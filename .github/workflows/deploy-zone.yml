@@ -24,17 +24,15 @@ jobs:
           ZONE_TARGET_DIR: ${{ secrets.ZONE_TARGET_DIR }}
         run: |
           HOST="${ZONE_HOST:-paidelinnameeskond.ee}"
-          if [ -z "$ZONE_USER" ]; then
-            echo "::error::Missing ZONE_USER in GitHub Repository Secrets."
-            exit 1
-          fi
+          USER="${ZONE_USER:-www.paidelinnameeskond.ee}"
 
           sudo apt-get update -y && sudo apt-get install -y lftp sshpass rsync openssh-client
 
           if [ -n "$ZONE_SSH_KEY" ]; then
+            SSH_USER="${ZONE_USER:-virt42667}"
             PORT="${ZONE_PORT:-22}"
-            TARGET_DIR="${ZONE_TARGET_DIR:-~/domeenid/www.paidelinnameeskond.ee/htdocs}"
-            echo "Deploying via SSH key + rsync to ${ZONE_USER}@${HOST}:${TARGET_DIR}..."
+            TARGET_DIR="${ZONE_TARGET_DIR:-/data01/virt42667/domeenid/www.paidelinnameeskond.ee/htdocs}"
+            echo "Deploying via SSH key + rsync to ${SSH_USER}@${HOST}:${TARGET_DIR}..."
             mkdir -p ~/.ssh
             echo "$ZONE_SSH_KEY" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
@@ -46,10 +44,10 @@ jobs:
               --exclude='scripts/' \
               --exclude='README.md' \
               -e "ssh -p ${PORT} -o StrictHostKeyChecking=no" \
-              ./ "${ZONE_USER}@${HOST}:${TARGET_DIR}/"
+              ./ "${SSH_USER}@${HOST}:${TARGET_DIR}/"
           elif [ -n "$ZONE_PASSWORD" ]; then
             PORT="${ZONE_PORT:-21}"
-            echo "Deploying via FTP/FTPS to ${HOST} (port ${PORT}) as ${ZONE_USER}..."
+            echo "Deploying via FTP/FTPS to ${HOST} (port ${PORT}) as ${USER}..."
             lftp -c "
               set ssl:verify-certificate no;
               set sftp:auto-confirm yes;
@@ -57,8 +55,8 @@ jobs:
               set ftp:passive-mode on;
               set net:timeout 20;
               set net:max-retries 3;
-              open -u \"${ZONE_USER}\",\"${ZONE_PASSWORD}\" -p ${PORT} \"${HOST}\";
-              cd \"${ZONE_TARGET_DIR:-htdocs}\" || cd .;
+              open -u \"${USER}\",\"${ZONE_PASSWORD}\" -p ${PORT} \"${HOST}\";
+              cd \"${ZONE_TARGET_DIR:-htdocs}\" || cd /domeenid/www.paidelinnameeskond.ee/htdocs || cd .;
               mirror --reverse --only-newer --verbose \
                 --exclude-glob .git* \
                 --exclude-glob data/cache* \
