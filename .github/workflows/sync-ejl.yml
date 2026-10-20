@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   sync-ejl:
-    name: Fetch Latest EJL Data & Commit
+    name: Fetch Latest EJL Data & Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -25,7 +25,12 @@ jobs:
       - name: Run EJL Sync Script
         run: python3 scripts/sync_jalgpall.py
 
-      - name: Commit and Push if EJL Data Changed
+      - name: Commit, Push & Upload to Zone.ee if EJL Data Changed
+        env:
+          ZONE_HOST: ${{ secrets.ZONE_HOST }}
+          ZONE_USER: ${{ secrets.ZONE_USER }}
+          ZONE_PASSWORD: ${{ secrets.ZONE_PASSWORD }}
+          ZONE_PORT: ${{ secrets.ZONE_PORT }}
         run: |
           git config user.name "Paide Linnameeskond Bot"
           git config user.email "info@paidelinnameeskond.ee"
@@ -36,3 +41,39 @@ jobs:
             git commit -m "chore(ejl): auto-sync official EJL standings and matches"
             git push
           fi
+
+          # Always push the latest data/jalgpall-data.json to Zone.ee
+          python3 - << 'PYEOF'
+          import os, ssl
+          from ftplib import FTP_TLS
+
+          host = (os.environ.get("ZONE_HOST") or "paidelinnameeskond.ee").strip()
+          port = int((os.environ.get("ZONE_PORT") or "21").strip())
+          user = (os.environ.get("ZONE_USER") or "www.paidelinnameeskond.ee").strip()
+          password = (os.environ.get("ZONE_PASSWORD") or "").strip()
+
+          if password:
+              ctx = ssl.create_default_context()
+              ctx.check_hostname = False
+              ctx.verify_mode = ssl.CERT_NONE
+              ftp = FTP_TLS(context=ctx, timeout=20)
+              ftp.connect(host, port)
+              ftp.auth()
+              ftp.login(user, password)
+              ftp.prot_p()
+              ftp.set_pasv(True)
+              for d in ["domeenid/www.paidelinnameeskond.ee/htdocs", "htdocs"]:
+                  try:
+                      ftp.cwd(d)
+                      break
+                  except Exception:
+                      pass
+              try:
+                  ftp.mkd("data")
+              except Exception:
+                  pass
+              with open("data/jalgpall-data.json", "rb") as f:
+                  ftp.storbinary("STOR data/jalgpall-data.json", f)
+              ftp.quit()
+              print("Uploaded latest data/jalgpall-data.json to Zone.ee!")
+          PYEOF
