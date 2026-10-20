@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy via SFTP / SSH (Zone.ee)
+      - name: Deploy to Zone.ee
         env:
           ZONE_HOST: ${{ secrets.ZONE_HOST }}
           ZONE_USER: ${{ secrets.ZONE_USER }}
@@ -23,22 +23,22 @@ jobs:
           ZONE_PORT: ${{ secrets.ZONE_PORT }}
           ZONE_TARGET_DIR: ${{ secrets.ZONE_TARGET_DIR }}
         run: |
-          if [ -z "$ZONE_HOST" ] || [ -z "$ZONE_USER" ]; then
-            echo "::error::Missing ZONE_HOST or ZONE_USER in GitHub Repository Secrets."
+          HOST="${ZONE_HOST:-paidelinnameeskond.ee}"
+          if [ -z "$ZONE_USER" ]; then
+            echo "::error::Missing ZONE_USER in GitHub Repository Secrets."
             exit 1
           fi
-
-          PORT="${ZONE_PORT:-22}"
-          TARGET_DIR="${ZONE_TARGET_DIR:-htdocs}"
 
           sudo apt-get update -y && sudo apt-get install -y lftp sshpass rsync openssh-client
 
           if [ -n "$ZONE_SSH_KEY" ]; then
-            echo "Deploying via SSH key + rsync to ${ZONE_USER}@${ZONE_HOST}:${TARGET_DIR}..."
+            PORT="${ZONE_PORT:-22}"
+            TARGET_DIR="${ZONE_TARGET_DIR:-~/domeenid/www.paidelinnameeskond.ee/htdocs}"
+            echo "Deploying via SSH key + rsync to ${ZONE_USER}@${HOST}:${TARGET_DIR}..."
             mkdir -p ~/.ssh
             echo "$ZONE_SSH_KEY" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
-            rsync -azP --delete \
+            rsync -azP \
               --exclude='.git/' \
               --exclude='.github/' \
               --exclude='.gitignore' \
@@ -46,23 +46,28 @@ jobs:
               --exclude='scripts/' \
               --exclude='README.md' \
               -e "ssh -p ${PORT} -o StrictHostKeyChecking=no" \
-              ./ "${ZONE_USER}@${ZONE_HOST}:${TARGET_DIR}/"
+              ./ "${ZONE_USER}@${HOST}:${TARGET_DIR}/"
           elif [ -n "$ZONE_PASSWORD" ]; then
-            echo "Deploying via lftp (SFTP/FTP) to ${ZONE_HOST}/${TARGET_DIR}..."
+            PORT="${ZONE_PORT:-21}"
+            echo "Deploying via FTP/FTPS to ${HOST} (port ${PORT}) as ${ZONE_USER}..."
             lftp -c "
               set ssl:verify-certificate no;
               set sftp:auto-confirm yes;
               set ftp:ssl-allow yes;
-              open -u \"${ZONE_USER}\",\"${ZONE_PASSWORD}\" -p ${PORT} \"${ZONE_HOST}\";
+              set ftp:passive-mode on;
+              set net:timeout 20;
+              set net:max-retries 3;
+              open -u \"${ZONE_USER}\",\"${ZONE_PASSWORD}\" -p ${PORT} \"${HOST}\";
+              cd \"${ZONE_TARGET_DIR:-htdocs}\" || cd .;
               mirror --reverse --only-newer --verbose \
                 --exclude-glob .git* \
                 --exclude-glob data/cache* \
                 --exclude-glob scripts* \
                 --exclude-glob README.md \
-                ./ \"${TARGET_DIR}\";
+                ./ ./;
               bye
             "
           else
-            echo "::error::Please set either ZONE_PASSWORD or ZONE_SSH_KEY in GitHub Repository Secrets."
+            echo "::error::Please set ZONE_PASSWORD in GitHub Repository Secrets."
             exit 1
           fi
