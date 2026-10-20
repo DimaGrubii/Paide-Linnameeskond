@@ -2,7 +2,7 @@
   "metadata": {
     "source": "Eesti Jalgpalli Liit (EJL)",
     "sourceUrl": "https://jalgpall.ee/voistlused/52/team/5",
-    "lastUpdated": "2026-10-14T21:15:00",
+    "lastUpdated": "2026-10-20T22:56:59.131338",
     "season": "2026",
     "status": "success"
   },
@@ -31,12 +31,6 @@
         "role": "Peatreener",
         "roleEn": "Head Coach",
         "photo": "assets/img/players/tarmo_kink.jpeg"
-      },
-      {
-        "name": "Daniel Bolufer",
-        "role": "Abitreener",
-        "roleEn": "Assistant Coach",
-        "photo": "assets/img/players/bolufer.jpeg"
       },
       {
         "name": "Jüris Sahkur",
@@ -78,6 +72,15 @@
   },
   "squad": [
     {
+      "number": "1",
+      "name": "Mattias Sapp",
+      "positionCode": "VV",
+      "position": "Väravavaht",
+      "birthDate": "17.07.2001",
+      "citizenship": "Eesti",
+      "photo": "assets/img/players/sapp.jpeg"
+    },
+    {
       "number": "2",
       "name": "Michael Lilander",
       "positionCode": "K",
@@ -103,15 +106,6 @@
       "birthDate": "20.04.2005",
       "citizenship": "Itaalia",
       "photo": "assets/img/players/andrade.jpeg"
-    },
-    {
-      "number": "5",
-      "name": "Gerdo Juhkam",
-      "positionCode": "K",
-      "position": "Kaitsja",
-      "birthDate": "19.06.1994",
-      "citizenship": "Eesti",
-      "photo": "assets/img/players/juhkam.jpeg"
     },
     {
       "number": "6",
@@ -177,6 +171,15 @@
       "photo": "assets/img/players/meerits.jpeg"
     },
     {
+      "number": "13",
+      "name": "Romet Nigula",
+      "positionCode": "R",
+      "position": "Ründaja",
+      "birthDate": "25.12.2007",
+      "citizenship": "Eesti",
+      "photo": "assets/img/players/nigula.jpeg"
+    },
+    {
       "number": "14",
       "name": "Momodou Jobarteh",
       "positionCode": "R",
@@ -187,12 +190,12 @@
     },
     {
       "number": "15",
-      "name": "Hindrek Ojamaa",
-      "positionCode": "K",
-      "position": "Kaitsja",
-      "birthDate": "12.06.1995",
+      "name": "Ramon Smirnov",
+      "positionCode": "PK",
+      "position": "Poolkaitsja",
+      "birthDate": "25.08.2004",
       "citizenship": "Eesti",
-      "photo": "assets/img/players/hi_ojamaa.jpeg"
+      "photo": "assets/img/players/smirnov.jpeg"
     },
     {
       "number": "16",
@@ -232,12 +235,12 @@
     },
     {
       "number": "21",
-      "name": "Ramon Smirnov",
-      "positionCode": "PK",
-      "position": "Poolkaitsja",
-      "birthDate": "25.08.2004",
+      "name": "Gerdo Juhkam",
+      "positionCode": "K",
+      "position": "Kaitsja",
+      "birthDate": "19.06.1994",
       "citizenship": "Eesti",
-      "photo": "assets/img/players/smirnov.jpeg"
+      "photo": "assets/img/players/juhkam.jpeg"
     },
     {
       "number": "23",
@@ -250,12 +253,21 @@
     },
     {
       "number": "24",
-      "name": "Romet Nigula",
+      "name": "William Gabriel Lins De Sa",
       "positionCode": "R",
       "position": "Ründaja",
-      "birthDate": "25.12.2007",
+      "birthDate": "24.01.2004",
+      "citizenship": "Brasiilia",
+      "photo": "assets/img/players/william.jpeg"
+    },
+    {
+      "number": "25",
+      "name": "Hindrek Ojamaa",
+      "positionCode": "K",
+      "position": "Kaitsja",
+      "birthDate": "12.06.1995",
       "citizenship": "Eesti",
-      "photo": "assets/img/players/nigula.jpeg"
+      "photo": "assets/img/players/hi_ojamaa.jpeg"
     },
     {
       "number": "27",
@@ -285,22 +297,13 @@
       "photo": "assets/img/players/darboe.jpeg"
     },
     {
-      "number": "37",
+      "number": "33",
       "name": "Kevin Joshua Kanne",
       "positionCode": "K",
       "position": "Kaitsja",
       "birthDate": "18.06.2004",
       "citizenship": "Eesti",
       "photo": "assets/img/players/kanne.jpeg"
-    },
-    {
-      "number": "43",
-      "name": "William Gabriel Lins De Sa",
-      "positionCode": "R",
-      "position": "Ründaja",
-      "birthDate": "24.01.2004",
-      "citizenship": "Brasiilia",
-      "photo": "assets/img/players/william.jpeg"
     },
     {
       "number": "44",
@@ -310,15 +313,6 @@
       "birthDate": "04.04.2005",
       "citizenship": "Eesti",
       "photo": "assets/img/players/kait.jpeg"
-    },
-    {
-      "number": "56",
-      "name": "Mattias Sapp",
-      "positionCode": "VV",
-      "position": "Väravavaht",
-      "birthDate": "17.07.2001",
-      "citizenship": "Eesti",
-      "photo": "assets/img/players/sapp.jpeg"
     },
     {
       "number": "77",
@@ -358,6 +352,13 @@
     },
     {
       "rank": "3",
+      "name": "Juan Sebastian Palacios Murillo",
+      "cupGoals": "0",
+      "leagueGoals": "5",
+      "totalGoals": "5"
+    },
+    {
+      "rank": "4",
       "name": "Daniel Cabral De Oliveira",
       "cupGoals": "0",
       "leagueGoals": "5",
@@ -365,32 +366,20 @@
       "assists": "6"
     },
     {
-      "rank": "4",
+      "rank": "5",
       "name": "Abdourahman Badamosi",
       "cupGoals": "1",
       "leagueGoals": "4",
       "totalGoals": "5",
       "assists": "2"
-    },
-    {
-      "rank": "5",
-      "name": "Daniel Luts",
-      "cupGoals": "3",
-      "leagueGoals": "2",
-      "totalGoals": "5",
-      "assists": "3"
     }
   ],
   "matches": {
     "next": {
       "type": "upcoming",
-      "homeTeam": "FC Kuressaare",
-      "awayTeam": "Paide Linnameeskond",
-      "date": "PL 24.10.2026 14:30",
-      "venue": "Kuressaare linnastaadion",
-      "round": "Premium Liiga • 33. Voor",
-      "broadcast": "OTSE: SOCCERNET TV / JALGPALL.EE",
-      "matchInfoUrl": "https://jalgpall.ee/voistlused/match_info/186270"
+      "homeTeam": "Paide Linnameeskond",
+      "date": "PL 07.11.2026 12:30",
+      "awayTeam": "Tallinna FC Flora"
     },
     "upcoming": [
       {
@@ -422,83 +411,23 @@
       {
         "type": "finished",
         "meta": "PL 18.10.2026 Kell 17:00",
-        "tournament": "A. Le Coq Premium Liiga",
-        "round": "32. voor",
-        "dateDisplay": "Pühapäev, 18. oktoober",
-        "timeDisplay": "17:00",
         "homeTeam": "Paide Linnameeskond",
         "score": "2 - 1",
-        "awayTeam": "JK Narva Trans",
-        "venue": "Paide kunstmuruväljak",
-        "protocolUrl": "https://jalgpall.ee/voistlused/protocol/143568",
-        "scorers": [
-          {
-            "minute": "18'",
-            "player": "Juan Sebastian Palacios Murillo",
-            "team": "Paide Linnameeskond",
-            "runningScore": "1 : 0",
-            "isPaide": true
-          },
-          {
-            "minute": "47'",
-            "player": "Wisdom Awusi",
-            "team": "JK Narva Trans",
-            "runningScore": "1 : 1",
-            "isPaide": false
-          },
-          {
-            "minute": "77'",
-            "player": "Martin Miller",
-            "team": "Paide Linnameeskond",
-            "runningScore": "2 : 1",
-            "isPaide": true
-          }
-        ]
+        "awayTeam": "JK Narva Trans"
       },
       {
         "type": "finished",
         "meta": "PL 14.10.2026 Kell 19:00",
-        "tournament": "A. Le Coq Premium Liiga",
-        "round": "31. voor",
-        "dateDisplay": "Kolmapäev, 14. oktoober",
-        "timeDisplay": "19:00",
         "homeTeam": "Paide Linnameeskond",
         "score": "2 - 1",
-        "awayTeam": "Tartu JK Tammeka",
-        "venue": "Paide kunstmuruväljak",
-        "attendance": 444,
-        "protocolUrl": "https://jalgpall.ee/voistlused/protocol/143570",
-        "scorers": [
-          {
-            "minute": "41'",
-            "player": "Dawda Darboe",
-            "team": "Paide Linnameeskond",
-            "runningScore": "1 : 0",
-            "isPaide": true
-          },
-          {
-            "minute": "44'",
-            "player": "Moussa Felix Sambe",
-            "team": "Tartu JK Tammeka",
-            "runningScore": "1 : 1",
-            "isPaide": false
-          },
-          {
-            "minute": "90+4'",
-            "player": "Michael Lilander",
-            "team": "Paide Linnameeskond",
-            "runningScore": "2 : 1",
-            "isPaide": true
-          }
-        ]
+        "awayTeam": "Tartu JK Tammeka"
       },
       {
         "type": "finished",
         "meta": "PL 11.10.2026 Kell 14:30",
         "homeTeam": "Tallinna FCI Levadia",
         "score": "1 - 0",
-        "awayTeam": "Paide Linnameeskond",
-        "venue": "A. Le Coq Arena, Tallinn"
+        "awayTeam": "Paide Linnameeskond"
       },
       {
         "type": "finished",
