@@ -1,0 +1,385 @@
+/* Import Google Fonts directly into stylesheet as well to guarantee loading */
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+/* Root Variables */
+:root {
+  --color-navy: #0b203e;
+  --color-navy-dark: #07152b;
+  --color-navy-light: #163660;
+  --color-crimson: #be2931;
+  --color-crimson-hover: #a61f26;
+  --color-white: #ffffff;
+  --color-bg-light: #f8fafc;
+  --color-border: #e2e8f0;
+  --font-heading: 'Marcellus', Georgia, Cambria, 'Times New Roman', serif;
+  --font-body: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Base resets & typography smoothing */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+body {
+  background-color: var(--color-bg-light);
+  color: #1e293b;
+  overflow-x: clip;
+  font-family: var(--font-body);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  letter-spacing: -0.015em;
+  width: 100%;
+}
+
+main,
+#root,
+.main-wrapper {
+  overflow-x: clip;
+  width: 100%;
+}
+
+/* Ensure headline wraps properly without overflowing on mobile */
+#hero-title {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* Hero story selector cards containment */
+.hero-story-btn {
+  max-width: 100%;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.hero-story-btn h3 {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Titles, Headings, and Display Elements in Marcellus */
+h1, h2, h3, h4, h5, h6,
+.font-display,
+.font-heading,
+.font-marcellus {
+  font-family: var(--font-heading) !important;
+  letter-spacing: 0.02em;
+}
+
+/* Sub-heading refinement */
+h1 {
+  letter-spacing: -0.005em;
+  line-height: 1.05;
+}
+
+h2, h3 {
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+}
+
+/* Space Grotesk UI and body text font utility */
+.font-sans,
+.font-grotesk {
+  font-family: var(--font-body) !important;
+}
+
+/* Subtle Hairline Borders */
+.hairline-border {
+  border: 1px solid rgba(226, 232, 240, 0.85);
+}
+
+.hairline-b {
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+}
+
+.hairline-t {
+  border-top: 1px solid rgba(226, 232, 240, 0.85);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Glass Header Blur */
+.header-glass {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Hero Gradient Overlay: 70% stronger opacity arriving up to 18. September 2026 and fading out above it */
+.hero-gradient {
+  background: linear-gradient(
+    to top,
+    rgba(7, 21, 43, 0.96) 0%,
+    rgba(7, 21, 43, 0.88) 22%,
+    rgba(7, 21, 43, 0.64) 42%,
+    rgba(7, 21, 43, 0.28) 53%,
+    rgba(7, 21, 43, 0) 60%
+  );
+}
+
+.hero-side-gradient {
+  background: radial-gradient(
+    ellipse 85% 58% at 0% 100%,
+    rgba(7, 21, 43, 0.85) 0%,
+    rgba(7, 21, 43, 0.48) 45%,
+    rgba(7, 21, 43, 0) 80%
+  );
+}
+
+/* Pulse animation for Live Badges & CTAs */
+@keyframes pulse-subtle {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 0.85;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Sponsor Logo Hover Transitions */
+.sponsor-grayscale {
+  filter: grayscale(100%) opacity(0.85);
+  transition: all 0.25s ease-in-out;
+}
+
+.sponsor-grayscale:hover {
+  filter: grayscale(0%) opacity(1);
+  transform: translateY(-2px);
+}
+
+/* Infinite Low-Speed Marquee for Partners & Sponsors (Right to Left) */
+@keyframes sponsor-marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.sponsor-marquee-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+}
+
+.sponsor-marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: sponsor-marquee 80s linear infinite;
+  will-change: transform;
+}
+
+.sponsor-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sponsor-marquee-track {
+    animation: none;
+    overflow-x: auto;
+  }
+}
+
+/* Play Button Glow */
+.play-btn-glow {
+  box-shadow: 0 0 25px rgba(190, 41, 49, 0.5);
+  transition: all 0.3s ease;
+}
+
+.play-btn-glow:hover {
+  box-shadow: 0 0 35px rgba(190, 41, 49, 0.8);
+  transform: scale(1.08);
+}
+
+/* Subtle Active Tab Indicator */
+.tab-active {
+  background-color: var(--color-navy);
+  color: var(--color-white) !important;
+  box-shadow: 0 4px 12px rgba(11, 32, 62, 0.15);
+}
+
+/* Paide Highlighting in Standings Table - Optical Inset Bar without shifting column alignment */
+.standings-paide-row {
+  background-color: #f1f5fa;
+  font-weight: 700;
+}
+
+.standings-paide-row > td:first-child {
+  box-shadow: inset 4px 0 0 0 var(--color-crimson) !important;
+}
+
+/* Starred club crests optical balance in standings tables (Levadia, Flora) */
+#table-standings-men img[src*="levadia.png"],
+#table-standings-men img[src*="flora.png"],
+#table-standings-women img[src*="flora_women.png"],
+.standings-table img[src*="levadia.png"],
+.standings-table img[src*="flora.png"],
+.standings-table img[src*="flora_women.png"],
+img.club-crest-starred {
+  height: 122% !important;
+  max-height: 38px !important;
+  width: auto !important;
+  transform: translateY(-2px);
+}
+
+/* Starred club crests optical balance in Match Hub / Fixture Strip (Levadia, Flora) */
+#match-hub img[src*="levadia.png"],
+#match-hub img[src*="flora.png"],
+#match-hub img[src*="flora_women.png"],
+.match-crest-starred {
+  height: 126% !important;
+  max-height: 96px !important;
+  width: auto !important;
+  transform: translateY(-4px);
+}
+
+/* Card hover elevations */
+.editorial-card {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.editorial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -8px rgba(11, 32, 62, 0.12), 0 4px 8px -2px rgba(11, 32, 62, 0.04);
+}
+
+/* Focus outline for accessibility */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--color-crimson);
+  outline-offset: 2px;
+}
+
+/* Hide scrollbar for tabs/horizontal ribbons */
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar,
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Subtle squad gradient expander */
+.squad-gradient-mask {
+  background: linear-gradient(to top, #f8fafc 18%, rgba(248, 250, 252, 0.72) 60%, rgba(248, 250, 252, 0) 100%);
+}
+
+/* ========================================================================== */
+/* Mobile Drawer - High Reliability Hardware-Accelerated Navigation           */
+/* ========================================================================== */
+#mobile-drawer {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999 !important;
+  touch-action: pan-y;
+}
+
+#mobile-drawer.hidden {
+  display: none !important;
+}
+
+#mobile-drawer:not(.hidden) {
+  display: block !important;
+}
+
+#drawer-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  background-color: rgba(7, 21, 43, 0.72) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  opacity: 0;
+  transition: opacity 300ms ease-in-out !important;
+  pointer-events: none;
+}
+
+#drawer-panel {
+  position: fixed !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  max-width: 20rem !important; /* 320px */
+  background-color: #ffffff !important;
+  box-shadow: -10px 0 35px rgba(0, 0, 0, 0.25) !important;
+  transform: translateX(100%) !important;
+  -webkit-transform: translateX(100%) !important;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  -webkit-transition: -webkit-transform 300ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  z-index: 10000 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+/* Open states - triggers when .hidden is removed OR .drawer-open is added */
+#mobile-drawer.drawer-open #drawer-backdrop,
+#mobile-drawer:not(.hidden) #drawer-backdrop {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+#mobile-drawer.drawer-open #drawer-panel,
+#mobile-drawer:not(.hidden) #drawer-panel {
+  transform: translateX(0) !important;
+  -webkit-transform: translateX(0) !important;
+}
+
+/* ========================================================================== */
+/* Active Filter & Tab Buttons - Guaranteed High Contrast White Text          */
+/* ========================================================================== */
+.squad-filter-btn.active,
+.squad-filter-btn.active:hover,
+.squad-filter-btn.active:focus,
+.squad-filter-btn.active:focus-visible,
+.women-squad-filter-btn.active,
+.women-squad-filter-btn.active:hover,
+.women-squad-filter-btn.active:focus,
+.women-squad-filter-btn.active:focus-visible,
+#tab-standings-men.bg-navy,
+#tab-standings-men.bg-navy:hover,
+#tab-standings-men.bg-navy:focus,
+#tab-standings-women.bg-navy,
+#tab-standings-women.bg-navy:hover,
+#tab-standings-women.bg-navy:focus {
+  background-color: var(--color-navy) !important;
+  color: #ffffff !important;
+  border-color: var(--color-navy) !important;
+}
+
+.squad-filter-btn:not(.active):hover,
+.women-squad-filter-btn:not(.active):hover {
+  color: var(--color-navy) !important;
+  border-color: var(--color-navy) !important;
+}

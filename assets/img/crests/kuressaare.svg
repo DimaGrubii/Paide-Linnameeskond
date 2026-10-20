@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <path d="M60 14 L96 30 C96 82 80 102 60 112 C40 102 24 82 24 30 Z" fill="#0a192f" stroke="#f7c800" stroke-width="4"/>
+  <path d="M40 50 L60 36 L80 50 L75 75 L60 84 L45 75 Z" fill="#f7c800"/>
+  <text x="60" y="65" fill="#0a192f" font-family="sans-serif" font-weight="900" font-size="8" text-anchor="middle">KURE</text>
+</svg>

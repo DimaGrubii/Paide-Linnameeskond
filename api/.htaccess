@@ -1,0 +1,2 @@
+# Zone.ee / Apache 2.4 compatible configuration
+# Access control and POST-only enforcement are handled directly inside register.php

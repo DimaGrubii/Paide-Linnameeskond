@@ -1,0 +1,68 @@
+name: Deploy to Zone.ee
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Upload Website to Zone.ee
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy via SFTP / SSH (Zone.ee)
+        env:
+          ZONE_HOST: ${{ secrets.ZONE_HOST }}
+          ZONE_USER: ${{ secrets.ZONE_USER }}
+          ZONE_PASSWORD: ${{ secrets.ZONE_PASSWORD }}
+          ZONE_SSH_KEY: ${{ secrets.ZONE_SSH_KEY }}
+          ZONE_PORT: ${{ secrets.ZONE_PORT }}
+          ZONE_TARGET_DIR: ${{ secrets.ZONE_TARGET_DIR }}
+        run: |
+          if [ -z "$ZONE_HOST" ] || [ -z "$ZONE_USER" ]; then
+            echo "::error::Missing ZONE_HOST or ZONE_USER in GitHub Repository Secrets."
+            exit 1
+          fi
+
+          PORT="${ZONE_PORT:-22}"
+          TARGET_DIR="${ZONE_TARGET_DIR:-htdocs}"
+
+          sudo apt-get update -y && sudo apt-get install -y lftp sshpass rsync openssh-client
+
+          if [ -n "$ZONE_SSH_KEY" ]; then
+            echo "Deploying via SSH key + rsync to ${ZONE_USER}@${ZONE_HOST}:${TARGET_DIR}..."
+            mkdir -p ~/.ssh
+            echo "$ZONE_SSH_KEY" > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+            rsync -azP --delete \
+              --exclude='.git/' \
+              --exclude='.github/' \
+              --exclude='.gitignore' \
+              --exclude='data/cache/' \
+              --exclude='scripts/' \
+              --exclude='README.md' \
+              -e "ssh -p ${PORT} -o StrictHostKeyChecking=no" \
+              ./ "${ZONE_USER}@${ZONE_HOST}:${TARGET_DIR}/"
+          elif [ -n "$ZONE_PASSWORD" ]; then
+            echo "Deploying via lftp (SFTP/FTP) to ${ZONE_HOST}/${TARGET_DIR}..."
+            lftp -c "
+              set ssl:verify-certificate no;
+              set sftp:auto-confirm yes;
+              set ftp:ssl-allow yes;
+              open -u \"${ZONE_USER}\",\"${ZONE_PASSWORD}\" -p ${PORT} \"${ZONE_HOST}\";
+              mirror --reverse --only-newer --verbose \
+                --exclude-glob .git* \
+                --exclude-glob data/cache* \
+                --exclude-glob scripts* \
+                --exclude-glob README.md \
+                ./ \"${TARGET_DIR}\";
+              bye
+            "
+          else
+            echo "::error::Please set either ZONE_PASSWORD or ZONE_SSH_KEY in GitHub Repository Secrets."
+            exit 1
+          fi

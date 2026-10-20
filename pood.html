@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="et" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Ametlik E-Pood | Paide Linnameeskond | Fännitooted & Uus Kollektsioon</title>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="Paide Linnameeskonna ametlik e-pood. Telli uus 2026. aasta kollektsioon: orgaanilised pusad, t-särgid, nokamütsid, fännisallid, talvemütsid ja sümboolika.">
+
+  <!-- Favicon / Crest Icon -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/crests/paide-crest.svg">
+  <link rel="icon" type="image/png" href="assets/img/jalgpall_logos/paide.png">
+  <link rel="apple-touch-icon" href="assets/img/jalgpall_logos/paide.png">
+  <script>
+    if (window.location.protocol !== "file:") {
+      if (/\/index\.html$/i.test(window.location.pathname)) {
+        window.history.replaceState(null, "", window.location.pathname.replace(/\/index\.html$/i, "/") + window.location.search + window.location.hash);
+      }
+      document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('a[href^="index.html"]').forEach(function(a) {
+          var href = a.getAttribute("href");
+          if (href === "index.html") {
+            a.setAttribute("href", "./");
+          } else if (href.indexOf("index.html#") === 0 || href.indexOf("index.html?") === 0) {
+            a.setAttribute("href", "./" + href.slice("index.html".length));
+          }
+        });
+      });
+    }
+  </script>
+  <meta property="og:title" content="Ametlik E-Pood | Paide Linnameeskond">
+  <meta property="og:description" content="Telli Paide Linnameeskonna ametlikud fännitooted ja uus 2026 kollektsioon otse klubi e-poest.">
+  <meta property="og:image" content="assets/img/merch/uus/3I2A0285.jpg">
+  <meta property="og:type" content="website">
+
+<!-- Google Fonts: Marcellus (Primary Heading) & Space Grotesk (Body & Numerals) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              DEFAULT: '#0b203e',
+              50: '#f0f4f9',
+              100: '#dbe5f1',
+              200: '#bccfe5',
+              300: '#91b2d4',
+              400: '#608fc0',
+              500: '#3e71ab',
+              600: '#2e578f',
+              700: '#264674',
+              800: '#1e385c',
+              900: '#0b203e',
+              950: '#07152b',
+            },
+            crimson: {
+              DEFAULT: '#be2931',
+              50: '#fdf2f2',
+              100: '#fde5e6',
+              200: '#fcd0d2',
+              300: '#f8aeb2',
+              400: '#f27e85',
+              500: '#e5535c',
+              600: '#d1343e',
+              700: '#be2931',
+              800: '#9a242b',
+              900: '#731c21',
+              950: '#400a0d',
+            }
+          },
+          fontFamily: {
+            sans: ['"Space Grotesk"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            display: ['"Marcellus"', 'Georgia', 'Cambria', 'serif'],
+            heading: ['"Marcellus"', 'Georgia', 'Cambria', 'serif'],
+            marcellus: ['"Marcellus"', 'Georgia', 'Cambria', 'serif'],
+            grotesk: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            'subtle': '0 1px 3px 0 rgba(11, 32, 62, 0.05), 0 1px 2px -1px rgba(11, 32, 62, 0.03)',
+            'card': '0 4px 20px -2px rgba(11, 32, 62, 0.07)',
+            'elevated': '0 20px 35px -8px rgba(11, 32, 62, 0.12)',
+            'glow-red': '0 0 25px rgba(190, 41, 49, 0.45)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Bespoke Stylesheet -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="bg-[#f8fafc] text-slate-800 antialiased selection:bg-crimson selection:text-white [overflow-x:clip] w-full">
+
+  <!-- ========================================================================= -->
+  <!-- NOTICE: E-Pood Valmimisel / Coming Soon Notice Banner                     -->
+  <!-- ========================================================================= -->
+  <div class="bg-gradient-to-r from-navy-950 via-navy-900 to-navy-950 text-white border-b-2 border-crimson py-6 px-4 text-center relative z-50 shadow-lg">
+    <div class="max-w-3xl mx-auto flex flex-col items-center gap-3">
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        AMETLIK E-POOD
+      </span>
+      <h2 class="font-display font-black text-2xl sm:text-3xl text-white uppercase tracking-tight">
+        Paide Linnameeskonna ametlik e-pood on avatud!
+      </h2>
+      <p class="text-xs sm:text-sm text-slate-300 max-w-xl leading-relaxed">
+        Ametlik klubi varustuse ja fännitoodete e-pood asub aadressil <a href="https://varustus.paidelinnameeskond.ee/" target="_blank" rel="noopener noreferrer" class="text-crimson font-bold underline hover:text-white">varustus.paidelinnameeskond.ee</a>.
+      </p>
+      <div class="pt-2 flex items-center gap-3 justify-center flex-wrap">
+        <a href="https://varustus.paidelinnameeskond.ee/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-crimson hover:bg-crimson-hover text-white text-xs font-bold tracking-wider uppercase transition-all shadow-md hover:scale-105">
+          <span>Ava ametlik E-pood</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+        <a href="index.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-navy-800 hover:bg-navy-700 text-white text-xs font-bold tracking-wider uppercase transition-all">
+          <span>Tagasi avalehele</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+
+
+      <!-- ========================================================================= -->
+  <!-- COMPONENT: Site Navigation Header (Standardized across PLM)              -->
+  <!-- ========================================================================= -->
+  <header id="main-header" class="sticky top-0 z-50 header-glass hairline-b transition-all duration-300 py-2.5 lg:py-3 w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="flex items-center justify-between">
+        
+        <!-- Left: Club Crest & Wordmark in Marcellus -->
+        <a href="index.html" class="flex items-center space-x-2.5 sm:space-x-3 group focus:outline-none flex-shrink-0" title="Paide Linnameeskond">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 transition-transform duration-300 group-hover:scale-105 flex-shrink-0">
+            <img src="assets/img/jalgpall_logos/paide.png" alt="Paide Linnameeskond Ametlik Vapp" class="club-crest-img w-full h-full object-contain filter drop-shadow-sm">
+          </div>
+          <div class="flex flex-col justify-center">
+            <span class="font-display font-black text-lg sm:text-xl lg:text-[21px] tracking-wider text-navy leading-none group-hover:text-crimson transition-colors uppercase">
+              PAIDE
+            </span>
+            <span class="font-display font-bold text-[9px] sm:text-[10px] tracking-[0.22em] text-slate-500 uppercase leading-tight">
+              LINNAMEESKOND
+            </span>
+          </div>
+        </a>
+        <!-- Center: Primary Desktop Navigation Links (Marcellus, No Paide TV, Uudised in place) -->
+        <nav class="hidden lg:flex items-center space-x-1 xl:space-x-2 2xl:space-x-2.5 font-display" aria-label="Peamenüü">
+          <a href="index.html" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            Avaleht
+          </a>
+          <a href="index.html#teams" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            Esindus
+          </a>
+          <a href="index.html#women-teams" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            Naiskond
+          </a>
+          <a href="noortetoo.html" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            Noortetöö
+          </a>
+          <a href="uudised.html" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            Uudised
+          </a>
+          <a href="https://varustus.paidelinnameeskond.ee/" target="_blank" rel="noopener noreferrer" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            E-pood
+          </a>
+          <a href="klubi.html" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            Klubi
+          </a>
+        </nav>
+
+        <!-- Right: Action CTAs -->
+        <div class="flex items-center space-x-1.5 sm:space-x-2 xl:space-x-2.5 flex-shrink-0">
+          <!-- Interactive Cart Trigger Button -->
+          <button type="button" 
+                  class="cart-open-trigger relative inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold tracking-wider uppercase font-display text-white bg-navy hover:bg-navy-800 rounded-lg transition-all shadow-sm flex-shrink-0 h-8 sm:h-9 cursor-pointer"
+                  title="Ava ostukorv">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <span class="hidden sm:inline">Ostukorv</span>
+            <span class="cart-count-badge hidden inline-flex items-center justify-center px-1.5 py-0.5 text-[10px] font-black leading-none text-white bg-crimson rounded-full animate-bounce">
+              0
+            </span>
+          </button>
+
+          <!-- Piletid CTA -->
+          <a href="https://www.piletilevi.ee/korraldajad/21-69-665/jalgpalliklubi-paide-linnameeskond" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-1 sm:gap-1.5 px-3 sm:px-4 py-1.5 text-xs font-bold tracking-wider uppercase font-display bg-crimson hover:bg-crimson-hover text-white rounded-lg shadow-sm hover:shadow transition-all flex-shrink-0 leading-none h-8 sm:h-9">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
+            <span class="whitespace-nowrap">Piletid</span>
+          </a>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button id="mobile-menu-btn" type="button" onclick="openMobileDrawer()" class="lg:hidden p-1.5 sm:p-2 text-navy hover:text-crimson hover:bg-slate-100 rounded-lg focus:outline-none transition-colors h-8 w-8 sm:h-9 sm:w-9 flex items-center justify-center flex-shrink-0 cursor-pointer" aria-label="Ava menüü" aria-expanded="false">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- COMPONENT: Mobile Drawer Slide-Over Menu (Standardized across PLM)        -->
+  <!-- ========================================================================= -->
+  <div id="mobile-drawer" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true">
+    <!-- Backdrop overlay -->
+    <div id="drawer-backdrop" onclick="closeMobileDrawer()" class="fixed inset-0 bg-navy-950/70 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+
+    <!-- Slide-over panel -->
+    <div id="drawer-panel" class="fixed inset-y-0 right-0 max-w-xs w-full bg-white shadow-2xl flex flex-col justify-between translate-x-full transition-transform duration-300 ease-in-out z-10">
+      
+      <!-- Drawer Header -->
+      <div class="p-4 sm:p-5 hairline-b flex items-center justify-between bg-slate-50">
+        <div class="flex items-center space-x-3">
+          <img src="assets/img/jalgpall_logos/paide.png" alt="Paide Crest" class="w-8 h-9 object-contain">
+          <div>
+            <div class="font-display font-black text-base sm:text-lg text-navy leading-none uppercase">PAIDE LM</div>
+            <div class="text-[9px] font-bold tracking-widest text-slate-400 font-sans uppercase">Ametlik Menüü</div>
+          </div>
+        </div>
+        <button id="drawer-close-btn" type="button" onclick="closeMobileDrawer()" class="p-2 text-slate-500 hover:text-crimson rounded-lg hover:bg-slate-200 focus:outline-none cursor-pointer" aria-label="Sulge menüü">
+          <svg class="w-5 h-5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <!-- Navigation links in Marcellus font -->
+      <div class="px-4 sm:px-5 py-5 space-y-1 overflow-y-auto flex-1 font-display tracking-wide uppercase text-base text-navy">
+        <a href="index.html" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Avaleht</a>
+        <a href="index.html#teams" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Esindusmeeskond</a>
+        <a href="index.html#women-teams" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Naiskond</a>
+        <a href="noortetoo.html" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Noortetöö</a>
+        <a href="uudised.html" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Uudised</a>
+        <a href="https://varustus.paidelinnameeskond.ee/" target="_blank" rel="noopener noreferrer" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">E-pood</a>
+        <a href="index.html#match-hub" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Mängukalender</a>
+        <a href="klubi.html" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Klubi & Kontakt</a>
+      </div>
+
+      <!-- Drawer Footer Actions -->
+      <div class="p-4 sm:p-5 hairline-t bg-slate-50 space-y-3">
+        <a href="https://www.piletilevi.ee/korraldajad/21-69-665/jalgpalliklubi-paide-linnameeskond" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-lg text-xs font-bold tracking-wider uppercase font-display bg-crimson hover:bg-crimson-hover text-white shadow-md flex items-center justify-center gap-2 cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
+          <span>Osta mängupilet (Piletilevi)</span>
+        </a>
+        <div class="pt-2 border-t border-slate-200">
+          <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest block text-center mb-2 font-sans">Jälgi Paide Linnameeskonda</span>
+          <div class="flex items-center justify-center gap-3 text-slate-600">
+            <a href="https://www.facebook.com/PaideLinnameeskond" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:text-[#1877f2] hover:border-[#1877f2] flex items-center justify-center transition-colors" title="Facebook">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/paidelinnameeskond/" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:text-[#e4405f] hover:border-[#e4405f] flex items-center justify-center transition-colors" title="Instagram (Esindus)">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@paidelinnameeskond" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:text-black hover:border-black flex items-center justify-center transition-colors" title="TikTok">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.3 6.3 0 0 0 1.96-4.49V8.62a8.27 8.27 0 0 0 4.81 1.53v-3.46h-1z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@PaideLinnameeskondTV" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:text-[#ff0000] hover:border-[#ff0000] flex items-center justify-center transition-colors" title="YouTube (@PaideLinnameeskondTV)">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN CONTENT CONTAINER                                                    -->
+  <!-- ========================================================================= -->
+  <section class="relative bg-navy-950 text-white overflow-hidden py-14 sm:py-20 lg:py-24 border-b border-navy-800">
+    <!-- Atmospheric Ambient Background Image (Sunset Photoshoot) -->
+    <div class="absolute inset-0 z-0">
+      <img src="assets/img/merch/uus/3I2A0285.jpg" 
+           alt="Uus Kollektsioon 2026 - Henrik Ojamaa" 
+           fetchpriority="high"
+           class="w-full h-full object-cover object-center filter brightness-[0.38] contrast-125 scale-105">
+      <div class="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/85 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-navy-950/60"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        
+        <!-- Left: Headline & Merch Story -->
+        <div class="lg:col-span-7 flex flex-col items-start space-y-6">
+          
+          <div class="flex items-center gap-2.5">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-crimson text-white shadow-lg shadow-crimson/30">
+              <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+              Uus Kollektsioon 2026
+            </span>
+            <span class="text-xs font-semibold text-slate-300 tracking-wide">
+              Ametlik Fännivarustus
+            </span>
+          </div>
+
+          <h1 class="font-display font-black text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1.08]">
+            Kanna Paide vaimu väljakul ja linnatänavatel.
+          </h1>
+
+          <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl font-normal">
+            Esitleme Paide Linnameeskonna uut ametlikku tänavariiete kollektsiooni. 
+            Valmistatud 100% orgaanilisest puuvillast, viimistletud uue reljeefse 3D-embleemiga ning loodud kestma läbi iga hooaja.
+          </p>
+
+          <!-- Key Trust Badges -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full max-w-xl pt-2">
+            <div class="flex items-center gap-2.5 p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              <div class="w-8 h-8 rounded-lg bg-crimson/20 flex items-center justify-center text-crimson-400 flex-shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <span class="text-xs font-semibold text-slate-200">100% orgaaniline puuvill</span>
+            </div>
+            <div class="flex items-center gap-2.5 p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              <div class="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400 flex-shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <span class="text-xs font-semibold text-slate-200">Tarne 2-4 tööpäeva</span>
+            </div>
+            <div class="flex items-center gap-2.5 p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm col-span-2 sm:col-span-1">
+              <div class="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 flex-shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              </div>
+              <span class="text-xs font-semibold text-slate-200">Ametlik klubi toode</span>
+            </div>
+          </div>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap items-center gap-4 pt-4">
+            <a href="#tooted" class="px-7 py-3.5 bg-crimson hover:bg-crimson-hover text-white text-sm font-bold tracking-wider uppercase rounded-xl transition-all shadow-lg shadow-crimson/30 hover:scale-105 active:scale-95 flex items-center gap-2">
+              <span>Tutvu toodetega</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </a>
+            <button type="button" onclick="openQuickView('uus-plm-hall-pusa')" class="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white text-sm font-bold tracking-wider uppercase rounded-xl border border-white/20 transition-all backdrop-blur-sm flex items-center gap-2">
+              <span>Vaata uut pusa (50 €)</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Right: Spotlight Preview Card (Henrik Ojamaa in the new hoodie & cap) -->
+        <div class="lg:col-span-5 flex justify-center lg:justify-end">
+          <div class="relative w-full max-w-sm sm:max-w-md">
+            
+            <!-- Glow background -->
+            <div class="absolute -inset-1.5 bg-gradient-to-tr from-crimson to-blue-600 rounded-3xl blur-xl opacity-30 animate-pulse"></div>
+
+            <div class="relative rounded-2xl overflow-hidden bg-navy-900 border border-white/15 shadow-2xl">
+              <div class="aspect-[3/4] overflow-hidden relative">
+                <img src="assets/img/merch/uus/3I2A0301.jpg" 
+                     alt="Henrik Ojamaa Uue Pusaga" 
+                     class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-black/20"></div>
+
+                <div class="absolute top-4 left-4">
+                  <span class="inline-flex items-center px-3 py-1 rounded-md text-xs font-black tracking-wider uppercase bg-crimson text-white shadow-md">
+                    STAARIKANDJA • HENRIK OJAMAA
+                  </span>
+                </div>
+
+                <div class="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-navy-950/90 backdrop-blur-md border border-white/10">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <h4 class="font-display font-bold text-white text-base">UUS PLM Hall Pusa</h4>
+                      <p class="text-xs text-slate-300">Orgaaniline puuvill • 3D tikand</p>
+                    </div>
+                    <div class="text-right">
+                      <span class="font-display font-black text-xl text-white">50 €</span>
+                    </div>
+                  </div>
+                  <button type="button" 
+                          onclick="addToCart('uus-plm-hall-pusa', 'L')" 
+                          class="mt-3 w-full py-2 bg-crimson hover:bg-crimson-hover text-white text-xs font-bold tracking-wider uppercase rounded-lg transition-colors flex items-center justify-center gap-1.5">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                    <span>Kiire ost (Suurus L)</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN SHOP SECTION: CONTROLS, CATEGORIES & PRODUCT GRID                    -->
+  <!-- ========================================================================= -->
+  <main id="tooted" class="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header & Filter Navigation Bar -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 pb-8 border-b border-slate-200">
+      <div>
+        <span class="text-xs font-black uppercase tracking-widest text-crimson font-sans">
+          Ametlik Varustuse E-Pood
+        </span>
+        <h2 class="font-display font-black text-2xl sm:text-4xl text-navy-950 mt-1">
+          Kõik Tooted & Kollektsioonid
+        </h2>
+        <p id="shop-results-count" class="text-xs sm:text-sm text-slate-500 mt-1">
+          Kuvatakse 12 toodet
+        </p>
+      </div>
+
+      <!-- Controls: Category Filters & Sort Select -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+        <!-- Sort Dropdown -->
+        <div class="relative">
+          <label for="shop-sort-select" class="sr-only">Sorteeri tooteid</label>
+          <select id="shop-sort-select" class="w-full sm:w-auto px-3.5 py-2.5 bg-white border border-slate-200 text-xs font-bold text-slate-700 rounded-xl focus:outline-none focus:border-crimson shadow-sm cursor-pointer pr-8 appearance-none">
+            <option value="default">Järjestus: Soovitatud</option>
+            <option value="price-asc">Hind: Madalam enne</option>
+            <option value="price-desc">Hind: Kõrgem enne</option>
+            <option value="popular">Enim hinnatud</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-slate-500">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Tabs Filter Strip (Sticky on Scroll) -->
+    <div class="py-4 my-2 flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth">
+      <button type="button" 
+              data-filter="all" 
+              class="shop-filter-btn px-4 py-2 rounded-xl text-xs font-bold tracking-wider uppercase whitespace-nowrap transition-all bg-navy-950 text-white shadow-sm">
+        Kõik tooted (12)
+      </button>
+      <button type="button" 
+              data-filter="uus" 
+              class="shop-filter-btn px-4 py-2 rounded-xl text-xs font-bold tracking-wider uppercase whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:border-slate-400">
+        Uus kollektsioon 2026 🔥
+      </button>
+      <button type="button" 
+              data-filter="riided" 
+              class="shop-filter-btn px-4 py-2 rounded-xl text-xs font-bold tracking-wider uppercase whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:border-slate-400">
+        Rõivad (Pusad & Särgid)
+      </button>
+      <button type="button" 
+              data-filter="mutsid" 
+              class="shop-filter-btn px-4 py-2 rounded-xl text-xs font-bold tracking-wider uppercase whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:border-slate-400">
+        Mütsid & Sallid
+      </button>
+      <button type="button" 
+              data-filter="sides" 
+              class="shop-filter-btn px-4 py-2 rounded-xl text-xs font-bold tracking-wider uppercase whitespace-nowrap transition-all bg-white text-slate-600 border border-slate-200 hover:border-slate-400">
+        Aksessuaarid & Sümboolika
+      </button>
+    </div>
+
+    <!-- The Product Grid (Hydrated by shop.js) -->
+    <div id="shop-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 mt-6">
+      <!-- Fallback static spinner / placeholder until DOM load -->
+      <div class="col-span-full py-16 text-center text-slate-400 font-semibold">
+        Laaditakse Paide Linnameeskonna tooteid...
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION: BRAND ADVANTAGES & DELIVERY INFORMATION                          -->
+  <!-- ========================================================================= -->
+  <section id="klubi-info" class="bg-white border-y border-slate-200 py-14 sm:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-black uppercase tracking-widest text-crimson font-sans">
+          Mugav & Turvaline
+        </span>
+        <h3 class="font-display font-black text-2xl sm:text-3xl text-navy-950 mt-1">
+          Miks tellida otse Paide Linnameeskonnalt?
+        </h3>
+        <p class="text-slate-500 text-sm mt-2">
+          Kõik tooted vastavad rangeimatele kvaliteedistandarditele ning toetavad otseselt kogukonda.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        <!-- Feature 1 -->
+        <div class="flex flex-col items-center text-center p-6 rounded-2xl bg-slate-50 border border-slate-100">
+          <div class="w-12 h-12 rounded-xl bg-navy/10 text-navy flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
+          </div>
+          <h4 class="font-bold text-navy-950 text-base mb-1">Kiire tarne üle Eesti</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Pakiautomaati (Omniva, Smartpost, DPD) 2–4 tööpäevaga. Tasuta tarne alates 60 € ostust.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="flex flex-col items-center text-center p-6 rounded-2xl bg-slate-50 border border-slate-100">
+          <div class="w-12 h-12 rounded-xl bg-crimson/10 text-crimson flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+          </div>
+          <h4 class="font-bold text-navy-950 text-base mb-1">Tule ise järele Paides</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Väljastus Paide Jalgpallikeskuses (Staadioni 4). Proovi tooteid kohapeal enne kättesaamist.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="flex flex-col items-center text-center p-6 rounded-2xl bg-slate-50 border border-slate-100">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          </div>
+          <h4 class="font-bold text-navy-950 text-base mb-1">14-päevane vahetusõigus</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Kui suurus või mudel ei sobi, vahetame toote kiiresti ja ilma liigse bürokraatiata ümber.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="flex flex-col items-center text-center p-6 rounded-2xl bg-slate-50 border border-slate-100">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+          </div>
+          <h4 class="font-bold text-navy-950 text-base mb-1">Toetad kohalikku noortetööd</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            100% fännitoodete tulust suunatakse Paide Linnameeskonna jalgpalliakadeemia ja noorte arendusse.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SLIDE-OUT CART DRAWER (#cart-drawer)                                      -->
+  <!-- ========================================================================= -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <!-- Backdrop Blur -->
+    <div id="cart-backdrop" class="fixed inset-0 bg-navy-950/70 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+
+    <!-- Sliding Panel -->
+    <div id="cart-panel" class="fixed inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl z-10 translate-x-full transition-transform duration-300 flex flex-col justify-between">
+      
+      <!-- Cart Header -->
+      <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-navy text-white flex items-center justify-center">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+          </div>
+          <h3 id="cart-title" class="font-display font-bold text-lg text-navy-950">
+            Sinu Ostukorv
+          </h3>
+        </div>
+        <button type="button" id="cart-close-btn" class="p-2 text-slate-400 hover:text-crimson rounded-lg transition-colors" aria-label="Sulge ostukorv">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Free Shipping Tracker Note -->
+      <div id="cart-shipping-note" class="px-6 py-2.5 bg-crimson/5 border-b border-crimson/10 text-xs text-slate-700 text-center font-medium">
+        Osta veel <strong class="text-crimson">60.00 €</strong> eest tasuta tarneks!
+      </div>
+
+      <!-- Items Scrollable Container -->
+      <div class="flex-grow overflow-y-auto p-6">
+        <!-- Empty State -->
+        <div id="cart-empty-state" class="py-16 text-center">
+          <div class="w-16 h-16 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+          </div>
+          <h4 class="font-bold text-navy-950 text-base mb-1">Ostukorv on tühi</h4>
+          <p class="text-xs text-slate-500 mb-6">Vali e-poest oma lemmiktooted ja lisa need siia.</p>
+          <button type="button" onclick="closeCartDrawer()" class="px-5 py-2.5 bg-navy text-white text-xs font-bold rounded-xl hover:bg-navy-800 transition-colors">
+            Alusta ostlemist
+          </button>
+        </div>
+
+        <!-- Rendered items list -->
+        <div id="cart-items-list" class="divide-y divide-slate-100"></div>
+      </div>
+
+      <!-- Cart Footer / Checkout CTA -->
+      <div id="cart-drawer-footer" class="p-6 border-t border-slate-100 bg-slate-50 hidden">
+        <div class="space-y-2 mb-4">
+          <div class="flex items-center justify-between text-xs text-slate-500">
+            <span>Vahesumma</span>
+            <span id="cart-subtotal-price" class="font-semibold text-slate-800">0.00 €</span>
+          </div>
+          <div class="flex items-center justify-between text-xs text-slate-500">
+            <span>Eesti pakiautomaadi tarne</span>
+            <span>3.50 € (või tasuta alates 60 €)</span>
+          </div>
+          <div class="flex items-center justify-between pt-2 border-t border-slate-200 text-base font-bold text-navy-950">
+            <span>Kokku</span>
+            <span id="cart-total-price" class="font-display text-xl text-crimson">0.00 €</span>
+          </div>
+        </div>
+
+        <button type="button" 
+                onclick="openCheckoutModal()" 
+                class="w-full py-3.5 bg-crimson hover:bg-crimson-hover text-white text-sm font-bold tracking-wider uppercase rounded-xl transition-all shadow-lg shadow-crimson/25 flex items-center justify-center gap-2">
+          <span>Mine kassasse</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+
+        <p class="text-[11px] text-slate-400 text-center mt-3 flex items-center justify-center gap-1">
+          <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          <span>Turvaline makse pangalinkide või kaardiga</span>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: QUICK VIEW PRODUCT DETAILS (#quick-view-modal)                     -->
+  <!-- ========================================================================= -->
+  <!-- ========================================================================= -->
+  <!-- MODAL: QUICK VIEW PRODUCT DETAILS (#quick-view-modal)                     -->
+  <!-- ========================================================================= -->
+  <div id="quick-view-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" role="dialog" aria-modal="true">
+    <!-- Backdrop -->
+    <div class="fixed inset-0 bg-navy-950/80 backdrop-blur-sm transition-opacity" onclick="closeQuickView()"></div>
+
+    <!-- Scrollable positioning wrapper: starts from top on mobile to eliminate clipping, centered on desktop -->
+    <div class="min-h-full flex items-start sm:items-center justify-center p-3 sm:p-6 z-10 relative">
+      <div class="relative bg-white rounded-2xl sm:rounded-3xl max-w-3xl w-full shadow-2xl overflow-hidden border border-slate-200 my-3 sm:my-8 text-left" onclick="event.stopPropagation()">
+        
+        <!-- Close Button (always visible and reachable on mobile) -->
+        <button type="button" 
+                id="qv-close-btn" 
+                onclick="closeQuickView()"
+                class="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/95 hover:bg-crimson hover:text-white text-slate-700 flex items-center justify-center shadow-md transition-all border border-slate-200 cursor-pointer" 
+                aria-label="Sulge kiirvaade">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          
+          <!-- Image and Thumbnails Column -->
+          <div class="bg-slate-50 p-4 sm:p-6 flex flex-col justify-between border-b md:border-b-0 md:border-r border-slate-200/80">
+            <!-- Main image viewport with object-contain to display 100% of the image without any cropping -->
+            <div class="w-full h-64 sm:h-80 md:h-[380px] rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-sm relative flex items-center justify-center p-2 sm:p-3">
+              <img id="qv-main-img" src="" alt="" class="max-w-full max-h-full w-auto h-auto object-contain object-center transition-all duration-300">
+            </div>
+            <!-- Thumbnails strip -->
+            <div id="qv-thumbs" class="flex items-center gap-2 mt-3 sm:mt-4 overflow-x-auto pb-1"></div>
+          </div>
+
+          <!-- Product Details and Actions Column -->
+          <div class="p-5 sm:p-8 flex flex-col justify-between">
+            <div>
+              <span id="qv-category" class="text-xs uppercase tracking-widest font-bold text-crimson font-sans">Rõivad</span>
+              <h3 id="qv-title" class="font-display font-black text-xl sm:text-2xl text-navy-950 mt-1 mb-2">Toote Nimi</h3>
+              
+              <div class="flex items-center gap-3 mb-4">
+                <span id="qv-price" class="font-display font-black text-2xl text-navy-950">0 €</span>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800 font-sans">
+                  Laos olemas
+                </span>
+              </div>
+
+              <p id="qv-description" class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6 font-sans">
+                Toote kirjeldus...
+              </p>
+
+              <!-- Sizes selector -->
+              <div class="mb-6">
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 font-sans">
+                  Vali suurus:
+                </label>
+                <div id="qv-sizes" class="flex items-center gap-2 flex-wrap"></div>
+              </div>
+
+              <!-- Product Specs Checklist -->
+              <div class="mb-6 pt-4 border-t border-slate-100">
+                <h5 class="text-xs font-bold text-navy-950 uppercase tracking-wider mb-2.5 font-sans">Toote detailid:</h5>
+                <ul id="qv-specs-list" class="space-y-1.5 font-sans"></ul>
+              </div>
+            </div>
+
+            <!-- Quantity & Add to Cart -->
+            <div class="pt-4 border-t border-slate-100">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-xs font-bold text-slate-700 uppercase font-sans">Kogus:</span>
+                <div class="flex items-center border border-slate-200 rounded-lg bg-slate-50">
+                  <button type="button" onclick="const q = document.getElementById('qv-quantity'); q.value = Math.max(1, parseInt(q.value)-1);" class="w-8 h-8 flex items-center justify-center font-bold text-slate-500 hover:text-navy-950 cursor-pointer">-</button>
+                  <input type="number" id="qv-quantity" value="1" min="1" max="10" class="w-10 text-center bg-transparent font-bold text-xs text-navy-950 focus:outline-none">
+                  <button type="button" onclick="const q = document.getElementById('qv-quantity'); q.value = Math.min(10, parseInt(q.value)+1);" class="w-8 h-8 flex items-center justify-center font-bold text-slate-500 hover:text-navy-950 cursor-pointer">+</button>
+                </div>
+              </div>
+
+              <button type="button" 
+                      onclick="addQuickViewToCart()" 
+                      class="w-full py-3.5 bg-crimson hover:bg-crimson-hover text-white text-xs font-bold tracking-wider uppercase rounded-xl transition-all shadow-lg shadow-crimson/25 flex items-center justify-center gap-2 font-sans cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                <span>Lisa ostukorvi</span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: CHECKOUT SIMULATION (#checkout-modal)                              -->
+  <!-- ========================================================================= -->
+  <div id="checkout-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-navy-950/80 backdrop-blur-sm" onclick="closeCheckoutModal()"></div>
+    <div class="min-h-full flex items-start sm:items-center justify-center p-3 sm:p-6 z-10 relative">
+      <div class="relative bg-white rounded-2xl sm:rounded-3xl max-w-xl w-full shadow-2xl overflow-hidden border border-slate-200 my-3 sm:my-8 p-5 sm:p-8 text-left" onclick="event.stopPropagation()">
+        
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-crimson text-white flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="font-display font-bold text-xl text-navy-950">Vormista Tellimus</h3>
+          </div>
+          <button type="button" onclick="closeCheckoutModal()" class="p-2 text-slate-400 hover:text-crimson rounded-lg transition-colors cursor-pointer" aria-label="Sulge tellimusaken">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <form onsubmit="submitCheckoutOrder(event)" class="space-y-4">
+          
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1 font-sans">Täisnimi *</label>
+            <input type="text" name="customer_name" required placeholder="Ees- ja perekonnanimi" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-crimson">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-1 font-sans">E-post *</label>
+              <input type="email" name="customer_email" required placeholder="sinu@email.ee" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-crimson">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-1 font-sans">Telefoninumber *</label>
+              <input type="tel" name="customer_phone" required placeholder="+372 5555 5555" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-crimson">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1 font-sans">Tarneviis *</label>
+            <div class="relative">
+              <select name="shipping_method" class="w-full appearance-none pl-4 pr-10 py-2.5 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-crimson bg-white cursor-pointer">
+                <option value="omniva">Omniva pakiautomaat (Vali lähim automaat)</option>
+                <option value="smartpost">Itella Smartpost pakiautomaat</option>
+                <option value="dpd">DPD Pickup pakiautomaat</option>
+                <option value="paide">Tulen ise järele: Paide Jalgpallikeskus (Staadioni 4, Tasuta)</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 text-slate-500">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1 font-sans">Pakiautomaadi asukoht / Märkused tellimusele</label>
+            <input type="text" name="customer_address" placeholder="nt. Paide Maksimarketi pakiautomaat" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-crimson">
+          </div>
+
+          <!-- Payment Options -->
+          <div class="pt-2">
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-2 font-sans">Makseviis</label>
+            <div class="grid grid-cols-3 gap-2 font-sans">
+              <label class="border border-slate-200 rounded-xl p-2.5 text-center cursor-pointer hover:border-crimson transition-all flex flex-col items-center justify-center bg-slate-50 text-xs font-bold">
+                <input type="radio" name="payment" value="swedbank" checked class="sr-only">
+                <span class="text-amber-600 font-black">Swedbank</span>
+              </label>
+              <label class="border border-slate-200 rounded-xl p-2.5 text-center cursor-pointer hover:border-crimson transition-all flex flex-col items-center justify-center bg-slate-50 text-xs font-bold">
+                <input type="radio" name="payment" value="lhv" class="sr-only">
+                <span class="text-slate-900 font-black">LHV</span>
+              </label>
+              <label class="border border-slate-200 rounded-xl p-2.5 text-center cursor-pointer hover:border-crimson transition-all flex flex-col items-center justify-center bg-slate-50 text-xs font-bold">
+                <input type="radio" name="payment" value="card" class="sr-only">
+                <span class="text-blue-700 font-black">Kaardimakse</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between font-sans">
+            <div>
+              <span class="text-xs text-slate-500">Tasumisele kuulub:</span>
+              <div id="checkout-modal-total" class="font-display font-black text-2xl text-crimson">0.00 €</div>
+            </div>
+            <button type="submit" class="px-6 py-3 bg-crimson hover:bg-crimson-hover text-white text-xs font-bold tracking-wider uppercase rounded-xl transition-all shadow-lg shadow-crimson/25 cursor-pointer">
+              Kinnita & Maksa
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: ORDER SUCCESS (#order-success-modal)                               -->
+  <!-- ========================================================================= -->
+  <div id="order-success-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-navy-950/80 backdrop-blur-sm" onclick="document.getElementById('order-success-modal').classList.add('hidden'); document.body.classList.remove('overflow-hidden');"></div>
+    <div class="min-h-full flex items-center justify-center p-3 sm:p-6 z-10 relative">
+      <div class="relative bg-white rounded-2xl sm:rounded-3xl max-w-md w-full shadow-2xl p-6 sm:p-8 text-center border border-slate-200 my-4" onclick="event.stopPropagation()">
+        
+        <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        </div>
+
+        <h3 class="font-display font-black text-2xl text-navy-950 mb-2">Suur tänu tellimuse eest!</h3>
+        <p class="text-sm text-slate-600 mb-6 leading-relaxed font-sans">
+          Tere, <span id="success-customer-name" class="font-bold text-navy-950">Fänn</span>! Sinu tellimus on edukalt vastu võetud. Saadame kinnituse ja pakijälgimise koodi sinu e-posti aadressile.
+        </p>
+
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-xs text-slate-500 mb-6 text-left space-y-1 font-sans">
+          <div>• Tellimuse staatus: <strong>Komplekteerimisel</strong></div>
+          <div>• Eeldatav tarne: <strong>2–4 tööpäeva jooksul</strong></div>
+          <div>• Küsimuste korral: <strong>varustus@paidelinnameeskond.ee</strong></div>
+        </div>
+
+        <button type="button" 
+                onclick="document.getElementById('order-success-modal').classList.add('hidden'); document.body.classList.remove('overflow-hidden');" 
+                class="w-full py-3 bg-navy hover:bg-navy-800 text-white text-xs font-bold tracking-wider uppercase rounded-xl transition-all cursor-pointer font-sans">
+          Tagasi e-poodi
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- FOOTER                                                                    -->
+  <!-- ========================================================================= -->
+  <footer class="bg-navy-950 text-white border-t border-navy-800 pt-16 pb-12 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Top Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-12 border-b border-navy-800/80">
+        
+        <!-- Col 1: Club Info -->
+        <div class="space-y-4">
+          <div class="flex items-center space-x-3">
+            <img src="assets/img/jalgpall_logos/paide.png" alt="Paide Crest" class="w-10 h-10 object-contain">
+            <div>
+              <span class="font-display font-bold text-white text-base block leading-tight">PAIDE LINNAMEESKOND</span>
+              <span class="text-xs text-crimson font-bold uppercase tracking-wider">Ametlik Fännipood</span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Kanna uhkusega Järvamaa esindusklubi värve. Iga ost toetab otseselt meie noormängijate ja akadeemia teekonda tippu.
+          </p>
+          <div class="pt-2 text-xs text-slate-400 space-y-1">
+            <p>Staadioni 4, Paide, 72712 Järvamaa</p>
+            <p>E-post: <a href="mailto:varustus@paidelinnameeskond.ee" class="text-white hover:text-crimson">varustus@paidelinnameeskond.ee</a></p>
+          </div>
+        </div>
+
+        <!-- Col 2: E-Poe Kategooriad -->
+        <div>
+          <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Tootekategooriad</h4>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><a href="#tooted" class="hover:text-white transition-colors">Uus kollektsioon 2026</a></li>
+            <li><a href="#tooted" class="hover:text-white transition-colors">Fännipusad ja pusakampsunid</a></li>
+            <li><a href="#tooted" class="hover:text-white transition-colors">Vabaajasärgid ja t-särgid</a></li>
+            <li><a href="#tooted" class="hover:text-white transition-colors">Nokamütsid ja talvemütsid</a></li>
+            <li><a href="#tooted" class="hover:text-white transition-colors">Fännisallid ja sümboolika</a></li>
+            <li><a href="#tooted" class="hover:text-white transition-colors">Klubi raamatud ja aksessuaarid</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Kiirlingid & Infomaterjalid -->
+        <div>
+          <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Klient & Tellimine</h4>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li><a href="index.html" class="hover:text-white transition-colors">Esileht ja Mängud</a></li>
+            <li><a href="noortetoo.html" class="hover:text-white transition-colors">Noortetöö & Jalgpallikool</a></li>
+            <li class="hidden"><a href="akadeemia.html" class="hover:text-white transition-colors">Jalgpalliakadeemia</a></li>
+            <li><a href="#klubi-info" class="hover:text-white transition-colors">Tarne ja tagastustingimused</a></li>
+            <li><a href="#klubi-info" class="hover:text-white transition-colors">Suuruste tabel ja hooldusjuhis</a></li>
+            <li><a href="https://www.piletilevi.ee/korraldajad/21-69-665/jalgpalliklubi-paide-linnameeskond" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Mängupiletid (Piletilevi)</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Klienditugi & Lahtiolekuajad -->
+        <div>
+          <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Klubihoone Väljastus</h4>
+          <p class="text-xs text-slate-400 leading-relaxed mb-3">
+            Tooteid saab proovida ja kätte saada Paide Jalgpallikeskuses kodumängude päeval või eelneval kokkuleppel.
+          </p>
+          <div class="p-3.5 rounded-xl bg-navy-900 border border-navy-800 text-xs text-slate-300">
+            <div class="font-bold text-white mb-1">MTÜ Jalgpalliklubi Paide Linnameeskond</div>
+            <div class="text-[11px] text-slate-400">Reg. kood 80339528 | KMKR EE101618003</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Sponsors Row -->
+      <div class="pt-8 pb-6 flex flex-wrap items-center justify-center gap-8 opacity-70 grayscale hover:grayscale-0 transition-all">
+        <img src="assets/img/sponsors/capelli.svg" alt="Capelli Sport" class="h-6 object-contain">
+        <img src="assets/img/sponsors/verston.svg" alt="Verston" class="h-6 object-contain">
+        <img src="assets/img/sponsors/ramirent.svg" alt="Ramirent" class="h-6 object-contain">
+        <img src="assets/img/sponsors/coop.svg" alt="Coop" class="h-6 object-contain">
+        <img src="assets/img/sponsors/enersense.svg" alt="Enersense" class="h-6 object-contain">
+        <img src="assets/img/sponsors/iizi.svg" alt="IIZI" class="h-6 object-contain">
+        <img src="assets/img/sponsors/piletilevi.svg" alt="Piletilevi" class="h-5 object-contain">
+      </div>
+
+      <!-- Copyright & Legal -->
+      <div class="pt-6 border-t border-navy-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
+        <p>&copy; 2026 Paide Linnameeskond. Kõik õigused kaitstud. Ametlik fännikaup ja varustus.</p>
+        <div class="flex items-center gap-4 text-slate-400">
+          <a href="privaatsuspoliitika.html" class="hover:text-white transition-colors">Privaatsuspoliitika</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/cookie-consent.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/shop.js"></script>
+  <!-- Standardized Mobile Drawer Script across PLM -->
+  <script>
+    function openMobileDrawer() {
+      const drawer = document.getElementById('mobile-drawer');
+      const panel = document.getElementById('drawer-panel');
+      const backdrop = document.getElementById('drawer-backdrop');
+      const openBtn = document.getElementById('mobile-menu-btn');
+      if (!drawer) return;
+
+      drawer.classList.remove('hidden');
+      drawer.classList.add('drawer-open');
+      void drawer.offsetWidth;
+      if (panel) {
+        panel.classList.remove('translate-x-full');
+        panel.classList.add('translate-x-0');
+      }
+      if (backdrop) {
+        backdrop.classList.remove('opacity-0');
+        backdrop.classList.add('opacity-100');
+      }
+      document.body.classList.add('overflow-hidden');
+      if (openBtn) openBtn.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMobileDrawer() {
+      const drawer = document.getElementById('mobile-drawer');
+      const panel = document.getElementById('drawer-panel');
+      const backdrop = document.getElementById('drawer-backdrop');
+      const openBtn = document.getElementById('mobile-menu-btn');
+      if (!drawer) return;
+
+      drawer.classList.remove('drawer-open');
+      if (panel) {
+        panel.classList.remove('translate-x-0');
+        panel.classList.add('translate-x-full');
+      }
+      if (backdrop) {
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0');
+      }
+      document.body.classList.remove('overflow-hidden');
+      if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
+
+      setTimeout(function() {
+        if (!drawer.classList.contains('drawer-open')) {
+          drawer.classList.add('hidden');
+        }
+      }, 300);
+    }
+
+    function toggleMobileDrawer() {
+      const drawer = document.getElementById('mobile-drawer');
+      if (!drawer) return;
+      if (drawer.classList.contains('hidden') || !drawer.classList.contains('drawer-open')) {
+        openMobileDrawer();
+      } else {
+        closeMobileDrawer();
+      }
+    }
+
+    window.openMobileDrawer = openMobileDrawer;
+    window.closeMobileDrawer = closeMobileDrawer;
+    window.toggleMobileDrawer = toggleMobileDrawer;
+
+    (function() {
+      const openBtn = document.getElementById('mobile-menu-btn');
+      const closeBtn = document.getElementById('drawer-close-btn');
+      const drawer = document.getElementById('mobile-drawer');
+      const backdrop = document.getElementById('drawer-backdrop');
+
+      if (openBtn) {
+        openBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          openMobileDrawer();
+        });
+        openBtn.addEventListener('touchend', function(e) {
+          e.preventDefault();
+          openMobileDrawer();
+        }, { passive: false });
+      }
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeMobileDrawer();
+        });
+      }
+      if (backdrop) {
+        backdrop.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeMobileDrawer();
+        });
+      }
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && drawer && !drawer.classList.contains('hidden')) {
+          closeMobileDrawer();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

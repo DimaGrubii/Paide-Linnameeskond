@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <circle cx="60" cy="60" r="54" fill="#0080ff" stroke="#0b203e" stroke-width="4"/>
+  <circle cx="60" cy="60" r="44" fill="#ffffff"/>
+  <path d="M45 45 L75 45 L60 75 Z" fill="#0080ff"/>
+  <text x="60" y="88" fill="#0b203e" font-family="sans-serif" font-weight="900" font-size="7.5" text-anchor="middle">TABASALU</text>
+</svg>

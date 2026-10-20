@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <path d="M60 14 L96 30 C96 82 80 102 60 112 C40 102 24 82 24 30 Z" fill="#0b6623" stroke="#e6c229" stroke-width="3"/>
+  <circle cx="60" cy="56" r="22" fill="#ffffff"/>
+  <polygon points="60,42 65,51 75,52 67,59 70,68 60,63 50,68 53,59 45,52 55,51" fill="#0b6623"/>
+  <text x="60" y="92" fill="#ffffff" font-family="sans-serif" font-weight="900" font-size="8" text-anchor="middle">SAKU</text>
+</svg>

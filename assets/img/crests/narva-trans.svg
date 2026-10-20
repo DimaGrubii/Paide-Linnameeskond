@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <circle cx="60" cy="60" r="54" fill="#0f2a4a" stroke="#d62828" stroke-width="4"/>
+  <circle cx="60" cy="60" r="44" fill="#d62828"/>
+  <circle cx="60" cy="60" r="38" fill="#ffffff"/>
+  <path d="M42 42 L78 42 L60 78 Z" fill="#0f2a4a"/>
+  <text x="60" y="94" fill="#0f2a4a" font-family="sans-serif" font-weight="900" font-size="9" text-anchor="middle">TRANS</text>
+</svg>

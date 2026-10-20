@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="et" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Paide Jalgpalliakadeemia | Tippsport ja Kutseharidus | Paide Linnameeskond</title>
+  <meta name="description" content="Paide Linnameeskonna jalgpalliakadeemia koostöös Järvamaa Rakendusliku Kolledžiga. SPORT/JALGPALL eriala, professionaalsed treeningud, tasuta varustus ja Baltikumi moodsaim treeningkeskus.">
+
+  <!-- Favicon / Crest Icon -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/crests/paide-crest.svg">
+  <link rel="icon" type="image/png" href="assets/img/jalgpall_logos/paide.png">
+  <link rel="apple-touch-icon" href="assets/img/jalgpall_logos/paide.png">
+  <script>
+    if (window.location.protocol !== "file:") {
+      if (/\/index\.html$/i.test(window.location.pathname)) {
+        window.history.replaceState(null, "", window.location.pathname.replace(/\/index\.html$/i, "/") + window.location.search + window.location.hash);
+      }
+      document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('a[href^="index.html"]').forEach(function(a) {
+          var href = a.getAttribute("href");
+          if (href === "index.html") {
+            a.setAttribute("href", "./");
+          } else if (href.indexOf("index.html#") === 0 || href.indexOf("index.html?") === 0) {
+            a.setAttribute("href", "./" + href.slice("index.html".length));
+          }
+        });
+      });
+    }
+  </script>
+  
+<!-- Google Fonts: Marcellus (Titles & Headings) & Space Grotesk (Body & UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS via CDN with customized Paide Design Tokens -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              DEFAULT: '#0b203e',
+              50: '#f0f5fb',
+              100: '#e1ebf7',
+              200: '#c3d8ef',
+              300: '#94bce4',
+              400: '#5e9bd5',
+              500: '#397ec5',
+              600: '#2764a7',
+              700: '#204f86',
+              800: '#1d4370',
+              900: '#0b203e',
+              950: '#07152b',
+            },
+            crimson: {
+              DEFAULT: '#be2931',
+              50: '#fdf2f2',
+              100: '#fde5e6',
+              200: '#fbced0',
+              300: '#f6a7ab',
+              400: '#ee7177',
+              500: '#e1434c',
+              600: '#be2931',
+              700: '#a61f26',
+              800: '#8a1c22',
+              900: '#731c21',
+              950: '#400a0d',
+            }
+          },
+          fontFamily: {
+            sans: ['"Space Grotesk"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            display: ['"Marcellus"', 'Georgia', 'Cambria', 'serif'],
+            heading: ['"Marcellus"', 'Georgia', 'Cambria', 'serif'],
+            marcellus: ['"Marcellus"', 'Georgia', 'Cambria', 'serif'],
+            grotesk: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            'subtle': '0 1px 3px 0 rgba(11, 32, 62, 0.05), 0 1px 2px -1px rgba(11, 32, 62, 0.03)',
+            'card': '0 4px 20px -2px rgba(11, 32, 62, 0.07)',
+            'elevated': '0 20px 35px -8px rgba(11, 32, 62, 0.12)',
+            'glow-red': '0 0 25px rgba(190, 41, 49, 0.45)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Bespoke Stylesheet -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="bg-[#f8fafc] text-slate-800 antialiased selection:bg-crimson selection:text-white [overflow-x:clip] w-full">
+
+  <!-- ========================================================================= -->
+  <!-- COMPONENT: Maintenance Alert Banner                                       -->
+  <!-- ========================================================================= -->
+  <aside id="maintenance-banner" class="bg-crimson text-white text-xs sm:text-sm font-sans py-2.5 px-4 relative z-50 border-b border-black/15 shadow-sm" aria-label="Hooldusteade">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/20 text-white flex-shrink-0" aria-hidden="true">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+        </span>
+        <div class="text-xs sm:text-[13px] leading-snug">
+          <span class="font-black uppercase tracking-wider bg-white/20 px-1.5 py-0.5 rounded text-[10px] mr-1.5">HOOLDUS</span>
+          <span class="font-bold">Veebileht on hetkel hoolduses ja uuendamisel.</span>
+          <span class="text-white/95">Kuvatav informatsioon võib ajutiselt sisaldada ebatäpsusi.</span>
+          <span class="hidden lg:inline text-white/75 ml-1.5">/ Website is under maintenance — displayed information may be inaccurate.</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-white/85 hidden sm:inline px-2 py-0.5 rounded bg-black/15">ARENDUSJÄRGUS</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================================================= -->
+
+      <!-- ========================================================================= -->
+  <!-- COMPONENT: Site Navigation Header (Standardized across PLM)              -->
+  <!-- ========================================================================= -->
+  <header id="main-header" class="sticky top-0 z-50 header-glass hairline-b transition-all duration-300 py-2.5 lg:py-3 w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="flex items-center justify-between">
+        
+        <!-- Left: Club Crest & Wordmark in Marcellus -->
+        <a href="index.html" class="flex items-center space-x-2.5 sm:space-x-3 group focus:outline-none flex-shrink-0" title="Paide Linnameeskond">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 transition-transform duration-300 group-hover:scale-105 flex-shrink-0">
+            <img src="assets/img/jalgpall_logos/paide.png" alt="Paide Linnameeskond Ametlik Vapp" class="club-crest-img w-full h-full object-contain filter drop-shadow-sm">
+          </div>
+          <div class="flex flex-col justify-center">
+            <span class="font-display font-black text-lg sm:text-xl lg:text-[21px] tracking-wider text-navy leading-none group-hover:text-crimson transition-colors uppercase">
+              PAIDE
+            </span>
+            <span class="font-display font-bold text-[9px] sm:text-[10px] tracking-[0.22em] text-slate-500 uppercase leading-tight">
+              LINNAMEESKOND
+            </span>
+          </div>
+        </a>
+        <!-- Center: Primary Desktop Navigation Links (Marcellus, No Paide TV, Uudised in place) -->
+        <nav class="hidden lg:flex items-center space-x-1 xl:space-x-2 2xl:space-x-2.5 font-display" aria-label="Peamenüü">
+          <a href="index.html" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            Avaleht
+          </a>
+          <a href="index.html#teams" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            Esindus
+          </a>
+          <a href="index.html#women-teams" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            Naiskond
+          </a>
+          <a href="noortetoo.html" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            Noortetöö
+          </a>
+          <a href="uudised.html" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            Uudised
+          </a>
+          <a href="https://varustus.paidelinnameeskond.ee/" target="_blank" rel="noopener noreferrer" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            E-pood
+          </a>
+          <a href="klubi.html" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            Klubi
+          </a>
+        </nav>
+
+        <!-- Right: Action CTAs -->
+        <div class="flex items-center space-x-1.5 sm:space-x-2 xl:space-x-2.5 flex-shrink-0">
+          <!-- Match Center Button -->
+          <a href="index.html#match-hub" class="whitespace-nowrap hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold tracking-wider uppercase font-display text-navy hover:bg-slate-100 hairline-border transition-all flex-shrink-0 leading-none h-8 sm:h-9" title="Mängukalender ja tulemused">
+            <svg class="w-3.5 h-3.5 text-crimson flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <span class="whitespace-nowrap">Mängud</span>
+          </a>
+
+          <!-- Prominent Piletid CTA Button -->
+          <a href="https://www.piletilevi.ee/korraldajad/21-69-665/jalgpalliklubi-paide-linnameeskond" target="_blank" rel="noopener noreferrer" class="whitespace-nowrap inline-flex items-center gap-1 sm:gap-1.5 px-3 sm:px-4 py-1.5 text-xs font-bold tracking-wider uppercase font-display bg-crimson hover:bg-crimson-hover text-white rounded-lg shadow-sm hover:shadow-glow-red transition-all flex-shrink-0 leading-none h-8 sm:h-9">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
+            <span class="whitespace-nowrap">Piletid</span>
+          </a>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button id="mobile-menu-btn" type="button" onclick="openMobileDrawer()" class="lg:hidden p-1.5 sm:p-2 text-navy hover:text-crimson hover:bg-slate-100 rounded-lg focus:outline-none transition-colors h-8 w-8 sm:h-9 sm:w-9 flex items-center justify-center flex-shrink-0 cursor-pointer" aria-label="Ava menüü" aria-expanded="false">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- COMPONENT: Mobile Drawer Slide-Over Menu (Standardized across PLM)        -->
+  <!-- ========================================================================= -->
+  <div id="mobile-drawer" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true">
+    <!-- Backdrop overlay -->
+    <div id="drawer-backdrop" onclick="closeMobileDrawer()" class="fixed inset-0 bg-navy-950/70 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+
+    <!-- Slide-over panel -->
+    <div id="drawer-panel" class="fixed inset-y-0 right-0 max-w-xs w-full bg-white shadow-2xl flex flex-col justify-between translate-x-full transition-transform duration-300 ease-in-out z-10">
+      
+      <!-- Drawer Header -->
+      <div class="p-4 sm:p-5 hairline-b flex items-center justify-between bg-slate-50">
+        <div class="flex items-center space-x-3">
+          <img src="assets/img/jalgpall_logos/paide.png" alt="Paide Crest" class="w-8 h-9 object-contain">
+          <div>
+            <div class="font-display font-black text-base sm:text-lg text-navy leading-none uppercase">PAIDE LM</div>
+            <div class="text-[9px] font-bold tracking-widest text-slate-400 font-sans uppercase">Ametlik Menüü</div>
+          </div>
+        </div>
+        <button id="drawer-close-btn" type="button" onclick="closeMobileDrawer()" class="p-2 text-slate-500 hover:text-crimson rounded-lg hover:bg-slate-200 focus:outline-none cursor-pointer" aria-label="Sulge menüü">
+          <svg class="w-5 h-5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <!-- Navigation links in Marcellus font -->
+      <div class="px-4 sm:px-5 py-5 space-y-1 overflow-y-auto flex-1 font-display tracking-wide uppercase text-base text-navy">
+        <a href="index.html" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Avaleht</a>
+        <a href="index.html#teams" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Esindusmeeskond</a>
+        <a href="index.html#women-teams" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Naiskond</a>
+        <a href="noortetoo.html" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Noortetöö</a>
+        <a href="uudised.html" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Uudised</a>
+        <a href="https://varustus.paidelinnameeskond.ee/" target="_blank" rel="noopener noreferrer" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">E-pood</a>
+        <a href="index.html#match-hub" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Mängukalender</a>
+        <a href="klubi.html" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Klubi & Kontakt</a>
+      </div>
+
+      <!-- Drawer Footer Actions -->
+      <div class="p-4 sm:p-5 hairline-t bg-slate-50 space-y-3">
+        <a href="https://www.piletilevi.ee/korraldajad/21-69-665/jalgpalliklubi-paide-linnameeskond" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-lg text-xs font-bold tracking-wider uppercase font-display bg-crimson hover:bg-crimson-hover text-white shadow-md flex items-center justify-center gap-2 cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
+          <span>Osta mängupilet (Piletilevi)</span>
+        </a>
+        <div class="pt-2 border-t border-slate-200">
+          <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest block text-center mb-2 font-sans">Jälgi Paide Linnameeskonda</span>
+          <div class="flex items-center justify-center gap-3 text-slate-600">
+            <a href="https://www.facebook.com/PaideLinnameeskond" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:text-[#1877f2] hover:border-[#1877f2] flex items-center justify-center transition-colors" title="Facebook">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/paidelinnameeskond/" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:text-[#e4405f] hover:border-[#e4405f] flex items-center justify-center transition-colors" title="Instagram (Esindus)">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@paidelinnameeskond" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:text-black hover:border-black flex items-center justify-center transition-colors" title="TikTok">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.3 6.3 0 0 0 1.96-4.49V8.62a8.27 8.27 0 0 0 4.81 1.53v-3.46h-1z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@PaideLinnameeskondTV" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:text-[#ff0000] hover:border-[#ff0000] flex items-center justify-center transition-colors" title="YouTube (@PaideLinnameeskondTV)">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN CONTENT CONTAINER                                                    -->
+  <!-- ========================================================================= -->
+  <main id="root" class="w-full [overflow-x:clip]">
+
+    <!-- Centralized Desktop Container -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+
+      <!-- Breadcrumbs -->
+      <nav class="pt-4 pb-2 text-xs font-semibold text-slate-500 flex items-center gap-2" aria-label="Breadcrumb">
+        <a href="index.html" class="hover:text-crimson transition-colors">Avaleht</a>
+        <span class="text-slate-300">/</span>
+        <span class="text-navy font-bold">Jalgpalliakadeemia</span>
+      </nav>
+
+      <!-- ========================================================================= -->
+      <!-- SECTION 1: HERO FEATURE & EDITORIAL BANNER                               -->
+      <!-- ========================================================================= -->
+      <section class="pt-3 pb-8 w-full">
+        <div class="bg-navy rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-10 text-white shadow-elevated border border-navy-800 relative overflow-hidden">
+          
+          <!-- Top Institution Branding & Badges -->
+          <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+            <div class="flex items-center gap-3 bg-navy-950/85 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10">
+              <img src="assets/img/jalgpall_logos/paide.png" alt="Paide Linnameeskond" class="w-8 h-9 object-contain">
+              <div class="w-px h-6 bg-white/20"></div>
+              <div>
+                <span class="text-[10px] tracking-widest text-crimson-400 font-bold uppercase block">Koostöös</span>
+                <span class="font-display font-bold text-xs sm:text-sm text-white">Järvamaa Rakenduslik Kolledž</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <span class="px-3 py-1 rounded-full bg-crimson text-white text-[11px] font-extrabold uppercase tracking-wider shadow-sm">
+                SPORT / JALGPALL ERIALA
+              </span>
+              <span class="hidden sm:inline-flex px-3 py-1 rounded-full bg-white/10 backdrop-blur text-white text-[11px] font-bold tracking-wider uppercase border border-white/10">
+                4-AASTANE KUTSEKESKHARIDUS
+              </span>
+              <span class="hidden md:inline-flex px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-[11px] font-bold tracking-wider uppercase border border-emerald-500/30">
+                100% TASUTA ÕPE
+              </span>
+            </div>
+          </div>
+
+          <!-- Featured Showcase: Clear Group Photo -->
+          <div class="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border border-white/15 mb-8 sm:mb-10 bg-navy-950 group">
+            <img src="assets/img/academy/Group_photo.jpeg" 
+                 alt="Paide Linnameeskonna jalgpalliakadeemia õppurid ja tulevikutalendid Järvamaa Kolledži linnakus" 
+                 class="w-full h-auto max-h-[580px] object-cover object-[center_35%] transform group-hover:scale-[1.01] transition-transform duration-700">
+            <div class="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 px-3.5 py-2 rounded-xl bg-navy-950/90 backdrop-blur-md border border-white/15 text-xs sm:text-sm font-medium text-slate-200 flex items-center gap-2.5 shadow-xl">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 flex-shrink-0 animate-pulse"></span>
+              <span>Paide Jalgpalliakadeemia koosseis ja noored talendid Järvamaa Kolledži linnakus</span>
+            </div>
+          </div>
+
+          <!-- Editorial Narrative & Call to Actions (Cleanly placed below the photo) -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-8">
+            <div class="lg:col-span-8">
+              <h1 class="font-display font-black text-2xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-[1.08] sm:leading-[1.04] uppercase mb-4">
+                PAIDE JALGPALLIAKADEEMIA:<br class="hidden sm:inline"> TEE TIPPJALGPALLI KÄSIKÄES HARIDUSEGA
+              </h1>
+              <p class="text-sm sm:text-lg text-slate-200 leading-relaxed font-normal mb-6 max-w-3xl">
+                Paide Linnameeskond ja Järvamaa Rakenduslik Kolledž viivad ellu noore sportlase unistuse: omanda riiklikult tunnustatud kutsekeskharidus koos UEFA litsentsidega treenerite käe all toimuva igapäevase professionaalse treeningprotsessiga.
+              </p>
+
+              <!-- CTA Actions -->
+              <div class="flex flex-wrap items-center gap-3.5 sm:gap-4">
+                <a href="https://www.sais.ee/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-crimson hover:bg-crimson-700 text-white font-bold text-sm tracking-wider uppercase transition-all shadow-glow-red hover:shadow-lg transform active:scale-95">
+                  <span>Kandideeri SAIS.ee portaalis</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </a>
+                <a href="#akadeemia-tv" class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur text-white font-bold text-sm tracking-wider uppercase transition-all border border-white/20">
+                  <svg class="w-4 h-4 text-crimson-400 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  <span>Vaata videoid</span>
+                </a>
+                <a href="https://akadeemia.paidelinnameeskond.ee/wp-content/uploads/2026/03/SPORT_oppekava.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-navy-950/80 hover:bg-navy-900 text-slate-300 hover:text-white font-bold text-sm tracking-wider uppercase transition-all border border-white/10">
+                  <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                  <span>Õppekava PDF</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Right Callout Box: Admissions Info -->
+            <div class="lg:col-span-4 bg-navy-950/70 rounded-2xl p-5 sm:p-6 border border-white/10 backdrop-blur flex flex-col justify-between">
+              <div>
+                <div class="flex items-center gap-2 text-crimson-400 text-xs font-bold uppercase tracking-wider mb-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  <span>Vastuvõtt 2026/2027</span>
+                </div>
+                <h3 class="font-display font-bold text-lg text-white mb-2">Avalduste vastuvõtt avatud</h3>
+                <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                  Akadeemiasse saavad kandideerida põhikooli lõpetanud noormehed ja neiud üle terve Eesti. Tagatud on tasuta elamine, treeningud, varustus ning toitlustus.
+                </p>
+              </div>
+              <div class="pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+                <span class="text-slate-400">Järgmised katsed:</span>
+                <span class="font-mono font-bold text-amber-400">Aprill – Juuni 2026</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Metric Strip -->
+          <div class="pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
+            <div class="bg-navy-950/50 p-4 rounded-xl border border-white/5">
+              <div class="font-display font-black text-2xl sm:text-3xl text-crimson-400">100% TASUTA</div>
+              <div class="text-xs text-slate-300 font-medium mt-1">Treeningud, varustus ja laagrid</div>
+            </div>
+            <div class="bg-navy-950/50 p-4 rounded-xl border border-white/5">
+              <div class="font-display font-black text-2xl sm:text-3xl text-white">4 AASTAT</div>
+              <div class="text-xs text-slate-300 font-medium mt-1">Kutsekeskharidus + treenerikutse</div>
+            </div>
+            <div class="bg-navy-950/50 p-4 rounded-xl border border-white/5">
+              <div class="font-display font-black text-2xl sm:text-3xl text-white">20 KOHTA</div>
+              <div class="text-xs text-slate-300 font-medium mt-1">Õppekohti aastas (noormehed & neiud)</div>
+            </div>
+            <div class="bg-navy-950/50 p-4 rounded-xl border border-white/5">
+              <div class="font-display font-black text-2xl sm:text-3xl text-white">UEFA PRO & A</div>
+              <div class="text-xs text-slate-300 font-medium mt-1">Rahvusvaheline treeneritetiim</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SECTION 2: ACADEMY PILLARS ("VÕIMALUSED")                                 -->
+      <!-- ========================================================================= -->
+      <section id="voimalused" class="py-10 w-full">
+        <div class="text-center max-w-3xl mx-auto mb-10">
+          <span class="text-crimson font-mono font-bold text-xs tracking-widest uppercase block mb-2">Miks valida Paide akadeemia?</span>
+          <h2 class="font-display font-black text-2xl sm:text-4xl text-navy uppercase tracking-tight">
+            Kolm sammast Sinu eduka karjääri tagamiseks
+          </h2>
+          <p class="text-sm sm:text-base text-slate-600 mt-3">
+            Pakume noormängijale täielikku ökosüsteemi, kus haridus ei jää spordi varju ega sport hariduse arvelt kannatama.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          
+          <!-- Pillar 1 -->
+          <div class="bg-white rounded-2xl p-7 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-crimson/10 text-crimson flex items-center justify-center mb-6">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+              <h3 class="font-display font-bold text-xl text-navy uppercase mb-3">
+                Tipptasemel treeningväljund ja tingimused
+              </h3>
+              <ul class="space-y-3 text-sm text-slate-600 leading-relaxed">
+                <li class="flex items-start gap-2.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-crimson mt-2 flex-shrink-0"></span>
+                  <span><strong>Kvalifitseeritud treenerid:</strong> rahvusvaheline taustasüsteem eesotsas UEFA Pro litsentsiga direktoriga.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-crimson mt-2 flex-shrink-0"></span>
+                  <span><strong>Läbimõeldud treeningprotsess:</strong> individuaalsed arengukavad (IDP), videoanalüütika ja GPS-monitooring.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-crimson mt-2 flex-shrink-0"></span>
+                  <span><strong>Eesti parim kompleks:</strong> soe sisehall (13–15°C talvel), kunstmurustaadion, 2 täismõõtmetes naturaalmuruväljakut ja 2025. a uus klubihoone.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-crimson">
+              <span>Moodsaim jalgpallikeskus</span>
+              <span>13–15°C sisehall</span>
+            </div>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="bg-white rounded-2xl p-7 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-navy/10 text-navy flex items-center justify-center mb-6">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+              </div>
+              <h3 class="font-display font-bold text-xl text-navy uppercase mb-3">
+                Haridustee ja tippjalgpall käsikäes
+              </h3>
+              <ul class="space-y-3 text-sm text-slate-600 leading-relaxed">
+                <li class="flex items-start gap-2.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-navy mt-2 flex-shrink-0"></span>
+                  <span><strong>Kohandatud päevaplaan:</strong> õppimist ja jalgpalli toetav elurütm, ühildatud Järvamaa Rakendusliku Kolledžiga.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-navy mt-2 flex-shrink-0"></span>
+                  <span><strong>Koostöö EJL-iga:</strong> omanda õpingute vältel ametlik jalgpallitreeneri ja kohtuniku kutsetunnistus.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-navy mt-2 flex-shrink-0"></span>
+                  <span><strong>Mitmekülgne õppekava:</strong> spordieetika, kultuur, toitumisteadus, taastumine ning spordisündmuste juhtimine.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-navy">
+              <span>EJL Treenerikutse</span>
+              <span>Kutsekeskharidus</span>
+            </div>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="bg-white rounded-2xl p-7 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-6">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              </div>
+              <h3 class="font-display font-bold text-xl text-navy uppercase mb-3">
+                Jätkusuutlik karjääriplaneerimine
+              </h3>
+              <ul class="space-y-3 text-sm text-slate-600 leading-relaxed">
+                <li class="flex items-start gap-2.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 flex-shrink-0"></span>
+                  <span><strong>Loogiline karjääriredel:</strong> noorte reaalne võistlusväljund Paide U21 (Esiliiga) võistkonnas ja U19 Eliitliigas.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 flex-shrink-0"></span>
+                  <span><strong>Otsesild esindusmeeskonda:</strong> Premium Liiga ja Naiste Meistriliiga esinduste uksed on akadeemia parimatele avatud.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 flex-shrink-0"></span>
+                  <span><strong>25 EKAPit praktikat:</strong> reaalne osalemine tippklubi igapäevases võistlus- ja organisatoorses protsessis.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-emerald-600">
+              <span>U21 & U19 Eliitliiga</span>
+              <span>Otseliin Premium Liigasse</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SECTION 3: CURRENT COHORTS & DIRECTOR EDITORIAL                           -->
+      <!-- ========================================================================= -->
+      <section class="py-8 w-full">
+        <div class="bg-navy rounded-3xl p-6 sm:p-10 lg:p-12 text-white relative overflow-hidden shadow-elevated">
+          <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-crimson/15 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            <!-- Left: Director Note & Photo -->
+            <div class="lg:col-span-6">
+              <span class="text-crimson-400 font-mono font-bold text-xs tracking-widest uppercase block mb-2">Akadeemia juhtimine</span>
+              <h2 class="font-display font-black text-2xl sm:text-4xl text-white uppercase tracking-tight mb-4">
+                „Me ei kasvata mitte ainult häid jalgpallureid, vaid eluks ettevalmistatud inimesi.”
+              </h2>
+              
+              <!-- Photo feature of Mika with students -->
+              <div class="mb-5 rounded-2xl overflow-hidden border border-white/10 bg-navy-950 shadow-md">
+                <img src="assets/img/academy/Mika_presentation.jpeg" 
+                     alt="Akadeemia direktor Mika Laurikainen tutvustamas õppuritele treeningnädalat ja individuaalset arenguplaani" 
+                     class="w-full h-60 sm:h-72 object-cover object-[center_28%]">
+                <div class="p-3.5 text-xs text-slate-300 italic bg-navy-950/95 border-t border-white/5 flex flex-wrap items-center justify-between gap-2">
+                  <span>Akadeemia direktor Mika Laurikainen tutvustamas noormängijatele nädala treeningkava ja individuaalse arengu programmi (IDP).</span>
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-crimson-400 whitespace-nowrap bg-crimson/10 px-2 py-0.5 rounded border border-crimson/20">MEETODIKAJUHT</span>
+                </div>
+              </div>
+
+              <p class="text-sm sm:text-base text-slate-300 leading-relaxed mb-4">
+                Paide jalgpalliakadeemia direktor <strong>Mika Laurikainen</strong> (UEFA PRO) alustas oma ametikohal kolmandat tööaastat. Ta toob klubisse pikaajalise Soome kõrgliiga ja rahvuskoondiste juhtimise kogemuse, juurutades rahvusvahelist distsipliini ja individuaalset mängijakesksust.
+              </p>
+              
+              <div class="flex items-center gap-4 pt-4 border-t border-navy-800">
+                <img src="assets/img/academy/Mika_Laurikainen1.jpg" alt="Mika Laurikainen" class="w-14 h-14 rounded-full object-cover object-top border-2 border-crimson shadow-md flex-shrink-0">
+                <div>
+                  <div class="font-display font-bold text-base text-white">Mika Laurikainen</div>
+                  <div class="text-xs text-slate-400">Akadeemia direktor • UEFA PRO 🇫🇮</div>
+                  <div class="text-[11px] text-crimson-400 mt-0.5">mika@paidelinnameeskond.ee</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: 3rd Cohort Roll Call -->
+            <div class="lg:col-span-6 bg-navy-900/90 rounded-2xl p-6 sm:p-8 hairline-border border-navy-800 backdrop-blur">
+              <div class="flex items-center justify-between mb-4 pb-3 border-b border-navy-800">
+                <div>
+                  <span class="text-xs font-bold text-crimson-400 uppercase tracking-widest block">Uusim koosseis</span>
+                  <h3 class="font-display font-bold text-xl text-white">Akadeemia 3. lend (2026/2027)</h3>
+                </div>
+                <span class="px-2.5 py-1 rounded bg-crimson text-white font-mono text-xs font-bold">17 ÕPPURIT</span>
+              </div>
+
+              <!-- Men's 3rd Cohort -->
+              <div class="mb-5">
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                  <span>Noormeeste kolmas lend (14 õppurit):</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-300">
+                  <div class="p-2 rounded bg-navy-950/60"><strong>Romet Randalainen</strong> (Paide LM)</div>
+                  <div class="p-2 rounded bg-navy-950/60"><strong>Rasmus Palmiste</strong> (Tartu Tammeka)</div>
+                  <div class="p-2 rounded bg-navy-950/60"><strong>Endrik Martin Elias</strong> (Paide LM)</div>
+                  <div class="p-2 rounded bg-navy-950/60"><strong>Karl Markus Treumuth</strong> (Tallinna Kalev)</div>
+                  <div class="p-2 rounded bg-navy-950/60"><strong>Kaspar Sinikas</strong> (Raplamaa JK)</div>
+                  <div class="p-2 rounded bg-navy-950/60"><strong>Mathias Meidla</strong> (Pärnu Kalev)</div>
+                  <div class="p-2 rounded bg-navy-950/60"><strong>Marten Uibos</strong> (Viljandi Tulevik)</div>
+                  <div class="p-2 rounded bg-navy-950/60"><strong>Adelhein Kikas</strong> (Põlva Lootos)</div>
+                  <div class="p-2 rounded bg-navy-950/60"><strong>Geiro Linnas</strong> (Viljandi Tulevik)</div>
+                  <div class="p-2 rounded bg-navy-950/60"><strong>Sander Kaljumäe</strong> (Viimsi JK)</div>
+                  <div class="p-2 rounded bg-navy-950/60"><strong>Kris-Kevin Salamatin</strong> (FC Raasiku)</div>
+                  <div class="p-2 rounded bg-navy-950/60"><strong>Keito Väljaots</strong> (Raplamaa JK)</div>
+                  <div class="p-2 rounded bg-navy-950/60"><strong>Raian Paabel</strong> (Viljandi Tulevik)</div>
+                  <div class="p-2 rounded bg-navy-950/60"><strong>Sten-Marten Dervojed</strong> (Pärnu Vaprus)</div>
+                </div>
+              </div>
+
+              <!-- Women's 2nd Cohort -->
+              <div>
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-crimson"></span>
+                  <span>Neidude teine lend (3 õppurit):</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs text-slate-300">
+                  <div class="p-2 rounded bg-navy-950/60"><strong>Kreteli Männiste</strong> (Paide LN)</div>
+                  <div class="p-2 rounded bg-navy-950/60"><strong>Sara Loviisa Pajuste</strong> (Harju JK)</div>
+                  <div class="p-2 rounded bg-navy-950/60"><strong>Anette Oidekivi</strong> (Põlva Lootos)</div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- COMPONENT: Paide TV Akadeemia Video Hub                                   -->
+      <!-- Gutenberg Pattern: paide/academy-tv                                      -->
+      <!-- ========================================================================= -->
+      <section id="akadeemia-tv" class="py-12 w-full">
+        <div class="bg-navy-950 rounded-3xl p-6 sm:p-10 lg:p-12 text-white relative overflow-hidden shadow-elevated border border-navy-800">
+          <!-- Background subtle stadium texture -->
+          <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#be2931_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
+          <div class="absolute -right-20 -top-20 w-96 h-96 bg-crimson/15 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div class="relative z-10">
+            <!-- Hub Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-4 border-b border-navy-800">
+              <div>
+                <div class="flex items-center gap-2 text-crimson-400 text-xs font-bold tracking-widest uppercase mb-1">
+                  <span class="w-2.5 h-2.5 rounded-full bg-crimson animate-ping"></span>
+                  Paide TV • Akadeemia Erisaated
+                </div>
+                <h2 class="font-display font-black text-2xl sm:text-4xl lg:text-5xl text-white tracking-tight uppercase">
+                  VAATA AKADEEMIA TEEKONDA JA TREENINGUID
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-300 mt-2 max-w-xl">
+                  Ametlikud videolood, intervjuud treeneritega ja ülevaade Baltikumi moodsaimast jalgpallitaristust.
+                </p>
+              </div>
+
+              <div class="mt-2 md:mt-0 flex flex-wrap items-center gap-2.5 text-xs font-bold shrink-0">
+                <span class="text-slate-400">Ametlik kanal:</span>
+                <a href="https://www.youtube.com/@PaideLinnameeskondTV" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-crimson hover:bg-crimson-700 text-white transition-all shadow-md flex items-center gap-2 group" title="Telli ametlik YouTube kanal @PaideLinnameeskondTV">
+                  <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                  <span>YouTube @PaideLinnameeskondTV</span>
+                </a>
+                <a href="https://www.tiktok.com/@paidelinnameeskond" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-lg bg-navy-900 border border-navy-700 hover:bg-black text-slate-200 hover:text-white transition-all flex items-center gap-1.5" title="Jälgi TikTokis @paidelinnameeskond">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.3 6.3 0 0 0 1.96-4.49V8.62a8.27 8.27 0 0 0 4.81 1.53v-3.46h-1z"/></svg>
+                  <span>TikTok</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Video Category Filter Pills (PSG-style Filter Bar) -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-6 scrollbar-none text-xs font-bold uppercase tracking-wider max-w-full">
+              <button type="button" class="video-filter-btn px-4 py-2 rounded-lg bg-crimson text-white transition-all shadow-sm shrink-0 cursor-pointer" data-video-filter="all">
+                Kõik videod
+              </button>
+              <button type="button" class="video-filter-btn px-4 py-2 rounded-lg bg-navy-900 text-slate-300 hover:text-white hover:bg-navy-800 transition-all border border-navy-800 shrink-0 cursor-pointer" data-video-filter="facilities">
+                Taristu & Hall
+              </button>
+              <button type="button" class="video-filter-btn px-4 py-2 rounded-lg bg-navy-900 text-slate-300 hover:text-white hover:bg-navy-800 transition-all border border-navy-800 shrink-0 cursor-pointer" data-video-filter="training">
+                Treeningud & Filosoofia
+              </button>
+              <button type="button" class="video-filter-btn px-4 py-2 rounded-lg bg-navy-900 text-slate-300 hover:text-white hover:bg-navy-800 transition-all border border-navy-800 shrink-0 cursor-pointer" data-video-filter="podcast">
+                IIZI TALK Podcast
+              </button>
+            </div>
+
+            <!-- Video Stage Grid: Featured Large Player on Left + 3 Suggested on Right (Equal Height) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+              
+              <!-- Featured Large Video Player Card (7 cols, Full Height Matching Right Column) -->
+              <div class="lg:col-span-7 rounded-2xl overflow-hidden border border-navy-800 bg-navy-900 shadow-2xl group flex flex-col justify-between h-full">
+                <div class="relative aspect-video overflow-hidden bg-black w-full" id="featured-video-player-wrap">
+                  <iframe id="main-featured-iframe" 
+                          data-video-id="kf6X3HSb5FY"
+                          width="560" 
+                          height="315" 
+                          src="https://www.youtube.com/embed/kf6X3HSb5FY?enablejsapi=1" 
+                          title="YouTube video player" 
+                          frameborder="0" 
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                          referrerpolicy="strict-origin-when-cross-origin" 
+                          allowfullscreen
+                          class="w-full h-full border-0 absolute inset-0"></iframe>
+                </div>
+
+                <!-- Video Info Footer -->
+                <div class="p-5 sm:p-6 flex flex-col justify-between flex-1">
+                  <div>
+                    <div class="flex items-center gap-2 text-xs font-bold text-slate-400 mb-2 font-sans">
+                      <span id="featured-video-category" class="text-crimson-400 font-extrabold uppercase tracking-wider">AKADEEMIA ESITLUS</span>
+                      <span>•</span>
+                      <span id="featured-video-views">03:45</span>
+                      <span>•</span>
+                      <span id="featured-video-time" class="text-slate-300">YouTube @PaideLinnameeskondTV</span>
+                    </div>
+                    <h3 id="featured-video-title" class="font-display font-black text-xl sm:text-2xl lg:text-3xl text-white uppercase tracking-tight mb-2.5 leading-tight">
+                      TÄHTEDE TEEKOND ALGAB SIIT | Paide jalgpalliakadeemia otsib uusi talente!
+                    </h3>
+                    <p id="featured-video-desc" class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-5 font-sans line-clamp-2">
+                      Tutvu Paide Linnameeskonna ja Järvamaa Rakendusliku Kolledži ühise jalgpalliakadeemia treeningute, treenerite ning noormängijate igapäevase eluga. Kuidas käib tippjalgpalli ja hariduse ühendamine?
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-3 pt-1">
+                    <a id="featured-video-external-link" href="https://www.youtube.com/watch?v=kf6X3HSb5FY" target="_blank" rel="noopener noreferrer" class="h-10 px-5 rounded-xl bg-crimson hover:bg-crimson-700 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-md cursor-pointer hover:shadow-glow-red">
+                      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                      <span>Vaata YouTube'is</span>
+                    </a>
+                    <button type="button" 
+                            id="featured-video-modal-btn"
+                            class="h-10 px-4 rounded-xl bg-navy-800 hover:bg-navy-700 text-slate-300 hover:text-white font-bold text-xs uppercase tracking-wider transition-all border border-navy-700 flex items-center gap-2 cursor-pointer"
+                            title="Ava video suuremas vaates">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+                      <span>Suurenda</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Video Playlist Grid (5 cols, 3 Suggested Videos) -->
+              <div class="lg:col-span-5 flex flex-col justify-between gap-3.5 sm:gap-4 h-full" id="video-playlist-container">
+                
+                <!-- Video Item 1: Taristu ülevaade -->
+                <div class="video-item p-3.5 sm:p-4 rounded-2xl border border-navy-800 bg-navy-900/90 hover:bg-navy-800/90 hover:border-navy-700 transition-all flex items-center gap-3.5 sm:gap-4 cursor-pointer group shadow-sm flex-1 min-h-[110px] lg:min-h-0"
+                     data-category="facilities"
+                     data-video-trigger
+                     data-video-id="yhh1irw4gc8"
+                     data-video-title="PLM JALGPALLITARISTU ÜLEVAADE | Hall, kunstmuruväljak, klubihoone ja muu"
+                     data-video-category="TARISTU & HALL"
+                     data-video-duration="04:15"
+                     data-video-views="04:15"
+                     data-video-time="Paide jalgpallikompleksi tutvustus"
+                     data-video-desc="Põhjalik videoülevaade Paide Linnameeskonna jalgpallikompleksist: soe sisehall (13–15°C talvel), renoveeritud kunstmurustaadion, 2025. a avatud uus klubihoone, jõusaal ja õppeklassid."
+                     data-video-url="https://www.youtube.com/watch?v=yhh1irw4gc8"
+                     data-video-img="https://i.ytimg.com/vi/yhh1irw4gc8/hqdefault.jpg">
+                  <div class="w-32 sm:w-40 aspect-video rounded-xl overflow-hidden bg-black flex-shrink-0 relative group-hover:ring-1 group-hover:ring-crimson/50 transition-all">
+                    <img src="https://i.ytimg.com/vi/yhh1irw4gc8/hqdefault.jpg" 
+                         alt="Paide taristu ülevaade" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/35 flex items-center justify-center">
+                      <div class="w-8 h-8 rounded-full bg-crimson/95 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                        <svg class="w-3.5 h-3.5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                      </div>
+                    </div>
+                    <span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-black/85 text-[10px] font-mono text-white">04:15</span>
+                  </div>
+                  <div class="flex-1 min-w-0 flex flex-col justify-center">
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30 uppercase tracking-wider font-sans">
+                        TARISTU & HALL
+                      </span>
+                    </div>
+                    <h4 class="font-display font-bold text-sm sm:text-base text-white uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                      PLM JALGPALLITARISTU ÜLEVAADE | Hall, kunstmuruväljak ja klubihoone
+                    </h4>
+                    <div class="text-[10px] text-slate-500 mt-1 font-mono">Paide jalgpallikompleksi tutvustus • @PaideLinnameeskondTV</div>
+                  </div>
+                </div>
+
+                <!-- Video Item 2: Treeningud ja filosoofia -->
+                <div class="video-item p-3.5 sm:p-4 rounded-2xl border border-navy-800 bg-navy-900/90 hover:bg-navy-800/90 hover:border-navy-700 transition-all flex items-center gap-3.5 sm:gap-4 cursor-pointer group shadow-sm flex-1 min-h-[110px] lg:min-h-0"
+                     data-category="training"
+                     data-video-trigger
+                     data-video-id="IA7_ASC1UTk"
+                     data-video-title="AKADEEMIA TREENINGUD & FILOSOOFIA | Mika Laurikainen"
+                     data-video-category="TREENINGUD & FILOSOOFIA"
+                     data-video-duration="02:50"
+                     data-video-views="02:50"
+                     data-video-time="Kuidas treenivad tulevikulootused"
+                     data-video-desc="Akadeemia direktor Mika Laurikainen (UEFA PRO) tutvustab Linnameeskonna treeningprotsessi ülesehitust ja individuaalseid mängija arengukavasid (IDP)."
+                     data-video-url="https://www.youtube.com/watch?v=IA7_ASC1UTk"
+                     data-video-img="https://i.ytimg.com/vi/IA7_ASC1UTk/hqdefault.jpg">
+                  <div class="w-32 sm:w-40 aspect-video rounded-xl overflow-hidden bg-black flex-shrink-0 relative group-hover:ring-1 group-hover:ring-crimson/50 transition-all">
+                    <img src="https://i.ytimg.com/vi/IA7_ASC1UTk/hqdefault.jpg" 
+                         alt="Akadeemia treeningud" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/35 flex items-center justify-center">
+                      <div class="w-8 h-8 rounded-full bg-crimson/95 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                        <svg class="w-3.5 h-3.5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                      </div>
+                    </div>
+                    <span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-black/85 text-[10px] font-mono text-white">02:50</span>
+                  </div>
+                  <div class="flex-1 min-w-0 flex flex-col justify-center">
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-crimson/20 text-crimson-400 border border-crimson/30 uppercase tracking-wider font-sans">
+                        TREENINGUD
+                      </span>
+                    </div>
+                    <h4 class="font-display font-bold text-sm sm:text-base text-white uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                      AKADEEMIA TREENINGUD & FILOSOOFIA | Mika Laurikainen
+                    </h4>
+                    <div class="text-[10px] text-slate-500 mt-1 font-mono">Kuidas treenivad tulevikulootused • @PaideLinnameeskondTV</div>
+                  </div>
+                </div>
+
+                <!-- Video Item 3: IIZI TALK Podcast -->
+                <div class="video-item p-3.5 sm:p-4 rounded-2xl border border-navy-800 bg-navy-900/90 hover:bg-navy-800/90 hover:border-navy-700 transition-all flex items-center gap-3.5 sm:gap-4 cursor-pointer group shadow-sm flex-1 min-h-[110px] lg:min-h-0"
+                     data-category="podcast"
+                     data-video-trigger
+                     data-video-id="oWMw6sEdOg0"
+                     data-video-title="IIZI TALK EP2 | Jalgpalliakadeemiast ja noore teekonnast tippu"
+                     data-video-category="IIZI TALK PODCAST"
+                     data-video-duration="51:15"
+                     data-video-views="1.6K vaatamist"
+                     data-video-time="9 päeva tagasi"
+                     data-video-desc="Klubi ametlik podcast noortetööst ja Paide Jalgpalliakadeemiast. Saatejuht Laura Jaansen, külalisteks Paide Linnanaiskonna peatreener Sirje Kapper ja noormängija Sara Loviisa Pajuste."
+                     data-video-url="https://www.youtube.com/watch?v=oWMw6sEdOg0"
+                     data-video-img="assets/img/youtube/oWMw6sEdOg0.jpg">
+                  <div class="w-32 sm:w-40 aspect-video rounded-xl overflow-hidden bg-black flex-shrink-0 relative group-hover:ring-1 group-hover:ring-crimson/50 transition-all">
+                    <img src="assets/img/youtube/oWMw6sEdOg0.jpg" 
+                         onerror="this.src='https://img.youtube.com/vi/oWMw6sEdOg0/hqdefault.jpg'"
+                         alt="IIZI Talk EP2 Podcast" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/35 flex items-center justify-center">
+                      <div class="w-8 h-8 rounded-full bg-crimson/95 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                        <svg class="w-3.5 h-3.5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                      </div>
+                    </div>
+                    <span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-black/85 text-[10px] font-mono text-white">51:15</span>
+                  </div>
+                  <div class="flex-1 min-w-0 flex flex-col justify-center">
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider font-sans">
+                        PODCAST
+                      </span>
+                      <span class="text-[10px] text-slate-400 font-sans">1.6K vaatamist</span>
+                    </div>
+                    <h4 class="font-display font-bold text-sm sm:text-base text-white uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                      IIZI TALK EP2 | Jalgpalliakadeemiast ja noore teekonnast tippu
+                    </h4>
+                    <div class="text-[10px] text-slate-500 mt-1 font-mono">Külalised: Sirje Kapper ja Sara Loviisa Pajuste</div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- YouTube Channel Subscribe Strip -->
+            <div class="mt-8 p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-navy-900 via-navy-900 to-navy-950 border border-navy-800 flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-crimson flex items-center justify-center text-white shrink-0 shadow-lg">
+                  <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </div>
+                <div>
+                  <div class="font-display font-bold text-lg text-white uppercase">Telli ametlik YouTube kanal @PaideLinnameeskondTV</div>
+                  <p class="text-xs text-slate-400 mt-0.5">Ära maga maha uusi IIZI TALK episoode, akadeemia videolugusid, mängukokkuvõtteid ja eksklusiivset telgitaguste sisu.</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3 shrink-0 w-full md:w-auto justify-end">
+                <a href="https://www.youtube.com/@PaideLinnameeskondTV?sub_confirmation=1" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-crimson hover:bg-crimson-700 text-white font-bold text-xs uppercase tracking-wider transition-all text-center shadow-md">
+                  Telli kanal (Tasuta)
+                </a>
+                <a href="https://www.youtube.com/@PaideLinnameeskondTV/playlists" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-navy-800 hover:bg-navy-700 text-slate-300 hover:text-white font-bold text-xs uppercase tracking-wider transition-all border border-navy-700 text-center">
+                  Esitusloendid ↗
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SECTION 4: FACILITIES & PAIDE JALGPALLIKESKUS                             -->
+      <!-- ========================================================================= -->
+      <section id="opikeskkond" class="py-10 w-full">
+        <div class="text-center max-w-3xl mx-auto mb-10">
+          <span class="text-crimson font-mono font-bold text-xs tracking-widest uppercase block mb-2">Õpikeskkond ja taristu</span>
+          <h2 class="font-display font-black text-2xl sm:text-4xl text-navy uppercase tracking-tight">
+            Tipptasemel Spordikompleks ja Kolledžilinnak
+          </h2>
+          <p class="text-sm sm:text-base text-slate-600 mt-3">
+            Paide akadeemia ühendab Eesti kaasaegseima jalgpallikeskuse ja Järvamaa Rakendusliku Kolledži modernse õppelinnaku ühtseks tervikuks.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          
+          <!-- Facility 1: Järvamaa Rakenduslik Kolledž (School_2) -->
+          <div class="bg-white rounded-2xl overflow-hidden hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col group">
+            <div class="h-56 bg-navy-900 relative overflow-hidden">
+              <img src="assets/img/academy/School_2.jpeg" 
+                   alt="Järvamaa Rakendusliku Kolledži kaasaegne õppehoone" 
+                   class="w-full h-full object-cover object-[center_35%] transform group-hover:scale-105 transition-transform duration-500">
+              <span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-bold uppercase shadow-sm">
+                KUTSEKESKHARIDUS
+              </span>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-display font-bold text-lg text-navy uppercase mb-1.5">Järvamaa Kolledž (JKHK)</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Moodne ja energiasäästlik peahoone, kus akadeemia noored omandavad 4-aastase riikliku kutsekeskhariduse kaasaegsetes IT- ja erialaklassides.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-slate-500 flex items-center justify-between">
+                <span>Erialane haridus</span>
+                <span class="text-crimson font-bold">4 aastat</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Facility 2: Roheline Ülikoolilinnak & Skulptuuriala (School_1) -->
+          <div class="bg-white rounded-2xl overflow-hidden hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col group">
+            <div class="h-56 bg-navy-900 relative overflow-hidden">
+              <img src="assets/img/academy/School_1.jpeg" 
+                   alt="Järvamaa Kolledži roheline linnak ja skulptuuriala" 
+                   class="w-full h-full object-cover object-[center_45%] transform group-hover:scale-105 transition-transform duration-500">
+              <span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-navy text-white text-[10px] font-bold uppercase shadow-sm">
+                ÕPILASLINNAK
+              </span>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-display font-bold text-lg text-navy uppercase mb-1.5">Roheline Kampus & Park</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Spordikompleksi kõrval paiknev roheline ülikoolilinnak koos skulptuuripargiga, luues noorsportlastele turvalise ja inspireeriva õpikeskkonna.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-slate-500 flex items-center justify-between">
+                <span>Linnak & vaba aeg</span>
+                <span class="text-navy font-bold">Jalutuskäigu kaugusel</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Facility 3: Täismõõtmetes Sisehall -->
+          <div class="bg-white rounded-2xl overflow-hidden hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col group">
+            <div class="h-56 bg-navy-900 relative overflow-hidden">
+              <img src="assets/img/academy/3I2A2243-1024x683.jpg" 
+                   alt="Soe täismõõtmetes sisehall talvel" 
+                   class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+              <span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-bold uppercase shadow-sm">
+                13–15 °C TALVEL
+              </span>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-display font-bold text-lg text-navy uppercase mb-1.5">Täismõõtmetes Sisehall</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Soe täismõõtmetes jalgpallihall tagab aastaringse stabiilse treeningprotsessi ka karmide Eesti talvepakaste ajal.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-slate-500 flex items-center justify-between">
+                <span>Tippklassi kunstmuru & LED</span>
+                <span class="text-emerald-600 font-bold">Aastaringne</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Facility 4: Moodne Klubihoone & Droonivaade -->
+          <div class="bg-white rounded-2xl overflow-hidden hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col group">
+            <div class="h-56 bg-navy-900 relative overflow-hidden">
+              <img src="assets/img/academy/01-droon-paide-1024x419.jpg" 
+                   alt="Paide jalgpallikompleksi ja klubihoone droonifoto" 
+                   class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+              <span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-navy text-white text-[10px] font-bold uppercase shadow-sm">
+                AVATUD JUUNI 2025
+              </span>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-display font-bold text-lg text-navy uppercase mb-1.5">Uus Klubihoone</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Avarad riietusruumid, kaasaegne jõusaal, taastumisvahendid, videoõppeklass ja Paide Linnameeskonna administratiivkeskus.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-slate-500 flex items-center justify-between">
+                <span>Jõusaal & taastumine</span>
+                <span class="text-navy font-bold">Tipptasemel</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Facility 5: Õpilaskodu / Ühiselamu -->
+          <div class="bg-white rounded-2xl overflow-hidden hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col group">
+            <div class="h-56 bg-navy-900 relative overflow-hidden">
+              <img src="assets/img/academy/09-opilaskodu-1024x512.jpg" 
+                   alt="Järvamaa Kolledži kaasaegne õpilaskodu" 
+                   class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+              <span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-emerald-600 text-white text-[10px] font-bold uppercase shadow-sm">
+                MUGAV ELAMINE
+              </span>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-display font-bold text-lg text-navy uppercase mb-1.5">Kaasaegne Õpilaskodu</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Mugavad toad, õpperuumid, kiire internet ja turvaline elukeskkond otse Järvamaa Rakendusliku Kolledži linnakus.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-slate-500 flex items-center justify-between">
+                <span>Õpilaskodu & tugi</span>
+                <span class="text-emerald-600 font-bold">100% Tasuta</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Facility 6: Kolledž & Toitlustus -->
+          <div class="bg-white rounded-2xl overflow-hidden hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col group">
+            <div class="h-56 bg-navy-900 relative overflow-hidden">
+              <img src="assets/img/academy/cafeteria-1024x644.png" 
+                   alt="Kolledži söökla ja sportlaste toitlustus" 
+                   class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+              <span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-navy-950 text-white text-[10px] font-bold uppercase shadow-sm">
+                TERVISLIK TOIT
+              </span>
+            </div>
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-display font-bold text-lg text-navy uppercase mb-1.5">Sportlaste Toitlustus</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Sportlaste energiavajadustele kohandatud täisväärtuslik soe koolilõuna ja toitlustus igapäevase treeningkoormuse toetamiseks.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] font-semibold text-slate-500 flex items-center justify-between">
+                <span>Soe toitlustus</span>
+                <span class="text-navy font-bold">Koolipäeviti</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SECTION 5: COACHING STAFF & LEADERSHIP                                    -->
+      <!-- ========================================================================= -->
+      <section id="treenerid" class="py-10 w-full">
+        <div class="text-center max-w-3xl mx-auto mb-10">
+          <span class="text-crimson font-mono font-bold text-xs tracking-widest uppercase block mb-2">Professionaalne meeskond</span>
+          <h2 class="font-display font-black text-2xl sm:text-4xl text-navy uppercase tracking-tight">
+            Akadeemia Treenerid ja Juhtkond
+          </h2>
+          <p class="text-sm sm:text-base text-slate-600 mt-3">
+            Meie rahvusvahelise kogemusega treenerite tiim tagab noore mängija igakülgse sportliku, vaimse ja füüsilise arengu.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          
+          <!-- Coach 1: Mika Laurikainen -->
+          <div class="bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all">
+            <div class="flex items-center gap-3.5 mb-3">
+              <div class="w-14 h-18 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 hairline-border shadow-sm">
+                <img src="assets/img/photos/mika_laurikainen.jpeg" alt="Mika Laurikainen" class="w-full h-full object-cover object-top">
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-base text-navy leading-tight">Mika Laurikainen</h3>
+                <span class="text-xs font-semibold text-crimson">Akadeemia direktor</span>
+              </div>
+            </div>
+            <div class="space-y-1 text-xs text-slate-600">
+              <div><strong class="text-slate-800">Tase:</strong> UEFA PRO 🇫🇮</div>
+              <div><strong class="text-slate-800">Valdkond:</strong> Akadeemiline juhtimine & metoodika</div>
+            </div>
+          </div>
+
+          <!-- Coach 2: Sirje Kapper -->
+          <div class="bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all">
+            <div class="flex items-center gap-3.5 mb-3">
+              <div class="w-14 h-18 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 hairline-border shadow-sm">
+                <img src="assets/img/photos/sirje_kapper.jpeg" alt="Sirje Kapper" class="w-full h-full object-cover object-top">
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-base text-navy leading-tight">Sirje Kapper</h3>
+                <span class="text-xs font-semibold text-crimson">Neidude mentor</span>
+              </div>
+            </div>
+            <div class="space-y-1 text-xs text-slate-600">
+              <div><strong class="text-slate-800">Tase:</strong> UEFA PRO 🇪🇪</div>
+              <div><strong class="text-slate-800">Valdkond:</strong> Neidude akadeemiline juhtimine</div>
+            </div>
+          </div>
+
+          <!-- Coach 3: Margus Luts -->
+          <div class="bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all">
+            <div class="flex items-center gap-3.5 mb-3">
+              <div class="w-14 h-18 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 hairline-border shadow-sm">
+                <img src="assets/img/photos/margus_luts.jpeg" alt="Margus Luts" class="w-full h-full object-cover object-top">
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-base text-navy leading-tight">Margus Luts</h3>
+                <span class="text-xs font-semibold text-crimson">Noortetöö juht</span>
+              </div>
+            </div>
+            <div class="space-y-1 text-xs text-slate-600">
+              <div><strong class="text-slate-800">Tase:</strong> UEFA A 🇪🇪</div>
+              <div><strong class="text-slate-800">Valdkond:</strong> Administratiivne juhtimine</div>
+            </div>
+          </div>
+
+          <!-- Coach 4: Luis Freitas -->
+          <div class="bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all">
+            <div class="flex items-center gap-3.5 mb-3">
+              <div class="w-14 h-18 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 hairline-border shadow-sm">
+                <img src="assets/img/photos/luis_freitas.jpeg" alt="Luis Freitas" class="w-full h-full object-cover object-top">
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-base text-navy leading-tight">Luis Freitas</h3>
+                <span class="text-xs font-semibold text-crimson">Akadeemia peatreener</span>
+              </div>
+            </div>
+            <div class="space-y-1 text-xs text-slate-600">
+              <div><strong class="text-slate-800">Tase:</strong> UEFA A 🇵🇹</div>
+              <div><strong class="text-slate-800">Valdkond:</strong> Meeskonna juhtimine, IDP & analüüs</div>
+            </div>
+          </div>
+
+          <!-- Coach 5: Joana Freitas -->
+          <div class="bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all">
+            <div class="flex items-center gap-3.5 mb-3">
+              <div class="w-14 h-18 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 hairline-border shadow-sm">
+                <img src="assets/img/photos/joana_cardoso_martins_freitas.jpeg" alt="Joana Freitas" class="w-full h-full object-cover object-top">
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-base text-navy leading-tight">Joana Freitas</h3>
+                <span class="text-xs font-semibold text-crimson">Neidude peatreener</span>
+              </div>
+            </div>
+            <div class="space-y-1 text-xs text-slate-600">
+              <div><strong class="text-slate-800">Tase:</strong> UEFA A 🇵🇹</div>
+              <div><strong class="text-slate-800">Valdkond:</strong> Neidude akadeemia & duubel</div>
+            </div>
+          </div>
+
+          <!-- Coach 6: Kevin Paavo -->
+          <div class="bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all">
+            <div class="flex items-center gap-3.5 mb-3">
+              <div class="w-14 h-18 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 hairline-border shadow-sm">
+                <img src="assets/img/academy/Kevin_Paavo1.jpg" alt="Kevin Paavo" class="w-full h-full object-cover object-top">
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-base text-navy leading-tight">Kevin Paavo</h3>
+                <span class="text-xs font-semibold text-crimson">Akadeemia treener</span>
+              </div>
+            </div>
+            <div class="space-y-1 text-xs text-slate-600">
+              <div><strong class="text-slate-800">Tase:</strong> UEFA A 🇪🇪</div>
+              <div><strong class="text-slate-800">Valdkond:</strong> Paide U21 abitreener & admin</div>
+            </div>
+          </div>
+
+          <!-- Coach 7: Hardi Häelme -->
+          <div class="bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all">
+            <div class="flex items-center gap-3.5 mb-3">
+              <div class="w-14 h-18 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 hairline-border shadow-sm">
+                <img src="assets/img/photos/hardi_haelme.jpeg" alt="Hardi Häelme" class="w-full h-full object-cover object-top">
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-base text-navy leading-tight">Hardi Häelme</h3>
+                <span class="text-xs font-semibold text-crimson">Talenditreener</span>
+              </div>
+            </div>
+            <div class="space-y-1 text-xs text-slate-600">
+              <div><strong class="text-slate-800">Tase:</strong> UEFA B 🇪🇪</div>
+              <div><strong class="text-slate-800">Valdkond:</strong> U17/U19 peatreener, U21 talent</div>
+            </div>
+          </div>
+
+          <!-- Coach 8: Mattias Sapp -->
+          <div class="bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all">
+            <div class="flex items-center gap-3.5 mb-3">
+              <div class="w-14 h-18 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 hairline-border shadow-sm">
+                <img src="assets/img/photos/mattias_sapp.jpeg" alt="Mattias Sapp" class="w-full h-full object-cover object-top">
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-base text-navy leading-tight">Mattias Sapp</h3>
+                <span class="text-xs font-semibold text-crimson">Väravavahtide treener</span>
+              </div>
+            </div>
+            <div class="space-y-1 text-xs text-slate-600">
+              <div><strong class="text-slate-800">Litsents:</strong> Väravavahtide eritreener 🇪🇪</div>
+              <div><strong class="text-slate-800">Valdkond:</strong> Noormeeste väravavahid</div>
+            </div>
+          </div>
+
+          <!-- Coach 9: Kaivo Sang -->
+          <div class="bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all">
+            <div class="flex items-center gap-3.5 mb-3">
+              <div class="w-14 h-18 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 hairline-border shadow-sm">
+                <img src="assets/img/photos/kaivo_sang.jpeg" alt="Kaivo Sang" class="w-full h-full object-cover object-top">
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-base text-navy leading-tight">Kaivo Sang</h3>
+                <span class="text-xs font-semibold text-crimson">Neidude treener</span>
+              </div>
+            </div>
+            <div class="space-y-1 text-xs text-slate-600">
+              <div><strong class="text-slate-800">Tase:</strong> UEFA B 🇪🇪</div>
+              <div><strong class="text-slate-800">Valdkond:</strong> Neidude akadeemia abitreener</div>
+            </div>
+          </div>
+
+          <!-- Coach 10: Rando Isakar -->
+          <div class="bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all">
+            <div class="flex items-center gap-3.5 mb-3">
+              <div class="w-14 h-18 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 hairline-border shadow-sm">
+                <img src="assets/img/photos/rando_isakar.jpeg" alt="Rando Isakar" class="w-full h-full object-cover object-top">
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-base text-navy leading-tight">Rando Isakar</h3>
+                <span class="text-xs font-semibold text-crimson">Väravavahtide treener</span>
+              </div>
+            </div>
+            <div class="space-y-1 text-xs text-slate-600">
+              <div><strong class="text-slate-800">Litsents:</strong> Väravavahtide eritreener 🇪🇪</div>
+              <div><strong class="text-slate-800">Valdkond:</strong> Neidude väravavahid</div>
+            </div>
+          </div>
+
+          <!-- Coach 11: Leila Ilisson -->
+          <div class="bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all">
+            <div class="flex items-center gap-3.5 mb-3">
+              <div class="w-14 h-18 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 hairline-border shadow-sm">
+                <img src="assets/img/photos/leila_ilisson.jpeg" alt="Leila Ilisson" class="w-full h-full object-cover object-top">
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-base text-navy leading-tight">Leila Ilisson</h3>
+                <span class="text-xs font-semibold text-crimson">Akadeemia füsioterapeut</span>
+              </div>
+            </div>
+            <div class="space-y-1 text-xs text-slate-600">
+              <div><strong class="text-slate-800">Valdkond:</strong> Meditsiiniline tugi & taastumine 🇪🇪</div>
+              <div><strong class="text-slate-800">Fookus:</strong> Vigastuste ennetus ja taastusravi</div>
+            </div>
+          </div>
+
+          <!-- Coach 12: Gert Kams -->
+          <div class="bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all">
+            <div class="flex items-center gap-3.5 mb-3">
+              <div class="w-14 h-18 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 hairline-border shadow-sm">
+                <img src="assets/img/photos/gert_kams.jpeg" alt="Gert Kams" class="w-full h-full object-cover object-top">
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-base text-navy leading-tight">Gert Kams</h3>
+                <span class="text-xs font-semibold text-crimson">Klubi spordidirektor</span>
+              </div>
+            </div>
+            <div class="space-y-1 text-xs text-slate-600">
+              <div><strong class="text-slate-800">Esindus:</strong> Paide Linnameeskond 🇪🇪</div>
+              <div><strong class="text-slate-800">Valdkond:</strong> Üleminekud & professionaalne karjäär</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SECTION 6: ADMISSIONS & TESTING SCHEDULE ("SISSEASTUMINE")                -->
+      <!-- ========================================================================= -->
+      <section id="sisseastumine" class="py-10 w-full">
+        <div class="bg-white rounded-3xl p-6 sm:p-10 lg:p-12 hairline-border shadow-card">
+          
+          <div class="max-w-3xl mb-10">
+            <span class="text-crimson font-mono font-bold text-xs tracking-widest uppercase block mb-2">Vastuvõtt 2026/2027</span>
+            <h2 class="font-display font-black text-2xl sm:text-4xl text-navy uppercase tracking-tight">
+              Sisseastumine ja Testimispäev Paides
+            </h2>
+            <p class="text-sm sm:text-base text-slate-600 mt-3">
+              Kavandatavaid õppekohti on 20. Õppima asumise eelduseks on põhiharidus. Treeningud, jalgpallivarustus ning laagrid on õppuritele tasuta!
+            </p>
+          </div>
+
+          <!-- Roadmap Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-10">
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+              <div class="w-8 h-8 rounded-full bg-crimson text-white font-bold flex items-center justify-center text-xs mb-3">1</div>
+              <div class="text-xs font-bold text-slate-500 uppercase">30. märts – 15. mai</div>
+              <h3 class="font-display font-bold text-base text-navy mt-1">Avaldused SAIS.ee</h3>
+              <p class="text-xs text-slate-600 mt-2">Täida kooli sisseastumisavaldus SAIS.ee portaalis (eriala: Jalgpall / Sport).</p>
+            </div>
+
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+              <div class="w-8 h-8 rounded-full bg-navy text-white font-bold flex items-center justify-center text-xs mb-3">2</div>
+              <div class="text-xs font-bold text-slate-500 uppercase">20. mai</div>
+              <h3 class="font-display font-bold text-base text-navy mt-1">Eelpunktide tulemused</h3>
+              <p class="text-xs text-slate-600 mt-2">Avalikustatakse eelkatsete punktisummad ja kutsutud kandidaadid.</p>
+            </div>
+
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+              <div class="w-8 h-8 rounded-full bg-crimson text-white font-bold flex items-center justify-center text-xs mb-3">3</div>
+              <div class="text-xs font-bold text-slate-500 uppercase">3. ja 4. juunil</div>
+              <h3 class="font-display font-bold text-base text-navy mt-1">Testimispäev Paides</h3>
+              <p class="text-xs text-slate-600 mt-2">Füüsilised testid, vestlused ning 4v4 ja 11v11 kontrollmängud Paide jalgpallikeskuses.</p>
+            </div>
+
+            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+              <div class="w-8 h-8 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-xs mb-3">4</div>
+              <div class="text-xs font-bold text-slate-500 uppercase">August 2026</div>
+              <h3 class="font-display font-bold text-base text-navy mt-1">Õpingute & laagri algus</h3>
+              <p class="text-xs text-slate-600 mt-2">Tasuta majutus mugavas õpilaskodus, riiklik stipendium ja ettevalmistav treeninglaager.</p>
+            </div>
+          </div>
+
+          <!-- Schedule Timeline Box -->
+          <div class="bg-navy-950 text-white rounded-2xl p-6 sm:p-8 mb-8">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-navy-800">
+              <div>
+                <span class="text-xs font-bold text-crimson-400 uppercase tracking-widest block">Paide jalgpallikeskus • Staadioni 4</span>
+                <h3 class="font-display font-bold text-xl sm:text-2xl text-white">Testimispäeva Ajakava</h3>
+              </div>
+              <span class="px-3 py-1 rounded bg-white/10 text-xs font-mono text-slate-300">Algus kell 09:30</span>
+            </div>
+
+            <div class="space-y-3.5 text-xs sm:text-sm">
+              <div class="flex items-start gap-4 p-3 rounded-xl bg-navy-900/60 border border-white/5">
+                <span class="font-mono font-bold text-crimson-400 w-24 flex-shrink-0">09:30 – 09:50</span>
+                <div><strong>Saabumine ja registreerimine:</strong> Paide Linnameeskonna jalgpallikeskuses (kontor ja fuajee).</div>
+              </div>
+              <div class="flex items-start gap-4 p-3 rounded-xl bg-navy-900/60 border border-white/5">
+                <span class="font-mono font-bold text-crimson-400 w-24 flex-shrink-0">09:50 – 10:00</span>
+                <div><strong>Sissejuhatus:</strong> Päevakava tutvustus akadeemia direktori Mika Laurikaineni poolt.</div>
+              </div>
+              <div class="flex items-start gap-4 p-3 rounded-xl bg-navy-900/60 border border-white/5">
+                <span class="font-mono font-bold text-crimson-400 w-24 flex-shrink-0">10:00 – 11:30</span>
+                <div><strong>Grupp 1:</strong> Vestlused (poisid & tüdrukud) • <strong>Grupp 2:</strong> Füüsilised testid (poisid).</div>
+              </div>
+              <div class="flex items-start gap-4 p-3 rounded-xl bg-navy-900/60 border border-white/5">
+                <span class="font-mono font-bold text-crimson-400 w-24 flex-shrink-0">11:30 – 13:00</span>
+                <div><strong>Grupp 2:</strong> Vestlused (poisid) • <strong>Grupp 1:</strong> Füüsilised testid (poisid & tüdrukud).</div>
+              </div>
+              <div class="flex items-start gap-4 p-3 rounded-xl bg-navy-900/60 border border-white/5">
+                <span class="font-mono font-bold text-emerald-400 w-24 flex-shrink-0">13:00 – 14:00</span>
+                <div><strong>Lõunapaus:</strong> Soe ja tervislik toit klubi poolt tasuta kõigile osalejatele.</div>
+              </div>
+              <div class="flex items-start gap-4 p-3 rounded-xl bg-navy-900/60 border border-white/5">
+                <span class="font-mono font-bold text-crimson-400 w-24 flex-shrink-0">14:00 – 15:30</span>
+                <div><strong>Kontrollmängud I:</strong> 4 vs 4 (poisid), 11 vs 11 (tüdrukud).</div>
+              </div>
+              <div class="flex items-start gap-4 p-3 rounded-xl bg-navy-900/60 border border-white/5">
+                <span class="font-mono font-bold text-crimson-400 w-24 flex-shrink-0">15:30 – 16:30</span>
+                <div><strong>Kontrollmängud II:</strong> 11 vs 11 (poisid täismõõtmetes väljakul).</div>
+              </div>
+              <div class="flex items-start gap-4 p-3 rounded-xl bg-navy-900/60 border border-white/5">
+                <span class="font-mono font-bold text-amber-400 w-24 flex-shrink-0">16:45</span>
+                <div><strong>Päeva kokkuvõte:</strong> Treenerite tagasiside ja edasised sammud.</div>
+              </div>
+            </div>
+
+            <div class="mt-6 p-4 rounded-xl bg-white/5 border border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-300">
+              <div>
+                <strong>Riietusruumid:</strong> Tüdrukud – kohtunike ruum 1 • Poisid – akadeemia riietusruum.
+              </div>
+              <div class="text-crimson-400 font-bold">
+                Küsimuste korral: Margus Luts (+372 5656 7076)
+              </div>
+            </div>
+          </div>
+
+          <!-- PDF Download and External Links -->
+          <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-slate-100">
+            <div class="flex flex-wrap items-center gap-3">
+              <a href="https://akadeemia.paidelinnameeskond.ee/wp-content/uploads/2026/03/SPORT_oppekava.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-navy text-white text-xs font-bold uppercase tracking-wider hover:bg-navy-800 transition-colors">
+                <svg class="w-4 h-4 text-crimson-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                <span>Õppekava PDF</span>
+              </a>
+              <a href="https://akadeemia.paidelinnameeskond.ee/wp-content/uploads/2026/03/Spordi-valdkonna-oppekava-2026.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-slate-100 text-navy text-xs font-bold uppercase tracking-wider hover:bg-slate-200 transition-colors">
+                <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                <span>Katsete ja testide kriteeriumid [PDF]</span>
+              </a>
+            </div>
+
+            <a href="https://www.kolledz.ee/et/vastuvott/erialad/logistika-elekter-jalgpall/jalgpall-sport" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-crimson hover:underline flex items-center gap-1">
+              <span>Loe lisa Järvamaa Rakendusliku Kolledži lehelt</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SECTION 7: CONTACTS & INQUIRY FORM                                        -->
+      <!-- ========================================================================= -->
+      <section id="kontakt" class="py-10 pb-16 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Contact Directory -->
+          <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-10 hairline-border shadow-card">
+            <span class="text-crimson font-mono font-bold text-xs tracking-widest uppercase block mb-2">Võta ühendust</span>
+            <h2 class="font-display font-black text-2xl sm:text-3xl text-navy uppercase tracking-tight mb-6">
+              Paide Jalgpalliakadeemia Kontaktid
+            </h2>
+
+            <div class="space-y-4 text-xs sm:text-sm">
+              
+              <!-- Mika Laurikainen -->
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <img src="assets/img/academy/Mika_Laurikainen1.jpg" alt="Mika Laurikainen" class="w-12 h-14 object-cover object-top rounded-lg hairline-border shadow-sm flex-shrink-0">
+                  <div>
+                    <div class="font-bold text-navy text-base">Mika Laurikainen</div>
+                    <div class="text-xs text-slate-500">Akadeemia direktor (UEFA PRO)</div>
+                  </div>
+                </div>
+                <div class="text-left sm:text-right text-xs space-y-0.5">
+                  <a href="mailto:mika@paidelinnameeskond.ee" class="block text-crimson hover:underline font-medium">mika@paidelinnameeskond.ee</a>
+                  <a href="tel:+358405906941" class="block text-slate-600 hover:text-navy">(+358) 40 590 6941</a>
+                </div>
+              </div>
+
+              <!-- Sirje Kapper -->
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <img src="assets/img/academy/Sirje-Kapper.jpg" alt="Sirje Kapper" class="w-12 h-14 object-cover object-top rounded-lg hairline-border shadow-sm flex-shrink-0">
+                  <div>
+                    <div class="font-bold text-navy text-base">Sirje Kapper</div>
+                    <div class="text-xs text-slate-500">Neidude akadeemia mentor (UEFA PRO)</div>
+                  </div>
+                </div>
+                <div class="text-left sm:text-right text-xs space-y-0.5">
+                  <a href="mailto:sirje@paidelinnameeskond.ee" class="block text-crimson hover:underline font-medium">sirje@paidelinnameeskond.ee</a>
+                  <a href="tel:+37256775970" class="block text-slate-600 hover:text-navy">(+372) 5677 5970</a>
+                </div>
+              </div>
+
+              <!-- Margus Luts -->
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <img src="assets/img/academy/Margus-Luts.jpg" alt="Margus Luts" class="w-12 h-14 object-cover object-top rounded-lg hairline-border shadow-sm flex-shrink-0">
+                  <div>
+                    <div class="font-bold text-navy text-base">Margus Luts</div>
+                    <div class="text-xs text-slate-500">Klubi noortetöö juht (UEFA A)</div>
+                  </div>
+                </div>
+                <div class="text-left sm:text-right text-xs space-y-0.5">
+                  <a href="mailto:margus.luts@paidelinnameeskond.ee" class="block text-crimson hover:underline font-medium">margus.luts@paidelinnameeskond.ee</a>
+                  <a href="tel:+37256567076" class="block text-slate-600 hover:text-navy">(+372) 5656 7076</a>
+                </div>
+              </div>
+
+              <!-- Gert Kams -->
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-14 rounded-lg overflow-hidden bg-slate-100 flex-shrink-0 hairline-border shadow-sm">
+                    <img src="assets/img/photos/gert_kams.jpeg" alt="Gert Kams" class="w-full h-full object-cover object-top">
+                  </div>
+                  <div>
+                    <div class="font-bold text-navy text-base">Gert Kams</div>
+                    <div class="text-xs text-slate-500">Paide Linnameeskonna spordidirektor</div>
+                  </div>
+                </div>
+                <div class="text-left sm:text-right text-xs space-y-0.5">
+                  <a href="mailto:gert@paidelinnameeskond.ee" class="block text-crimson hover:underline font-medium">gert@paidelinnameeskond.ee</a>
+                  <a href="tel:+37256240156" class="block text-slate-600 hover:text-navy">(+372) 5624 0156</a>
+                </div>
+              </div>
+
+              <!-- Rein Oselin -->
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <div class="font-bold text-navy text-base">Rein Oselin</div>
+                  <div class="text-xs text-slate-500">Järvamaa Rakendusliku Kolledži direktor</div>
+                </div>
+                <div class="text-left sm:text-right text-xs space-y-0.5">
+                  <a href="mailto:rein.oselin@kolledz.ee" class="block text-crimson hover:underline font-medium">rein.oselin@kolledz.ee</a>
+                  <a href="tel:+3725159495" class="block text-slate-600 hover:text-navy">(+372) 515 9495</a>
+                </div>
+              </div>
+
+              <!-- Külli Marrandi-Kallas -->
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <div class="font-bold text-navy text-base">Külli Marrandi-Kallas</div>
+                  <div class="text-xs text-slate-500">Õppe- ja arendustöö üksuse juhataja (JKHK)</div>
+                </div>
+                <div class="text-left sm:text-right text-xs space-y-0.5">
+                  <a href="mailto:kylli.marrandi@kolledz.ee" class="block text-crimson hover:underline font-medium">kylli.marrandi@kolledz.ee</a>
+                  <a href="tel:+37253450406" class="block text-slate-600 hover:text-navy">(+372) 5345 0406</a>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Address note -->
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center gap-3 text-xs text-slate-500">
+              <svg class="w-4 h-4 text-crimson flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <span>Paide Linnameeskonna jalgpallikeskus: Staadioni tn 4, Paide 72717</span>
+            </div>
+          </div>
+
+          <!-- Quick Message Form -->
+          <div class="lg:col-span-5 bg-navy text-white rounded-3xl p-6 sm:p-10 shadow-elevated">
+            <span class="text-crimson-400 font-mono font-bold text-xs tracking-widest uppercase block mb-2">Küsi lisa</span>
+            <h3 class="font-display font-bold text-2xl text-white uppercase tracking-tight mb-2">
+              Saada meile sõnum
+            </h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-6">
+              Oled huvitatud õppima asumisest või soovid täpsemat infot vastuvõtukatsete kohta? Kirjuta meile julgelt!
+            </p>
+
+            <form onsubmit="event.preventDefault(); alert('Aitäh! Sinu teade on edastatud Paide Linnameeskonna akadeemia juhtkonnale.');" class="space-y-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">Sinu nimi *</label>
+                <input type="text" required placeholder="Ees- ja perekonnanimi" class="w-full px-4 py-3 rounded-xl bg-navy-900 border border-navy-700 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-crimson">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">E-post *</label>
+                <input type="email" required placeholder="nimi@naide.ee" class="w-full px-4 py-3 rounded-xl bg-navy-900 border border-navy-700 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-crimson">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">Telefon</label>
+                <input type="tel" placeholder="+372 ..." class="w-full px-4 py-3 rounded-xl bg-navy-900 border border-navy-700 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-crimson">
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">Teema / Huvi</label>
+                <div class="relative">
+                  <select class="w-full appearance-none pl-4 pr-10 py-3 rounded-xl bg-navy-900 border border-navy-700 text-white text-xs focus:outline-none focus:border-crimson cursor-pointer">
+                    <option value="sisseastumine">Sisseastumine ja testimispäev</option>
+                    <option value="oppekava">SPORT / Jalgpall õppekava sisu</option>
+                    <option value="tudrukud">Neidude jalgpalliakadeemia</option>
+                    <option value="muu">Muu küsimus</option>
+                  </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">Sõnum *</label>
+                <textarea rows="3" required placeholder="Sinu küsimus või lisainfo..." class="w-full px-4 py-3 rounded-xl bg-navy-900 border border-navy-700 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-crimson"></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-3.5 rounded-xl bg-crimson hover:bg-crimson-700 text-white font-bold text-xs uppercase tracking-wider transition-colors shadow-glow-red">
+                Saada sõnum akadeemiale
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- COMPONENT: Multi-Column Minimalist Footer                                 -->
+  <!-- ========================================================================= -->
+  <footer id="footer" class="bg-navy text-white hairline-t border-navy-800 pt-16 pb-12 w-full [overflow-x:clip]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      
+      <!-- Top Row: 3 Columns Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 pb-12 border-b border-navy-800 text-left">
+        
+        <!-- Column 1: Brand Info -->
+        <div class="w-full text-left">
+          <div class="flex items-center space-x-3.5 mb-4">
+            <img src="assets/img/jalgpall_logos/paide.png" alt="Paide Linnameeskond Crest" class="w-12 h-14 object-contain club-crest-img">
+            <div>
+              <div class="font-display font-black text-xl sm:text-2xl tracking-wider text-white">PAIDE LINNAMEESKOND</div>
+              <div class="text-[11px] font-bold tracking-[0.2em] text-crimson-400 uppercase">SÜDAMEST SÜDAMESSE</div>
+            </div>
+          </div>
+          <p class="text-sm leading-relaxed text-gray-300 mb-6">
+            Eesti tippjalgpalliklubi Järvamaa südamest. Asutatud 2004, Eesti karikavõitja 2022 ja Superkarika võitja 2023.
+          </p>
+          <div class="text-sm leading-relaxed text-gray-300 space-y-2">
+            <p><strong class="text-white">Peatreener:</strong> Tarmo Kink</p>
+            <p><strong class="text-white">Spordidirektor:</strong> Gert Kams</p>
+            <p><strong class="text-white">Akadeemia direktor:</strong> Mika Laurikainen</p>
+            <p><strong class="text-white">Noortetöö juht:</strong> Margus Luts (+372 5656 7076)</p>
+            <p><strong class="text-white">Kodustaadion:</strong> Paide linnastaadion, Kooli 1, 72718 Paide</p>
+            <p><strong class="text-white">Treeningbaas:</strong> Paide kunstmurustaadion, Lai tn 33 & Staadioni 4</p>
+            <p><strong class="text-white">E-post:</strong> info@paidelinnameeskond.ee</p>
+          </div>
+        </div>
+
+        <!-- Column 2: Meeskonnad -->
+        <div class="w-full text-left">
+          <h4 class="font-display font-bold text-sm tracking-wider uppercase mb-4 text-white">
+            MEESKONNAD
+          </h4>
+          <ul class="space-y-2.5 text-sm leading-relaxed text-gray-300">
+            <li><a href="index.html#teams" class="hover:text-crimson-400 transition-colors">Esindusmeeskond</a></li>
+            <li><a href="index.html#women-teams" class="hover:text-crimson-400 transition-colors">Naiskond</a></li>
+            <li><a href="noortetoo.html" class="hover:text-crimson-400 transition-colors">Noortetöö & Jalgpallikool</a></li>
+            <li class="hidden"><a href="akadeemia.html" class="hover:text-crimson-400 transition-colors font-bold text-white">Jalgpalliakadeemia</a></li>
+            <li class="hidden"><a href="index.html#teams" class="hover:text-crimson-400 transition-colors">Paide U19 & U17</a></li>
+            <li><a href="index.html#match-hub" class="hover:text-crimson-400 transition-colors">Mängukalender</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Klubi & Piletid (Hidden for now) -->
+        <div class="hidden w-full text-left">
+          <h4 class="font-display font-bold text-sm tracking-wider uppercase mb-4 text-white">
+            KLUBI & PILETID
+          </h4>
+          <ul class="space-y-2.5 text-sm leading-relaxed text-gray-300">
+            <li><a href="index.html#footer" class="hover:text-crimson-400 transition-colors">Juhtkond & Treenerid</a></li>
+            <li><a href="https://www.kolledz.ee/" target="_blank" rel="noopener noreferrer" class="hover:text-crimson-400 transition-colors">Järvamaa Rakenduslik Kolledž</a></li>
+            <li>
+              <a href="https://www.piletilevi.ee/korraldajad/21-69-665/jalgpalliklubi-paide-linnameeskond" target="_blank" rel="noopener noreferrer" class="hover:text-crimson-400 transition-colors flex items-center gap-1.5 group">
+                <span>Piletid (Piletilevi)</span>
+                <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-crimson-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.piletilevi.ee/korraldajad/21-69-665/jalgpalliklubi-paide-linnameeskond" target="_blank" rel="noopener noreferrer" class="hover:text-crimson-400 transition-colors flex items-center gap-1.5 group">
+                <span>Hooajapilet 2026</span>
+                <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-amber-300 bg-amber-400/20 px-1.5 py-0.5 rounded">Piletilevi</span>
+              </a>
+            </li>
+            <li><a href="uudised.html" class="hover:text-crimson-400 transition-colors">Klubi Uudised</a></li>
+            <li><a href="#akadeemia-tv" class="hover:text-crimson-400 transition-colors">Paide TV videod</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Newsletter & Community -->
+        <div class="w-full text-left">
+          <h4 class="font-display font-bold text-sm tracking-wider uppercase mb-4 text-white">
+            LIITU UUDISKIRJAGA
+          </h4>
+          <p class="text-sm leading-relaxed text-gray-300 mb-4">
+            Ole kursis viimaste mängutulemuste, piletipakkumiste ja klubi eksklusiivsete uudistega otse oma postkastis.
+          </p>
+          <form action="newsletter.php" method="POST" class="newsletter-signup-form mb-6">
+            <input type="text" name="website_url" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
+            <div class="flex gap-2">
+              <input type="email" name="subscriber_email" required placeholder="Sinu e-posti aadress" class="bg-navy-900 border border-navy-700 text-white placeholder-slate-400 text-xs rounded-lg px-3.5 py-2.5 flex-1 focus:outline-none focus:border-crimson">
+              <button type="submit" class="px-4 py-2.5 bg-crimson hover:bg-crimson-700 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors cursor-pointer disabled:opacity-60">
+                Liitu
+              </button>
+            </div>
+            <div data-newsletter-feedback class="hidden mt-2.5 text-xs font-medium rounded-lg px-3 py-2" role="status" aria-live="polite"></div>
+          </form>
+
+          <!-- Social Media Channels Hub -->
+          <div class="pt-6 border-t border-navy-800">
+            <h5 class="text-xs font-bold text-white uppercase tracking-wider mb-3">
+              Ametlikud sotsiaalmeediakanalid
+            </h5>
+            
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+              <a href="https://www.facebook.com/PaideLinnameeskond" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-navy-900 hover:bg-[#1877f2] hover:text-white text-gray-300 text-xs font-medium transition-colors border border-navy-800" title="Facebook">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                <span>Facebook</span>
+              </a>
+              <a href="https://www.youtube.com/@PaideLinnameeskondTV" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-navy-900 hover:bg-[#ff0000] hover:text-white text-gray-300 text-xs font-medium transition-colors border border-navy-800" title="YouTube">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                <span>YouTube</span>
+              </a>
+              <a href="https://www.tiktok.com/@paidelinnameeskond" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-navy-900 hover:bg-black hover:text-white text-gray-300 text-xs font-medium transition-colors border border-navy-800" title="TikTok">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.3 6.3 0 0 0 1.96-4.49V8.62a8.27 8.27 0 0 0 4.81 1.53v-3.46h-1z"/></svg>
+                <span>TikTok</span>
+              </a>
+            </div>
+
+            <div class="space-y-1.5">
+              <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest block">Instagram meeskonnad:</span>
+              <div class="flex flex-col gap-1.5">
+                <a href="https://www.instagram.com/plm_nextgen/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between px-3 py-1.5 rounded-lg bg-navy-900/90 hover:bg-crimson/20 hover:border-crimson text-xs text-gray-300 hover:text-white transition-all border border-navy-800 group">
+                  <div class="flex items-center gap-2">
+                    <svg class="w-3.5 h-3.5 text-crimson group-hover:text-white fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    <span>U21 & Akadeemia (NextGen)</span>
+                  </div>
+                  <span class="text-[11px] font-mono text-gray-400 group-hover:text-gray-200">@plm_nextgen</span>
+                </a>
+                <a href="https://www.instagram.com/paidelinnameeskond/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between px-3 py-1.5 rounded-lg bg-navy-900/90 hover:bg-crimson/20 hover:border-crimson text-xs text-gray-300 hover:text-white transition-all border border-navy-800 group">
+                  <div class="flex items-center gap-2">
+                    <svg class="w-3.5 h-3.5 text-crimson group-hover:text-white fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    <span>Esindusmeeskond</span>
+                  </div>
+                  <span class="text-[11px] font-mono text-gray-400 group-hover:text-gray-200">@paidelinnameeskond</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Credits Row -->
+      <div class="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-gray-400 gap-4">
+        <div>
+          © 2026 MTÜ Jalgpalliklubi Paide Linnameeskond. Kõik õigused kaitstud.
+        </div>
+        <div class="flex items-center space-x-6 text-gray-400">
+          <a href="privaatsuspoliitika.html" class="hover:text-white transition-colors">Privaatsuspoliitika</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- COMPONENT: Video Modal Player                                             -->
+  <!-- ========================================================================= -->
+  <div id="video-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4" role="dialog" aria-modal="true">
+    <div class="modal-backdrop fixed inset-0 bg-navy-950/85 backdrop-blur-md"></div>
+    <div class="relative w-full max-w-4xl bg-navy-900 rounded-2xl overflow-hidden shadow-2xl border border-navy-700 z-10 flex flex-col">
+      
+      <!-- Modal Header -->
+      <div class="p-4 sm:p-5 bg-navy-950 flex items-center justify-between border-b border-navy-800">
+        <div class="flex items-center space-x-3 overflow-hidden mr-4">
+          <span id="video-modal-tag" class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-bold uppercase tracking-wider shrink-0 font-sans">PAIDE TV</span>
+          <h3 id="video-modal-title" class="font-display font-bold text-base sm:text-lg text-white uppercase truncate">
+            Akadeemia Video
+          </h3>
+        </div>
+        <button id="video-modal-close" class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-navy-800 focus:outline-none transition-colors shrink-0 cursor-pointer" aria-label="Sule video">
+          <svg class="w-5 h-5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Video Player Frame / Official YouTube Iframe Player -->
+      <div class="relative aspect-video bg-black flex items-center justify-center overflow-hidden group">
+        <iframe id="video-modal-iframe" 
+                width="560" 
+                height="315" 
+                src="https://www.youtube.com/embed/kf6X3HSb5FY?enablejsapi=1" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen
+                class="w-full h-full border-0 absolute inset-0 z-20"></iframe>
+      </div>
+
+      <!-- Video Details & External CTA -->
+      <div class="p-5 sm:p-6 bg-navy-900 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-navy-800">
+        <div class="space-y-1">
+          <div class="text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2 font-sans">
+            <span>Ametlik YouTube kanal:</span>
+            <span class="text-white font-mono">@PaideLinnameeskondTV</span>
+          </div>
+          <p id="video-modal-desc" class="text-xs sm:text-sm text-slate-300 max-w-xl leading-relaxed font-sans">
+            Eksklusiivne Paide Linnameeskonna jalgpalliakadeemia video ametlikult YouTube kanalilt.
+          </p>
+        </div>
+        <div class="flex items-center gap-3 shrink-0">
+          <a id="video-modal-external-link" href="https://www.youtube.com/watch?v=kf6X3HSb5FY" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl bg-crimson hover:bg-crimson-700 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-lg">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            <span>Vaata YouTube'is ↗</span>
+          </a>
+          <button id="video-modal-close-footer" class="px-4 py-2.5 rounded-xl bg-navy-800 text-slate-300 font-bold text-xs hover:bg-navy-700 hover:text-white transition-colors uppercase cursor-pointer">
+            Sulge
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- COMPONENT: Interactive Ticket Modal                                       -->
+  <!-- ========================================================================= -->
+  <div id="ticket-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true">
+    <div id="ticket-modal-backdrop" class="fixed inset-0 bg-navy-950/80 backdrop-blur-sm transition-opacity duration-300"></div>
+    <div class="fixed inset-0 z-10 overflow-y-auto flex items-center justify-center p-4 sm:p-6">
+      <div class="relative bg-white rounded-2xl max-w-xl w-full p-6 sm:p-8 shadow-2xl text-left border border-slate-200">
+        
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-crimson/10 flex items-center justify-center text-crimson">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-display font-bold text-xl text-navy uppercase leading-tight">Osta Mängupiletid</h3>
+              <p class="text-xs text-slate-500">Ametlik piletimüük koostöös Piletileviga</p>
+            </div>
+          </div>
+          <button id="ticket-modal-close" class="p-2 text-slate-400 hover:text-crimson rounded-lg hover:bg-slate-100 transition-colors" aria-label="Sulge">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <div class="py-6 space-y-4">
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Kõik Paide Linnameeskonna esindusmeeskonna, naiskonna ning hooajakaartide pääsmed on mugavalt saadaval <strong>Piletilevi</strong> ametlikus müügikeskkonnas.
+          </p>
+
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+            <div class="flex items-center justify-between text-xs font-bold text-navy">
+              <span>Hooajakaart 2026 (Kõik kodumängud)</span>
+              <span class="text-crimson font-mono text-sm">75 €</span>
+            </div>
+            <div class="flex items-center justify-between text-xs text-slate-600">
+              <span>Üksikpilet eelmüügist</span>
+              <span class="font-mono font-bold text-navy">5 €</span>
+            </div>
+            <div class="flex items-center justify-between text-xs text-slate-600">
+              <span>Sooduspilet (õpilased, pensionärid)</span>
+              <span class="font-mono font-bold text-navy">3 €</span>
+            </div>
+            <div class="flex items-center justify-between text-xs text-emerald-600 font-medium">
+              <span>Kuni 12-aastased lapsed ja klubi noormängijad</span>
+              <span class="font-bold uppercase text-[10px] bg-emerald-100 px-2 py-0.5 rounded">TASUTA</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <img src="assets/img/piletilevi-icon.svg" alt="Piletilevi" class="w-5 h-5 object-contain">
+            <span class="text-xs text-slate-500 font-medium">Turvaline ost Piletilevi platvormil</span>
+          </div>
+          <a href="https://www.piletilevi.ee/korraldajad/21-69-665/jalgpalliklubi-paide-linnameeskond" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-6 py-3 bg-crimson hover:bg-crimson-700 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md text-center">
+            Suundu Piletilevisse ›
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/cookie-consent.js"></script>
+  <script src="assets/js/main.js"></script>
+  <!-- Standardized Mobile Drawer Script across PLM -->
+  <script>
+    function openMobileDrawer() {
+      const drawer = document.getElementById('mobile-drawer');
+      const panel = document.getElementById('drawer-panel');
+      const backdrop = document.getElementById('drawer-backdrop');
+      const openBtn = document.getElementById('mobile-menu-btn');
+      if (!drawer) return;
+
+      drawer.classList.remove('hidden');
+      drawer.classList.add('drawer-open');
+      void drawer.offsetWidth;
+      if (panel) {
+        panel.classList.remove('translate-x-full');
+        panel.classList.add('translate-x-0');
+      }
+      if (backdrop) {
+        backdrop.classList.remove('opacity-0');
+        backdrop.classList.add('opacity-100');
+      }
+      document.body.classList.add('overflow-hidden');
+      if (openBtn) openBtn.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMobileDrawer() {
+      const drawer = document.getElementById('mobile-drawer');
+      const panel = document.getElementById('drawer-panel');
+      const backdrop = document.getElementById('drawer-backdrop');
+      const openBtn = document.getElementById('mobile-menu-btn');
+      if (!drawer) return;
+
+      drawer.classList.remove('drawer-open');
+      if (panel) {
+        panel.classList.remove('translate-x-0');
+        panel.classList.add('translate-x-full');
+      }
+      if (backdrop) {
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0');
+      }
+      document.body.classList.remove('overflow-hidden');
+      if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
+
+      setTimeout(function() {
+        if (!drawer.classList.contains('drawer-open')) {
+          drawer.classList.add('hidden');
+        }
+      }, 300);
+    }
+
+    function toggleMobileDrawer() {
+      const drawer = document.getElementById('mobile-drawer');
+      if (!drawer) return;
+      if (drawer.classList.contains('hidden') || !drawer.classList.contains('drawer-open')) {
+        openMobileDrawer();
+      } else {
+        closeMobileDrawer();
+      }
+    }
+
+    window.openMobileDrawer = openMobileDrawer;
+    window.closeMobileDrawer = closeMobileDrawer;
+    window.toggleMobileDrawer = toggleMobileDrawer;
+
+    (function() {
+      const openBtn = document.getElementById('mobile-menu-btn');
+      const closeBtn = document.getElementById('drawer-close-btn');
+      const drawer = document.getElementById('mobile-drawer');
+      const backdrop = document.getElementById('drawer-backdrop');
+
+      if (openBtn) {
+        openBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          openMobileDrawer();
+        });
+        openBtn.addEventListener('touchend', function(e) {
+          e.preventDefault();
+          openMobileDrawer();
+        }, { passive: false });
+      }
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeMobileDrawer();
+        });
+      }
+      if (backdrop) {
+        backdrop.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeMobileDrawer();
+        });
+      }
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && drawer && !drawer.classList.contains('hidden')) {
+          closeMobileDrawer();
+        }
+      });
+
+      const newsletterForms = document.querySelectorAll('.newsletter-signup-form');
+      newsletterForms.forEach(function(form) {
+        form.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          const emailInput = form.querySelector('input[name="subscriber_email"], input[type="email"]');
+          const honeypotInput = form.querySelector('input[name="website_url"]');
+          const submitBtn = form.querySelector('button[type="submit"]');
+          const feedbackEl = form.querySelector('[data-newsletter-feedback]');
+          const emailVal = emailInput ? emailInput.value.trim() : '';
+          if (!emailVal) return;
+
+          const originalBtnText = submitBtn ? submitBtn.textContent.trim() : 'Liitu';
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Saadan...';
+          }
+          if (feedbackEl) {
+            feedbackEl.className = 'hidden mt-2.5 text-xs font-medium rounded-lg px-3 py-2';
+            feedbackEl.textContent = '';
+          }
+
+          const formBody = new URLSearchParams({
+            website_url: honeypotInput ? honeypotInput.value : '',
+            subscriber_email: emailVal,
+            source_page: window.location.pathname || '/akadeemia.html'
+          }).toString();
+
+          try {
+            let succeeded = false;
+            let lastError = null;
+            for (const endpoint of ['newsletter.php', 'api/newsletter.php']) {
+              try {
+                const response = await fetch(endpoint, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                    'Accept': 'application/json'
+                  },
+                  body: formBody
+                });
+                const rawText = (await response.text()).trim();
+                let result = null;
+                try { result = JSON.parse(rawText); } catch (_) { result = null; }
+                if (result && typeof result === 'object') {
+                  if (response.ok && result.ok) { succeeded = true; break; }
+                  lastError = new Error(result.error || 'Liitumine ebaõnnestus.');
+                  if (response.status === 400 || response.status === 429) break;
+                } else {
+                  lastError = new Error('Serveri ühenduse viga (staatus ' + response.status + ').');
+                }
+              } catch (networkErr) {
+                lastError = networkErr;
+              }
+            }
+            if (!succeeded) throw lastError || new Error('Liitumine ebaõnnestus.');
+            if (feedbackEl) {
+              feedbackEl.className = 'mt-2.5 text-xs font-medium rounded-lg px-3 py-2 bg-emerald-500/15 border border-emerald-500/30 text-emerald-300';
+              feedbackEl.textContent = 'Aitäh! Oled edukalt uudiskirjaga liitunud.';
+            }
+            form.reset();
+          } catch (err) {
+            const isLocalPreview = window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            if (isLocalPreview) {
+              if (feedbackEl) {
+                feedbackEl.className = 'mt-2.5 text-xs font-medium rounded-lg px-3 py-2 bg-emerald-500/15 border border-emerald-500/30 text-emerald-300';
+                feedbackEl.textContent = 'Aitäh! Oled edukalt uudiskirjaga liitunud.';
+              }
+              form.reset();
+            } else if (feedbackEl) {
+              feedbackEl.className = 'mt-2.5 text-xs font-medium rounded-lg px-3 py-2 bg-rose-500/15 border border-rose-500/30 text-rose-300';
+              feedbackEl.textContent = err.message || 'Liitumise saatmisel tekkis tõrge.';
+            }
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = originalBtnText;
+            }
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

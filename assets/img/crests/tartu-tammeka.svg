@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <path d="M60 14 L96 30 C96 82 80 102 60 112 C40 102 24 82 24 30 Z" fill="#004b9b" stroke="#ffffff" stroke-width="3"/>
+  <path d="M60 22 L88 36 C88 76 74 94 60 104 C46 94 32 76 32 36 Z" fill="#ffffff"/>
+  <!-- Oak Leaf Motif -->
+  <path d="M60 38 C54 44 50 56 60 74 C70 56 66 44 60 38 Z" fill="#004b9b"/>
+  <line x1="60" y1="38" x2="60" y2="78" stroke="#ffffff" stroke-width="2"/>
+  <text x="60" y="92" fill="#004b9b" font-family="sans-serif" font-weight="900" font-size="9" text-anchor="middle">TAMMEKA</text>
+</svg>

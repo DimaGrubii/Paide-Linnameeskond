@@ -1,0 +1,38 @@
+name: Sync EJL Standings & Matches
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Automatically syncs every day at 08:00 and 20:00 UTC (11:00 and 23:00 Estonian time)
+    - cron: '0 8,20 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  sync-ejl:
+    name: Fetch Latest EJL Data & Commit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run EJL Sync Script
+        run: python3 scripts/sync_jalgpall.py
+
+      - name: Commit and Push if EJL Data Changed
+        run: |
+          git config user.name "Paide Linnameeskond Bot"
+          git config user.email "info@paidelinnameeskond.ee"
+          git add data/jalgpall-data.json
+          if git diff --staged --quiet; then
+            echo "No changes in EJL data."
+          else
+            git commit -m "chore(ejl): auto-sync official EJL standings and matches"
+            git push
+          fi

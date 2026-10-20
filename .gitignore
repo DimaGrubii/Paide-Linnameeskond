@@ -1,0 +1,20 @@
+# macOS & OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Environment & secrets
+.env
+.env.*
+
+# Local EJL HTML scrape cache (large raw HTML files)
+data/cache/
+
+# Editor & IDE directories
+.vscode/
+.idea/
+
+# Temporary rate-limit or runtime files
+api/ratelimit_*.json
+ratelimit_*.json

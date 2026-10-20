@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <circle cx="60" cy="60" r="54" fill="#1a1a1a" stroke="#e6007e" stroke-width="4"/>
+  <circle cx="60" cy="60" r="46" fill="#ffffff"/>
+  <circle cx="60" cy="60" r="40" fill="#1a1a1a"/>
+  <path d="M44 48 Q60 35 76 48 Q70 70 60 78 Q50 70 44 48 Z" fill="#e6007e"/>
+  <polygon points="60,46 64,54 72,54 66,59 68,67 60,62 52,67 54,59 48,54 56,54" fill="#ffffff"/>
+  <text x="60" y="94" fill="#ffffff" font-family="sans-serif" font-weight="900" font-size="8" letter-spacing="1" text-anchor="middle">KALJU FC</text>
+</svg>

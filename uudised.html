@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="et" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Uudised ja Artiklid | Paide Linnameeskond</title>
+  <meta name="description" content="Kõik Paide Linnameeskonna ametlikud uudised, intervjuud, mängude eelvaated, üleminekud, noortetöö ja kogukonna teated.">
+
+  <!-- Favicon / Crest Icon -->
+  <link rel="icon" type="image/svg+xml" href="assets/img/crests/paide-crest.svg">
+  <link rel="icon" type="image/png" href="assets/img/jalgpall_logos/paide.png">
+  <link rel="apple-touch-icon" href="assets/img/jalgpall_logos/paide.png">
+  <script>
+    if (window.location.protocol !== "file:") {
+      if (/\/index\.html$/i.test(window.location.pathname)) {
+        window.history.replaceState(null, "", window.location.pathname.replace(/\/index\.html$/i, "/") + window.location.search + window.location.hash);
+      }
+      document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('a[href^="index.html"]').forEach(function(a) {
+          var href = a.getAttribute("href");
+          if (href === "index.html") {
+            a.setAttribute("href", "./");
+          } else if (href.indexOf("index.html#") === 0 || href.indexOf("index.html?") === 0) {
+            a.setAttribute("href", "./" + href.slice("index.html".length));
+          }
+        });
+      });
+    }
+  </script>
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Uudised ja Artiklid | Paide Linnameeskond">
+  <meta property="og:description" content="Kõik Paide Linnameeskonna ametlikud uudised, intervjuud, mängude eelvaated, üleminekud, noortetöö ja kogukonna teated.">
+  <meta property="og:image" content="assets/img/photos/Mayo_presentation_1_web.jpg">
+  <meta property="og:type" content="website">
+
+<!-- Google Fonts: Marcellus & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS via CDN with customized Paide Design Tokens -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              DEFAULT: '#0b203e',
+              50: '#f0f5fb',
+              100: '#e1ebf7',
+              200: '#c3d8ef',
+              300: '#94bce4',
+              400: '#5e9bd5',
+              500: '#397ec5',
+              600: '#2764a7',
+              700: '#204f86',
+              800: '#1d4370',
+              900: '#0b203e',
+              950: '#07152b',
+            },
+            crimson: {
+              DEFAULT: '#be2931',
+              50: '#fdf2f2',
+              100: '#fde5e6',
+              200: '#fbced0',
+              300: '#f6a7ab',
+              400: '#ee7177',
+              500: '#e1434c',
+              600: '#be2931',
+              700: '#a61f26',
+              800: '#8a1c22',
+              900: '#731c21',
+              950: '#400a0d',
+            }
+          },
+          fontFamily: {
+            sans: ['"Space Grotesk"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            display: ['"Marcellus"', 'Georgia', 'Cambria', 'serif'],
+            heading: ['"Marcellus"', 'Georgia', 'Cambria', 'serif'],
+            marcellus: ['"Marcellus"', 'Georgia', 'Cambria', 'serif'],
+            grotesk: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            'subtle': '0 1px 3px 0 rgba(11, 32, 62, 0.05), 0 1px 2px -1px rgba(11, 32, 62, 0.03)',
+            'card': '0 4px 20px -2px rgba(11, 32, 62, 0.07)',
+            'elevated': '0 20px 35px -8px rgba(11, 32, 62, 0.12)',
+            'glow-red': '0 0 25px rgba(190, 41, 49, 0.45)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Bespoke Stylesheet -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body class="bg-[#f8fafc] text-slate-800 antialiased selection:bg-crimson selection:text-white [overflow-x:clip] w-full flex flex-col min-h-screen">
+
+  <!-- ========================================================================= -->
+  <!-- COMPONENT: Maintenance Alert Banner                                       -->
+  <!-- ========================================================================= -->
+  <aside id="maintenance-banner" class="bg-crimson text-white text-xs sm:text-sm font-sans py-2.5 px-4 relative z-50 border-b border-black/15 shadow-sm" aria-label="Hooldusteade">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/20 text-white flex-shrink-0" aria-hidden="true">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+        </span>
+        <div class="text-xs sm:text-[13px] leading-snug">
+          <span class="font-black uppercase tracking-wider bg-white/20 px-1.5 py-0.5 rounded text-[10px] mr-1.5">HOOLDUS</span>
+          <span class="font-bold">Veebileht on hetkel hoolduses ja uuendamisel.</span>
+          <span class="text-white/95">Kuvatav informatsioon võib ajutiselt sisaldada ebatäpsusi.</span>
+          <span class="hidden lg:inline text-white/75 ml-1.5">/ Website is under maintenance — displayed information may be inaccurate.</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-white/85 hidden sm:inline px-2 py-0.5 rounded bg-black/15">ARENDUSJÄRGUS</span>
+      </div>
+    </div>
+  </aside>
+
+
+      <!-- ========================================================================= -->
+  <!-- COMPONENT: Site Navigation Header (Standardized across PLM)              -->
+  <!-- ========================================================================= -->
+  <header id="main-header" class="sticky top-0 z-50 header-glass hairline-b transition-all duration-300 py-2.5 lg:py-3 w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="flex items-center justify-between">
+        
+        <!-- Left: Club Crest & Wordmark in Marcellus -->
+        <a href="index.html" class="flex items-center space-x-2.5 sm:space-x-3 group focus:outline-none flex-shrink-0" title="Paide Linnameeskond">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 transition-transform duration-300 group-hover:scale-105 flex-shrink-0">
+            <img src="assets/img/jalgpall_logos/paide.png" alt="Paide Linnameeskond Ametlik Vapp" class="club-crest-img w-full h-full object-contain filter drop-shadow-sm">
+          </div>
+          <div class="flex flex-col justify-center">
+            <span class="font-display font-black text-lg sm:text-xl lg:text-[21px] tracking-wider text-navy leading-none group-hover:text-crimson transition-colors uppercase">
+              PAIDE
+            </span>
+            <span class="font-display font-bold text-[9px] sm:text-[10px] tracking-[0.22em] text-slate-500 uppercase leading-tight">
+              LINNAMEESKOND
+            </span>
+          </div>
+        </a>
+        <!-- Center: Primary Desktop Navigation Links (Marcellus, No Paide TV, Uudised in place) -->
+        <nav class="hidden lg:flex items-center space-x-1 xl:space-x-2 2xl:space-x-2.5 font-display" aria-label="Peamenüü">
+          <a href="index.html" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            Avaleht
+          </a>
+          <a href="index.html#teams" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            Esindus
+          </a>
+          <a href="index.html#women-teams" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            Naiskond
+          </a>
+          <a href="noortetoo.html" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            Noortetöö
+          </a>
+          <a href="uudised.html" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-crimson font-black">
+            Uudised
+          </a>
+          <a href="https://varustus.paidelinnameeskond.ee/" target="_blank" rel="noopener noreferrer" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            E-pood
+          </a>
+          <a href="klubi.html" class="whitespace-nowrap px-2 xl:px-2.5 py-1.5 text-xs xl:text-[13px] 2xl:text-sm font-bold tracking-wider uppercase font-display transition-colors rounded-md text-navy hover:text-crimson hover:bg-slate-50/80">
+            Klubi
+          </a>
+        </nav>
+
+        <!-- Right: Action CTAs -->
+        <div class="flex items-center space-x-1.5 sm:space-x-2 xl:space-x-2.5 flex-shrink-0">
+          <!-- Match Center Button -->
+          <a href="index.html#match-hub" class="whitespace-nowrap hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold tracking-wider uppercase font-display text-navy hover:bg-slate-100 hairline-border transition-all flex-shrink-0 leading-none h-8 sm:h-9" title="Mängukalender ja tulemused">
+            <svg class="w-3.5 h-3.5 text-crimson flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <span class="whitespace-nowrap">Mängud</span>
+          </a>
+
+          <!-- Prominent Piletid CTA Button -->
+          <a href="https://www.piletilevi.ee/korraldajad/21-69-665/jalgpalliklubi-paide-linnameeskond" target="_blank" rel="noopener noreferrer" class="whitespace-nowrap inline-flex items-center gap-1 sm:gap-1.5 px-3 sm:px-4 py-1.5 text-xs font-bold tracking-wider uppercase font-display bg-crimson hover:bg-crimson-hover text-white rounded-lg shadow-sm hover:shadow-glow-red transition-all flex-shrink-0 leading-none h-8 sm:h-9">
+            <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
+            <span class="whitespace-nowrap">Piletid</span>
+          </a>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button id="mobile-menu-btn" type="button" onclick="openMobileDrawer()" class="lg:hidden p-1.5 sm:p-2 text-navy hover:text-crimson hover:bg-slate-100 rounded-lg focus:outline-none transition-colors h-8 w-8 sm:h-9 sm:w-9 flex items-center justify-center flex-shrink-0 cursor-pointer" aria-label="Ava menüü" aria-expanded="false">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- COMPONENT: Mobile Drawer Slide-Over Menu (Standardized across PLM)        -->
+  <!-- ========================================================================= -->
+  <div id="mobile-drawer" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true">
+    <!-- Backdrop overlay -->
+    <div id="drawer-backdrop" onclick="closeMobileDrawer()" class="fixed inset-0 bg-navy-950/70 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+
+    <!-- Slide-over panel -->
+    <div id="drawer-panel" class="fixed inset-y-0 right-0 max-w-xs w-full bg-white shadow-2xl flex flex-col justify-between translate-x-full transition-transform duration-300 ease-in-out z-10">
+      
+      <!-- Drawer Header -->
+      <div class="p-4 sm:p-5 hairline-b flex items-center justify-between bg-slate-50">
+        <div class="flex items-center space-x-3">
+          <img src="assets/img/jalgpall_logos/paide.png" alt="Paide Crest" class="w-8 h-9 object-contain">
+          <div>
+            <div class="font-display font-black text-base sm:text-lg text-navy leading-none uppercase">PAIDE LM</div>
+            <div class="text-[9px] font-bold tracking-widest text-slate-400 font-sans uppercase">Ametlik Menüü</div>
+          </div>
+        </div>
+        <button id="drawer-close-btn" type="button" onclick="closeMobileDrawer()" class="p-2 text-slate-500 hover:text-crimson rounded-lg hover:bg-slate-200 focus:outline-none cursor-pointer" aria-label="Sulge menüü">
+          <svg class="w-5 h-5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <!-- Navigation links in Marcellus font -->
+      <div class="px-4 sm:px-5 py-5 space-y-1 overflow-y-auto flex-1 font-display tracking-wide uppercase text-base text-navy">
+        <a href="index.html" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Avaleht</a>
+        <a href="index.html#teams" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Esindusmeeskond</a>
+        <a href="index.html#women-teams" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Naiskond</a>
+        <a href="noortetoo.html" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Noortetöö</a>
+        <a href="uudised.html" class="block px-3 py-2 rounded-lg transition-colors font-display bg-crimson/10 text-crimson font-black">Uudised</a>
+        <a href="https://varustus.paidelinnameeskond.ee/" target="_blank" rel="noopener noreferrer" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">E-pood</a>
+        <a href="index.html#match-hub" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Mängukalender</a>
+        <a href="klubi.html" class="block px-3 py-2 rounded-lg transition-colors font-display hover:bg-slate-100 hover:text-crimson">Klubi & Kontakt</a>
+      </div>
+
+      <!-- Drawer Footer Actions -->
+      <div class="p-4 sm:p-5 hairline-t bg-slate-50 space-y-3">
+        <a href="https://www.piletilevi.ee/korraldajad/21-69-665/jalgpalliklubi-paide-linnameeskond" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 rounded-lg text-xs font-bold tracking-wider uppercase font-display bg-crimson hover:bg-crimson-hover text-white shadow-md flex items-center justify-center gap-2 cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
+          <span>Osta mängupilet (Piletilevi)</span>
+        </a>
+        <div class="pt-2 border-t border-slate-200">
+          <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest block text-center mb-2 font-sans">Jälgi Paide Linnameeskonda</span>
+          <div class="flex items-center justify-center gap-3 text-slate-600">
+            <a href="https://www.facebook.com/PaideLinnameeskond" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:text-[#1877f2] hover:border-[#1877f2] flex items-center justify-center transition-colors" title="Facebook">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/paidelinnameeskond/" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:text-[#e4405f] hover:border-[#e4405f] flex items-center justify-center transition-colors" title="Instagram (Esindus)">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@paidelinnameeskond" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:text-black hover:border-black flex items-center justify-center transition-colors" title="TikTok">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.3 6.3 0 0 0 1.96-4.49V8.62a8.27 8.27 0 0 0 4.81 1.53v-3.46h-1z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@PaideLinnameeskondTV" target="_blank" rel="noopener noreferrer" class="w-7 h-7 rounded-full bg-white border border-slate-200 hover:text-[#ff0000] hover:border-[#ff0000] flex items-center justify-center transition-colors" title="YouTube (@PaideLinnameeskondTV)">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN CONTENT CONTAINER                                                    -->
+  <!-- ========================================================================= -->
+  <main class="flex-1 w-full [overflow-x:clip]">
+
+    <!-- Page Header Hero Banner -->
+    <section class="bg-gradient-to-b from-navy-950 via-navy-900 to-navy text-white py-12 sm:py-16 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#be2931_1px,transparent_1px)] [background-size:16px_16px]"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <!-- Breadcrumbs -->
+        <nav class="text-xs font-semibold text-slate-300 flex items-center gap-2 mb-4 font-sans" aria-label="Breadcrumb">
+          <a href="index.html" class="hover:text-crimson-400 transition-colors">Avaleht</a>
+          <span class="text-slate-500">/</span>
+          <span class="text-crimson-400 font-bold">Uudised ja Artiklid</span>
+        </nav>
+
+        <div class="flex items-center gap-2 text-crimson-400 text-xs font-bold tracking-widest uppercase mb-2 font-sans">
+          <span class="w-2 h-2 rounded-full bg-crimson animate-ping"></span>
+          Klubi Ametlik Meediavoog
+        </div>
+
+        <h1 class="font-display font-black text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight uppercase leading-[1.05] mb-4">
+          UUDISED JA ARTIKLID
+        </h1>
+
+        <p class="text-slate-300 text-sm sm:text-base max-w-2xl font-sans leading-relaxed">
+          Kõik ametlikud uudised esindusmeeskonna, naiskonna, noortetöö, karikamängude, üleminekute ja Järvamaa kogukonna tegemiste kohta otse Paide südamest.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Top Featured Story Spotlight -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-8 mb-12 relative z-20">
+      <a href="artikkel-linnanaiskond-flora-voit.html" class="bg-white rounded-3xl hairline-border shadow-elevated hover:shadow-2xl transition-all duration-500 overflow-hidden block group cursor-pointer">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
+          
+          <!-- Image Container (Left 7 cols) -->
+          <div class="lg:col-span-7 relative h-72 sm:h-96 lg:h-[460px] overflow-hidden bg-slate-900">
+            <img src="assets/img/news/PLN_FCF_Victory.JPEG" 
+                 alt="Linnanaiskond alistas Flora ja tõusis tiitliheitluses ühele pulgale!" 
+                 class="w-full h-full object-cover object-[45%_32%] sm:object-[center_32%] transform group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent"></div>
+            <div class="absolute top-4 left-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full bg-crimson text-white text-xs font-black uppercase font-sans shadow-md">
+                ESILUGU
+              </span>
+              <span class="px-3 py-1 rounded-full bg-navy/90 backdrop-blur text-white text-xs font-bold uppercase font-sans">
+                PAIDE LINNANAISKOND
+              </span>
+            </div>
+            <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white text-xs">
+              <span class="font-sans font-semibold text-slate-200">Paide Linnanaiskond 2 : 0 Tallinna FC Flora</span>
+              <span class="bg-black/60 px-2.5 py-1 rounded text-[11px] font-sans">FOTO: Liisi Troska/EJL</span>
+            </div>
+          </div>
+
+          <!-- Narrative Preview (Right 5 cols) -->
+          <div class="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between bg-white">
+            <div>
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 font-sans">
+                <span>17. OKTOOBER 2026</span>
+                <span>•</span>
+                <span>2 MIN LUGEMIST</span>
+              </div>
+              <h2 class="font-display font-black text-2xl sm:text-3xl text-navy uppercase leading-tight group-hover:text-crimson transition-colors mb-4">
+                Linnanaiskond alistas Flora ja tõusis tiitliheitluses ühele pulgale!
+              </h2>
+              <p class="text-slate-600 text-sm sm:text-base leading-relaxed font-sans mb-6">
+                Paide Linnanaiskond alistas reedel, 16. oktoobril Paide kunstmuruväljakul naiste Meistriliiga senise tabeliliidri FC Flora tulemusega 2:0 ning tõusis seeläbi pealinna rohelistega võrdsele punktisummale. Võitlus Eesti meistritiitli nimel jätkub täie hooga!
+              </p>
+            </div>
+
+            <div class="pt-6 border-t border-slate-100 flex items-center">
+              <div class="flex items-center gap-3">
+                <img src="assets/img/photos/female_team_article.jpg" alt="Paide Linnanaiskond" class="w-8 h-8 rounded-full object-cover shadow-sm flex-shrink-0">
+                <div>
+                  <div class="text-xs font-bold text-navy uppercase font-sans">Paide Linnanaiskond</div>
+                  <div class="text-[11px] text-slate-400 font-sans">Mänguülevaade</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </a>
+    </section>
+
+    <!-- Filter Tabs & Live Search Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+      <div class="bg-white rounded-2xl hairline-border shadow-card px-3.5 py-2.5 sm:px-4 sm:py-3 flex flex-col lg:flex-row lg:items-center justify-between gap-2.5">
+        
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap lg:flex-nowrap items-center gap-1.5 min-w-0" id="filter-tabs">
+          <button type="button" data-filter="all" class="filter-btn active-tab px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-wider whitespace-nowrap transition-all bg-navy text-white shadow-sm font-sans">
+            Kõik (33)
+          </button>
+          <button type="button" data-filter="esindus" class="filter-btn px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-wider whitespace-nowrap transition-all bg-slate-50 hairline-border text-slate-600 hover:text-crimson hover:border-crimson font-sans">
+            Esindusmeeskond (13)
+          </button>
+          <button type="button" data-filter="naiskond" class="filter-btn px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-wider whitespace-nowrap transition-all bg-slate-50 hairline-border text-slate-600 hover:text-crimson hover:border-crimson font-sans">
+            Linnanaiskond (5)
+          </button>
+          <button type="button" data-filter="noored" class="filter-btn px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-wider whitespace-nowrap transition-all bg-slate-50 hairline-border text-slate-600 hover:text-crimson hover:border-crimson font-sans">
+            Noored & Akadeemia (4)
+          </button>
+          <button type="button" data-filter="eurosari" class="filter-btn px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-wider whitespace-nowrap transition-all bg-slate-50 hairline-border text-slate-600 hover:text-crimson hover:border-crimson font-sans">
+            Eurosari & Mängupäev (6)
+          </button>
+          <button type="button" data-filter="kogukond" class="filter-btn px-3 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-wider whitespace-nowrap transition-all bg-slate-50 hairline-border text-slate-600 hover:text-crimson hover:border-crimson font-sans">
+            Kogukond (5)
+          </button>
+        </div>
+
+        <!-- Live Search Input -->
+        <div class="relative w-full lg:w-48 xl:w-52 flex-shrink-0">
+          <svg class="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" 
+                 id="news-search" 
+                 placeholder="Otsi artikleid..." 
+                 class="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg bg-slate-50 border border-slate-200 focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson transition-all font-sans">
+        </div>
+
+      </div>
+
+      <!-- Live Counter Bar -->
+      <div class="flex items-center justify-between text-xs text-slate-500 font-sans px-2 mt-3">
+        <span id="news-counter">Näidatakse kõiki <strong>33</strong> artiklit</span>
+        <span class="text-slate-400">Järjestatud kuupäeva järgi (uuemad eespool)</span>
+      </div>
+    </section>
+
+    <!-- News Grid Container -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16">
+      
+      <!-- Responsive 3-Column Grid -->
+      <div id="news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+
+        <!-- Article Card (0/33): Linnanaiskond alistas Flora 2:0 -->
+        <article class="news-item flex" data-category="naiskond" data-search="linnanaiskond alistas flora ja tõusis tiitliheitluses ühele pulgale! paide linnanaiskond naiste meistriliiga fc flora 2:0 kennedy mayo kirkeliis lillemets marie kiivit tammik 172 publikurekord">
+          <a href="artikkel-linnanaiskond-flora-voit.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/PLN_FCF_Victory.JPEG" 
+                     alt="LINNANAISKOND ALISTAS FLORA JA TÕUSIS TIITLIHEITLUSES ÜHELE PULGALE!" 
+                     class="w-full h-full object-cover object-[45%_32%] transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Linnanaiskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>17. OKTOOBER 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  LINNANAISKOND ALISTAS FLORA JA TÕUSIS TIITLIHEITLUSES ÜHELE PULGALE!
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnanaiskond alistas reedel, 16. oktoobril Paide kunstmuruväljakul naiste Meistriliiga senise tabeliliidri FC Flora tulemusega 2:0 ning tõusis seeläbi pealinna rohelistega võrdsele punktisummale!
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (1/33): Lilanderi üleminutite värav Tammeka üle -->
+        <article class="news-item flex" data-category="esindus" data-search="lilanderi üleminutite värav tõi linnameeskonnale magusa võidu tammeka üle! esindusmeeskond michael lilander dawda darboe moussa felix sambe tartu jk tammeka kärg 444">
+          <a href="artikkel-lilander-tammeka-voit.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/lilander_winning_goal_tammeka.JPEG" 
+                     alt="LILANDERI ÜLEMINUTITE VÄRAV TÕI LINNAMEESKONNALE MAGUSA VÕIDU TAMMEKA ÜLE!" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Esindusmeeskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>15. OKTOOBER 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  LILANDERI ÜLEMINUTITE VÄRAV TÕI LINNAMEESKONNALE MAGUSA VÕIDU TAMMEKA ÜLE!
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskond teenis kolmapäeval, 14. oktoobril A. Le Coq Premium liiga 31. voorus koduväljakul väärtusliku 2:1 võidu Tartu JK Tammeka üle. Kohtumise kangelaseks kerkis Michael Lilander!
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (1/31): FÄNNIBUSSIGA FINAALI VAATAMA! 🏁 -->
+        <article class="news-item flex" data-category="kogukond" data-search="fännibussiga finaali vaatama! 🏁 kogukond & fännid sel laupäeval ootab paide linnameeskond iii ees kuues väikeste karikavõistluste finaal. tule fännibussiga a. le coq arenale ja toome karika paidesse!">
+          <a href="artikkel-fannibuss.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/photos/Fanbus_web.jpg" 
+                     alt="FÄNNIBUSSIGA FINAALI VAATAMA! 🏁" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-navy-700 text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Kogukond & Fännid
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>25. SEPTEMBER 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  FÄNNIBUSSIGA FINAALI VAATAMA! 🏁
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Sel laupäeval ootab Paide Linnameeskond III ees kuues Väikeste karikavõistluste finaal. Tule fännibussiga A. Le Coq Arenale ja toome karika Paidesse!
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (2/31): Linnanaiskond sai esimese välismängija -->
+        <article class="news-item flex" data-category="naiskond" data-search="linnanaiskond sai esimese välismängija linnanaiskond paide linnanaiskonnaga liitus 23-aastane ameeriklannast ründaja kennedy avery mayo (#21), kellest saab naiskonna ajaloo esimene välismängija.">
+          <a href="artikkel-linnanaiskond-mayo.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/photos/Mayo_presentation_1_web.jpg" 
+                     alt="Linnanaiskond sai esimese välismängija" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Linnanaiskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>18. SEPTEMBER 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Linnanaiskond sai esimese välismängija
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnanaiskonnaga liitus 23-aastane ameeriklannast ründaja Kennedy Avery Mayo (#21), kellest saab naiskonna ajaloo esimene välismängija.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (3/31): Badamosi Tšehhi kõrgliigasse -->
+        <article class="news-item flex" data-category="esindus" data-search="abdourahman badamosi siirdus tšehhi kõrgliigasse esindusmeeskond paide linnameeskonna ründaja abdourahman badamosi sõlmis lepingu tšehhi kõrgliigaklubiga fk teplice. paide teenis üleminekust märkimisväärse üleminekutasu.">
+          <a href="artikkel-badamosi-tsehhi-korgliigasse.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/badamosi-tsehhi-korgliigasse.jpeg" 
+                     alt="Abdourahman Badamosi siirdus Tšehhi kõrgliigasse" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Esindusmeeskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>8. SEPTEMBER 2026</span>
+                  <span>•</span>
+                  <span>3 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Abdourahman Badamosi siirdus Tšehhi kõrgliigasse
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskonna ründaja Abdourahman Badamosi sõlmis lepingu Tšehhi kõrgliigaklubiga FK Teplice. Paide teenis üleminekust märkimisväärse üleminekutasu.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (4/31): Uute laste vastuvõtt klubisse on alanud! -->
+        <article class="news-item flex" data-category="noored" data-search="uute laste vastuvõtt klubisse on alanud! noortetöö & akadeemia paide linnameeskond alustab uue hooaja eel laste vastuvõttu treeninggruppidesse paides, türil, väätsal, koerus ja järva-jaanis. esimene treeningkuu on tasuta!">
+          <a href="artikkel-uute-laste-vastuvott.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/uute-laste-vastuvott-klubisse-on-alanud.jpg" 
+                     alt="Uute laste vastuvõtt klubisse on alanud!" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-navy text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Noortetöö & Akadeemia
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>31. AUGUST 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Uute laste vastuvõtt klubisse on alanud!
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskond alustab uue hooaja eel laste vastuvõttu treeninggruppidesse Paides, Türil, Väätsal, Koerus ja Järva-Jaanis. Esimene treeningkuu on tasuta!
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (5/31): Paidega liitus Gambia ründaja Dawda Darboe -->
+        <article class="news-item flex" data-category="esindus" data-search="paidega liitus gambia ründaja dawda darboe esindusmeeskond paide linnameeskonnaga sõlmis mitmeaastase lepingu 21-aastane gambia noortekoondise ründaja dawda darboe, kes hakkab kandma särginumbrit 29.">
+          <a href="artikkel-dawda-darboe.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/paidega-liitus-gambia-rundaja-dawda-darboe.jpg" 
+                     alt="Paidega liitus Gambia ründaja Dawda Darboe" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Esindusmeeskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>21. AUGUST 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Paidega liitus Gambia ründaja Dawda Darboe
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskonnaga sõlmis mitmeaastase lepingu 21-aastane Gambia noortekoondise ründaja Dawda Darboe, kes hakkab kandma särginumbrit 29.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (6/31): Paide hankis ääreründaja Kolumbiast -->
+        <article class="news-item flex" data-category="esindus" data-search="paide hankis ääreründaja kolumbiast esindusmeeskond paide linnameeskond täiendas rünnakut kolumbia ääreründaja juan palaciosega, kes liitus meeskonnaga laenulepingu alusel ostuvõimalusega.">
+          <a href="artikkel-palacios-kolumbia.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/paide-hankis-aarerundaja-kolumbiast.jpg" 
+                     alt="Paide hankis ääreründaja Kolumbiast" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Esindusmeeskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>17. AUGUST 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Paide hankis ääreründaja Kolumbiast
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskond täiendas rünnakut Kolumbia ääreründaja Juan Palaciosega, kes liitus meeskonnaga laenulepingu alusel ostuvõimalusega.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (7/31): Natural Suvelaagrit nauditi täiest südamest -->
+        <article class="news-item flex" data-category="noored" data-search="natural suvelaagrit nauditi täiest südamest noortetöö & akadeemia järvamaa noorte jalgpallisuve suursündmus natural suvelaager tõi paidesse ja türile kokku rekordilised 101 last, pakkudes sporti, rõõmu ja unustamatuid elamusi.">
+          <a href="artikkel-natural-suvelaager.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/natural-suvelaagrit-nauditi-taiest-sudamest.jpg" 
+                     alt="Natural Suvelaagrit nauditi täiest südamest" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-navy text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Noortetöö & Akadeemia
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>10. AUGUST 2026</span>
+                  <span>•</span>
+                  <span>4 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Natural Suvelaagrit nauditi täiest südamest
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Järvamaa noorte jalgpallisuve suursündmus Natural Suvelaager tõi Paidesse ja Türile kokku rekordilised 101 last, pakkudes sporti, rõõmu ja unustamatuid elamusi.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (8/31): Naiskond täiendas ridu äärekaitsjaga -->
+        <article class="news-item flex" data-category="naiskond" data-search="naiskond täiendas ridu äärekaitsjaga linnanaiskond paide linnanaiskonnaga liitus eesti noortekoondise äärekaitsja nora-mai kool, tuues naiskonna kaitseliini lisajõudu ja kiirust.">
+          <a href="artikkel-naiskond-nora-mai-kool.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/naiskond-taiendas-ridu-aarekaitsjaga.jpg" 
+                     alt="Naiskond täiendas ridu äärekaitsjaga" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Linnanaiskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>6. AUGUST 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Naiskond täiendas ridu äärekaitsjaga
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnanaiskonnaga liitus Eesti noortekoondise äärekaitsja Nora-Mai Kool, tuues naiskonna kaitseliini lisajõudu ja kiirust.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (9/31): KOLMAS RING! | Piletid Paide vs Rapid Wien mängule on müügil! -->
+        <article class="news-item flex" data-category="eurosari" data-search="kolmas ring! | piletid paide vs rapid wien mängule on müügil! eurosari & mängupäev paide linnameeskond võõrustab uefa konverentsiliiga kolmandas eelringis pärnu rannastaadionil austria tippklubi sk rapid wien. piletid nüüd müügil!">
+          <a href="artikkel-rapid-wien-piletid.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/kolmas-ring-piletid-paide-vs-rapid-wien-mangule-on-muugil.jpg" 
+                     alt="KOLMAS RING! | Piletid Paide vs Rapid Wien mängule on müügil!" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-amber-600 text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Eurosari & Mängupäev
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>2. AUGUST 2026</span>
+                  <span>•</span>
+                  <span>3 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  KOLMAS RING! | Piletid Paide vs Rapid Wien mängule on müügil!
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskond võõrustab UEFA Konverentsiliiga kolmandas eelringis Pärnu Rannastaadionil Austria tippklubi SK Rapid Wien. Piletid nüüd müügil!
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (10/31): Kristofer Käit liitub Paide Linnameeskonnaga -->
+        <article class="news-item flex" data-category="esindus" data-search="kristofer käit liitub paide linnameeskonnaga esindusmeeskond paide linnameeskonnaga liitus 21-aastane eesti a-koondise keskkaitsja kristofer käit, kes hakkab esindusmeeskonnas kandma särginumbrit 44.">
+          <a href="artikkel-kristofer-kait.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/kristofer-kait-liitub-paide-linnameeskonnaga.jpg" 
+                     alt="Kristofer Käit liitub Paide Linnameeskonnaga" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Esindusmeeskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>2. AUGUST 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Kristofer Käit liitub Paide Linnameeskonnaga
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskonnaga liitus 21-aastane Eesti A-koondise keskkaitsja Kristofer Käit, kes hakkab esindusmeeskonnas kandma särginumbrit 44.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (11/31): PILETID MÜÜGIL! | Eurosarja teine ring Pärnus juba neljapäeval! -->
+        <article class="news-item flex" data-category="eurosari" data-search="piletid müügil! | eurosarja teine ring pärnus juba neljapäeval! eurosari & mängupäev uefa konverentsiliiga 2. eelringi kodumäng aserbaidžaani klubi zirä fk vastu toimub juba sel neljapäeval pärnu rannastaadionil.">
+          <a href="artikkel-eurosari-zira-piletid.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/piletid-muugil-eurosarja-teine-ring-parnus-juba-neljapaeval.jpg" 
+                     alt="PILETID MÜÜGIL! | Eurosarja teine ring Pärnus juba neljapäeval!" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-amber-600 text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Eurosari & Mängupäev
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>21. JUULI 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  PILETID MÜÜGIL! | Eurosarja teine ring Pärnus juba neljapäeval!
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  UEFA Konverentsiliiga 2. eelringi kodumäng Aserbaidžaani klubi Zirä FK vastu toimub juba sel neljapäeval Pärnu Rannastaadionil.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (12/31): MEDIA | Pressiinfo / Press info, 22.-23.07.2026 -->
+        <article class="news-item flex" data-category="eurosari" data-search="media | pressiinfo / press info, 22.-23.07.2026 eurosari & mängupäev ametlik meediainfo ja pressiakrediteerimise juhend uefa konverentsiliiga teise eelringi kohtumiseks paide linnameeskond vs pfc zira pärnu rannastaadionil.">
+          <a href="artikkel-media-pressiinfo-2307.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/media-pressiinfo-press-info-22-23-07-2026.jpg" 
+                     alt="MEDIA | Pressiinfo / Press info, 22.-23.07.2026" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-amber-600 text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Eurosari & Mängupäev
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>21. JUULI 2026</span>
+                  <span>•</span>
+                  <span>3 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  MEDIA | Pressiinfo / Press info, 22.-23.07.2026
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Ametlik meediainfo ja pressiakrediteerimise juhend UEFA Konverentsiliiga teise eelringi kohtumiseks Paide Linnameeskond vs PFC Zira Pärnu Rannastaadionil.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (13/31): Linnameeskond täienes kahe spordiedendajaga -->
+        <article class="news-item flex" data-category="kogukond" data-search="linnameeskond täienes kahe spordiedendajaga kogukond & fännid paide linnameeskonna klubistruktuur ja sporditöö laienesid kahe kogenud spordiedendaja liitumisega, et tugevdada noorte arendust ja kohalikku kogukonnatööd.">
+          <a href="artikkel-spordiedendajad.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/linnameeskond-taienes-kahe-spordiedendajaga.jpg" 
+                     alt="Linnameeskond täienes kahe spordiedendajaga" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-navy text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Kogukond & Fännid
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>14. JUULI 2026</span>
+                  <span>•</span>
+                  <span>3 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Linnameeskond täienes kahe spordiedendajaga
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskonna klubistruktuur ja sporditöö laienesid kahe kogenud spordiedendaja liitumisega, et tugevdada noorte arendust ja kohalikku kogukonnatööd.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (14/31): MEDIA | Pressiinfo / information for press | 16.07.2026 -->
+        <article class="news-item flex" data-category="eurosari" data-search="media | pressiinfo / information for press | 16.07.2026 eurosari & mängupäev ametlik meedia ja pressiinfo paide linnameeskond vs fc hegelmann korduskohtumiseks pärnu rannastaadionil.">
+          <a href="artikkel-media-pressiinfo-1607.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/media-pressiinfo-information-for-press-16-07-2026.jpg" 
+                     alt="MEDIA | Pressiinfo / information for press | 16.07.2026" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-amber-600 text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Eurosari & Mängupäev
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>12. JUULI 2026</span>
+                  <span>•</span>
+                  <span>3 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  MEDIA | Pressiinfo / information for press | 16.07.2026
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Ametlik meedia ja pressiinfo Paide Linnameeskond vs FC Hegelmann korduskohtumiseks Pärnu Rannastaadionil.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (15/31): PILET EUROMÄNGULE! | Osta pilet Pärnusse siit! -->
+        <article class="news-item flex" data-category="eurosari" data-search="pilet euromängule! | osta pilet pärnusse siit! eurosari & mängupäev kõik teed viivad pärnusse! osta pilet paide linnameeskonna ja fc hegelmanni vahelisele euromängule ning toeta meeskonda kohapeal.">
+          <a href="artikkel-euromang-hegelmann-piletid.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/piletiinfo-euromangule-osta-pilet-parnusse-siit.jpeg" 
+                     alt="PILET EUROMÄNGULE! | Osta pilet Pärnusse siit!" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-amber-600 text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Eurosari & Mängupäev
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>12. JUULI 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  PILET EUROMÄNGULE! | Osta pilet Pärnusse siit!
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Kõik teed viivad Pärnusse! Osta pilet Paide Linnameeskonna ja FC Hegelmanni vahelisele euromängule ning toeta meeskonda kohapeal.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (16/31): VAATA SIIT! | Paide eurosuve avalöök Leedus -->
+        <article class="news-item flex" data-category="eurosari" data-search="vaata siit! | paide eurosuve avalöök leedus eurosari & mängupäev paide linnameeskonna eurohooaeg saab alguse leedus kaunase dariaus ja girėno staadionil fc hegelmanni vastu. vaata otseülekannet!">
+          <a href="artikkel-fc-hegelmann-avaloog.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/fc-hegelmann-vs-paide-linnameeskond.jpg" 
+                     alt="VAATA SIIT! | Paide eurosuve avalöök Leedus" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-amber-600 text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Eurosari & Mängupäev
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>6. JUULI 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  VAATA SIIT! | Paide eurosuve avalöök Leedus
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskonna eurohooaeg saab alguse Leedus Kaunase Dariaus ja Girėno staadionil FC Hegelmanni vastu. Vaata otseülekannet!
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (17/31): Esindusmeeskonna treeneritetiimiga liitub Mika Laurikainen -->
+        <article class="news-item flex" data-category="esindus" data-search="esindusmeeskonna treeneritetiimiga liitub mika laurikainen esindusmeeskond paide linnameeskonna esindusmeeskonna treeneritetiimiga liitus kogenud soomlasest treener mika laurikainen, kellel on pikaajaline kogemus soome veikkausliigas ja noortekoondistes.">
+          <a href="artikkel-mika-laurikainen.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/esindusmeeskonna-treeneritetiimiga-liitub-mika-laurikainen.jpg" 
+                     alt="Esindusmeeskonna treeneritetiimiga liitub Mika Laurikainen" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Esindusmeeskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>26. JUUNI 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Esindusmeeskonna treeneritetiimiga liitub Mika Laurikainen
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskonna esindusmeeskonna treeneritetiimiga liitus kogenud soomlasest treener Mika Laurikainen, kellel on pikaajaline kogemus Soome Veikkausliigas ja noortekoondistes.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (18/31): Horticom väetab, klubi kasvab! -->
+        <article class="news-item flex" data-category="kogukond" data-search="horticom väetab, klubi kasvab! kogukond & klubi paide linnameeskonna treening- ja mängukeskkonna üheks oluliseks osaks on kvaliteetne muruväljak ning selle nimel tehtav järjepidev hooldustöö aiandus- ja põllumajandusettevõttega horticom.">
+          <a href="artikkel-horticom-vaetab.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/horticom-vaetab-klubi-kasvab.jpg" 
+                     alt="Horticom väetab, klubi kasvab!" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-navy text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Kogukond & Klubi
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>20. JUUNI 2026</span>
+                  <span>•</span>
+                  <span>3 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Horticom väetab, klubi kasvab!
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskonna treening- ja mängukeskkonna üheks oluliseks osaks on kvaliteetne muruväljak ning selle nimel tehtav järjepidev hooldustöö aiandus- ja põllumajandusettevõttega Horticom.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (19/31): Bolufer esindusmeeskonda, Freitas duubli peatreeneriks -->
+        <article class="news-item flex" data-category="esindus" data-search="bolufer esindusmeeskonda, freitas duubli peatreeneriks esindusmeeskond paide linnameeskonna esindusmeeskonna treenerite koosseisuga liitus daniel bolufer, samas kui duubelmeeskonna peatreeneri teatepulga võttis üle pedro freitas.">
+          <a href="artikkel-bolufer-freitas.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/bolufer-esindusmeeskonda-freitas-duubli-peatreeneriks.jpg" 
+                     alt="Bolufer esindusmeeskonda, Freitas duubli peatreeneriks" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Esindusmeeskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>4. MAI 2026</span>
+                  <span>•</span>
+                  <span>3 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Bolufer esindusmeeskonda, Freitas duubli peatreeneriks
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskonna esindusmeeskonna treenerite koosseisuga liitus Daniel Bolufer, samas kui duubelmeeskonna peatreeneri teatepulga võttis üle Pedro Freitas.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (20/31): Koostöö Vladimir Vassiljeviga lõppes -->
+        <article class="news-item flex" data-category="esindus" data-search="koostöö vladimir vassiljeviga lõppes esindusmeeskond paide linnameeskond ja esindusmeeskonna peatreener vladimir vassiljev lõpetasid vastastikusel kokkuleppel koostöö. esinduse tüüri juurde asub ajutiselt tarmo kink.">
+          <a href="artikkel-vassiljev-koostoo-lopp.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/koostoo-vladimir-vassiljeviga-loppes.jpg" 
+                     alt="Koostöö Vladimir Vassiljeviga lõppes" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Esindusmeeskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>27. APRILL 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Koostöö Vladimir Vassiljeviga lõppes
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskond ja esindusmeeskonna peatreener Vladimir Vassiljev lõpetasid vastastikusel kokkuleppel koostöö. Esinduse tüüri juurde asub ajutiselt Tarmo Kink.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (21/31): Kesknädala mäng toob Nõmme Paidesse -->
+        <article class="news-item flex" data-category="esindus" data-search="kesknädala mäng toob nõmme paidesse esindusmeeskond a. le coq premium liiga kesknädala voor toob paide linnastaadioni kunstmurule nõmme unitedi. eesmärk on selge – kodupubliku ees kolm punkti tabelisse kirjutada!">
+          <a href="artikkel-nomme-united-paidesse.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/kesknadala-mang-toob-nomme-paidesse.jpg" 
+                     alt="Kesknädala mäng toob Nõmme Paidesse" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Esindusmeeskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>6. APRILL 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Kesknädala mäng toob Nõmme Paidesse
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  A. Le Coq Premium liiga kesknädala voor toob Paide linnastaadioni kunstmurule Nõmme Unitedi. Eesmärk on selge – kodupubliku ees kolm punkti tabelisse kirjutada!
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (22/31): Sinilillejooks 2026 -->
+        <article class="news-item flex" data-category="kogukond" data-search="sinilillejooks 2026 kogukond & heategevus paide linnameeskond ja naiskodukaitse kutsuvad järvamaa koole osalema sinilille teatejooksul, et toetada eesti kaitseväe ja kaitseliidu veterane ning nende lähedasi.">
+          <a href="artikkel-sinilillejooks-2026.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/sinilillejooks-2026.png" 
+                     alt="Sinilillejooks 2026" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-navy text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Kogukond & Heategevus
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>29. MÄRTS 2026</span>
+                  <span>•</span>
+                  <span>4 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Sinilillejooks 2026
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskond ja Naiskodukaitse kutsuvad Järvamaa koole osalema Sinilille teatejooksul, et toetada Eesti kaitseväe ja Kaitseliidu veterane ning nende lähedasi.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (23/31): Jalgpalliakadeemia sai suurtoetaja -->
+        <article class="news-item flex" data-category="noored" data-search="jalgpalliakadeemia sai suurtoetaja noortetöö & akadeemia paide linnameeskonna jalgpalliakadeemia sõlmis kolmeaastase suurtoetajalepingu ventilatsiooni- ja kliimaseadmete valdkonnas tegutseva ettevõttega comfort ae as.">
+          <a href="artikkel-akadeemia-comfort.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/jalgpalliakadeemia-sai-suurtoetaja.jpg" 
+                     alt="Jalgpalliakadeemia sai suurtoetaja" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-navy text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Noortetöö & Akadeemia
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>26. MÄRTS 2026</span>
+                  <span>•</span>
+                  <span>3 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Jalgpalliakadeemia sai suurtoetaja
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskonna Jalgpalliakadeemia sõlmis kolmeaastase suurtoetajalepingu ventilatsiooni- ja kliimaseadmete valdkonnas tegutseva ettevõttega Comfort AE AS.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (24/31): Linnanaiskond tervitab uut toetajat -->
+        <article class="news-item flex" data-category="naiskond" data-search="linnanaiskond tervitab uut toetajat linnanaiskond rahvusvaheline advokaadibüroo eversheds sutherland liitub paide linnanaiskonna toetajate ringiga, aidates kaasa naiste jalgpalli arengule järvamaal.">
+          <a href="artikkel-naiskond-eversheds.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/linnanaiskonna-toetajaks-saab-tunnustatud-advokaadiburoo.jpg" 
+                     alt="Linnanaiskond tervitab uut toetajat" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Linnanaiskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>20. MÄRTS 2026</span>
+                  <span>•</span>
+                  <span>3 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Linnanaiskond tervitab uut toetajat
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Rahvusvaheline advokaadibüroo Eversheds Sutherland liitub Paide Linnanaiskonna toetajate ringiga, aidates kaasa naiste jalgpalli arengule Järvamaal.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (25/31): Linnameeskonna noortetöö pälvis kolmanda tärni -->
+        <article class="news-item flex" data-category="noored" data-search="linnameeskonna noortetöö pälvis kolmanda tärni noortetöö & akadeemia eesti jalgpalli liidu poolt käivitatud noortetöö kvaliteedistandardi projektis pälvis paide linnameeskond kolmanda taseme tärni, kuuludes eesti tippklubide sekka.">
+          <a href="artikkel-noortetoo-kolmas-tarn.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/linnameeskonna-noortetoo-palvis-kolmanda-tarni.jpg" 
+                     alt="Linnameeskonna noortetöö pälvis kolmanda tärni" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-navy text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Noortetöö & Akadeemia
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>19. MÄRTS 2026</span>
+                  <span>•</span>
+                  <span>3 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Linnameeskonna noortetöö pälvis kolmanda tärni
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Eesti Jalgpalli Liidu poolt käivitatud noortetöö kvaliteedistandardi projektis pälvis Paide Linnameeskond kolmanda taseme tärni, kuuludes Eesti tippklubide sekka.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (26/31): KODUMÄNG! | Pühapäeval Paide vs Narva Trans -->
+        <article class="news-item flex" data-category="esindus" data-search="kodumäng! | pühapäeval paide vs narva trans esindusmeeskond pühapäeval võõrustab paide linnameeskond a. le coq premium liiga teises voorus narva transi. tule staadionile omasid toetama!">
+          <a href="artikkel-paide-narva-trans.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/kodumang-puhapaeval-paide-vs-narva-trans.jpg" 
+                     alt="KODUMÄNG! | Pühapäeval Paide vs Narva Trans" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Esindusmeeskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>13. MÄRTS 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  KODUMÄNG! | Pühapäeval Paide vs Narva Trans
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Pühapäeval võõrustab Paide Linnameeskond A. Le Coq Premium liiga teises voorus Narva Transi. Tule staadionile omasid toetama!
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (27/31): MÄNGUINFO | Karikas kolmapäeval kodumäng! -->
+        <article class="news-item flex" data-category="esindus" data-search="mänguinfo | karikas kolmapäeval kodumäng! esindusmeeskond kolmapäeval, 11. märtsil kohtub paide linnameeskond evald tipneri karikavõistluste veerandfinaalis koduväljakul. võit viib poolfinaali!">
+          <a href="artikkel-tipneri-karikas-kodumang.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/manguinfo-tipneri-karika-kodumang-kolmapaeval-11-martsil.jpeg" 
+                     alt="MÄNGUINFO | Karikas kolmapäeval kodumäng!" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Esindusmeeskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>9. MÄRTS 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  MÄNGUINFO | Karikas kolmapäeval kodumäng!
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Kolmapäeval, 11. märtsil kohtub Paide Linnameeskond Evald Tipneri karikavõistluste veerandfinaalis koduväljakul. Võit viib poolfinaali!
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (28/31): TOETA KLUBI! | Linnameeskonna hooajakaart müügil! -->
+        <article class="news-item flex" data-category="kogukond" data-search="toeta klubi! | linnameeskonna hooajakaart müügil! kogukond & klubi paide linnameeskonna 2026. aasta ametlik hooajakaart tagab sissepääsu kõigile esindusmeeskonna, naiskonna ja duubli kodumängudele ning toetab klubi tegevust.">
+          <a href="artikkel-hooajakaart-2026.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/toeta-klubi-linnameeskonna-hooajakaart-muugil.png" 
+                     alt="TOETA KLUBI! | Linnameeskonna hooajakaart müügil!" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-navy-700 text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Kogukond & Klubi
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>26. VEEBRUAR 2026</span>
+                  <span>•</span>
+                  <span>3 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  TOETA KLUBI! | Linnameeskonna hooajakaart müügil!
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskonna 2026. aasta ametlik hooajakaart tagab sissepääsu kõigile esindusmeeskonna, naiskonna ja duubli kodumängudele ning toetab klubi tegevust.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (29/31): Linnameeskonnaga liitus keskpoolkaitsja Daniel Cabral -->
+        <article class="news-item flex" data-category="esindus" data-search="linnameeskonnaga liitus keskpoolkaitsja daniel cabral esindusmeeskond paide linnameeskonnaga liitus 23-aastane brasiillasest keskpoolkaitsja daniel cabral, kes on varasemalt esindanud brasiilia noortekoondisi ja flamengo noorteakadeemiat.">
+          <a href="artikkel-daniel-cabral.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/linnameeskonnaga-liitus-keskpoolkaitsja-daniel-cabral.png" 
+                     alt="Linnameeskonnaga liitus keskpoolkaitsja Daniel Cabral" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Esindusmeeskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>9. VEEBRUAR 2026</span>
+                  <span>•</span>
+                  <span>3 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Linnameeskonnaga liitus keskpoolkaitsja Daniel Cabral
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskonnaga liitus 23-aastane brasiillasest keskpoolkaitsja Daniel Cabral, kes on varasemalt esindanud Brasiilia noortekoondisi ja Flamengo noorteakadeemiat.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (30/31): Juksar ja Õun Linnanaiskonnas! -->
+        <article class="news-item flex" data-category="naiskond" data-search="juksar ja õun linnanaiskonnas! linnanaiskond paide linnanaiskond täiendas ridu kahe andeka mängijaga: võistkonnaga liitusid anna-mariin juksar ja kreete õun.">
+          <a href="artikkel-juksar-oun-naiskonnas.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/juksar-ja-oun-linnanaiskonnas.jpg" 
+                     alt="Juksar ja Õun Linnanaiskonnas!" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-crimson text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Linnanaiskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>30. JAANUAR 2026</span>
+                  <span>•</span>
+                  <span>2 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Juksar ja Õun Linnanaiskonnas!
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnanaiskond täiendas ridu kahe andeka mängijaga: võistkonnaga liitusid Anna-Mariin Juksar ja Kreete Õun.
+                </p>
+              </div>
+          </a>
+        </article>
+
+        <!-- Article Card (31/31): Uued treenerid Portugalist -->
+        <article class="news-item flex" data-category="esindus" data-search="uued treenerid portugalist esindusmeeskond paide linnameeskonna treeneritetiim ja jalgpalliakadeemia täienesid kahe portugali spetsialistiga, tuues paidesse euroopa tippjalgpalli metoodikat ja treeningfilosoofiat.">
+          <a href="artikkel-uued-treenerid-portugalist.html" class="bg-white rounded-2xl hairline-border shadow-card hover:shadow-elevated hover:border-slate-300 transition-all duration-300 overflow-hidden editorial-card flex flex-col group w-full cursor-pointer">
+              <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-900 flex items-center justify-center">
+                <img src="assets/img/news/uued-treenerid-portugalist.jpg" 
+                     alt="Uued treenerid Portugalist" 
+                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="absolute top-3 left-3">
+                  <span class="px-2.5 py-1 rounded bg-navy text-white text-[10px] font-extrabold uppercase font-sans shadow-sm">
+                    Esindusmeeskond
+                  </span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 font-sans flex items-center gap-2">
+                  <span>19. JAANUAR 2026</span>
+                  <span>•</span>
+                  <span>3 MIN</span>
+                </div>
+                <h3 class="font-display font-black text-xl text-navy uppercase leading-snug group-hover:text-crimson transition-colors line-clamp-2">
+                  Uued treenerid Portugalist
+                </h3>
+                <p class="text-slate-600 text-xs sm:text-sm mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                  Paide Linnameeskonna treeneritetiim ja jalgpalliakadeemia täienesid kahe Portugali spetsialistiga, tuues Paidesse Euroopa tippjalgpalli metoodikat ja treeningfilosoofiat.
+                </p>
+              </div>
+          </a>
+        </article>
+      </div>
+
+      <!-- No Results State (Hidden by default) -->
+      <div id="no-results" class="hidden text-center py-20 bg-white rounded-3xl hairline-border p-8 my-8">
+        <div class="w-16 h-16 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-xl text-navy uppercase mb-2">Ühtegi artiklit ei leitud</h3>
+        <p class="text-slate-500 text-xs sm:text-sm font-sans max-w-md mx-auto mb-6">
+          Sinu otsingule vastavaid uudiseid ei leitud. Proovi teistsugust märksõna või vali mõni muu kategooria.
+        </p>
+        <button type="button" id="reset-filter-btn" class="px-5 py-2.5 rounded-xl bg-navy text-white text-xs font-bold uppercase tracking-wider hover:bg-crimson transition-colors">
+          Näita kõiki uudiseid
+        </button>
+      </div>
+
+    </section>
+
+    <!-- Community & Newsletter Banner -->
+    <section class="bg-navy text-white py-14 border-t border-navy-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <div class="lg:col-span-7">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-crimson text-white mb-3 font-sans">
+              PAIDE LINNAMEESKOND
+            </span>
+            <h2 class="font-display font-black text-2xl sm:text-4xl uppercase tracking-tight leading-tight mb-3">
+              Ära maga ühtegi klubiuudist maha!
+            </h2>
+            <p class="text-slate-300 text-sm leading-relaxed font-sans max-w-xl">
+              Liitu Paide Linnameeskonna fännikogukonnaga, saa esimesena infot piletite müügi, koosseisude, üleminekute ning mängupäeva fännitranspordi kohta.
+            </p>
+          </div>
+
+          <div class="lg:col-span-5 flex flex-col sm:flex-row gap-3">
+            <a href="https://www.facebook.com/paidelinnameeskond" target="_blank" rel="noopener noreferrer" class="flex-1 py-3.5 px-5 rounded-xl bg-crimson hover:bg-crimson-hover text-white text-center font-bold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-glow-red flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              <span>Jälgi Facebookis</span>
+            </a>
+            <a href="https://www.instagram.com/paidelinnameeskond" target="_blank" rel="noopener noreferrer" class="flex-1 py-3.5 px-5 rounded-xl bg-navy-800 hover:bg-slate-800 border border-slate-700 text-white text-center font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              <span>Jälgi Instagramis</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- STANDARDIZED RESPONSIVE FOOTER                                            -->
+  <!-- ========================================================================= -->
+  <footer class="bg-navy-950 text-white border-t border-navy-900 pt-12 pb-8 w-full mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Footer Grid: 4 Clean Columns -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        
+        <!-- Column 1: Club Branding -->
+        <div class="w-full text-left">
+          <div class="flex items-center space-x-3 mb-4">
+            <img src="assets/img/jalgpall_logos/paide.png" alt="Paide Linnameeskond Vapp" class="w-10 h-12 object-contain">
+            <div>
+              <span class="font-display font-black text-lg text-white uppercase block leading-none">PAIDE</span>
+              <span class="font-display font-medium text-xs text-crimson-400 uppercase tracking-widest block">LINNAMEESKOND</span>
+            </div>
+          </div>
+          <p class="text-sm leading-relaxed text-gray-300 mb-4 font-sans">
+            Süda, Kirg, Ühtsus. Järvamaa jalgpalli uhkus ja noorte tee tippsporti.
+          </p>
+          <div class="text-xs text-gray-400 space-y-1 font-sans">
+            <div>Klubihoone: Staadioni 4, Paide</div>
+            <div>Telefon: +372 5656 7076</div>
+            <div>E-post: info@paidelinnameeskond.ee</div>
+          </div>
+        </div>
+
+        <!-- Column 2: Meeskonnad -->
+        <div class="w-full text-left">
+          <h4 class="text-base font-bold text-white uppercase tracking-wider mb-4 border-l-2 border-crimson pl-2.5 font-sans">
+            MEESKONNAD
+          </h4>
+          <ul class="space-y-2.5 text-sm leading-relaxed text-gray-300 font-sans">
+            <li><a href="index.html#teams" class="hover:text-crimson-400 transition-colors">Esindusmeeskond</a></li>
+            <li><a href="index.html#women-teams" class="hover:text-crimson-400 transition-colors">Naiskond</a></li>
+            <li><a href="noortetoo.html" class="hover:text-crimson-400 transition-colors">Noortetöö & Jalgpallikool</a></li>
+            <li class="hidden"><a href="akadeemia.html" class="hover:text-crimson-400 transition-colors">Jalgpalliakadeemia</a></li>
+            <li><a href="index.html#teams" class="hover:text-crimson-400 transition-colors">Paide LM III</a></li>
+            <li><a href="index.html#match-hub" class="hover:text-crimson-400 transition-colors">Mängukalender</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Klubi & Teenused -->
+        <div class="w-full text-left">
+          <h4 class="text-base font-bold text-white uppercase tracking-wider mb-4 border-l-2 border-crimson pl-2.5 font-sans">
+            KLUBI
+          </h4>
+          <ul class="space-y-2.5 text-sm leading-relaxed text-gray-300 font-sans">
+            <li><a href="uudised.html" class="hover:text-crimson-400 transition-colors">Uudised ja artiklid</a></li>
+            <li><a href="index.html#paide-tv" class="hover:text-crimson-400 transition-colors">Paide TV videod</a></li>
+            <li class="hidden"><a href="akadeemia.html#sisseastumine" class="hover:text-crimson-400 transition-colors">Akadeemia vastuvõtt</a></li>
+            <li><a href="noortetoo.html#registreeru" class="hover:text-crimson-400 transition-colors">Lapse registreerimine</a></li>
+            <li><a href="https://www.piletilevi.ee/korraldajad/21-69-665/jalgpalliklubi-paide-linnameeskond" target="_blank" rel="noopener noreferrer" class="hover:text-crimson-400 transition-colors">Piletid Piletilevis</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Sotsiaalmeedia & Toetus -->
+        <div class="w-full text-left">
+          <h4 class="text-base font-bold text-white uppercase tracking-wider mb-4 border-l-2 border-crimson pl-2.5 font-sans">
+            JÄLGI MEID
+          </h4>
+          <p class="text-sm leading-relaxed text-gray-300 mb-4 font-sans">
+            Ole kursis Paide Linnameeskonna tegemistega sotsiaalmeedias.
+          </p>
+          <div class="flex items-center space-x-3 text-slate-300">
+            <a href="https://www.facebook.com/paidelinnameeskond" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-navy-900 hover:bg-crimson flex items-center justify-center transition-colors text-slate-300 hover:text-white" title="Facebook">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/paidelinnameeskond/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-navy-900 hover:bg-crimson flex items-center justify-center transition-colors text-slate-300 hover:text-white" title="Instagram">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@paidelinnameeskond" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-navy-900 hover:bg-crimson flex items-center justify-center transition-colors text-slate-300 hover:text-white" title="TikTok">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.49 6.3 6.3 0 0 0 1.96-4.49V8.62a8.27 8.27 0 0 0 4.81 1.53v-3.46h-1z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@PaideLinnameeskondTV" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-xl bg-navy-900 hover:bg-crimson flex items-center justify-center transition-colors text-slate-300 hover:text-white" title="YouTube">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-6 border-t border-navy-900/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 font-sans gap-3">
+        <p>&copy; 2026 Paide Linnameeskond. Kõik õigused kaitstud.</p>
+        <div class="flex items-center gap-4 text-slate-400">
+          <a href="privaatsuspoliitika.html" class="hover:text-white transition-colors">Privaatsuspoliitika</a>
+          <span>•</span>
+          <span>Südamest Südamesse</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Interactive Client-Side Filtering & Search Script -->
+  <script>
+    // Mobile Drawer handled by Standardized Script
+
+    // Filter Tabs and Search
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const searchInput = document.getElementById('news-search');
+    const items = document.querySelectorAll('.news-item');
+    const counter = document.getElementById('news-counter');
+    const noResults = document.getElementById('no-results');
+    const resetBtn = document.getElementById('reset-filter-btn');
+
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    function applyFilters() {
+      let visibleCount = 0;
+
+      items.forEach(item => {
+        const cat = item.getAttribute('data-category');
+        const searchContent = (item.getAttribute('data-search') || '').toLowerCase();
+
+        const matchesCategory = (activeCategory === 'all' || cat.split(' ').includes(activeCategory));
+        const matchesSearch = !searchQuery || searchContent.includes(searchQuery);
+
+        if (matchesCategory && matchesSearch) {
+          item.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      // Update counter
+      if (counter) {
+        if (visibleCount === items.length) {
+          counter.innerHTML = `Näidatakse kõiki <strong>${visibleCount}</strong> artiklit`;
+        } else {
+          counter.innerHTML = `Leitud <strong>${visibleCount}</strong> artiklit kokku ${items.length}-st`;
+        }
+      }
+
+      // Show / hide no results
+      if (noResults) {
+        if (visibleCount === 0) {
+          noResults.classList.remove('hidden');
+        } else {
+          noResults.classList.add('hidden');
+        }
+      }
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+          b.classList.remove('bg-navy', 'text-white', 'shadow-sm');
+          b.classList.add('bg-slate-50', 'text-slate-600', 'hairline-border');
+        });
+        btn.classList.remove('bg-slate-50', 'text-slate-600', 'hairline-border');
+        btn.classList.add('bg-navy', 'text-white', 'shadow-sm');
+
+        activeCategory = btn.getAttribute('data-filter');
+        applyFilters();
+      });
+    });
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.trim().toLowerCase();
+        applyFilters();
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        activeCategory = 'all';
+        searchQuery = '';
+        if (searchInput) searchInput.value = '';
+        filterBtns.forEach(b => {
+          if (b.getAttribute('data-filter') === 'all') {
+            b.classList.remove('bg-slate-50', 'text-slate-600', 'hairline-border');
+            b.classList.add('bg-navy', 'text-white', 'shadow-sm');
+          } else {
+            b.classList.remove('bg-navy', 'text-white', 'shadow-sm');
+            b.classList.add('bg-slate-50', 'text-slate-600', 'hairline-border');
+          }
+        });
+        applyFilters();
+      });
+    }
+  </script>
+
+  <!-- Standardized Mobile Drawer Script across PLM -->
+  <script>
+    function openMobileDrawer() {
+      const drawer = document.getElementById('mobile-drawer');
+      const panel = document.getElementById('drawer-panel');
+      const backdrop = document.getElementById('drawer-backdrop');
+      const openBtn = document.getElementById('mobile-menu-btn');
+      if (!drawer) return;
+
+      drawer.classList.remove('hidden');
+      drawer.classList.add('drawer-open');
+      void drawer.offsetWidth;
+      if (panel) {
+        panel.classList.remove('translate-x-full');
+        panel.classList.add('translate-x-0');
+      }
+      if (backdrop) {
+        backdrop.classList.remove('opacity-0');
+        backdrop.classList.add('opacity-100');
+      }
+      document.body.classList.add('overflow-hidden');
+      if (openBtn) openBtn.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMobileDrawer() {
+      const drawer = document.getElementById('mobile-drawer');
+      const panel = document.getElementById('drawer-panel');
+      const backdrop = document.getElementById('drawer-backdrop');
+      const openBtn = document.getElementById('mobile-menu-btn');
+      if (!drawer) return;
+
+      drawer.classList.remove('drawer-open');
+      if (panel) {
+        panel.classList.remove('translate-x-0');
+        panel.classList.add('translate-x-full');
+      }
+      if (backdrop) {
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0');
+      }
+      document.body.classList.remove('overflow-hidden');
+      if (openBtn) openBtn.setAttribute('aria-expanded', 'false');
+
+      setTimeout(function() {
+        if (!drawer.classList.contains('drawer-open')) {
+          drawer.classList.add('hidden');
+        }
+      }, 300);
+    }
+
+    function toggleMobileDrawer() {
+      const drawer = document.getElementById('mobile-drawer');
+      if (!drawer) return;
+      if (drawer.classList.contains('hidden') || !drawer.classList.contains('drawer-open')) {
+        openMobileDrawer();
+      } else {
+        closeMobileDrawer();
+      }
+    }
+
+    window.openMobileDrawer = openMobileDrawer;
+    window.closeMobileDrawer = closeMobileDrawer;
+    window.toggleMobileDrawer = toggleMobileDrawer;
+
+    (function() {
+      const openBtn = document.getElementById('mobile-menu-btn');
+      const closeBtn = document.getElementById('drawer-close-btn');
+      const drawer = document.getElementById('mobile-drawer');
+      const backdrop = document.getElementById('drawer-backdrop');
+
+      if (openBtn) {
+        openBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          openMobileDrawer();
+        });
+        openBtn.addEventListener('touchend', function(e) {
+          e.preventDefault();
+          openMobileDrawer();
+        }, { passive: false });
+      }
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeMobileDrawer();
+        });
+      }
+      if (backdrop) {
+        backdrop.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeMobileDrawer();
+        });
+      }
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && drawer && !drawer.classList.contains('hidden')) {
+          closeMobileDrawer();
+        }
+      });
+    })();
+  </script>
+  <script src="assets/js/cookie-consent.js"></script>
+</body>
+</html>
