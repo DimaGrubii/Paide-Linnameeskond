@@ -23,16 +23,19 @@ jobs:
           ZONE_PORT: ${{ secrets.ZONE_PORT }}
           ZONE_TARGET_DIR: ${{ secrets.ZONE_TARGET_DIR }}
         run: |
-          HOST="${ZONE_HOST:-paidelinnameeskond.ee}"
-          USER="${ZONE_USER:-www.paidelinnameeskond.ee}"
+          # Clean any accidental leading/trailing spaces from secrets
+          HOST=$(echo "${ZONE_HOST:-paidelinnameeskond.ee}" | xargs)
+          USER=$(echo "${ZONE_USER:-www.paidelinnameeskond.ee}" | xargs)
+          PORT=$(echo "${ZONE_PORT:-21}" | xargs)
+          TARGET_DIR=$(echo "${ZONE_TARGET_DIR}" | xargs)
 
-          sudo apt-get update -y && sudo apt-get install -y lftp sshpass rsync openssh-client
+          sudo apt-get update -y && sudo apt-get install -y lftp rsync openssh-client
 
           if [ -n "$ZONE_SSH_KEY" ]; then
             SSH_USER="${ZONE_USER:-virt42667}"
-            PORT="${ZONE_PORT:-22}"
-            TARGET_DIR="${ZONE_TARGET_DIR:-/data01/virt42667/domeenid/www.paidelinnameeskond.ee/htdocs}"
-            echo "Deploying via SSH key + rsync to ${SSH_USER}@${HOST}:${TARGET_DIR}..."
+            SSH_PORT="${ZONE_PORT:-22}"
+            SSH_TARGET="${TARGET_DIR:-/data01/virt42667/domeenid/www.paidelinnameeskond.ee/htdocs}"
+            echo "Deploying via SSH key + rsync to ${SSH_USER}@${HOST}:${SSH_TARGET}..."
             mkdir -p ~/.ssh
             echo "$ZONE_SSH_KEY" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
@@ -43,29 +46,48 @@ jobs:
               --exclude='data/cache/' \
               --exclude='scripts/' \
               --exclude='README.md' \
-              -e "ssh -p ${PORT} -o StrictHostKeyChecking=no" \
-              ./ "${SSH_USER}@${HOST}:${TARGET_DIR}/"
+              -e "ssh -p ${SSH_PORT} -o StrictHostKeyChecking=no" \
+              ./ "${SSH_USER}@${HOST}:${SSH_TARGET}/"
           elif [ -n "$ZONE_PASSWORD" ]; then
-            PORT="${ZONE_PORT:-21}"
             echo "Deploying via FTP/FTPS to ${HOST} (port ${PORT}) as ${USER}..."
-            lftp -c "
-              set ssl:verify-certificate no;
-              set sftp:auto-confirm yes;
-              set ftp:ssl-allow yes;
-              set ftp:passive-mode on;
-              set net:timeout 20;
-              set net:max-retries 3;
-              open -u \"${USER}\",\"${ZONE_PASSWORD}\" -p ${PORT} \"${HOST}\";
-              cd \"${ZONE_TARGET_DIR:-htdocs}\" || cd /domeenid/www.paidelinnameeskond.ee/htdocs || cd .;
-              mirror --reverse --only-newer --verbose \
-                --exclude-glob .git* \
-                --exclude-glob data/cache* \
-                --exclude-glob scripts* \
-                --exclude-glob README.md \
-                ./ ./;
-              bye
-            "
+            # Write lftp script safely without expanding special characters in ZONE_PASSWORD
+            cat << 'EOF' > /tmp/deploy.lftp
+          set ssl:verify-certificate no
+          set sftp:auto-confirm yes
+          set ftp:ssl-allow yes
+          set ftp:ssl-protect-data yes
+          set ftp:passive-mode on
+          set net:timeout 15
+          set net:max-retries 2
+          set net:reconnect-interval-base 5
+          EOF
+            # Use printf %q to safely escape username, password, and host for lftp
+            ESCAPED_USER=$(printf '%q' "$USER")
+            ESCAPED_PASS=$(printf '%q' "$ZONE_PASSWORD")
+            if [ "$PORT" = "22" ]; then
+              echo "open -u ${ESCAPED_USER},${ESCAPED_PASS} sftp://${HOST}:${PORT}" >> /tmp/deploy.lftp
+            else
+              echo "open -u ${ESCAPED_USER},${ESCAPED_PASS} -p ${PORT} ${HOST}" >> /tmp/deploy.lftp
+            fi
+
+            # On Zone.ee, FTP account www.paidelinnameeskond.ee already starts in htdocs (or has htdocs as a subfolder for main FTP accounts).
+            # Try cd into htdocs only if it exists, without failing if we are already inside htdocs.
+            cat << 'EOF' >> /tmp/deploy.lftp
+          pwd
+          cls -1
+          cd domeenid/www.paidelinnameeskond.ee/htdocs || cd htdocs || cd .
+          pwd
+          mirror --reverse --only-newer --verbose --parallel=2 \
+            --exclude-glob .git* \
+            --exclude-glob data/cache* \
+            --exclude-glob scripts* \
+            --exclude-glob README.md \
+            ./ ./
+          bye
+          EOF
+
+            lftp -f /tmp/deploy.lftp
           else
-            echo "::error::Please set ZONE_PASSWORD in GitHub Repository Secrets."
+            echo "::error::Missing ZONE_PASSWORD in GitHub Repository Secrets (Settings -> Secrets and variables -> Actions)."
             exit 1
           fi
