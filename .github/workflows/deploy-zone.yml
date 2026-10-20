@@ -23,18 +23,11 @@ jobs:
           ZONE_PORT: ${{ secrets.ZONE_PORT }}
           ZONE_TARGET_DIR: ${{ secrets.ZONE_TARGET_DIR }}
         run: |
-          # Clean any accidental leading/trailing spaces from secrets
-          HOST=$(echo "${ZONE_HOST:-paidelinnameeskond.ee}" | xargs)
-          USER=$(echo "${ZONE_USER:-www.paidelinnameeskond.ee}" | xargs)
-          PORT=$(echo "${ZONE_PORT:-21}" | xargs)
-          TARGET_DIR=$(echo "${ZONE_TARGET_DIR}" | xargs)
-
-          sudo apt-get update -y && sudo apt-get install -y lftp rsync openssh-client
-
           if [ -n "$ZONE_SSH_KEY" ]; then
-            SSH_USER="${ZONE_USER:-virt42667}"
-            SSH_PORT="${ZONE_PORT:-22}"
-            SSH_TARGET="${TARGET_DIR:-/data01/virt42667/domeenid/www.paidelinnameeskond.ee/htdocs}"
+            HOST=$(echo "${ZONE_HOST:-paidelinnameeskond.ee}" | xargs)
+            SSH_USER=$(echo "${ZONE_USER:-virt42667}" | xargs)
+            SSH_PORT=$(echo "${ZONE_PORT:-22}" | xargs)
+            SSH_TARGET=$(echo "${ZONE_TARGET_DIR:-/data01/virt42667/domeenid/www.paidelinnameeskond.ee/htdocs}" | xargs)
             echo "Deploying via SSH key + rsync to ${SSH_USER}@${HOST}:${SSH_TARGET}..."
             mkdir -p ~/.ssh
             echo "$ZONE_SSH_KEY" > ~/.ssh/id_rsa
@@ -48,46 +41,138 @@ jobs:
               --exclude='README.md' \
               -e "ssh -p ${SSH_PORT} -o StrictHostKeyChecking=no" \
               ./ "${SSH_USER}@${HOST}:${SSH_TARGET}/"
-          elif [ -n "$ZONE_PASSWORD" ]; then
-            echo "Deploying via FTP/FTPS to ${HOST} (port ${PORT}) as ${USER}..."
-            # Write lftp script safely without expanding special characters in ZONE_PASSWORD
-            cat << 'EOF' > /tmp/deploy.lftp
-          set ssl:verify-certificate no
-          set sftp:auto-confirm yes
-          set ftp:ssl-allow yes
-          set ftp:ssl-protect-data yes
-          set ftp:passive-mode on
-          set net:timeout 15
-          set net:max-retries 2
-          set net:reconnect-interval-base 5
-          EOF
-            # Use printf %q to safely escape username, password, and host for lftp
-            ESCAPED_USER=$(printf '%q' "$USER")
-            ESCAPED_PASS=$(printf '%q' "$ZONE_PASSWORD")
-            if [ "$PORT" = "22" ]; then
-              echo "open -u ${ESCAPED_USER},${ESCAPED_PASS} sftp://${HOST}:${PORT}" >> /tmp/deploy.lftp
-            else
-              echo "open -u ${ESCAPED_USER},${ESCAPED_PASS} -p ${PORT} ${HOST}" >> /tmp/deploy.lftp
-            fi
-
-            # On Zone.ee, FTP account www.paidelinnameeskond.ee already starts in htdocs (or has htdocs as a subfolder for main FTP accounts).
-            # Try cd into htdocs only if it exists, without failing if we are already inside htdocs.
-            cat << 'EOF' >> /tmp/deploy.lftp
-          pwd
-          cls -1
-          cd domeenid/www.paidelinnameeskond.ee/htdocs || cd htdocs || cd .
-          pwd
-          mirror --reverse --only-newer --verbose --parallel=2 \
-            --exclude-glob .git* \
-            --exclude-glob data/cache* \
-            --exclude-glob scripts* \
-            --exclude-glob README.md \
-            ./ ./
-          bye
-          EOF
-
-            lftp -f /tmp/deploy.lftp
           else
-            echo "::error::Missing ZONE_PASSWORD in GitHub Repository Secrets (Settings -> Secrets and variables -> Actions)."
-            exit 1
+            python3 - << 'PYEOF'
+          import os
+          import sys
+          import ssl
+          from ftplib import FTP_TLS, FTP
+          from pathlib import Path
+
+          host = (os.environ.get("ZONE_HOST") or "paidelinnameeskond.ee").strip()
+          port = int((os.environ.get("ZONE_PORT") or "21").strip())
+          configured_user = (os.environ.get("ZONE_USER") or "www.paidelinnameeskond.ee").strip()
+          password = os.environ.get("ZONE_PASSWORD") or ""
+          passwords_to_try = [password]
+          if password.strip() != password and password.strip():
+              passwords_to_try.append(password.strip())
+
+          if not password:
+              print("::error::Missing ZONE_PASSWORD in GitHub Repository Secrets.")
+              sys.exit(1)
+
+          users_to_try = []
+          for u in [configured_user, "www.paidelinnameeskond.ee", "ftp.paidelinnameeskond.ee", "doktor.paidelinnameeskond.ee"]:
+              if u and u not in users_to_try:
+                  users_to_try.append(u)
+
+          ftp = None
+          for u in users_to_try:
+              for pw in passwords_to_try:
+                  try:
+                      ctx = ssl.create_default_context()
+                      ctx.check_hostname = False
+                      ctx.verify_mode = ssl.CERT_NONE
+                      candidate = FTP_TLS(context=ctx, timeout=20)
+                      candidate.connect(host, port)
+                      candidate.auth()
+                      candidate.login(u, pw)
+                      candidate.prot_p()
+                      candidate.set_pasv(True)
+                      ftp = candidate
+                      print(f"Successfully authenticated to {host} via FTPS!", flush=True)
+                      break
+                  except Exception as e:
+                      print(f"Auth attempt failed: {e}", flush=True)
+              if ftp:
+                  break
+
+          if not ftp:
+              print("\n::error::All FTP login attempts failed with 530 Invalid auth credentials.")
+              print("How to fix in 30 seconds:")
+              print("1) In MyZone -> Webhosting -> FTP -> User accounts, click the pencil icon next to 'www.paidelinnameeskond.ee'.")
+              print("2) Enter a new FTP password on that page and click Save (note: FTP accounts have their own password, separate from your main MyZone login).")
+              print("3) Update ZONE_PASSWORD in GitHub -> Settings -> Secrets and variables -> Actions.")
+              sys.exit(1)
+
+          # Navigate to htdocs if not already inside it
+          for candidate_dir in ["domeenid/www.paidelinnameeskond.ee/htdocs", "htdocs"]:
+              try:
+                  ftp.cwd(candidate_dir)
+                  print(f"Changed remote directory to: {ftp.pwd()}", flush=True)
+                  break
+              except Exception:
+                  pass
+
+          print(f"Uploading website files to remote directory: {ftp.pwd()}", flush=True)
+
+          EXCLUDE_DIRS = {".git", ".github", "scripts", "cache", "__pycache__"}
+          EXCLUDE_FILES = {".gitignore", "README.md", ".DS_Store"}
+          ALWAYS_UPLOAD_EXTS = {".html", ".js", ".css", ".json", ".xml", ".txt", ".webmanifest"}
+
+          ensured_dirs = set()
+          remote_dir_sizes = {}
+
+          def ensure_remote_dir(remote_dir: str):
+              if not remote_dir or remote_dir == "." or remote_dir in ensured_dirs:
+                  return
+              parts = [p for p in remote_dir.split("/") if p and p != "."]
+              cur = ""
+              for part in parts:
+                  cur = f"{cur}/{part}" if cur else part
+                  if cur not in ensured_dirs:
+                      try:
+                          ftp.mkd(cur)
+                      except Exception:
+                          pass
+                      ensured_dirs.add(cur)
+
+          def get_remote_sizes(remote_dir: str):
+              key = remote_dir or "."
+              if key in remote_dir_sizes:
+                  return remote_dir_sizes[key]
+              sizes = {}
+              try:
+                  for name, facts in ftp.mlsd(key):
+                      if facts.get("type") == "file" and "size" in facts:
+                          sizes[name] = int(facts["size"])
+              except Exception:
+                  pass
+              remote_dir_sizes[key] = sizes
+              return sizes
+
+          root = Path(".")
+          all_files = []
+          for path in sorted(root.rglob("*")):
+              rel_parts = path.relative_to(root).parts
+              if any(p in EXCLUDE_DIRS for p in rel_parts) or path.is_dir() or path.name in EXCLUDE_FILES:
+                  continue
+              all_files.append(path)
+
+          # Upload HTML/JS/CSS/JSON first so code & data updates appear immediately
+          all_files.sort(key=lambda p: (0 if p.suffix.lower() in ALWAYS_UPLOAD_EXTS else 1, p.as_posix()))
+
+          uploaded = 0
+          skipped = 0
+          for path in all_files:
+              rel_posix = path.relative_to(root).as_posix()
+              parent_posix = path.relative_to(root).parent.as_posix()
+              if parent_posix != ".":
+                  ensure_remote_dir(parent_posix)
+
+              if path.suffix.lower() not in ALWAYS_UPLOAD_EXTS:
+                  existing_sizes = get_remote_sizes(parent_posix)
+                  if existing_sizes.get(path.name) == path.stat().st_size:
+                      skipped += 1
+                      continue
+
+              with open(path, "rb") as f:
+                  ftp.storbinary(f"STOR {rel_posix}", f)
+              uploaded += 1
+              if path.suffix.lower() in ALWAYS_UPLOAD_EXTS or uploaded % 20 == 0:
+                  print(f"Uploaded ({uploaded}): {rel_posix}", flush=True)
+
+          ftp.quit()
+          print(f"Done! Uploaded {uploaded} files, skipped {skipped} unchanged media files.", flush=True)
+          PYEOF
           fi
