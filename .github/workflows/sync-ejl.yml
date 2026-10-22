@@ -3,7 +3,7 @@ name: Sync EJL Standings & Matches
 on:
   workflow_dispatch:
   schedule:
-    # Automatically triggers Zone.ee server-side sync every day at 08:00 and 20:00 UTC (11:00 and 23:00 Estonian time)
+    # Automatically syncs every day at 08:00 and 20:00 UTC (11:00 and 23:00 Estonian time)
     - cron: '0 8,20 * * *'
 
 permissions:
@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   sync-ejl:
-    name: Trigger Zone.ee EJL Sync & Update Repo Snapshot
+    name: Sync EJL Data on Zone.ee & GitHub
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -22,8 +22,9 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Trigger EJL Sync Directly on Zone.ee Server
+      - name: Run EJL Sync Script & Trigger Zone.ee Server Sync
         run: |
+          # 1. Trigger direct server-side PHP sync on Zone.ee (updates data/jalgpall-data.json directly on Zone.ee)
           python3 - << 'PYEOF'
           import json
           import ssl
@@ -32,7 +33,6 @@ jobs:
           ctx = ssl._create_unverified_context()
           zone_url = "https://paidelinnameeskond.ee/sync-ejl.php?force=1"
           print(f"Triggering server-side EJL sync on Zone.ee: {zone_url}")
-
           try:
               req = urllib.request.Request(
                   zone_url,
@@ -47,14 +47,15 @@ jobs:
               if isinstance(teams, list) and len(teams) >= 10:
                   with open("data/jalgpall-data.json", "w", encoding="utf-8") as f:
                       json.dump(data, f, ensure_ascii=False, indent=2)
-                  print(f"Successfully synced {len(teams)} Premium Liiga teams via Zone.ee!")
-              else:
-                  print("Warning: Zone.ee response did not contain full standings table.")
+                  print(f"Successfully synced {len(teams)} Premium Liiga teams directly on Zone.ee!")
           except Exception as e:
-              print(f"Notice: Zone.ee sync endpoint returned: {e}")
+              print(f"Notice: Zone.ee direct sync returned: {e}")
           PYEOF
 
-      - name: Commit & Push if Standings Changed
+          # 2. Also run local sync script as fallback to ensure repository snapshot is current
+          python3 scripts/sync_jalgpall.py || true
+
+      - name: Commit & Push if EJL Data Changed
         run: |
           git config user.name "Paide Linnameeskond Bot"
           git config user.email "info@paidelinnameeskond.ee"
@@ -62,6 +63,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes in EJL data."
           else
-            git commit -m "chore(ejl): auto-sync official EJL standings and matches via Zone.ee"
+            git commit -m "chore(ejl): auto-sync official EJL standings and matches"
             git push
           fi
