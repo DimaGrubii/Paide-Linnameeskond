@@ -384,6 +384,35 @@ def extract_season_history(html, total_rounds, clean_women=False):
         result[team] = arr
     return result
 
+def compute_recent_form(season_history, fallback_form=None):
+    if not season_history:
+        return fallback_form or []
+    played = [m for m in season_history if m.get('type') in ('win', 'draw', 'loss')]
+    if not played:
+        return fallback_form or []
+
+    def sort_key(m):
+        d_str = m.get('date', '')
+        dm = re.search(r'(\d{2})\.(\d{2})\.(\d{4})(?:\s+(\d{1,2}):(\d{2}))?', d_str)
+        if dm:
+            day, month, year = int(dm.group(1)), int(dm.group(2)), int(dm.group(3))
+            hour = int(dm.group(4)) if dm.group(4) else 0
+            minute = int(dm.group(5)) if dm.group(5) else 0
+            return (year, month, day, hour, minute, m.get('round', 0))
+        return (9999, 12, 31, 0, 0, m.get('round', 0))
+
+    played.sort(key=sort_key)
+    last3 = played[-3:]
+    return [
+        {
+            'result': m.get('result', 'V'),
+            'type': m.get('type', 'win'),
+            'score': m.get('score', ''),
+            'opponent': m.get('opponent', '')
+        }
+        for m in last3
+    ]
+
 def parse_premium_liiga_standings(html, existing_forms=None, season_history_map=None):
     tables = re.findall(r'<table[^>]*>(.*?)</table>', html, re.DOTALL | re.I)
     standings = []
@@ -423,11 +452,13 @@ def parse_premium_liiga_standings(html, existing_forms=None, season_history_map=
                 elif 'United' in team_name: local_logo = 'assets/img/jalgpall_logos/nomme_united.png'
                 elif 'Trans' in team_name: local_logo = 'assets/img/jalgpall_logos/trans.png'
 
-                form_data = (existing_forms or {}).get(team_name) or VERIFIED_FORMS_MEN.get(team_name, [
+                team_history = (season_history_map or {}).get(team_name, [])
+                fallback_form = (existing_forms or {}).get(team_name) or VERIFIED_FORMS_MEN.get(team_name, [
                     {'result': 'V', 'type': 'win', 'score': 'Võit', 'opponent': ''},
                     {'result': 'V', 'type': 'win', 'score': 'Võit', 'opponent': ''},
                     {'result': 'V', 'type': 'win', 'score': 'Võit', 'opponent': ''}
                 ])
+                form_data = compute_recent_form(team_history, fallback_form)
 
                 standings.append({
                     'position': int(pos) if pos.isdigit() else len(standings) + 1,
@@ -444,7 +475,7 @@ def parse_premium_liiga_standings(html, existing_forms=None, season_history_map=
                     'points': points,
                     'isPaide': 'Paide' in team_name,
                     'form': form_data,
-                    'seasonHistory': (season_history_map or {}).get(team_name, [])
+                    'seasonHistory': team_history
                 })
     return standings
 
@@ -481,11 +512,13 @@ def parse_women_standings(html, existing_forms=None, season_history_map=None):
                 elif 'Harju' in team_name: local_logo = 'assets/img/jalgpall_logos/harju.png'
                 elif 'Elva' in team_name: local_logo = 'assets/img/jalgpall_logos/elva.png'
 
-                form_data = (existing_forms or {}).get(team_name) or VERIFIED_FORMS_WOMEN.get(team_name, [
+                team_history = (season_history_map or {}).get(team_name, [])
+                fallback_form = (existing_forms or {}).get(team_name) or VERIFIED_FORMS_WOMEN.get(team_name, [
                     {'result': 'V', 'type': 'win', 'score': 'Võit', 'opponent': ''},
                     {'result': 'V', 'type': 'win', 'score': 'Võit', 'opponent': ''},
                     {'result': 'V', 'type': 'win', 'score': 'Võit', 'opponent': ''}
                 ])
+                form_data = compute_recent_form(team_history, fallback_form)
 
                 standings.append({
                     'position': int(pos) if pos.isdigit() else len(standings) + 1,
@@ -502,7 +535,7 @@ def parse_women_standings(html, existing_forms=None, season_history_map=None):
                     'points': points,
                     'isPaide': 'Paide' in team_name,
                     'form': form_data,
-                    'seasonHistory': (season_history_map or {}).get(team_name, [])
+                    'seasonHistory': team_history
                 })
     return standings
 
@@ -608,7 +641,7 @@ def main():
         if scorer.get('name') in existing_assists:
             scorer['assists'] = existing_assists[scorer['name']]
 
-    # 4. Construct complete JSON dataset
+    # 4. Construct complete JSON dataset (preserving curated squad, staff & match details)
     final_payload = {
         'metadata': {
             'source': 'Eesti Jalgpalli Liit (EJL)',
@@ -617,10 +650,10 @@ def main():
             'season': '2026',
             'status': 'success'
         },
-        'club': team_data['club'],
-        'squad': team_data['squad'],
-        'topScorers': team_data['stats']['topScorers'],
-        'matches': team_data['matches'],
+        'club': existing_data.get('club') or team_data['club'],
+        'squad': existing_data.get('squad') or team_data['squad'],
+        'topScorers': team_data['stats']['topScorers'] or existing_data.get('topScorers', []),
+        'matches': existing_data.get('matches') or team_data['matches'],
         'standings': {
             'premiumLiiga': premium_standings,
             'naisteMeistriliiga': women_standings

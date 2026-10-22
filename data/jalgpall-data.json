@@ -2,7 +2,7 @@
   "metadata": {
     "source": "Eesti Jalgpalli Liit (EJL)",
     "sourceUrl": "https://jalgpall.ee/voistlused/52/team/5",
-    "lastUpdated": "2026-10-14T21:15:00",
+    "lastUpdated": "2026-10-22T11:57:41.260553",
     "season": "2026",
     "status": "success"
   },
@@ -358,6 +358,13 @@
     },
     {
       "rank": "3",
+      "name": "Juan Sebastian Palacios Murillo",
+      "cupGoals": "0",
+      "leagueGoals": "5",
+      "totalGoals": "5"
+    },
+    {
+      "rank": "4",
       "name": "Daniel Cabral De Oliveira",
       "cupGoals": "0",
       "leagueGoals": "5",
@@ -365,20 +372,12 @@
       "assists": "6"
     },
     {
-      "rank": "4",
+      "rank": "5",
       "name": "Abdourahman Badamosi",
       "cupGoals": "1",
       "leagueGoals": "4",
       "totalGoals": "5",
       "assists": "2"
-    },
-    {
-      "rank": "5",
-      "name": "Daniel Luts",
-      "cupGoals": "3",
-      "leagueGoals": "2",
-      "totalGoals": "5",
-      "assists": "3"
     }
   ],
   "matches": {
@@ -1307,22 +1306,16 @@
         "team": "Tallinna FC Flora",
         "logo": "https://www.jalgpall.ee/images/teams/9FA11522AB09B90003E8875D5B25116A",
         "localLogo": "assets/img/jalgpall_logos/flora.png",
-        "played": 32,
+        "played": 33,
         "won": 19,
         "drawn": 1,
-        "lost": 12,
-        "goalsFor": 62,
-        "goalsAgainst": 44,
-        "goalDifference": "+18",
+        "lost": 13,
+        "goalsFor": 63,
+        "goalsAgainst": 47,
+        "goalDifference": "+16",
         "points": 58,
         "isPaide": false,
         "form": [
-          {
-            "result": "K",
-            "type": "loss",
-            "score": "0:2 vs FC Kuressaare",
-            "opponent": "FC Kuressaare"
-          },
           {
             "result": "K",
             "type": "loss",
@@ -1334,6 +1327,12 @@
             "type": "win",
             "score": "2:0 vs Tartu JK Tammeka",
             "opponent": "Tartu JK Tammeka"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "1:3 vs Harju JK Laagri",
+            "opponent": "Harju JK Laagri"
           }
         ],
         "seasonHistory": [
@@ -1735,10 +1734,10 @@
           },
           {
             "round": 34,
-            "type": "upcoming",
-            "result": "-",
-            "score": "vs Harju JK Laagri",
-            "matchScore": "-",
+            "type": "loss",
+            "result": "K",
+            "score": "1:3 vs Harju JK Laagri",
+            "matchScore": "3:1",
             "homeTeam": "Harju JK Laagri",
             "awayTeam": "Tallinna FC Flora",
             "opponent": "Harju JK Laagri",
@@ -3183,22 +3182,16 @@
         "team": "Harju JK Laagri",
         "logo": "https://jalgpall.ee/images/clubs/B35E6F475CFD782B9499B3FAF26C3A55",
         "localLogo": "assets/img/jalgpall_logos/harju.png",
-        "played": 32,
-        "won": 14,
+        "played": 33,
+        "won": 15,
         "drawn": 2,
         "lost": 16,
-        "goalsFor": 45,
-        "goalsAgainst": 47,
-        "goalDifference": "-2",
-        "points": 44,
+        "goalsFor": 48,
+        "goalsAgainst": 48,
+        "goalDifference": "0",
+        "points": 47,
         "isPaide": false,
         "form": [
-          {
-            "result": "V",
-            "type": "win",
-            "score": "1:0 vs Nõmme Kalju FC",
-            "opponent": "Nõmme Kalju FC"
-          },
           {
             "result": "V",
             "type": "win",
@@ -3210,6 +3203,12 @@
             "type": "win",
             "score": "2:0 vs Pärnu JK Vaprus",
             "opponent": "Pärnu JK Vaprus"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "3:1 vs Tallinna FC Flora",
+            "opponent": "Tallinna FC Flora"
           }
         ],
         "seasonHistory": [
@@ -3611,10 +3610,10 @@
           },
           {
             "round": 34,
-            "type": "upcoming",
-            "result": "-",
-            "score": "vs Tallinna FC Flora",
-            "matchScore": "-",
+            "type": "win",
+            "result": "V",
+            "score": "3:1 vs Tallinna FC Flora",
+            "matchScore": "3:1",
             "homeTeam": "Harju JK Laagri",
             "awayTeam": "Tallinna FC Flora",
             "opponent": "Tallinna FC Flora",

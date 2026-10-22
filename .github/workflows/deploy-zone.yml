@@ -108,7 +108,7 @@ jobs:
 
           EXCLUDE_DIRS = {".git", ".github", "scripts", "cache", "__pycache__"}
           EXCLUDE_FILES = {".gitignore", "README.md", ".DS_Store"}
-          ALWAYS_UPLOAD_EXTS = {".html", ".js", ".css", ".json", ".xml", ".txt", ".webmanifest"}
+          ALWAYS_UPLOAD_EXTS = {".html", ".js", ".css", ".json", ".php", ".xml", ".txt", ".webmanifest"}
 
           ensured_dirs = set()
           remote_dir_sizes = {}
