@@ -362,24 +362,14 @@ def extract_season_history(html, total_rounds, clean_women=False):
                     'isHome': False
                 }
 
-    def upcoming_date_key(m):
-        d_str = m.get('date', '')
-        dm = re.search(r'(\d{2})\.(\d{2})\.(\d{4})(?:\s+(\d{1,2}):(\d{2}))?', d_str)
-        if dm:
-            day, month, year = int(dm.group(1)), int(dm.group(2)), int(dm.group(3))
-            hour = int(dm.group(4)) if dm.group(4) else 0
-            minute = int(dm.group(5)) if dm.group(5) else 0
-            return (year, month, day, hour, minute, m.get('round', 0))
-        return (9999, 12, 31, 0, 0, m.get('round', 0))
-
     result = {}
     for team, rmap in team_rounds.items():
-        raw_arr = []
+        arr = []
         for r in range(1, total_rounds + 1):
             if r in rmap:
-                raw_arr.append(rmap[r])
+                arr.append(rmap[r])
             else:
-                raw_arr.append({
+                arr.append({
                     'round': r,
                     'type': 'upcoming',
                     'result': '-',
@@ -391,13 +381,7 @@ def extract_season_history(html, total_rounds, clean_women=False):
                     'date': '',
                     'isHome': True
                 })
-        played_items = [x for x in raw_arr if x.get('type') in ('win', 'draw', 'loss')]
-        upcoming_items = [x for x in raw_arr if x.get('type') not in ('win', 'draw', 'loss')]
-        upcoming_items.sort(key=upcoming_date_key)
-        ordered = played_items + upcoming_items
-        for idx, item in enumerate(ordered, start=1):
-            item['round'] = idx
-        result[team] = ordered
+        result[team] = arr
     return result
 
 def compute_recent_form(season_history, fallback_form=None):
