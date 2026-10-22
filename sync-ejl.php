@@ -161,12 +161,12 @@ function ejlExtractSeasonHistory($html, $totalRounds, $cleanWomen = false) {
 
     $result = array();
     foreach ($teamRounds as $team => $rmap) {
-        $arr = array();
+        $rawArr = array();
         for ($r = 1; $r <= $totalRounds; $r++) {
             if (isset($rmap[$r])) {
-                $arr[] = $rmap[$r];
+                $rawArr[] = $rmap[$r];
             } else {
-                $arr[] = array(
+                $rawArr[] = array(
                     'round'      => $r,
                     'type'       => 'upcoming',
                     'result'     => '-',
@@ -180,7 +180,29 @@ function ejlExtractSeasonHistory($html, $totalRounds, $cleanWomen = false) {
                 );
             }
         }
-        $result[$team] = $arr;
+        $playedItems = array();
+        $upcomingItems = array();
+        foreach ($rawArr as $item) {
+            if (isset($item['type']) && in_array($item['type'], array('win', 'draw', 'loss'), true)) {
+                $playedItems[] = $item;
+            } else {
+                $upcomingItems[] = $item;
+            }
+        }
+        usort($upcomingItems, function ($a, $b) {
+            $ta = ejlMatchSortTimestamp($a);
+            $tb = ejlMatchSortTimestamp($b);
+            if ($ta !== $tb) {
+                return ($ta === 0 ? PHP_INT_MAX : $ta) - ($tb === 0 ? PHP_INT_MAX : $tb);
+            }
+            return ((int) $a['round']) - ((int) $b['round']);
+        });
+        $ordered = array_merge($playedItems, $upcomingItems);
+        foreach ($ordered as $idx => &$it) {
+            $it['round'] = $idx + 1;
+        }
+        unset($it);
+        $result[$team] = $ordered;
     }
 
     return $result;

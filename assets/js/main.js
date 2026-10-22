@@ -394,19 +394,9 @@ function initSeasonHistoryGraph() {
     }
   });
 
-  const handleRoundFocusOrHover = (e) => {
-    const roundNode = e.target.closest('[data-round-node]');
-    if (!roundNode) return;
-
-    const historyRow = roundNode.closest('.season-history-row');
-    if (!historyRow) return;
-
+  const updateReadoutPill = (historyRow, summary, outcome, type) => {
     const readoutText = historyRow.querySelector('.season-readout-text');
     const readoutBadge = historyRow.querySelector('.season-readout-badge');
-    const summary = roundNode.getAttribute('data-round-summary');
-    const outcome = roundNode.getAttribute('data-round-outcome');
-    const type = roundNode.getAttribute('data-round-type');
-
     if (readoutText && summary) {
       readoutText.textContent = summary;
     }
@@ -424,8 +414,46 @@ function initSeasonHistoryGraph() {
     }
   };
 
+  const handleRoundFocusOrHover = (e) => {
+    const roundNode = e.target.closest('[data-round-node]');
+    if (!roundNode) return;
+
+    const historyRow = roundNode.closest('.season-history-row');
+    if (!historyRow) return;
+
+    const summary = roundNode.getAttribute('data-round-summary');
+    const outcome = roundNode.getAttribute('data-round-outcome');
+    const type = roundNode.getAttribute('data-round-type');
+    updateReadoutPill(historyRow, summary, outcome, type);
+  };
+
+  const handleRoundLeave = (e) => {
+    const historyRow = e.target.closest('.season-history-row');
+    if (!historyRow) return;
+    if (e.relatedTarget && historyRow.contains(e.relatedTarget)) return;
+
+    let defSummary = historyRow.getAttribute('data-default-summary');
+    let defOutcome = historyRow.getAttribute('data-default-outcome');
+    let defType = historyRow.getAttribute('data-default-type');
+
+    if (!defSummary) {
+      const playedNodes = historyRow.querySelectorAll('[data-round-node][data-round-type="win"], [data-round-node][data-round-type="draw"], [data-round-node][data-round-type="loss"]');
+      const lastNode = playedNodes.length > 0 ? playedNodes[playedNodes.length - 1] : null;
+      if (lastNode) {
+        defSummary = lastNode.getAttribute('data-round-summary');
+        defOutcome = lastNode.getAttribute('data-round-outcome');
+        defType = lastNode.getAttribute('data-round-type');
+      }
+    }
+
+    if (defSummary && defOutcome) {
+      updateReadoutPill(historyRow, defSummary, defOutcome, defType);
+    }
+  };
+
   standingsSection.addEventListener('mouseover', handleRoundFocusOrHover);
   standingsSection.addEventListener('focusin', handleRoundFocusOrHover);
+  standingsSection.addEventListener('mouseout', handleRoundLeave);
 }
 
 /* -------------------------------------------------------------------------- */
