@@ -140,6 +140,7 @@ function cleanMultiline($val, $maxLen = 1500) {
 }
 
 $childName      = cleanLine(getField($data, 'child_name'), 120);
+$childIsikukood = cleanLine(getField($data, 'child_isikukood'), 30);
 $childBirthyear = cleanLine(getField($data, 'child_birthyear'), 10);
 $childGenderRaw = cleanLine(getField($data, 'child_gender'), 20);
 $trainingLocRaw = cleanLine(getField($data, 'training_location'), 40);
@@ -150,7 +151,7 @@ $notes          = cleanMultiline(getField($data, 'notes'), 1500);
 $sourcePage     = cleanLine(getField($data, 'source_page'), 120);
 
 // Validate required fields
-if ($childName === '' || $childBirthyear === '' || $parentName === '' || $parentPhone === '' || $parentEmailRaw === '') {
+if ($childName === '' || $childIsikukood === '' || $childBirthyear === '' || $parentName === '' || $parentPhone === '' || $parentEmailRaw === '') {
     setStatus(400);
     echo json_encode(array(
         'ok'    => false,
@@ -210,6 +211,7 @@ $emailBody = "UUS PROOVITRENNI REGISTREERING — PAIDE LINNAMEESKOND\n"
     . "1. LAPSE ANDMED\n"
     . "----------------------------------------------------\n"
     . "Lapse nimi:              {$childName}\n"
+    . "Isikukood:               {$childIsikukood}\n"
     . "Sünniaasta:              {$childBirthyear}\n"
     . "Sugu:                    {$childGender}\n"
     . "Eelistatud treeningpaik: {$trainingLocation}\n\n"

@@ -2159,12 +2159,21 @@
                 1. Lapse andmed
               </h3>
               
-              <div>
-                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" for="child-name">
-                  Lapse ees- ja perekonnanimi *
-                </label>
-                <input type="text" id="child-name" name="child_name" required placeholder="nt Karl Kallas" 
-                       class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" for="child-name">
+                    Lapse ees- ja perekonnanimi *
+                  </label>
+                  <input type="text" id="child-name" name="child_name" required autocomplete="name" placeholder="nt Karl Kallas" 
+                         class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" for="child-isikukood">
+                    Isikukood *
+                  </label>
+                  <input type="text" id="child-isikukood" name="child_isikukood" required inputmode="numeric" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="20" placeholder="nt 5150101..." 
+                         class="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson">
+                </div>
               </div>
 
               <div class="grid grid-cols-2 gap-3">
@@ -2264,7 +2273,7 @@
 
               <div>
                 <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" for="notes">
-                  Lisainfo (nt kas laps tuleb proovitrenni või on juba alustanud, isikukood/elukoht vm)
+                  Lisainfo (nt kas laps tuleb proovitrenni või on juba alustanud, elukoht vm)
                 </label>
                 <textarea id="notes" name="notes" rows="3" placeholder="Soovin tulla proovitrenni / Laps on juba alustanud treeningutega..."
                           class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson"></textarea>
@@ -2505,6 +2514,7 @@
           const payload = {
             website_url: (document.getElementById('website-url') || {}).value || '',
             child_name: (document.getElementById('child-name') || {}).value || '',
+            child_isikukood: (document.getElementById('child-isikukood') || {}).value || '',
             child_birthyear: (document.getElementById('child-birthyear') || {}).value || '',
             child_gender: (document.getElementById('child-gender') || {}).value || '',
             training_location: (document.getElementById('training-location') || {}).value || '',
