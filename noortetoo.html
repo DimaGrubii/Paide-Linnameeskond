@@ -426,7 +426,7 @@
         <!-- Interactive Filter Tabs -->
         <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
           <button type="button" class="filter-tab active px-3.5 py-2 rounded-xl text-xs font-bold tracking-wider uppercase border border-slate-200 bg-white text-slate-700 hover:border-crimson transition-all cursor-pointer" data-filter="all">
-            Kõik grupid (22)
+            Kõik grupid (23)
           </button>
           <button type="button" class="filter-tab px-3.5 py-2 rounded-xl text-xs font-bold tracking-wider uppercase border border-slate-200 bg-white text-slate-700 hover:border-crimson transition-all cursor-pointer" data-filter="vastuvott">
             🌟 Uute laste vastuvõtt (5–12 a)
@@ -453,48 +453,74 @@
           <input type="text" id="group-search-input" placeholder="Otsi sünniaasta (nt 2018), piirkonna (nt Türi, Koeru), grupi (nt U13) või treeneri nime järgi..." class="w-full text-xs sm:text-sm text-navy placeholder-slate-400 focus:outline-none">
         </div>
         <div class="flex items-center gap-2 text-xs text-slate-500 border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-100">
-          <span id="group-count-badge" class="px-2.5 py-1 rounded-lg bg-slate-100 font-bold text-navy">Kuvatakse 22 gruppi</span>
+          <span id="group-count-badge" class="px-2.5 py-1 rounded-lg bg-slate-100 font-bold text-navy">Kuvatakse 23 gruppi</span>
         </div>
       </div>
 
-      <!-- Groups Grid (Authentic Data from Old Website's noortetoo.md, paide/*.md & laste-vastuvott-2026-sugis.md) -->
+      <!-- Groups Grid (Updated 2026 Training Schedule & Coaches) -->
       <div id="groups-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 
-        <!-- 1. PAIDE LM U21 / U19 -->
+        <!-- 1. AKADEEMIA / U21 -->
         <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="paide">
           <div>
             <div class="flex items-center justify-between gap-2 mb-2.5">
-              <span class="px-2.5 py-1 rounded bg-navy text-white text-[11px] font-bold uppercase tracking-wider">PAIDE LM U21 / U19</span>
+              <span class="px-2.5 py-1 rounded bg-navy text-white text-[11px] font-bold uppercase tracking-wider">AKADEEMIA / U21</span>
               <span class="text-xs font-bold text-crimson">60 € / kuu</span>
             </div>
-            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Akadeemia & Järelkasv (10+1)</h3>
-            <p class="text-xs text-slate-600 mb-3">Esindusmeeskonna järelkasv ja U19 meistrivõistlused (4–5 treeningut nädalas, 90–105 min).</p>
+            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Akadeemia / U21 (10+1)</h3>
+            <p class="text-xs text-slate-600 mb-3">Peatreener Luis Freitas, abitreenerid Hardi Häelme ja Kevin Paavo. Esindusmeeskonna järelkasv (4 treeningut nädalas, 90 min).</p>
             <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
               <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Paide kunstmuru & Jalgpallihall</strong></div>
-              <div class="flex justify-between gap-2"><span class="text-slate-500">Treeningud:</span><span class="font-semibold text-navy text-right">4–5x nädalas (Sportlyzeri graafik)</span></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, T, N 16:30–18:00 • R 13:30–15:00</span></div>
             </div>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
             <div class="flex items-center gap-2.5">
-              <img src="assets/img/youth/Meelis_Rooba.jpg" alt="Meelis Rooba" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
+              <img src="assets/img/photos/luis_freitas.jpeg" alt="Luis Freitas" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
               <div>
-                <div class="font-bold text-xs text-navy">Meelis Rooba</div>
-                <div class="text-[10px] text-slate-500">Peatreener • UEFA PRO</div>
+                <div class="font-bold text-xs text-navy">Luis Freitas</div>
+                <div class="text-[10px] text-slate-500">Abitr. Hardi Häelme / Kevin Paavo</div>
               </div>
             </div>
-            <a href="tel:+37256289822" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">5628 9822</a>
+            <a href="mailto:luis@paidelinnameeskond.ee" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">Kirjuta</a>
           </div>
         </div>
 
-        <!-- 2. PAIDE LM U17 I -->
+        <!-- 2. PAIDE LM U-19 -->
         <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="paide">
           <div>
             <div class="flex items-center justify-between gap-2 mb-2.5">
-              <span class="px-2.5 py-1 rounded bg-crimson/10 text-crimson text-[11px] font-bold uppercase tracking-wider">PAIDE LM U17 I</span>
+              <span class="px-2.5 py-1 rounded bg-navy text-white text-[11px] font-bold uppercase tracking-wider">PAIDE LM U-19</span>
               <span class="text-xs font-bold text-crimson">60 € / kuu</span>
             </div>
-            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide LM U17 I (10+1)</h3>
-            <p class="text-xs text-slate-600 mb-3">Abitreener Rauno Kald, fitness-treener Raiko Karpov. 4 treeningut nädalas (90–105 min).</p>
+            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide LM U-19 (10+1)</h3>
+            <p class="text-xs text-slate-600 mb-3">Peatreener Kevin Paavo, abitreener Meelis Rooba. 4 treeningut nädalas (90 min).</p>
+            <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Paide Jalgpallihall / kunstmuru</strong></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, T, N 18:00–19:30 • R 17:00–18:30</span></div>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5">
+              <img src="assets/img/academy/Kevin_Paavo1.jpg" alt="Kevin Paavo" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
+              <div>
+                <div class="font-bold text-xs text-navy">Kevin Paavo & Meelis Rooba</div>
+                <div class="text-[10px] text-slate-500">UEFA A • UEFA PRO</div>
+              </div>
+            </div>
+            <a href="tel:+37255905581" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">5590 5581</a>
+          </div>
+        </div>
+
+        <!-- 3. AKADEEMIA U-17 / U19 -->
+        <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="paide">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <span class="px-2.5 py-1 rounded bg-crimson/10 text-crimson text-[11px] font-bold uppercase tracking-wider">AKADEEMIA U-17 / U19</span>
+              <span class="text-xs font-bold text-crimson">60 € / kuu</span>
+            </div>
+            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Akadeemia U-17 / U19 (10+1)</h3>
+            <p class="text-xs text-slate-600 mb-3">Peatreener Hardi Häelme, abitreener Rauno Kald. 4 treeningut nädalas (90 min).</p>
             <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
               <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Paide Jalgpallihall / kunstmuru</strong></div>
               <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, T, N 18:00–19:30 • R 17:00–18:30</span></div>
@@ -504,127 +530,101 @@
             <div class="flex items-center gap-2.5">
               <img src="assets/img/photos/hardi_haelme.jpeg" alt="Hardi Häelme" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
               <div>
-                <div class="font-bold text-xs text-navy">Hardi Häelme</div>
-                <div class="text-[10px] text-slate-500">Peatreener • UEFA B</div>
+                <div class="font-bold text-xs text-navy">Hardi Häelme & Rauno Kald</div>
+                <div class="text-[10px] text-slate-500">Peatreener • Abitreener (UEFA B)</div>
               </div>
             </div>
             <a href="tel:+37258607295" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">5860 7295</a>
           </div>
         </div>
 
-        <!-- 3. PAIDE LM U17 II -->
+        <!-- 4. PAIDE LM U-15 -->
         <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="paide">
           <div>
             <div class="flex items-center justify-between gap-2 mb-2.5">
-              <span class="px-2.5 py-1 rounded bg-crimson/10 text-crimson text-[11px] font-bold uppercase tracking-wider">PAIDE LM U17 II</span>
-              <span class="text-xs font-bold text-crimson">60 € / kuu</span>
+              <span class="px-2.5 py-1 rounded bg-navy/10 text-navy text-[11px] font-bold uppercase tracking-wider">PAIDE LM U-15</span>
+              <span class="text-xs font-bold text-crimson">45 € / kuu</span>
             </div>
-            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide LM U17 II (10+1)</h3>
-            <p class="text-xs text-slate-600 mb-3">Peatreener Meelis Rooba, abitreener Markus Piim. 4 treeningut nädalas (90 min).</p>
+            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide LM U-15 (10+1)</h3>
+            <p class="text-xs text-slate-600 mb-3">Peatreenerid Kevin Kärp ja Kristo Kiik. 4 treeningut nädalas (90 min).</p>
             <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
               <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Paide Jalgpallihall / kunstmuru</strong></div>
-              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, T 18:00 • N 17:30 • R 17:00</span></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, T, N 15:45–17:15 • R 15:00–16:30</span></div>
             </div>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
             <div class="flex items-center gap-2.5">
-              <img src="assets/img/youth/Meelis_Rooba.jpg" alt="Meelis Rooba" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
+              <img src="assets/img/photos/kevin_karp.jpeg" alt="Kevin Kärp" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
               <div>
-                <div class="font-bold text-xs text-navy">Meelis Rooba & Markus Piim</div>
-                <div class="text-[10px] text-slate-500">UEFA PRO • Abitreener</div>
+                <div class="font-bold text-xs text-navy">Kevin Kärp & Kristo Kiik</div>
+                <div class="text-[10px] text-slate-500">UEFA C • UEFA B</div>
               </div>
             </div>
-            <a href="tel:+37256289822" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">5628 9822</a>
+            <a href="tel:+37253518541" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">5351 8541</a>
           </div>
         </div>
 
-        <!-- 4. PAIDE LM U15 -->
+        <!-- 5. PAIDE LM U-13 -->
         <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="paide">
           <div>
             <div class="flex items-center justify-between gap-2 mb-2.5">
-              <span class="px-2.5 py-1 rounded bg-navy/10 text-navy text-[11px] font-bold uppercase tracking-wider">PAIDE LM U15</span>
+              <span class="px-2.5 py-1 rounded bg-navy/10 text-navy text-[11px] font-bold uppercase tracking-wider">PAIDE LM U-13</span>
               <span class="text-xs font-bold text-crimson">45 € / kuu</span>
             </div>
-            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide LM U15 (10+1)</h3>
-            <p class="text-xs text-slate-600 mb-3">Peatreener Kristo Kiik, abitreener Kevin Kärp. 3–4 treeningut nädalas (90 min).</p>
+            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide LM U-13 (8+1)</h3>
+            <p class="text-xs text-slate-600 mb-3">Peatreener Rauno Kööp, abitreener Kevin Kärp. 4 treeningut nädalas (90 min).</p>
             <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
               <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Paide Jalgpallihall / kunstmuru</strong></div>
-              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">3–4x nädalas (90 min)</span></div>
-            </div>
-          </div>
-          <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-            <div class="flex items-center gap-2.5">
-              <img src="assets/img/photos/kristo_kiik.jpeg" alt="Kristo Kiik" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
-              <div>
-                <div class="font-bold text-xs text-navy">Kristo Kiik & Kevin Kärp</div>
-                <div class="text-[10px] text-slate-500">UEFA B • UEFA C</div>
-              </div>
-            </div>
-            <a href="tel:+3725513602" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">551 3602</a>
-          </div>
-        </div>
-
-        <!-- 5. PAIDE LM U13 -->
-        <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="paide">
-          <div>
-            <div class="flex items-center justify-between gap-2 mb-2.5">
-              <span class="px-2.5 py-1 rounded bg-navy/10 text-navy text-[11px] font-bold uppercase tracking-wider">PAIDE LM U13</span>
-              <span class="text-xs font-bold text-crimson">45 € / kuu</span>
-            </div>
-            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide LM U13 (8+1)</h3>
-            <p class="text-xs text-slate-600 mb-3">Peatreener Rauno Kööp, abitreenerid Viktor Mets ja Kevin Kärp. 3–4x nädalas (90 min).</p>
-            <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
-              <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Paide Jalgpallihall / kunstmuru</strong></div>
-              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E 16:00 • T, K 17:30 • R 16:30</span></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, T, K 17:30–19:00 • R 16:00–17:30</span></div>
             </div>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
             <div class="flex items-center gap-2.5">
               <img src="assets/img/photos/rauno_koop.jpeg" alt="Rauno Kööp" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
               <div>
-                <div class="font-bold text-xs text-navy">Rauno Kööp & Viktor Mets</div>
-                <div class="text-[10px] text-slate-500">UEFA A treenerid</div>
+                <div class="font-bold text-xs text-navy">Rauno Kööp & Kevin Kärp</div>
+                <div class="text-[10px] text-slate-500">UEFA A • UEFA C</div>
               </div>
             </div>
             <a href="tel:+37255612135" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">5561 2135</a>
           </div>
         </div>
 
-        <!-- 6. PAIDE 2015-2016 POISID (U11 SININE / EDASIJÕUDNUD) -->
+        <!-- 6. PAIDE LM U-12 -->
         <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="paide vastuvott">
           <div>
             <div class="flex items-center justify-between gap-2 mb-2.5">
-              <span class="px-2.5 py-1 rounded bg-blue-500/10 text-blue-700 text-[11px] font-bold uppercase tracking-wider">U11 SININE • 2015–2016</span>
-              <span class="text-xs font-bold text-crimson">35–40 € / kuu</span>
+              <span class="px-2.5 py-1 rounded bg-blue-500/10 text-blue-700 text-[11px] font-bold uppercase tracking-wider">PAIDE LM U-12</span>
+              <span class="text-xs font-bold text-crimson">35 € / kuu</span>
             </div>
-            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide LM U11 Sinine / 2015–2016</h3>
-            <p class="text-xs text-slate-600 mb-3">Edasijõudnud ja U11 sinine grupp (8+1 formaat, 3 treeningut nädalas, 90 min).</p>
+            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide LM U-12</h3>
+            <p class="text-xs text-slate-600 mb-3">Peatreener Steven Pleesi, abitreener Markus Piim (8+1 formaat, 3 treeningut nädalas, 90 min).</p>
             <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
               <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Ülejõe staadion / Jalgpallihall</strong></div>
-              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, T 17:30–19:00 • R 17:00 / T, N 16:00</span></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, T 18:00–19:30 • R 17:00–18:30</span></div>
             </div>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
             <div class="flex items-center gap-2.5">
-              <img src="assets/img/youth/Meelis_Rooba.jpg" alt="Meelis Rooba" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
+              <img src="assets/img/youth/steven_pleesi.JPEG" alt="Steven Pleesi" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
               <div>
-                <div class="font-bold text-xs text-navy">Meelis Rooba & Steven Pleesi</div>
-                <div class="text-[10px] text-slate-500">UEFA PRO • UEFA C</div>
+                <div class="font-bold text-xs text-navy">Steven Pleesi & Markus Piim</div>
+                <div class="text-[10px] text-slate-500">Peatreener • Abitreener</div>
               </div>
             </div>
             <a href="tel:+37255630650" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">5563 0650</a>
           </div>
         </div>
 
-        <!-- 7. PAIDE LM U11 VALGE & 2016-2017 POISID -->
+        <!-- 7. PAIDE LM U-11 -->
         <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="paide vastuvott">
           <div>
             <div class="flex items-center justify-between gap-2 mb-2.5">
-              <span class="px-2.5 py-1 rounded bg-slate-100 text-navy text-[11px] font-bold uppercase tracking-wider">U11 VALGE • 2016–2017</span>
-              <span class="text-xs font-bold text-crimson">35 € / kuu</span>
+              <span class="px-2.5 py-1 rounded bg-slate-100 text-navy text-[11px] font-bold uppercase tracking-wider">PAIDE LM U-11</span>
+              <span class="text-xs font-bold text-crimson">35–40 € / kuu</span>
             </div>
-            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide LM U11 Valge / 2016–2017</h3>
-            <p class="text-xs text-slate-600 mb-3">2016–2017 sünniaastaga poisid ja U11 valge grupp. Oodatud ka uued liitujad!</p>
+            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide LM U-11</h3>
+            <p class="text-xs text-slate-600 mb-3">Peatreener Steven Pleesi, abitreener Meelis Rooba. Oodatud ka uued liitujad!</p>
             <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
               <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Paide Ülejõe staadion / Hall</strong></div>
               <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">T, N 15:30–17:00 • R 15:00–16:30</span></div>
@@ -632,28 +632,28 @@
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
             <div class="flex items-center gap-2.5">
-              <img src="assets/img/photos/taavi_parts.jpeg" alt="Taavi Parts" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
+              <img src="assets/img/youth/steven_pleesi.JPEG" alt="Steven Pleesi" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
               <div>
-                <div class="font-bold text-xs text-navy">Taavi Parts & Steven Pleesi</div>
-                <div class="text-[10px] text-slate-500">UEFA B • UEFA C</div>
+                <div class="font-bold text-xs text-navy">Steven Pleesi & Meelis Rooba</div>
+                <div class="text-[10px] text-slate-500">UEFA C • UEFA PRO</div>
               </div>
             </div>
-            <a href="tel:+37253023400" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">5302 3400</a>
+            <a href="tel:+37255630650" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">5563 0650</a>
           </div>
         </div>
 
-        <!-- 8. PAIDE LM U10 (2017-2018 POISID) -->
+        <!-- 8. PAIDE LM U10 -->
         <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="paide vastuvott">
           <div>
             <div class="flex items-center justify-between gap-2 mb-2.5">
-              <span class="px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-700 text-[11px] font-bold uppercase tracking-wider">PAIDE LM U10 • 2017–2018</span>
+              <span class="px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-700 text-[11px] font-bold uppercase tracking-wider">PAIDE LM U10</span>
               <span class="text-xs font-bold text-crimson">35 € / kuu</span>
             </div>
-            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide LM U10 (2017–2018 poisid)</h3>
-            <p class="text-xs text-slate-600 mb-3">Mänguformaat 6+1, 3 treeningut nädalas (90 min). Treenerid Taavi Parts, Rauno Kald ja Margus Luts.</p>
+            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide LM U10</h3>
+            <p class="text-xs text-slate-600 mb-3">Mänguformaat 6+1, 3 treeningut nädalas (90 min). Treenerid Rauno Kald ja Taavi Parts.</p>
             <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
               <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Ülejõe staadion / Jalgpallihall</strong></div>
-              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">T, N 15:30–17:00 (või 16:30) • R 15:00</span></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">T, N 15:30–17:00 • R 15:00–16:30</span></div>
             </div>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
@@ -668,25 +668,25 @@
           </div>
         </div>
 
-        <!-- 9. PAIDE LM U9 (2018-2019 EDASIJÕUDNUD) -->
+        <!-- 9. PAIDE LM U-9 -->
         <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="paide vastuvott">
           <div>
             <div class="flex items-center justify-between gap-2 mb-2.5">
-              <span class="px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-700 text-[11px] font-bold uppercase tracking-wider">PAIDE LM U9 • 2018–2019</span>
+              <span class="px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-700 text-[11px] font-bold uppercase tracking-wider">PAIDE LM U-9</span>
               <span class="text-xs font-bold text-crimson">35 € / kuu</span>
             </div>
-            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide LM U9 (2018–2019 poisid)</h3>
-            <p class="text-xs text-slate-600 mb-3">Peatreener Taavi Parts, abitreenerid Siim Luts ja Markus Piim. Mänguformaat 6+1 (75 min).</p>
+            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide LM U-9</h3>
+            <p class="text-xs text-slate-600 mb-3">Peatreener Taavi Parts, abitreener Markus Piim. Mänguformaat 6+1 (75 min).</p>
             <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
               <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Paide Ülejõe staadion / Hall</strong></div>
-              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, K, N kell 17:00–18:15</span></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, K, N 17:00–18:15</span></div>
             </div>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
             <div class="flex items-center gap-2.5">
               <img src="assets/img/photos/taavi_parts.jpeg" alt="Taavi Parts" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
               <div>
-                <div class="font-bold text-xs text-navy">Taavi Parts & Siim Luts</div>
+                <div class="font-bold text-xs text-navy">Taavi Parts & Markus Piim</div>
                 <div class="text-[10px] text-slate-500">UEFA B • Abitreener</div>
               </div>
             </div>
@@ -694,52 +694,52 @@
           </div>
         </div>
 
-        <!-- 10. PAIDE 2019-2020 POISID (ALGAJAD / U8) -->
+        <!-- 10. PAIDE LM U-8 -->
         <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="paide vastuvott">
           <div>
             <div class="flex items-center justify-between gap-2 mb-2.5">
-              <span class="px-2.5 py-1 rounded bg-amber-500/15 text-amber-800 text-[11px] font-bold uppercase tracking-wider">U8 ALGAJAD • 2019–2020</span>
+              <span class="px-2.5 py-1 rounded bg-amber-500/15 text-amber-800 text-[11px] font-bold uppercase tracking-wider">PAIDE LM U-8</span>
               <span class="text-xs font-bold text-crimson">30 € / kuu</span>
             </div>
-            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">2019–2020 Poisid (Algajad)</h3>
-            <p class="text-xs text-slate-600 mb-3">Spetsiaalne vastuvõtugrupp algajatele! Mänguformaat 4+1, 2x nädalas (60 min).</p>
+            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide LM U-8</h3>
+            <p class="text-xs text-slate-600 mb-3">Peatreener Markus Piim, abitreener Kert Selter. Mänguformaat 4+1, 2x nädalas (60 min).</p>
             <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
               <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Paide Ülejõe staadion / Hall</strong></div>
-              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E ja K kell 17:15–18:15</span></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, K 17:00–18:00</span></div>
             </div>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
             <div class="flex items-center gap-2.5">
               <img src="assets/img/photos/markus_piim.jpeg" alt="Markus Piim" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
               <div>
-                <div class="font-bold text-xs text-navy">Markus Piim</div>
-                <div class="text-[10px] text-slate-500">Treener • Paide keskus</div>
+                <div class="font-bold text-xs text-navy">Markus Piim & Kert Selter</div>
+                <div class="text-[10px] text-slate-500">Peatreener • Abitreener</div>
               </div>
             </div>
             <a href="tel:+37255967994" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">5596 7994</a>
           </div>
         </div>
 
-        <!-- 11. PAIDE 2020-2022 POISID (UUS MUDILASTE GRUPP) -->
+        <!-- 11. PAIDE LM U7 (MUDILASTE GRUPP) -->
         <div class="group-card bg-white rounded-2xl p-5 border-2 border-emerald-500/40 shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="paide vastuvott">
           <div>
             <div class="flex items-center justify-between gap-2 mb-2.5">
-              <span class="px-2.5 py-1 rounded bg-emerald-600 text-white text-[11px] font-bold uppercase tracking-wider">UUS GRUPP • 2020–2022</span>
+              <span class="px-2.5 py-1 rounded bg-emerald-600 text-white text-[11px] font-bold uppercase tracking-wider">PAIDE LM U7</span>
               <span class="text-xs font-bold text-emerald-700">1. kuu 0 €</span>
             </div>
-            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">2020–2022 Poisid (Mudilased)</h3>
-            <p class="text-xs text-slate-600 mb-3">Uus alustav treeninggrupp kõige noorematele jalgpallihuvilistele! Mänguline liikumine ja pallirõõm.</p>
+            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide LM U7 (Mudilased)</h3>
+            <p class="text-xs text-slate-600 mb-3">Peatreener Markus Piim, abitreener Kert Selter. Treeninggrupp kõige noorematele jalgpallihuvilistele!</p>
             <div class="space-y-1.5 text-xs bg-emerald-50/60 p-3 rounded-xl border border-emerald-200/60 mb-4">
               <div class="flex justify-between gap-2"><span class="text-slate-600">Asukoht:</span><strong class="text-navy text-right">Paide Ülejõe staadion / Hall</strong></div>
-              <div class="flex justify-between gap-2"><span class="text-slate-600">Graafik:</span><span class="font-semibold text-emerald-800 text-right">Kolmapäeval kell 18:15–19:00</span></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-600">Graafik:</span><span class="font-semibold text-emerald-800 text-right">T 17:00–18:00 • K 18:00–19:00</span></div>
             </div>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
             <div class="flex items-center gap-2.5">
               <img src="assets/img/photos/markus_piim.jpeg" alt="Markus Piim" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
               <div>
-                <div class="font-bold text-xs text-navy">Markus Piim</div>
-                <div class="text-[10px] text-slate-500">Treener • Mudilased</div>
+                <div class="font-bold text-xs text-navy">Markus Piim & Kert Selter</div>
+                <div class="text-[10px] text-slate-500">Peatreener • Abitreener</div>
               </div>
             </div>
             <a href="tel:+37255967994" class="px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-colors">5596 7994</a>
@@ -772,18 +772,44 @@
           </div>
         </div>
 
-        <!-- 13. TÜDRUKUD 2013-2017 (PLN U14 & U12) -->
+        <!-- 13. U14 TÜDRUKUD -->
         <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="paide tudrukud vastuvott">
           <div>
             <div class="flex items-center justify-between gap-2 mb-2.5">
-              <span class="px-2.5 py-1 rounded bg-crimson/10 text-crimson text-[11px] font-bold uppercase tracking-wider">TÜDRUKUD • 2013–2017 (U14/U12)</span>
+              <span class="px-2.5 py-1 rounded bg-crimson/10 text-crimson text-[11px] font-bold uppercase tracking-wider">U14 TÜDRUKUD</span>
               <span class="text-xs font-bold text-crimson">35 € / kuu</span>
             </div>
-            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">2013–2017 Tüdrukud (PLN U14 & U12)</h3>
-            <p class="text-xs text-slate-600 mb-3">Tüdrukute U14 (8+1) ja U12 (6+1) grupid. Uute tüdrukute vastuvõtt aastaringselt!</p>
+            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide U14 Tüdrukud</h3>
+            <p class="text-xs text-slate-600 mb-3">Peatreener Kaivo Sang. Tüdrukute U14 grupp (8+1 formaat, 4x nädalas, 90 min).</p>
             <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
               <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Paide jalgpallihall & kunstmuru</strong></div>
-              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, T ja N kell 16:00–17:15</span></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, T, N 17:15–18:45 • R 17:30–19:00</span></div>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5">
+              <img src="assets/img/photos/kaivo_sang.jpeg" alt="Kaivo Sang" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
+              <div>
+                <div class="font-bold text-xs text-navy">Kaivo Sang</div>
+                <div class="text-[10px] text-slate-500">Peatreener • UEFA A</div>
+              </div>
+            </div>
+            <a href="tel:+3725520889" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">552 0889</a>
+          </div>
+        </div>
+
+        <!-- 14. U12 TÜDRUKUD -->
+        <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="paide tudrukud vastuvott">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <span class="px-2.5 py-1 rounded bg-crimson/10 text-crimson text-[11px] font-bold uppercase tracking-wider">U12 TÜDRUKUD</span>
+              <span class="text-xs font-bold text-crimson">35 € / kuu</span>
+            </div>
+            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide U12 Tüdrukud</h3>
+            <p class="text-xs text-slate-600 mb-3">Peatreener Katriin Rodi. Tüdrukute U12 grupp (6+1 formaat, 3x nädalas, 75 min). Uute tüdrukute vastuvõtt aastaringselt!</p>
+            <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Paide jalgpallihall & kunstmuru</strong></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, K, R 17:30–18:45</span></div>
             </div>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
@@ -791,25 +817,25 @@
               <img src="assets/img/photos/katriin_rodi.jpeg" alt="Katriin Rodi" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
               <div>
                 <div class="font-bold text-xs text-navy">Katriin Rodi</div>
-                <div class="text-[10px] text-slate-500">Treener • EJL D</div>
+                <div class="text-[10px] text-slate-500">Peatreener • EJL D</div>
               </div>
             </div>
             <a href="tel:+37258835271" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">5883 5271</a>
           </div>
         </div>
 
-        <!-- 14. TÜDRUKUD 2018-2021 (U8 TÜDRUKUD) -->
+        <!-- 15. U9 TÜDRUKUD -->
         <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="paide tudrukud vastuvott">
           <div>
             <div class="flex items-center justify-between gap-2 mb-2.5">
-              <span class="px-2.5 py-1 rounded bg-crimson/10 text-crimson text-[11px] font-bold uppercase tracking-wider">TÜDRUKUD • 2018–2021 (U8)</span>
+              <span class="px-2.5 py-1 rounded bg-crimson/10 text-crimson text-[11px] font-bold uppercase tracking-wider">U9 TÜDRUKUD</span>
               <span class="text-xs font-bold text-crimson">30 € / kuu</span>
             </div>
-            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">2018–2021 Sünniaastaga Tüdrukud</h3>
-            <p class="text-xs text-slate-600 mb-3">Rõõmsameelne tüdrukute treeninggrupp (4+1 formaat, 2x nädalas, 60 min). Oodatud kõik 5–8 a tüdrukud!</p>
+            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Paide U9 Tüdrukud</h3>
+            <p class="text-xs text-slate-600 mb-3">Peatreener Kristi Selter, abitreener Kätlin Kalamees. Rõõmsameelne tüdrukute treeninggrupp (4+1 formaat, 2x nädalas, 60 min).</p>
             <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
               <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Paide jalgpallihall</strong></div>
-              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E ja K kell 17:00–18:00</span></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, K 17:00–18:00</span></div>
             </div>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
@@ -824,71 +850,18 @@
           </div>
         </div>
 
-        <!-- 15. TÜRI 1.-2. KLASS -->
+        <!-- 16. TÜRI 1.-2. KLASS -->
         <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="turi vastuvott">
           <div>
             <div class="flex items-center justify-between gap-2 mb-2.5">
-              <span class="px-2.5 py-1 rounded bg-navy/10 text-navy text-[11px] font-bold uppercase tracking-wider">TÜRI • 1.–2. KLASS (U9)</span>
+              <span class="px-2.5 py-1 rounded bg-navy/10 text-navy text-[11px] font-bold uppercase tracking-wider">TÜRI • 1.–2. KLASS</span>
               <span class="text-xs font-bold text-crimson">35 € / kuu</span>
             </div>
             <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Türi 1.–2. Klass Poisid ja Tüdrukud</h3>
-            <p class="text-xs text-slate-600 mb-3">Türi noortegrupp algklasside lastele. Treenerid Rauno Kald ja Kristo Kiik.</p>
+            <p class="text-xs text-slate-600 mb-3">Türi noortegrupp algklasside lastele. Peatreener Rauno Kald.</p>
             <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
               <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Türi põhikooli staadion</strong></div>
-              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E ja K kell 17:00–18:00</span></div>
-            </div>
-          </div>
-          <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-            <div class="flex items-center gap-2.5">
-              <img src="assets/img/photos/rauno_kald.jpeg" alt="Rauno Kald" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
-              <div>
-                <div class="font-bold text-xs text-navy">Rauno Kald & Kristo Kiik</div>
-                <div class="text-[10px] text-slate-500">UEFA B treenerid</div>
-              </div>
-            </div>
-            <a href="tel:+37256914525" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">5691 4525</a>
-          </div>
-        </div>
-
-        <!-- 16. TÜRI 3.-5. KLASS -->
-        <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="turi vastuvott">
-          <div>
-            <div class="flex items-center justify-between gap-2 mb-2.5">
-              <span class="px-2.5 py-1 rounded bg-navy/10 text-navy text-[11px] font-bold uppercase tracking-wider">TÜRI • 3.–5. KLASS</span>
-              <span class="text-xs font-bold text-crimson">35 € / kuu</span>
-            </div>
-            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Türi 3.–5. Klass Poisid ja Tüdrukud</h3>
-            <p class="text-xs text-slate-600 mb-3">Treeningud Türi põhikooli ja metsakombinaadi/kunstmuru staadionil. Treenerid Rauno Kald & Kristo Kiik.</p>
-            <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
-              <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Türi põhikooli staadion</strong></div>
-              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E ja K kell 18:00–19:00</span></div>
-            </div>
-          </div>
-          <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-            <div class="flex items-center gap-2.5">
-              <img src="assets/img/photos/kristo_kiik.jpeg" alt="Kristo Kiik" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
-              <div>
-                <div class="font-bold text-xs text-navy">Kristo Kiik & Rauno Kald</div>
-                <div class="text-[10px] text-slate-500">UEFA B treenerid</div>
-              </div>
-            </div>
-            <a href="tel:+3725513602" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">551 3602</a>
-          </div>
-        </div>
-
-        <!-- 17. TÜRI LASTEAIAD (KESKLINNA, LOKUTA, TÜRI-ALLIKU) -->
-        <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="turi vastuvott">
-          <div>
-            <div class="flex items-center justify-between gap-2 mb-2.5">
-              <span class="px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-700 text-[11px] font-bold uppercase tracking-wider">TÜRI LASTEAIAD (3 RÜHMA)</span>
-              <span class="text-xs font-bold text-crimson">20 € / kuu</span>
-            </div>
-            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Türi Kesklinna, Lokuta & Türi-Alliku</h3>
-            <p class="text-xs text-slate-600 mb-3">Lasteaiatreeningud poistele ja tüdrukutele (1x nädalas, 30 min).</p>
-            <div class="space-y-1 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
-              <div class="flex justify-between"><span class="text-slate-500">Türi Kesklinna LA:</span><strong class="text-navy">K kell 15:15</strong></div>
-              <div class="flex justify-between"><span class="text-slate-500">Lokuta lasteaed:</span><strong class="text-navy">E kell 15:15</strong></div>
-              <div class="flex justify-between"><span class="text-slate-500">Türi-Alliku LA:</span><strong class="text-navy">E kell 16:00</strong></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, K 17:00–18:00</span></div>
             </div>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
@@ -896,14 +869,66 @@
               <img src="assets/img/photos/rauno_kald.jpeg" alt="Rauno Kald" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
               <div>
                 <div class="font-bold text-xs text-navy">Rauno Kald</div>
-                <div class="text-[10px] text-slate-500">Treener • UEFA B</div>
+                <div class="text-[10px] text-slate-500">Peatreener • UEFA B</div>
               </div>
             </div>
             <a href="tel:+37256914525" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">5691 4525</a>
           </div>
         </div>
 
-        <!-- 18. KOERU 1.-3. KLASS & KOERU LASTEAED -->
+        <!-- 17. TÜRI 3.-5. KLASS -->
+        <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="turi vastuvott">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <span class="px-2.5 py-1 rounded bg-navy/10 text-navy text-[11px] font-bold uppercase tracking-wider">TÜRI • 3.–5. KLASS</span>
+              <span class="text-xs font-bold text-crimson">35 € / kuu</span>
+            </div>
+            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Türi 3.–5. Klass Poisid ja Tüdrukud</h3>
+            <p class="text-xs text-slate-600 mb-3">Treeningud Türi põhikooli ja metsakombinaadi/kunstmuru staadionil. Peatreener Kristo Kiik.</p>
+            <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Türi põhikooli staadion</strong></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, K 18:00–19:00</span></div>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5">
+              <img src="assets/img/photos/kristo_kiik.jpeg" alt="Kristo Kiik" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
+              <div>
+                <div class="font-bold text-xs text-navy">Kristo Kiik</div>
+                <div class="text-[10px] text-slate-500">Peatreener • UEFA B</div>
+              </div>
+            </div>
+            <a href="tel:+3725513602" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">551 3602</a>
+          </div>
+        </div>
+
+        <!-- 18. TÜRI LASTEAED -->
+        <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="turi vastuvott">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2.5">
+              <span class="px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-700 text-[11px] font-bold uppercase tracking-wider">TÜRI LASTEAED</span>
+              <span class="text-xs font-bold text-crimson">20 € / kuu</span>
+            </div>
+            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Türi Lasteaed</h3>
+            <p class="text-xs text-slate-600 mb-3">Lasteaiatreeningud poistele ja tüdrukutele (1x nädalas, 45 min). Peatreener Rauno Kald.</p>
+            <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Türi lasteaed</strong></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">K 15:00–15:45</span></div>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5">
+              <img src="assets/img/photos/rauno_kald.jpeg" alt="Rauno Kald" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
+              <div>
+                <div class="font-bold text-xs text-navy">Rauno Kald</div>
+                <div class="text-[10px] text-slate-500">Peatreener • UEFA B</div>
+              </div>
+            </div>
+            <a href="tel:+37256914525" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">5691 4525</a>
+          </div>
+        </div>
+
+        <!-- 19. KOERU 1.-3. KLASS & KOERU LASTEAED -->
         <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="jarva vastuvott">
           <div>
             <div class="flex items-center justify-between gap-2 mb-2.5">
@@ -911,10 +936,10 @@
               <span class="text-xs font-bold text-crimson">30 € / 20 €</span>
             </div>
             <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Koeru 1.–3. Klass ja Lasteaed</h3>
-            <p class="text-xs text-slate-600 mb-3">Poisid ja tüdrukud Koeru keskkooli staadionil (2x nädalas, 75 min) ja Koeru lasteaias (1x nädalas, 30 min).</p>
+            <p class="text-xs text-slate-600 mb-3">Poisid ja tüdrukud Koeru keskkooli staadionil (2x nädalas, 90 min) ja Koeru lasteaias (1x nädalas, 45 min).</p>
             <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
-              <div class="flex justify-between gap-2"><span class="text-slate-500">1.–3. klass (staadion):</span><strong class="text-navy text-right">T ja N kell 15:00–16:15</strong></div>
-              <div class="flex justify-between gap-2"><span class="text-slate-500">Koeru lasteaed:</span><span class="font-semibold text-navy text-right">N kell 14:15–14:45</span></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">1.–3. klass:</span><strong class="text-navy text-right">T, N 15:00–16:30</strong></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Koeru lasteaed:</span><span class="font-semibold text-navy text-right">N 14:00–14:45</span></div>
             </div>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
@@ -922,25 +947,25 @@
               <img src="assets/img/photos/rando_isakar.jpeg" alt="Rando Isakar" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
               <div>
                 <div class="font-bold text-xs text-navy">Rando Isakar</div>
-                <div class="text-[10px] text-slate-500">Treener • EJL D / VV</div>
+                <div class="text-[10px] text-slate-500">Peatreener • EJL D / VV</div>
               </div>
             </div>
             <a href="tel:+37258235360" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">5823 5360</a>
           </div>
         </div>
 
-        <!-- 19. JÄRVA-JAANI 1.-3. KLASS & LASTEAED -->
+        <!-- 20. JÄRVA-JAANI 1.-3. KLASS -->
         <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="jarva vastuvott">
           <div>
             <div class="flex items-center justify-between gap-2 mb-2.5">
               <span class="px-2.5 py-1 rounded bg-navy/10 text-navy text-[11px] font-bold uppercase tracking-wider">JÄRVA-JAANI • 1.–3. KLASS</span>
               <span class="text-xs font-bold text-crimson">30 € / 20 €</span>
             </div>
-            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Järva-Jaani Poisid ja Tüdrukud</h3>
+            <h3 class="font-display font-bold text-lg text-navy uppercase mb-1">Järva-Jaani 1.–3. Klass</h3>
             <p class="text-xs text-slate-600 mb-3">Treeningud Järva-Jaani Arena kunstmuruväljakul ja Kasekopli staadionil legendaarse Viktor Metsa juhendamisel.</p>
             <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
               <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Järva-Jaani Arena kunstmuru</strong></div>
-              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E ja K kell 15:15–16:30</span></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">E, K 15:00–16:30</span></div>
             </div>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
@@ -948,14 +973,14 @@
               <img src="assets/img/photos/viktor_mets.jpeg" alt="Viktor Mets" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
               <div>
                 <div class="font-bold text-xs text-navy">Viktor Mets</div>
-                <div class="text-[10px] text-slate-500">Treener • UEFA A</div>
+                <div class="text-[10px] text-slate-500">Peatreener • UEFA A</div>
               </div>
             </div>
             <a href="tel:+37256251081" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">5625 1081</a>
           </div>
         </div>
 
-        <!-- 20. ARAVETE 1.-3. KLASS -->
+        <!-- 21. ARAVETE 1.-3. KLASS -->
         <div class="group-card bg-white rounded-2xl p-5 hairline-border shadow-subtle hover:shadow-card transition-all flex flex-col justify-between" data-category="jarva vastuvott">
           <div>
             <div class="flex items-center justify-between gap-2 mb-2.5">
@@ -966,7 +991,7 @@
             <p class="text-xs text-slate-600 mb-3">Aravete piirkonna treeninggrupp Aravete põhikooli staadionil (Piibe mnt 21).</p>
             <div class="space-y-1.5 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100 mb-4">
               <div class="flex justify-between gap-2"><span class="text-slate-500">Asukoht:</span><strong class="text-navy text-right">Aravete staadion</strong></div>
-              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">Neljapäeval kell 15:00–16:00</span></div>
+              <div class="flex justify-between gap-2"><span class="text-slate-500">Graafik:</span><span class="font-semibold text-navy text-right">N 15:00–16:00</span></div>
             </div>
           </div>
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
@@ -974,7 +999,7 @@
               <img src="assets/img/photos/kevin_karp.jpeg" alt="Kevin Kärp" class="w-9 h-9 rounded-full object-cover object-top border border-slate-200">
               <div>
                 <div class="font-bold text-xs text-navy">Kevin Kärp</div>
-                <div class="text-[10px] text-slate-500">Treener • UEFA C</div>
+                <div class="text-[10px] text-slate-500">Peatreener • UEFA C</div>
               </div>
             </div>
             <a href="tel:+37253518541" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-crimson hover:text-white text-navy text-xs font-bold transition-colors">5351 8541</a>
@@ -1088,7 +1113,7 @@
             <span class="text-xs font-bold text-navy uppercase tracking-widest block mb-1">Noortetreener • UEFA A litsents</span>
             <h3 class="font-display font-black text-2xl sm:text-3xl text-navy uppercase">Viktor Mets</h3>
             <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed mb-4">
-              Järvamaa jalgpalli teerajaja ja Valgetähe V klassi teenetemärgi kavaler. Järva-Jaani, Paide U13 ning Ukraina perede kontaktisik.
+              Järvamaa jalgpalli teerajaja ja Valgetähe V klassi teenetemärgi kavaler. Järva-Jaani 1.–3. klassi peatreener ning Ukraina perede kontaktisik.
             </p>
             <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 text-sm sm:text-base font-bold text-navy">
               <a href="tel:+37256251081" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-navy text-white hover:bg-crimson transition-all shadow-sm">
@@ -1114,7 +1139,7 @@
           <div class="min-w-0 flex-1">
             <span class="px-2 py-0.5 rounded bg-crimson/10 text-crimson text-[10px] font-bold uppercase">UEFA PRO</span>
             <h4 class="font-display font-bold text-sm text-navy uppercase mt-1 truncate">Meelis Rooba</h4>
-            <div class="text-[11px] text-slate-500 truncate">U21 / U17 II / U11 Sinine</div>
+            <div class="text-[11px] text-slate-500 truncate">U-19 & U-11 abitreener</div>
             <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
               <a href="tel:+37256289822" class="text-navy hover:text-crimson">5628 9822</a>
               <span class="text-slate-300">•</span>
@@ -1157,7 +1182,7 @@
           <div class="min-w-0 flex-1">
             <span class="px-2 py-0.5 rounded bg-navy/10 text-navy text-[10px] font-bold uppercase">UEFA A</span>
             <h4 class="font-display font-bold text-sm text-navy uppercase mt-1 truncate">Kevin Paavo</h4>
-            <div class="text-[11px] text-slate-500 truncate">Akadeemia & Noortetöö</div>
+            <div class="text-[11px] text-slate-500 truncate">U-19 peatreener & Akadeemia/U21</div>
             <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
               <a href="tel:+37255905581" class="text-navy hover:text-crimson">5590 5581</a>
               <span class="text-slate-300">•</span>
@@ -1172,7 +1197,7 @@
           <div class="min-w-0 flex-1">
             <span class="px-2 py-0.5 rounded bg-navy/10 text-navy text-[10px] font-bold uppercase">UEFA A</span>
             <h4 class="font-display font-bold text-sm text-navy uppercase mt-1 truncate">Rauno Kööp</h4>
-            <div class="text-[11px] text-slate-500 truncate">Paide LM U13 peatreener</div>
+            <div class="text-[11px] text-slate-500 truncate">Paide LM U-13 peatreener</div>
             <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
               <a href="tel:+37255612135" class="text-navy hover:text-crimson">5561 2135</a>
               <span class="text-slate-300">•</span>
@@ -1187,7 +1212,7 @@
           <div class="min-w-0 flex-1">
             <span class="px-2 py-0.5 rounded bg-navy/10 text-navy text-[10px] font-bold uppercase">UEFA A</span>
             <h4 class="font-display font-bold text-sm text-navy uppercase mt-1 truncate">Luis Freitas</h4>
-            <div class="text-[11px] text-slate-500 truncate">Noortetöö & Akadeemia</div>
+            <div class="text-[11px] text-slate-500 truncate">Akadeemia / U21 peatreener</div>
             <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
               <a href="mailto:luis@paidelinnameeskond.ee" class="text-navy hover:text-crimson truncate">luis@paidelinnameeskond.ee</a>
             </div>
@@ -1213,7 +1238,7 @@
           <div class="min-w-0 flex-1">
             <span class="px-2 py-0.5 rounded bg-navy/10 text-navy text-[10px] font-bold uppercase">UEFA A</span>
             <h4 class="font-display font-bold text-sm text-navy uppercase mt-1 truncate">Kaivo Sang</h4>
-            <div class="text-[11px] text-slate-500 truncate">Noortetreener</div>
+            <div class="text-[11px] text-slate-500 truncate">U14 tüdrukud peatreener</div>
             <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
               <a href="tel:+3725520889" class="text-navy hover:text-crimson">552 0889</a>
               <span class="text-slate-300">•</span>
@@ -1228,7 +1253,7 @@
           <div class="min-w-0 flex-1">
             <span class="px-2 py-0.5 rounded bg-slate-100 text-navy text-[10px] font-bold uppercase">UEFA B</span>
             <h4 class="font-display font-bold text-sm text-navy uppercase mt-1 truncate">Rauno Kald</h4>
-            <div class="text-[11px] text-slate-500 truncate">Türi grupid & Paide U17/U10</div>
+            <div class="text-[11px] text-slate-500 truncate">U10, Türi 1.–2. kl/LA & U-17/U19</div>
             <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
               <a href="tel:+37256914525" class="text-navy hover:text-crimson">5691 4525</a>
               <span class="text-slate-300">•</span>
@@ -1243,7 +1268,7 @@
           <div class="min-w-0 flex-1">
             <span class="px-2 py-0.5 rounded bg-slate-100 text-navy text-[10px] font-bold uppercase">UEFA B</span>
             <h4 class="font-display font-bold text-sm text-navy uppercase mt-1 truncate">Kristo Kiik</h4>
-            <div class="text-[11px] text-slate-500 truncate">Paide U15 & Türi grupid</div>
+            <div class="text-[11px] text-slate-500 truncate">Paide U-15 & Türi 3.–5. klass</div>
             <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
               <a href="tel:+3725513602" class="text-navy hover:text-crimson">551 3602</a>
               <span class="text-slate-300">•</span>
@@ -1258,7 +1283,7 @@
           <div class="min-w-0 flex-1">
             <span class="px-2 py-0.5 rounded bg-slate-100 text-navy text-[10px] font-bold uppercase">UEFA B</span>
             <h4 class="font-display font-bold text-sm text-navy uppercase mt-1 truncate">Taavi Parts</h4>
-            <div class="text-[11px] text-slate-500 truncate">Paide U11 valge, U10, U9, Väätsa</div>
+            <div class="text-[11px] text-slate-500 truncate">Paide U-9, U10 & Väätsa</div>
             <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
               <a href="tel:+37253023400" class="text-navy hover:text-crimson">5302 3400</a>
               <span class="text-slate-300">•</span>
@@ -1273,7 +1298,7 @@
           <div class="min-w-0 flex-1">
             <span class="px-2 py-0.5 rounded bg-slate-100 text-navy text-[10px] font-bold uppercase">UEFA B</span>
             <h4 class="font-display font-bold text-sm text-navy uppercase mt-1 truncate">Hardi Häelme</h4>
-            <div class="text-[11px] text-slate-500 truncate">Paide LM U17 I peatreener</div>
+            <div class="text-[11px] text-slate-500 truncate">Akadeemia U-17/U19 & U21</div>
             <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
               <a href="tel:+37258607295" class="text-navy hover:text-crimson">5860 7295</a>
               <span class="text-slate-300">•</span>
@@ -1284,13 +1309,11 @@
 
         <!-- Steven Pleesi -->
         <div class="bg-white rounded-2xl p-4 hairline-border shadow-subtle hover:shadow-card transition-all flex items-center gap-3.5">
-          <div class="w-16 h-16 rounded-xl bg-navy text-white font-display font-black text-lg flex items-center justify-center border border-slate-200 flex-shrink-0">
-            SP
-          </div>
+          <img src="assets/img/youth/steven_pleesi.JPEG" alt="Steven Pleesi" class="w-16 h-16 rounded-xl object-cover object-top border border-slate-200 flex-shrink-0">
           <div class="min-w-0 flex-1">
             <span class="px-2 py-0.5 rounded bg-slate-100 text-navy text-[10px] font-bold uppercase">UEFA C</span>
             <h4 class="font-display font-bold text-sm text-navy uppercase mt-1 truncate">Steven Pleesi</h4>
-            <div class="text-[11px] text-slate-500 truncate">Paide U11 Sinine & 2015–2017</div>
+            <div class="text-[11px] text-slate-500 truncate">Paide U-12 & U-11 peatreener</div>
             <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
               <a href="tel:+37255630650" class="text-navy hover:text-crimson">5563 0650</a>
               <span class="text-slate-300">•</span>
@@ -1305,7 +1328,7 @@
           <div class="min-w-0 flex-1">
             <span class="px-2 py-0.5 rounded bg-slate-100 text-navy text-[10px] font-bold uppercase">UEFA C</span>
             <h4 class="font-display font-bold text-sm text-navy uppercase mt-1 truncate">Kevin Kärp</h4>
-            <div class="text-[11px] text-slate-500 truncate">Aravete, U15 & U13</div>
+            <div class="text-[11px] text-slate-500 truncate">Paide U-15, U-13 & Aravete 1.–3. kl</div>
             <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
               <a href="tel:+37253518541" class="text-navy hover:text-crimson">5351 8541</a>
               <span class="text-slate-300">•</span>
@@ -1320,7 +1343,7 @@
           <div class="min-w-0 flex-1">
             <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-700 text-[10px] font-bold uppercase">EJL D • EJL VV</span>
             <h4 class="font-display font-bold text-sm text-navy uppercase mt-1 truncate">Rando Isakar</h4>
-            <div class="text-[11px] text-slate-500 truncate">Koeru grupid & Naiskonna VV</div>
+            <div class="text-[11px] text-slate-500 truncate">Koeru 1.–3. kl, lasteaed & VV</div>
             <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
               <a href="tel:+37258235360" class="text-navy hover:text-crimson">5823 5360</a>
               <span class="text-slate-300">•</span>
@@ -1348,7 +1371,7 @@
           <div class="min-w-0 flex-1">
             <span class="px-2 py-0.5 rounded bg-slate-100 text-navy text-[10px] font-bold uppercase">EJL D</span>
             <h4 class="font-display font-bold text-sm text-navy uppercase mt-1 truncate">Katriin Rodi</h4>
-            <div class="text-[11px] text-slate-500 truncate">2013–2017 tüdrukud</div>
+            <div class="text-[11px] text-slate-500 truncate">U12 tüdrukud peatreener</div>
             <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
               <a href="tel:+37258835271" class="text-navy hover:text-crimson">5883 5271</a>
               <span class="text-slate-300">•</span>
@@ -1363,7 +1386,7 @@
           <div class="min-w-0 flex-1">
             <span class="px-2 py-0.5 rounded bg-slate-100 text-navy text-[10px] font-bold uppercase">EJL D</span>
             <h4 class="font-display font-bold text-sm text-navy uppercase mt-1 truncate">Kristi Selter</h4>
-            <div class="text-[11px] text-slate-500 truncate">2018–2021 tüdrukud</div>
+            <div class="text-[11px] text-slate-500 truncate">U9 tüdrukud peatreener</div>
             <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
               <a href="tel:+37255695155" class="text-navy hover:text-crimson">5569 5155</a>
               <span class="text-slate-300">•</span>
@@ -1378,7 +1401,7 @@
           <div class="min-w-0 flex-1">
             <span class="px-2 py-0.5 rounded bg-slate-100 text-navy text-[10px] font-bold uppercase">EJL D</span>
             <h4 class="font-display font-bold text-sm text-navy uppercase mt-1 truncate">Kätlin Kalamees</h4>
-            <div class="text-[11px] text-slate-500 truncate">2018–2021 tüdrukud</div>
+            <div class="text-[11px] text-slate-500 truncate">U9 tüdrukud abitreener</div>
             <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
               <a href="tel:+37256712441" class="text-navy hover:text-crimson">5671 2441</a>
               <span class="text-slate-300">•</span>
@@ -1393,11 +1416,26 @@
           <div class="min-w-0 flex-1">
             <span class="px-2 py-0.5 rounded bg-slate-100 text-navy text-[10px] font-bold uppercase">TREENER</span>
             <h4 class="font-display font-bold text-sm text-navy uppercase mt-1 truncate">Markus Piim</h4>
-            <div class="text-[11px] text-slate-500 truncate">Paide 2019–2022 & U17 II</div>
+            <div class="text-[11px] text-slate-500 truncate">Paide U-8 & U7 peatr., U-12 & U-9</div>
             <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
               <a href="tel:+37255967994" class="text-navy hover:text-crimson">5596 7994</a>
               <span class="text-slate-300">•</span>
               <a href="mailto:markus@paidelinnameeskond.ee" class="text-slate-500 hover:text-crimson truncate">E-post</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kert Selter -->
+        <div class="bg-white rounded-2xl p-4 hairline-border shadow-subtle hover:shadow-card transition-all flex items-center gap-3.5">
+          <div class="w-16 h-16 rounded-xl bg-navy text-white font-display font-black text-lg flex items-center justify-center border border-slate-200 flex-shrink-0">
+            KS
+          </div>
+          <div class="min-w-0 flex-1">
+            <span class="px-2 py-0.5 rounded bg-slate-100 text-navy text-[10px] font-bold uppercase">ABITREENER</span>
+            <h4 class="font-display font-bold text-sm text-navy uppercase mt-1 truncate">Kert Selter</h4>
+            <div class="text-[11px] text-slate-500 truncate">Paide LM U-8 & U7 abitreener</div>
+            <div class="mt-1.5 flex items-center gap-2 text-[11px] font-bold">
+              <span class="text-slate-500">Paide Jalgpallikeskus</span>
             </div>
           </div>
         </div>
