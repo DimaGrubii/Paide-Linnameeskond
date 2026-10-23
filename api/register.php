@@ -35,13 +35,174 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'OPTIONS
 }
 
 // ============================================================================
-// 1. CONFIGURATION (Update recipient email(s) here)
+// 1. CONFIGURATION & DYNAMIC COACH ROUTING
 // ============================================================================
-$RECIPIENT_EMAIL = 'margus.luts@paidelinnameeskond.ee, marek@paidelinnameeskond.ee';
+$BASE_RECIPIENT = 'margus.luts@paidelinnameeskond.ee';
 
 // Primary sender address for paidelinnameeskond.ee:
 $SENDER_EMAIL    = 'info@paidelinnameeskond.ee';
 $SENDER_NAME     = 'Paide Linnameeskond';
+
+/**
+ * Resolves the target training group, coach names, and coach emails
+ * based on preferred location, gender, and birth year (2026 season).
+ */
+function resolveRegistrationRouting($locationKey, $genderKey, $birthYear) {
+    $year = (int) $birthYear;
+
+    // 1. Regional centers (Mixed-gender groups; Option A: all ages in town route to town coach)
+    if ($locationKey === 'koeru') {
+        return array(
+            'group'   => ($year >= 2020) ? 'Koeru lasteaed' : 'Koeru 1.–3. klass',
+            'coaches' => 'Rando Isakar',
+            'emails'  => array('rando@paidelinnameeskond.ee')
+        );
+    }
+
+    if ($locationKey === 'jarva-jaani') {
+        return array(
+            'group'   => 'Järva-Jaani 1.–3. klass',
+            'coaches' => 'Viktor Mets',
+            'emails'  => array('viktor@paidelinnameeskond.ee')
+        );
+    }
+
+    if ($locationKey === 'aravete') {
+        return array(
+            'group'   => 'Aravete 1.–3. klass',
+            'coaches' => 'Kevin Kärp',
+            'emails'  => array('kevin.karp@paidelinnameeskond.ee')
+        );
+    }
+
+    if ($locationKey === 'tyri') {
+        if ($year >= 2020) {
+            return array(
+                'group'   => 'Türi lasteaed',
+                'coaches' => 'Rauno Kald',
+                'emails'  => array('rauno@paidelinnameeskond.ee')
+            );
+        }
+        if ($year >= 2017 && $year <= 2019) {
+            return array(
+                'group'   => 'Türi 1.–2. klass',
+                'coaches' => 'Rauno Kald',
+                'emails'  => array('rauno@paidelinnameeskond.ee')
+            );
+        }
+        return array(
+            'group'   => 'Türi 3.–5. klass',
+            'coaches' => 'Kristo Kiik',
+            'emails'  => array('kristo@paidelinnameeskond.ee')
+        );
+    }
+
+    // 2. Paide (and default fallback) — Girls ('tudruk')
+    if ($genderKey === 'tudruk') {
+        if ($year >= 2018) {
+            return array(
+                'group'   => 'Paide U9 Tüdrukud',
+                'coaches' => 'Kristi Selter & Kätlin Kalamees',
+                'emails'  => array('kristi@paidelinnameeskond.ee', 'katlin@paidelinnameeskond.ee')
+            );
+        }
+        if ($year >= 2015 && $year <= 2017) {
+            return array(
+                'group'   => 'Paide U12 Tüdrukud',
+                'coaches' => 'Katriin Rodi',
+                'emails'  => array('katriin@paidelinnameeskond.ee')
+            );
+        }
+        if ($year >= 2013 && $year <= 2014) {
+            return array(
+                'group'   => 'Paide U14 Tüdrukud',
+                'coaches' => 'Kaivo Sang',
+                'emails'  => array('kaivo@paidelinnameeskond.ee')
+            );
+        }
+        return array(
+            'group'   => 'Paide Linnanaiskond II / TU17',
+            'coaches' => 'Joana Freitas & Sirje Kapper',
+            'emails'  => array('joana@paidelinnameeskond.ee', 'sirje@paidelinnameeskond.ee')
+        );
+    }
+
+    // 3. Paide (and default fallback) — Boys ('poiss')
+    if ($year >= 2020) {
+        return array(
+            'group'   => 'Paide LM U7 (Mudilased)',
+            'coaches' => 'Markus Piim & Kert Selter',
+            'emails'  => array('markus@paidelinnameeskond.ee')
+        );
+    }
+    if ($year === 2019) {
+        return array(
+            'group'   => 'Paide LM U-8',
+            'coaches' => 'Markus Piim & Kert Selter',
+            'emails'  => array('markus@paidelinnameeskond.ee')
+        );
+    }
+    if ($year === 2018) {
+        return array(
+            'group'   => 'Paide LM U-9',
+            'coaches' => 'Taavi Parts & Markus Piim',
+            'emails'  => array('taavi@paidelinnameeskond.ee', 'markus@paidelinnameeskond.ee')
+        );
+    }
+    if ($year === 2017) {
+        return array(
+            'group'   => 'Paide LM U10',
+            'coaches' => 'Rauno Kald & Taavi Parts',
+            'emails'  => array('rauno@paidelinnameeskond.ee', 'taavi@paidelinnameeskond.ee')
+        );
+    }
+    if ($year === 2016) {
+        return array(
+            'group'   => 'Paide LM U-11',
+            'coaches' => 'Steven Pleesi & Meelis Rooba',
+            'emails'  => array('steven@paidelinnameeskond.ee', 'meelis@paidelinnameeskond.ee')
+        );
+    }
+    if ($year === 2015) {
+        return array(
+            'group'   => 'Paide LM U-12',
+            'coaches' => 'Steven Pleesi & Markus Piim',
+            'emails'  => array('steven@paidelinnameeskond.ee', 'markus@paidelinnameeskond.ee')
+        );
+    }
+    if ($year >= 2013 && $year <= 2014) {
+        return array(
+            'group'   => 'Paide LM U-13',
+            'coaches' => 'Rauno Kööp & Kevin Kärp',
+            'emails'  => array('rauno.koop@paidelinnameeskond.ee', 'kevin.karp@paidelinnameeskond.ee')
+        );
+    }
+    if ($year >= 2011 && $year <= 2012) {
+        return array(
+            'group'   => 'Paide LM U-15',
+            'coaches' => 'Kevin Kärp & Kristo Kiik',
+            'emails'  => array('kevin.karp@paidelinnameeskond.ee', 'kristo@paidelinnameeskond.ee')
+        );
+    }
+    if ($year === 2010) {
+        return array(
+            'group'   => 'Akadeemia U-17 / U19',
+            'coaches' => 'Hardi Häelme & Rauno Kald',
+            'emails'  => array('hardi@paidelinnameeskond.ee', 'rauno@paidelinnameeskond.ee')
+        );
+    }
+
+    return array(
+        'group'   => 'Paide LM U-19 / Akadeemia U-17/U19',
+        'coaches' => 'Kevin Paavo, Meelis Rooba, Hardi Häelme & Rauno Kald',
+        'emails'  => array(
+            'kevin@paidelinnameeskond.ee',
+            'meelis@paidelinnameeskond.ee',
+            'hardi@paidelinnameeskond.ee',
+            'rauno@paidelinnameeskond.ee'
+        )
+    );
+}
 
 // ============================================================================
 // 2. HTTP METHOD CHECK
@@ -198,9 +359,26 @@ $locationLabels = array(
 $trainingLocation = isset($locationLabels[$trainingLocRaw]) ? $locationLabels[$trainingLocRaw] : $trainingLocRaw;
 
 // ============================================================================
-// 7. BUILD & SEND EMAIL VIA MAIL SERVER
+// 7. RESOLVE TARGET GROUP, COACHES & RECIPIENTS
 // ============================================================================
-$subjectText = "Uus proovitrenni registreering: {$childName} ({$childBirthyear}) - {$trainingLocation}";
+$routing = resolveRegistrationRouting($trainingLocRaw, $childGenderRaw, $childBirthyear);
+$matchedGroup   = $routing['group'];
+$matchedCoaches = $routing['coaches'];
+
+$recipientList = array($BASE_RECIPIENT);
+if (isset($routing['emails']) && is_array($routing['emails'])) {
+    foreach ($routing['emails'] as $coachEmail) {
+        if ($coachEmail !== '' && !in_array($coachEmail, $recipientList, true)) {
+            $recipientList[] = $coachEmail;
+        }
+    }
+}
+$RECIPIENT_EMAIL = implode(', ', $recipientList);
+
+// ============================================================================
+// 8. BUILD & SEND EMAIL VIA MAIL SERVER
+// ============================================================================
+$subjectText = "Uus proovitrenni registreering: {$childName} ({$childBirthyear}) - {$matchedGroup}";
 $encodedSubject = '=?UTF-8?B?' . base64_encode($subjectText) . '?=';
 
 $dateStr = date('d.m.Y H:i:s');
@@ -208,13 +386,15 @@ $notesBlock = ($notes !== '') ? $notes : '— (lisainfo puudub)';
 
 $emailBody = "UUS PROOVITRENNI REGISTREERING — PAIDE LINNAMEESKOND\n"
     . "====================================================\n\n"
-    . "1. LAPSE ANDMED\n"
+    . "1. LAPSE ANDMED & TREENINGGRUPP\n"
     . "----------------------------------------------------\n"
     . "Lapse nimi:              {$childName}\n"
     . "Isikukood:               {$childIsikukood}\n"
     . "Sünniaasta:              {$childBirthyear}\n"
     . "Sugu:                    {$childGender}\n"
-    . "Eelistatud treeningpaik: {$trainingLocation}\n\n"
+    . "Eelistatud treeningpaik: {$trainingLocation}\n"
+    . "Suunatud treeninggrupp:  {$matchedGroup}\n"
+    . "Grupi treener(id):       {$matchedCoaches}\n\n"
     . "2. LAPSEVANEMA KONTAKT\n"
     . "----------------------------------------------------\n"
     . "Lapsevanema nimi:        {$parentName}\n"
@@ -224,6 +404,7 @@ $emailBody = "UUS PROOVITRENNI REGISTREERING — PAIDE LINNAMEESKOND\n"
     . "----------------------------------------------------\n"
     . "{$notesBlock}\n\n"
     . "----------------------------------------------------\n"
+    . "Saajad:   {$RECIPIENT_EMAIL}\n"
     . "Esitatud: {$dateStr}\n"
     . "Lehekülg: {$sourcePage}\n"
     . "(Vastamiseks võite vajutada otse \"Reply / Vasta\" — vastus läheb lapsevanema e-postile: {$parentEmail})\n";
