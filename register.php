@@ -37,7 +37,10 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'OPTIONS
 // ============================================================================
 // 1. CONFIGURATION & DYNAMIC COACH ROUTING
 // ============================================================================
-$BASE_RECIPIENT = 'margus.luts@paidelinnameeskond.ee';
+$BASE_RECIPIENTS = array(
+    'margus.luts@paidelinnameeskond.ee',
+    'marek@paidelinnameeskond.ee'
+);
 
 // Primary sender address for paidelinnameeskond.ee:
 $SENDER_EMAIL    = 'info@paidelinnameeskond.ee';
@@ -365,7 +368,7 @@ $routing = resolveRegistrationRouting($trainingLocRaw, $childGenderRaw, $childBi
 $matchedGroup   = $routing['group'];
 $matchedCoaches = $routing['coaches'];
 
-$recipientList = array($BASE_RECIPIENT);
+$recipientList = $BASE_RECIPIENTS;
 if (isset($routing['emails']) && is_array($routing['emails'])) {
     foreach ($routing['emails'] as $coachEmail) {
         if ($coachEmail !== '' && !in_array($coachEmail, $recipientList, true)) {
