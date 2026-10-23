@@ -353,32 +353,42 @@
       </article>
 
       <!-- ========================================================================= -->
-      <!-- EMBEDDED REGISTRATION FORM: REGISTREERI LAPS PROOVITRENNI                 -->
+      <!-- EMBEDDED REGISTRATION FORM: LAPSE REGISTREERIMINE KLUBISSE                -->
       <!-- ========================================================================= -->
-      <section id="registreeru" class="mb-14 w-full">
-        <div class="bg-white rounded-3xl p-6 sm:p-10 hairline-border shadow-elevated">
+      <section id="registreeru" class="mb-14 w-full font-sans">
+        <div class="bg-white rounded-3xl p-6 sm:p-10 lg:p-12 hairline-border shadow-elevated">
           
-          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 pb-5 border-b border-slate-100">
-            <div class="max-w-2xl">
-              <div class="flex items-center gap-2 text-crimson text-xs font-bold tracking-widest uppercase mb-2 font-sans">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+            <div class="lg:col-span-7">
+              <div class="inline-flex items-center gap-2 text-crimson text-xs font-bold tracking-widest uppercase mb-2 font-sans">
                 <span class="w-2 h-2 rounded-full bg-crimson"></span>
-                <span>Liitu Paide jalgpalliperega</span>
+                <span>Lapse registreerimine klubisse ja treeningutele</span>
               </div>
-              <h2 class="font-display font-black text-2xl sm:text-3xl text-navy uppercase tracking-tight">
-                Registreeri Laps Proovitrenni
+              <h2 class="font-display font-black text-2xl sm:text-4xl text-navy uppercase tracking-tight">
+                Lapse Registreerimine Klubisse
               </h2>
-              <p class="text-sm text-slate-600 mt-1.5 font-sans">
-                Täida allolev lühike ankeet ja meie noortetreener võtab teiega ühendust, et kinnitada sobivaim aeg ja grupp.
+              <p class="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">
+                Hea lapsevanem! Sellel leheküljel saate meile edastada meie klubis treeningutega alustava lapse andmed, et saaksime need klubi süsteemi sisestada või leppida kokku esimese proovitreeningu aja.
               </p>
             </div>
-            <a href="noortetoo.html#grupid" class="inline-flex items-center gap-1.5 text-xs font-bold text-navy hover:text-crimson transition-colors whitespace-nowrap font-sans shrink-0">
-              <span>Vaata treeninggruppe ja aegu</span>
-              <svg class="w-3.5 h-3.5 text-crimson" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
+
+            <!-- Official Data & Privacy Notice -->
+            <div class="lg:col-span-5 bg-slate-50 rounded-2xl p-5 border border-slate-200 text-xs text-slate-600 space-y-2">
+              <div class="font-display font-bold text-sm text-navy uppercase">Pane tähele:</div>
+              <p class="text-emerald-800 font-semibold">
+                • Näidistreeningutel osalemiseks ei ole vaja eelnevalt lepingut sõlmida — esimene kuu on kõigile tasuta!
+              </p>
+              <p>
+                • Teie sisestatud andmeid kasutatakse klubi raamatupidamises, võistkondade moodustamisel ja muul klubi tööga seotud otstarbel.
+              </p>
+              <p>
+                • Andmeid hoitakse turvaliselt ning jagatakse Eesti Jalgpalli Liiduga (meistrivõistlustel ja turniiridel osalemiseks), lapse elukohajärgse kohaliku omavalitsusega ning asjakohaste riiklike registritega.
+              </p>
+            </div>
           </div>
 
-          <form id="youth-reg-form" action="register.php" method="POST" class="space-y-6 font-sans">
-            <!-- Anti-spam honeypot field (invisible to humans) -->
+          <form id="youth-reg-form" action="register.php" method="POST" class="space-y-6">
+            <!-- Anti-spam honeypot field -->
             <input type="text" name="website_url" id="website-url" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -414,17 +424,21 @@
                     <div class="relative">
                       <select id="child-birthyear" name="child_birthyear" required class="w-full appearance-none pl-4 pr-10 py-3 rounded-xl border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson bg-white cursor-pointer">
                         <option value="">Vali aasta</option>
-                        <option value="2019">2019 (5 a)</option>
-                        <option value="2018">2018 (6 a)</option>
-                        <option value="2017">2017 (7 a)</option>
-                        <option value="2016">2016 (8 a)</option>
-                        <option value="2015">2015 (9 a)</option>
-                        <option value="2014">2014 (10 a)</option>
-                        <option value="2013">2013 (11 a)</option>
-                        <option value="2012">2012 (12 a)</option>
-                        <option value="2011">2011 (13 a)</option>
-                        <option value="2010">2010 (14 a)</option>
-                        <option value="2009">2009 (15 a)</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                        <option value="2017">2017</option>
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
+                        <option value="2014">2014</option>
+                        <option value="2013">2013</option>
+                        <option value="2012">2012</option>
+                        <option value="2011">2011</option>
+                        <option value="2010">2010</option>
+                        <option value="2009">2009</option>
+                        <option value="2008">2008</option>
                       </select>
                       <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 text-slate-500">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
@@ -453,11 +467,11 @@
                   </label>
                   <div class="relative">
                     <select id="training-location" name="training_location" required class="w-full appearance-none pl-4 pr-10 py-3 rounded-xl border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson bg-white cursor-pointer">
-                      <option value="paide">Paide (jalgpallikeskus & hall)</option>
-                      <option value="tyri">Türi (linnastaadion & spordihoone)</option>
-                      <option value="koeru">Koeru (keskkooli staadion)</option>
-                      <option value="jarva-jaani">Järva-Jaani</option>
-                      <option value="aravete">Aravete & Albu</option>
+                      <option value="paide">Paide (jalgpallikeskus, hall & Ülejõe)</option>
+                      <option value="tyri">Türi (põhikooli staadion & lasteaiad)</option>
+                      <option value="koeru">Koeru (keskkooli staadion & lasteaed)</option>
+                      <option value="jarva-jaani">Järva-Jaani (Arena & Kasekopli)</option>
+                      <option value="aravete">Aravete (põhikooli staadion)</option>
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 text-slate-500">
                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
@@ -499,9 +513,9 @@
 
                 <div>
                   <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5" for="notes">
-                    Lisainfo või küsimused (valikuline)
+                    Lisainfo (nt kas laps tuleb proovitrenni või on juba alustanud, elukoht vm)
                   </label>
-                  <textarea id="notes" name="notes" rows="3" placeholder="Varasem treeningkogemus, küsimused treeningaegade kohta jne."
+                  <textarea id="notes" name="notes" rows="3" placeholder="Soovin tulla proovitrenni / Laps on juba alustanud treeningutega..."
                             class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson"></textarea>
                 </div>
               </div>
@@ -511,7 +525,7 @@
             <!-- Submit Button & Feedback -->
             <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div class="text-xs text-slate-500">
-                * Kinnitan, et esitatud andmed on tõesed. Esimene proovikuu on tasuta ja ei kohusta lepingut sõlmima.
+                * Kinnitan, et esitatud andmed on tõesed. Esimene proovikuu on tasuta.
               </div>
               <button type="submit" id="youth-reg-submit-btn" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-crimson hover:bg-crimson-700 disabled:opacity-60 text-white font-bold text-sm tracking-wider uppercase transition-all shadow-glow-red hover:shadow-lg transform active:scale-95 whitespace-nowrap cursor-pointer">
                 Saada registreering
@@ -531,11 +545,32 @@
                 <span>Aitäh! Registreering on edukalt vastu võetud.</span>
               </div>
               <p class="text-xs text-emerald-700">
-                Meie noortetreener võtab teiega 1-2 tööpäeva jooksul ühendust esimese proovitreeningu täpse aja ja koha osas.
+                Meie noortetreener või noortetöö juht võtab teiega 1–2 tööpäeva jooksul ühendust.
               </p>
             </div>
 
           </form>
+
+          <!-- Noorliikme liitumisavalduse allalaadimise plokk -->
+          <div class="mt-8 pt-8 border-t border-slate-200/80">
+            <div class="bg-slate-50 rounded-2xl p-5 sm:p-6 border border-slate-200 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+              <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 text-navy text-xs font-bold tracking-widest uppercase mb-1.5 font-display">
+                  <svg class="w-4 h-4 text-crimson shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                  <span>Klubi Noorliikme Liitumisavaldus</span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                  Kui tasuta proovikuu on läbitud ja soovid jätkata treeningutega Paide Linnameeskonna ridades, laadi siit alla liitumisdokument, täida see, allkirjasta digitaalselt ning edasta noortetöö juhile Margus Lutsule e-posti aadressil <a href="mailto:margus@paidelinnameeskond.ee" class="font-bold text-crimson hover:underline">margus@paidelinnameeskond.ee</a>.
+                </p>
+              </div>
+              <div class="shrink-0">
+                <a href="assets/Paide%20LM%20noorliikme%20liitumisavaldus.docx" download="Paide LM noorliikme liitumisavaldus.docx" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-navy hover:bg-crimson text-white font-bold text-xs sm:text-sm tracking-wider uppercase transition-all shadow-sm cursor-pointer whitespace-nowrap">
+                  <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                  <span>Laadi alla liitumisavaldus (.docx)</span>
+                </a>
+              </div>
+            </div>
+          </div>
 
         </div>
       </section>
