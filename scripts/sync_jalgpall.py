@@ -295,7 +295,38 @@ VERIFIED_FORMS_WOMEN = {
     ]
 }
 
-def extract_season_history(html, total_rounds, clean_women=False):
+def parse_date_ts(date_str):
+    dm = re.search(r'(\d{2})\.(\d{2})\.(\d{4})(?:\s+(\d{1,2}):(\d{2}))?', date_str or '')
+    if not dm:
+        return 0
+    day, month, year = int(dm.group(1)), int(dm.group(2)), int(dm.group(3))
+    hour = int(dm.group(4)) if dm.group(4) else 0
+    minute = int(dm.group(5)) if dm.group(5) else 0
+    return int(datetime(year, month, day, hour, minute).timestamp())
+
+def is_match_still_live(ev_html, date_str):
+    ko_ts = parse_date_ts(date_str)
+    if ko_ts <= 0:
+        return False
+    now_ts = int(datetime.now().timestamp())
+    elapsed = now_ts - ko_ts
+    if elapsed < -1800 or elapsed > 12600:
+        return False
+    pm = re.search(r'/voistlused/protocol/(\d+)', ev_html)
+    if pm:
+        try:
+            proto_html = fetch_url(f'https://jalgpall.ee/voistlused/protocol/{pm.group(1)}')
+            if 'Lõppseis' in proto_html:
+                return False
+            if 'Hetkeseis' in proto_html:
+                return True
+        except Exception:
+            pass
+    return 0 <= elapsed < 6600
+
+def extract_season_history(html, total_rounds, clean_women=False, live_matches_by_team=None):
+    if live_matches_by_team is None:
+        live_matches_by_team = {}
     blocks = re.split(r'<div class="block block-01">', html)[1:]
     team_rounds = {}
     for b in blocks:
@@ -317,19 +348,29 @@ def extract_season_history(html, total_rounds, clean_women=False):
                     home = home.replace(' (N)', '').strip()
                     away = away.replace(' (N)', '').strip()
                 res_m = re.search(r'<div class="result">.*?<p>(.*?)</p>', ev, re.DOTALL)
-                score_raw = re.sub(r'<[^>]+>', '', res_m.group(1)).strip() if res_m else ''
+                res_inner = re.sub(r'<!--.*?-->', '', res_m.group(1), flags=re.DOTALL) if res_m else ''
+                score_raw = re.sub(r'<[^>]+>', '', res_inner).replace('*', '').strip()
                 score_clean = ' '.join(score_raw.split())
 
                 m_score = re.match(r'^(\d+)\s*-\s*(\d+)$', score_clean)
                 if m_score:
                     hg, ag = int(m_score.group(1)), int(m_score.group(2))
-                    h_type = 'win' if hg > ag else ('loss' if hg < ag else 'draw')
-                    a_type = 'win' if ag > hg else ('loss' if ag < hg else 'draw')
-                    h_res = 'V' if h_type in ('win', 'draw') else 'K'
-                    a_res = 'V' if a_type in ('win', 'draw') else 'K'
-                    h_score_str = f'{hg}:{ag} vs {away}'
-                    a_score_str = f'{ag}:{hg} vs {home}'
-                    match_score = f'{hg}:{ag}'
+                    if is_match_still_live(ev, date_str):
+                        live_matches_by_team.setdefault(home, []).append({'gf': hg, 'ga': ag})
+                        live_matches_by_team.setdefault(away, []).append({'gf': ag, 'ga': hg})
+                        h_type = a_type = 'upcoming'
+                        h_res = a_res = '-'
+                        h_score_str = f'vs {away}'
+                        a_score_str = f'vs {home}'
+                        match_score = '-'
+                    else:
+                        h_type = 'win' if hg > ag else ('loss' if hg < ag else 'draw')
+                        a_type = 'win' if ag > hg else ('loss' if ag < hg else 'draw')
+                        h_res = 'V' if h_type in ('win', 'draw') else 'K'
+                        a_res = 'V' if a_type in ('win', 'draw') else 'K'
+                        h_score_str = f'{hg}:{ag} vs {away}'
+                        a_score_str = f'{ag}:{hg} vs {home}'
+                        match_score = f'{hg}:{ag}'
                 else:
                     h_type = a_type = 'upcoming'
                     h_res = a_res = '-'
@@ -413,7 +454,41 @@ def compute_recent_form(season_history, fallback_form=None):
         for m in last3
     ]
 
-def parse_premium_liiga_standings(html, existing_forms=None, season_history_map=None):
+def adjust_standings_for_live_matches(standings, live_matches_by_team):
+    if not live_matches_by_team or not standings:
+        return standings
+    adjusted_any = False
+    for row in standings:
+        t_name = row['team']
+        live_list = live_matches_by_team.get(t_name, [])
+        if not live_list:
+            continue
+        finished_count = sum(1 for m in row.get('seasonHistory', []) if m.get('type') in ('win', 'draw', 'loss'))
+        if row['played'] > finished_count:
+            for lm in live_list:
+                if row['played'] <= finished_count:
+                    break
+                row['played'] = max(0, row['played'] - 1)
+                row['goalsFor'] = max(0, row['goalsFor'] - int(lm['gf']))
+                row['goalsAgainst'] = max(0, row['goalsAgainst'] - int(lm['ga']))
+                if lm['gf'] > lm['ga']:
+                    row['won'] = max(0, row['won'] - 1)
+                    row['points'] = max(0, row['points'] - 3)
+                elif lm['gf'] < lm['ga']:
+                    row['lost'] = max(0, row['lost'] - 1)
+                else:
+                    row['drawn'] = max(0, row['drawn'] - 1)
+                    row['points'] = max(0, row['points'] - 1)
+                gd = row['goalsFor'] - row['goalsAgainst']
+                row['goalDifference'] = f'+{gd}' if gd > 0 else str(gd)
+                adjusted_any = True
+    if adjusted_any:
+        standings.sort(key=lambda r: (-r['points'], -r['won'], -(r['goalsFor'] - r['goalsAgainst']), -r['goalsFor'], r['position']))
+        for idx, row in enumerate(standings):
+            row['position'] = idx + 1
+    return standings
+
+def parse_premium_liiga_standings(html, existing_forms=None, season_history_map=None, live_matches_by_team=None):
     tables = re.findall(r'<table[^>]*>(.*?)</table>', html, re.DOTALL | re.I)
     standings = []
     if tables:
@@ -477,9 +552,9 @@ def parse_premium_liiga_standings(html, existing_forms=None, season_history_map=
                     'form': form_data,
                     'seasonHistory': team_history
                 })
-    return standings
+    return adjust_standings_for_live_matches(standings, live_matches_by_team)
 
-def parse_women_standings(html, existing_forms=None, season_history_map=None):
+def parse_women_standings(html, existing_forms=None, season_history_map=None, live_matches_by_team=None):
     tables = re.findall(r'<table[^>]*>(.*?)</table>', html, re.DOTALL | re.I)
     standings = []
     if tables:
@@ -537,7 +612,7 @@ def parse_women_standings(html, existing_forms=None, season_history_map=None):
                     'form': form_data,
                     'seasonHistory': team_history
                 })
-    return standings
+    return adjust_standings_for_live_matches(standings, live_matches_by_team)
 
 def main():
     print('[jalgpall.ee Sync] Starting synchronization from Estonian FA...')
@@ -602,9 +677,10 @@ def main():
         print(f'Warning: Could not fetch men calendar URL directly ({e}), checking local cache...')
         cache_path = 'data/cache/calendar_52.html'
         cal_men_html = open(cache_path, 'r', encoding='utf-8').read() if os.path.exists(cache_path) else ''
-    men_season_history = extract_season_history(cal_men_html, 36, False) if cal_men_html else {}
+    men_live_by_team = {}
+    men_season_history = extract_season_history(cal_men_html, 36, False, men_live_by_team) if cal_men_html else {}
 
-    premium_standings = parse_premium_liiga_standings(league_html, existing_forms_men, men_season_history)
+    premium_standings = parse_premium_liiga_standings(league_html, existing_forms_men, men_season_history, men_live_by_team)
     print(f'Extracted {len(premium_standings)} teams in Premium Liiga.')
 
     # 3. Fetch Naiste Meistriliiga standings
@@ -630,9 +706,10 @@ def main():
         print(f'Warning: Could not fetch women calendar URL directly ({e}), checking local cache...')
         cache_path = 'data/cache/calendar_63.html'
         cal_women_html = open(cache_path, 'r', encoding='utf-8').read() if os.path.exists(cache_path) else ''
-    women_season_history = extract_season_history(cal_women_html, 25, True) if cal_women_html else {}
+    women_live_by_team = {}
+    women_season_history = extract_season_history(cal_women_html, 25, True, women_live_by_team) if cal_women_html else {}
 
-    women_standings = parse_women_standings(women_html, existing_forms_women, women_season_history) if women_html else []
+    women_standings = parse_women_standings(women_html, existing_forms_women, women_season_history, women_live_by_team) if women_html else []
     print(f'Extracted {len(women_standings)} teams in Naiste Meistriliiga.')
 
     # Preserve assists in topScorers if already present in existing_data

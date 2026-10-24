@@ -508,7 +508,7 @@
         <!-- GAMEDAY LIVE / LATEST RESULT CARD (Compact, Horizontal, Stacked)    -->
         <!-- =================================================================== -->
         <div id="matchday-latest-result"
-          class="hidden mx-2 sm:mx-6 lg:mx-10 bg-white rounded-t-2xl hairline-border border-b-0 shadow-[0_-4px_24px_-4px_rgba(11,32,62,0.08)] relative z-0 overflow-hidden transition-all duration-300">
+          class="mx-2 sm:mx-6 lg:mx-10 bg-white rounded-t-2xl hairline-border border-b-0 shadow-[0_-4px_24px_-4px_rgba(11,32,62,0.08)] relative z-0 overflow-hidden transition-all duration-300">
 
           <div class="px-4 py-3 sm:px-6 sm:py-3.5 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-5 items-center">
@@ -518,12 +518,12 @@
                 class="lg:col-span-3 min-w-0 text-center lg:text-left border-b lg:border-b-0 lg:border-r border-slate-100 pb-2 lg:pb-0 lg:pr-4 flex flex-col justify-center">
                 <div id="latest-match-round"
                   class="text-[11px] font-sans font-extrabold uppercase tracking-wider text-crimson truncate leading-tight flex items-center justify-center lg:justify-start gap-1.5">
-                  A. Le Coq Premium Liiga • 32. voor
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping flex-shrink-0"></span> <span class="whitespace-nowrap">Naiste Meistriliiga • 23. voor</span>
                 </div>
                 <div id="latest-match-datetime-row" class="hidden font-display text-sm sm:text-base text-navy leading-tight mt-0.5 items-center justify-center lg:justify-start gap-1.5">
-                  <span id="latest-match-date">18. okt</span>
+                  <span id="latest-match-date">Laupäev, 24. oktoober</span>
                   <span class="text-slate-300">•</span>
-                  <span id="latest-match-time" class="text-navy">17:00</span>
+                  <span id="latest-match-time" class="text-navy">Avavile: 12:30</span>
                 </div>
                 <div class="text-xs text-slate-500 mt-1 flex flex-wrap items-center justify-center lg:justify-start gap-x-1.5 gap-y-0.5 leading-tight">
                   <span id="latest-match-venue">Paide kunstmuruväljak</span>
@@ -538,11 +538,11 @@
                   <div class="flex flex-col items-center text-center justify-self-center w-full min-w-0 px-2">
                     <div class="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center relative">
                       <img id="latest-match-homelogo" src="assets/img/jalgpall_logos/paide.png"
-                        alt="Paide Linnameeskond" class="w-full h-full object-contain filter drop-shadow-sm">
+                        alt="Paide Linnanaiskond" class="w-full h-full object-contain filter drop-shadow-sm">
                     </div>
                     <span id="latest-match-hometeam"
-                      class="font-display font-black text-sm sm:text-[15px] text-navy mt-1.5 tracking-wide uppercase whitespace-nowrap leading-none">
-                      <span class="sm:hidden">PLM</span><span class="hidden sm:inline">PAIDE LM</span>
+                      class="font-display font-black text-sm sm:text-lg md:text-xl text-navy uppercase tracking-tight leading-none truncate">
+                      <span class="sm:hidden">PLN</span><span class="hidden sm:inline">PAIDE NAISKOND</span>
                     </span>
                   </div>
 
@@ -550,7 +550,7 @@
                   <div class="flex items-center justify-center gap-3 sm:gap-5 px-2 sm:px-4 flex-shrink-0">
                     <span id="latest-match-score-home"
                       class="font-serif text-3xl sm:text-4xl md:text-5xl text-navy leading-none tracking-tight select-none">
-                      2
+                      4
                     </span>
 
                     <!-- Center Status Stack: Blinking Green Pill + Live Match Clock -->
@@ -571,19 +571,19 @@
 
                     <span id="latest-match-score-away"
                       class="font-serif text-3xl sm:text-4xl md:text-5xl text-slate-500 leading-none tracking-tight select-none">
-                      1
+                      0
                     </span>
                   </div>
 
                   <!-- Away Team -->
                   <div class="flex flex-col items-center text-center justify-self-center w-full min-w-0 px-2">
                     <div class="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center relative">
-                      <img id="latest-match-awaylogo" src="assets/img/jalgpall_logos/trans.png"
-                        alt="JK Narva Trans" class="w-full h-full object-contain filter drop-shadow-sm">
+                      <img id="latest-match-awaylogo" src="assets/img/jalgpall_logos/elva.png"
+                        alt="FC Elva" class="w-full h-full object-contain filter drop-shadow-sm">
                     </div>
                     <span id="latest-match-awayteam"
-                      class="font-display font-bold text-sm sm:text-[15px] text-slate-600 mt-1.5 tracking-wide uppercase whitespace-nowrap leading-none">
-                      <span class="sm:hidden">JKNT</span><span class="hidden sm:inline">JK NARVA TRANS</span>
+                      class="font-display font-bold text-sm sm:text-lg md:text-xl text-slate-600 uppercase tracking-tight leading-none truncate">
+                      <span class="sm:hidden">ELVA</span><span class="hidden sm:inline">FC ELVA</span>
                     </span>
                   </div>
 
@@ -595,19 +595,24 @@
                 class="lg:col-span-3 min-w-0 border-t lg:border-t-0 lg:border-l border-slate-100 pt-2.5 lg:pt-0 lg:pl-5 flex flex-col justify-center">
                 <div id="latest-match-scorers" class="space-y-0.5 font-display text-base sm:text-[17px] leading-snug">
                   <div class="flex items-center justify-between lg:justify-start gap-2.5 text-xs leading-tight">
-                    <span class="font-serif text-[13px] text-crimson w-7 text-right flex-shrink-0">18'</span>
-                    <span class="font-serif text-[13px] sm:text-[14px] text-navy tracking-wide truncate">J. Murillo</span>
+                    <span class="font-serif text-[13px] text-crimson w-7 text-right flex-shrink-0">14'</span>
+                    <span class="font-serif text-[13px] sm:text-[14px] text-navy tracking-wide truncate">L. Rannasto</span>
                     <span class="ml-auto font-serif text-[12px] text-navy bg-slate-100 px-1.5 py-0.5 rounded flex-shrink-0">1 : 0</span>
                   </div>
                   <div class="flex items-center justify-between lg:justify-start gap-2.5 text-xs leading-tight">
-                    <span class="font-serif text-[13px] text-slate-400 w-7 text-right flex-shrink-0">47'</span>
-                    <span class="font-serif text-[13px] sm:text-[14px] text-slate-500 tracking-wide truncate">W. Awusi</span>
-                    <span class="ml-auto font-serif text-[12px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded flex-shrink-0">1 : 1</span>
+                    <span class="font-serif text-[13px] text-crimson w-7 text-right flex-shrink-0">24'</span>
+                    <span class="font-serif text-[13px] sm:text-[14px] text-navy tracking-wide truncate">L. Rannasto</span>
+                    <span class="ml-auto font-serif text-[12px] text-navy bg-slate-100 px-1.5 py-0.5 rounded flex-shrink-0">2 : 0</span>
                   </div>
                   <div class="flex items-center justify-between lg:justify-start gap-2.5 text-xs leading-tight">
-                    <span class="font-serif text-[13px] text-crimson w-7 text-right flex-shrink-0">77'</span>
-                    <span class="font-serif text-[13px] sm:text-[14px] text-navy tracking-wide truncate">M. Miller</span>
-                    <span class="ml-auto font-serif text-[12px] text-navy bg-slate-100 px-1.5 py-0.5 rounded flex-shrink-0">2 : 1</span>
+                    <span class="font-serif text-[13px] text-crimson w-7 text-right flex-shrink-0">83'</span>
+                    <span class="font-serif text-[13px] sm:text-[14px] text-navy tracking-wide truncate">K. Rodi</span>
+                    <span class="ml-auto font-serif text-[12px] text-navy bg-slate-100 px-1.5 py-0.5 rounded flex-shrink-0">3 : 0</span>
+                  </div>
+                  <div class="flex items-center justify-between lg:justify-start gap-2.5 text-xs leading-tight">
+                    <span class="font-serif text-[13px] text-crimson w-7 text-right flex-shrink-0">88'</span>
+                    <span class="font-serif text-[13px] sm:text-[14px] text-navy tracking-wide truncate">K. Rodi</span>
+                    <span class="ml-auto font-serif text-[12px] text-navy bg-slate-100 px-1.5 py-0.5 rounded flex-shrink-0">4 : 0</span>
                   </div>
                 </div>
               </div>
@@ -656,16 +661,16 @@
                 <span id="match-next-round"
                   class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-100 text-navy font-sans text-xs font-bold uppercase tracking-wide whitespace-nowrap mb-2">
                   <span class="w-1.5 h-1.5 rounded-full bg-crimson animate-ping flex-shrink-0"></span>
-                  <span>Premium Liiga • 33. Voor</span>
+                  <span>Premium Liiga • 34. Voor</span>
                 </span>
-                <div id="match-next-date" class="font-display font-extrabold text-xl text-navy">Laupäev, 24. oktoober</div>
+                <div id="match-next-date" class="font-display font-extrabold text-xl text-navy">Kolmapäev, 28. oktoober</div>
                 <div id="match-next-time"
                   class="text-sm font-semibold text-crimson flex items-center justify-center lg:justify-start gap-1 mt-0.5">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>Avavile: 14:30</span>
+                  <span>Avavile: 19:00</span>
                 </div>
                 <div class="text-xs text-slate-500 mt-2 flex items-center justify-center lg:justify-start gap-1">
                   <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -674,24 +679,24 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <span id="match-next-venue">Kuressaare linnastaadion</span>
+                  <span id="match-next-venue">Paide kunstmuruväljak</span>
                 </div>
               </div>
 
               <!-- Teams Face-Off Visual: Strict 3-Column Subgrid locking VS to dead center and crests to identical positions -->
               <div class="lg:col-span-6 min-w-0 w-full flex items-center justify-center">
                 <div class="grid grid-cols-[1fr_auto_1fr] items-center w-full max-w-lg mx-auto">
-                  <!-- Home: FC Kuressaare -->
+                  <!-- Home: Paide Linnameeskond -->
                   <div
                     class="flex flex-col items-center text-center justify-self-center w-full min-w-0 px-2 group cursor-pointer">
                     <div
                       class="w-16 h-16 sm:w-20 sm:h-20 p-1.5 transition-transform duration-300 group-hover:scale-110 flex items-center justify-center relative">
-                      <img id="match-next-homelogo" src="assets/img/jalgpall_logos/kuressaare.png" alt="FC Kuressaare Ametlik Logo"
+                      <img id="match-next-homelogo" src="assets/img/jalgpall_logos/paide.png" alt="Paide Linnameeskond Ametlik Logo"
                         class="w-full h-full object-contain filter drop-shadow">
                     </div>
                     <span id="match-next-hometeam"
                       class="font-display font-black text-lg sm:text-xl text-navy mt-2 tracking-wide uppercase whitespace-nowrap">
-                      <span class="sm:hidden">KUR</span><span class="hidden sm:inline">FC KURESSAARE</span>
+                      <span class="sm:hidden">PLM</span><span class="hidden sm:inline">PAIDE LM</span>
                     </span>
                   </div>
 
@@ -704,17 +709,17 @@
                     </div>
                   </div>
 
-                  <!-- Away: Paide Linnameeskond -->
+                  <!-- Away: Nõmme Kalju FC -->
                   <div
                     class="flex flex-col items-center text-center justify-self-center w-full min-w-0 px-2 group cursor-pointer">
                     <div
                       class="w-16 h-16 sm:w-20 sm:h-20 p-1.5 transition-transform duration-300 group-hover:scale-110 flex items-center justify-center relative">
-                      <img id="match-next-awaylogo" src="assets/img/jalgpall_logos/paide.png"
-                        alt="Paide Linnameeskond Ametlik Logo" class="w-full h-full object-contain filter drop-shadow">
+                      <img id="match-next-awaylogo" src="assets/img/jalgpall_logos/kalju.png"
+                        alt="Nõmme Kalju FC Ametlik Logo" class="w-full h-full object-contain filter drop-shadow">
                     </div>
                     <span id="match-next-awayteam"
                       class="font-display font-black text-lg sm:text-xl text-navy mt-2 tracking-wide uppercase whitespace-nowrap">
-                      <span class="sm:hidden">PLM</span><span class="hidden sm:inline">PAIDE LM</span>
+                      <span class="sm:hidden">NKFC</span><span class="hidden sm:inline">NÕMME KALJU</span>
                     </span>
                   </div>
                 </div>
@@ -761,9 +766,9 @@
                 <span id="match-women-round"
                   class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-100 text-navy font-sans text-xs font-bold uppercase tracking-wide whitespace-nowrap mb-2">
                   <span class="w-1.5 h-1.5 rounded-full bg-crimson animate-ping flex-shrink-0"></span>
-                  <span>Naiste Meistriliiga • 23. Voor</span>
+                  <span>Naiste Meistriliiga • 24. Voor</span>
                 </span>
-                <div id="match-women-date" class="font-display font-extrabold text-xl text-navy">Laupäev, 24. oktoober
+                <div id="match-women-date" class="font-display font-extrabold text-xl text-navy">Laupäev, 31. oktoober
                 </div>
                 <div id="match-women-time"
                   class="text-sm font-semibold text-crimson flex items-center justify-center lg:justify-start gap-1 mt-0.5">
@@ -771,7 +776,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>Avavile: 12:30</span>
+                  <span>Avavile: 17:00</span>
                 </div>
                 <div class="text-xs text-slate-500 mt-2 flex items-center justify-center lg:justify-start gap-1">
                   <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -780,24 +785,24 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <span id="match-women-venue">Paide kunstmuruväljak</span>
+                  <span id="match-women-venue">Viimsi staadion</span>
                 </div>
               </div>
 
               <!-- Teams Face-Off Visual: Strict 3-Column Subgrid locking VS to dead center and crests to identical positions -->
               <div class="lg:col-span-6 min-w-0 w-full flex items-center justify-center">
                 <div class="grid grid-cols-[1fr_auto_1fr] items-center w-full max-w-lg mx-auto">
-                  <!-- Home: Paide Linnanaiskond -->
+                  <!-- Home: Viimsi JK -->
                   <div
                     class="flex flex-col items-center text-center justify-self-center w-full min-w-0 px-2 group cursor-pointer">
                     <div
                       class="w-16 h-16 sm:w-20 sm:h-20 p-1.5 transition-transform duration-300 group-hover:scale-110 flex items-center justify-center relative">
-                      <img id="match-women-homelogo" src="assets/img/jalgpall_logos/paide.png" alt="Paide Linnanaiskond"
+                      <img id="match-women-homelogo" src="assets/img/jalgpall_logos/viimsi.png" alt="Viimsi JK"
                         class="w-full h-full object-contain filter drop-shadow">
                     </div>
                     <span id="match-women-hometeam"
                       class="font-display font-black text-lg sm:text-xl text-navy mt-2 tracking-wide uppercase whitespace-nowrap">
-                      <span class="sm:hidden">PLN</span><span class="hidden sm:inline">PAIDE NAISKOND</span>
+                      <span class="sm:hidden">VII</span><span class="hidden sm:inline">VIIMSI JK</span>
                     </span>
                   </div>
 
@@ -810,17 +815,17 @@
                     </div>
                   </div>
 
-                  <!-- Away: FC Elva -->
+                  <!-- Away: Paide Linnanaiskond -->
                   <div
                     class="flex flex-col items-center text-center justify-self-center w-full min-w-0 px-2 group cursor-pointer">
                     <div
                       class="w-16 h-16 sm:w-20 sm:h-20 p-1.5 transition-transform duration-300 group-hover:scale-110 flex items-center justify-center relative">
-                      <img id="match-women-awaylogo" src="assets/img/jalgpall_logos/elva.png"
-                        alt="FC Elva" class="w-full h-full object-contain filter drop-shadow">
+                      <img id="match-women-awaylogo" src="assets/img/jalgpall_logos/paide.png"
+                        alt="Paide Linnanaiskond" class="w-full h-full object-contain filter drop-shadow">
                     </div>
                     <span id="match-women-awayteam"
                       class="font-display font-black text-lg sm:text-xl text-navy mt-2 tracking-wide uppercase whitespace-nowrap">
-                      <span class="sm:hidden">ELVA</span><span class="hidden sm:inline">FC ELVA</span>
+                      <span class="sm:hidden">PLN</span><span class="hidden sm:inline">PAIDE NAISKOND</span>
                     </span>
                   </div>
                 </div>

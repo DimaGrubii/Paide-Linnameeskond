@@ -60,12 +60,53 @@ function ejlFetchUrl($url, $timeout = 10) {
 }
 
 function ejlCleanText($str) {
-    $str = html_entity_decode(strip_tags((string) $str), ENT_QUOTES, 'UTF-8');
+    $str = preg_replace('/<!--.*?-->/s', '', (string) $str);
+    $str = html_entity_decode(strip_tags($str), ENT_QUOTES, 'UTF-8');
+    $str = str_replace('*', '', $str);
     $str = preg_replace('/\s+/u', ' ', $str);
     return trim($str);
 }
 
-function ejlExtractSeasonHistory($html, $totalRounds, $cleanWomen = false) {
+function ejlParseDateTimestamp($dStr) {
+    if (preg_match('/(\d{2})\.(\d{2})\.(\d{4})(?:\s+(\d{1,2}):(\d{2}))?/', (string) $dStr, $dm)) {
+        $day = (int) $dm[1];
+        $month = (int) $dm[2];
+        $year = (int) $dm[3];
+        $hour = isset($dm[4]) && $dm[4] !== '' ? (int) $dm[4] : 0;
+        $min = isset($dm[5]) && $dm[5] !== '' ? (int) $dm[5] : 0;
+        return mktime($hour, $min, 0, $month, $day, $year);
+    }
+    return 0;
+}
+
+function ejlIsMatchStillLive($evHtml, $dateStr) {
+    $kickoffTs = ejlParseDateTimestamp($dateStr);
+    if ($kickoffTs <= 0) return false;
+    $elapsed = time() - $kickoffTs;
+    // Only matches that kicked off within the last 3.5 hours can be currently live
+    if ($elapsed < -1800 || $elapsed > 12600) {
+        return false;
+    }
+    // Check official EJL protocol status (<small>Hetkeseis</small> vs <small>Lõppseis</small>)
+    if (preg_match('/\/voistlused\/protocol\/(\d+)/', $evHtml, $pm)) {
+        $protoHtml = ejlFetchUrl('https://jalgpall.ee/voistlused/protocol/' . $pm[1], 5);
+        if ($protoHtml) {
+            if (stripos($protoHtml, 'Lõppseis') !== false) {
+                return false;
+            }
+            if (stripos($protoHtml, 'Hetkeseis') !== false) {
+                return true;
+            }
+        }
+    }
+    // Fallback if protocol page could not be reached: a standard match takes ~108 minutes
+    return ($elapsed >= 0 && $elapsed < 6600);
+}
+
+function ejlExtractSeasonHistory($html, $totalRounds, $cleanWomen = false, &$liveMatchesByTeam = null) {
+    if (!is_array($liveMatchesByTeam)) {
+        $liveMatchesByTeam = array();
+    }
     if (!$html) return array();
     $blocks = preg_split('/<div class="block block-01">/i', $html);
     if (!$blocks || count($blocks) <= 1) return array();
@@ -110,13 +151,30 @@ function ejlExtractSeasonHistory($html, $totalRounds, $cleanWomen = false) {
                 if (preg_match('/^(\d+)\s*-\s*(\d+)$/', $scoreClean, $mScore)) {
                     $hg = (int) $mScore[1];
                     $ag = (int) $mScore[2];
-                    $hType = ($hg > $ag) ? 'win' : (($hg < $ag) ? 'loss' : 'draw');
-                    $aType = ($ag > $hg) ? 'win' : (($ag < $hg) ? 'loss' : 'draw');
-                    $hRes = ($hType === 'win' || $hType === 'draw') ? 'V' : 'K';
-                    $aRes = ($aType === 'win' || $aType === 'draw') ? 'V' : 'K';
-                    $hScoreStr = $hg . ':' . $ag . ' vs ' . $away;
-                    $aScoreStr = $ag . ':' . $hg . ' vs ' . $home;
-                    $matchScore = $hg . ':' . $ag;
+
+                    // Do not count in-progress (Hetkeseis) matches in standings/form/history until the match is finished (Lõppseis)
+                    if (ejlIsMatchStillLive($ev, $dateStr)) {
+                        if (!isset($liveMatchesByTeam[$home])) $liveMatchesByTeam[$home] = array();
+                        if (!isset($liveMatchesByTeam[$away])) $liveMatchesByTeam[$away] = array();
+                        $liveMatchesByTeam[$home][] = array('gf' => $hg, 'ga' => $ag);
+                        $liveMatchesByTeam[$away][] = array('gf' => $ag, 'ga' => $hg);
+
+                        $hType = 'upcoming';
+                        $aType = 'upcoming';
+                        $hRes = '-';
+                        $aRes = '-';
+                        $hScoreStr = 'vs ' . $away;
+                        $aScoreStr = 'vs ' . $home;
+                        $matchScore = '-';
+                    } else {
+                        $hType = ($hg > $ag) ? 'win' : (($hg < $ag) ? 'loss' : 'draw');
+                        $aType = ($ag > $hg) ? 'win' : (($ag < $hg) ? 'loss' : 'draw');
+                        $hRes = ($hType === 'win' || $hType === 'draw') ? 'V' : 'K';
+                        $aRes = ($aType === 'win' || $aType === 'draw') ? 'V' : 'K';
+                        $hScoreStr = $hg . ':' . $ag . ' vs ' . $away;
+                        $aScoreStr = $ag . ':' . $hg . ' vs ' . $home;
+                        $matchScore = $hg . ':' . $ag;
+                    }
                 } else {
                     $hType = 'upcoming';
                     $aType = 'upcoming';
@@ -258,7 +316,7 @@ function ejlResolveLocalLogo($teamName, $isWomen = false) {
     return 'assets/img/jalgpall_logos/paide.png';
 }
 
-function ejlParseStandingsTable($html, $existingTeamsMap, $seasonHistoryMap, $isWomen = false) {
+function ejlParseStandingsTable($html, $existingTeamsMap, $seasonHistoryMap, $isWomen = false, $liveMatchesByTeam = array()) {
     if (!$html) return array();
     if (!preg_match_all('/<table[^>]*>(.*?)<\/table>/is', $html, $tables) || empty($tables[1])) {
         return array();
@@ -271,6 +329,7 @@ function ejlParseStandingsTable($html, $existingTeamsMap, $seasonHistoryMap, $is
 
     $standings = array();
     $rowList = array_slice($rows[1], 1);
+    $adjustedAnyLive = false;
 
     foreach ($rowList as $r) {
         if (!preg_match_all('/<t[dh][^>]*>(.*?)<\/t[dh]>/is', $r, $cols) || count($cols[1]) < 9) {
@@ -307,12 +366,41 @@ function ejlParseStandingsTable($html, $existingTeamsMap, $seasonHistoryMap, $is
             $gf = (int) trim($parts[0]);
             $ga = (int) trim($parts[1]);
         }
-        $gd = $gf - $ga;
-        $gdStr = ($gd > 0) ? ('+' . $gd) : (string) $gd;
 
         $prevTeam = isset($existingTeamsMap[$teamName]) ? $existingTeamsMap[$teamName] : array();
         $fallbackHistory = isset($prevTeam['seasonHistory']) ? $prevTeam['seasonHistory'] : array();
         $teamHistory = !empty($seasonHistoryMap[$teamName]) ? $seasonHistoryMap[$teamName] : $fallbackHistory;
+
+        // If EJL's live table prematurely included an in-progress (Hetkeseis) match, subtract it until Lõppseis
+        if (!empty($liveMatchesByTeam[$teamName]) && is_array($teamHistory)) {
+            $finishedCount = 0;
+            foreach ($teamHistory as $hm) {
+                if (isset($hm['type']) && in_array($hm['type'], array('win', 'draw', 'loss'), true)) {
+                    $finishedCount++;
+                }
+            }
+            if ($played > $finishedCount) {
+                foreach ($liveMatchesByTeam[$teamName] as $lm) {
+                    if ($played <= $finishedCount) break;
+                    $played = max(0, $played - 1);
+                    $gf = max(0, $gf - (int) $lm['gf']);
+                    $ga = max(0, $ga - (int) $lm['ga']);
+                    if ($lm['gf'] > $lm['ga']) {
+                        $won = max(0, $won - 1);
+                        $points = max(0, $points - 3);
+                    } elseif ($lm['gf'] < $lm['ga']) {
+                        $lost = max(0, $lost - 1);
+                    } else {
+                        $drawn = max(0, $drawn - 1);
+                        $points = max(0, $points - 1);
+                    }
+                    $adjustedAnyLive = true;
+                }
+            }
+        }
+
+        $gd = $gf - $ga;
+        $gdStr = ($gd > 0) ? ('+' . $gd) : (string) $gd;
 
         $fallbackForm = isset($prevTeam['form']) ? $prevTeam['form'] : array();
         $formData = ejlComputeRecentForm($teamHistory, $fallbackForm);
@@ -336,6 +424,22 @@ function ejlParseStandingsTable($html, $existingTeamsMap, $seasonHistoryMap, $is
         );
     }
 
+    if ($adjustedAnyLive && count($standings) > 1) {
+        usort($standings, function ($a, $b) {
+            if ($a['points'] !== $b['points']) return $b['points'] - $a['points'];
+            if ($a['won'] !== $b['won']) return $b['won'] - $a['won'];
+            $gdA = $a['goalsFor'] - $a['goalsAgainst'];
+            $gdB = $b['goalsFor'] - $b['goalsAgainst'];
+            if ($gdA !== $gdB) return $gdB - $gdA;
+            if ($a['goalsFor'] !== $b['goalsFor']) return $b['goalsFor'] - $a['goalsFor'];
+            return $a['position'] - $b['position'];
+        });
+        foreach ($standings as $idx => &$row) {
+            $row['position'] = $idx + 1;
+        }
+        unset($row);
+    }
+
     return $standings;
 }
 
@@ -344,7 +448,7 @@ function ejlParseStandingsTable($html, $existingTeamsMap, $seasonHistoryMap, $is
 // ============================================================================
 $dataFile = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'jalgpall-data.json';
 $forceRefresh = (isset($_GET['force']) && $_GET['force'] === '1') || (PHP_SAPI === 'cli');
-$syncTtlSeconds = 900; // 15 minutes cache on Zone.ee
+$syncTtlSeconds = 120; // 2 minutes cache on Zone.ee so finished matches update promptly
 
 $existingData = array();
 if (file_exists($dataFile)) {
@@ -357,7 +461,7 @@ if (file_exists($dataFile)) {
     }
 }
 
-// Return existing JSON if fresh (< 15 min old) and not forced
+// Return existing JSON if fresh (< 2 min old) and not forced
 if (!$forceRefresh && !empty($existingData) && file_exists($dataFile) && (time() - filemtime($dataFile)) < $syncTtlSeconds) {
     echo json_encode($existingData, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     exit;
@@ -378,16 +482,18 @@ if (isset($existingData['standings']['naisteMeistriliiga']) && is_array($existin
 }
 
 // 1. Fetch Premium Liiga Standings & Calendar (36 rounds)
+$menLiveByTeam = array();
 $menLeagueHtml = ejlFetchUrl('https://jalgpall.ee/voistlused/52/premium-liiga', 10);
 $menCalHtml    = ejlFetchUrl('https://jalgpall.ee/voistlused/52/liigad/calendar?season=2026', 10);
-$menHistoryMap = $menCalHtml ? ejlExtractSeasonHistory($menCalHtml, 36, false) : array();
-$menStandings  = $menLeagueHtml ? ejlParseStandingsTable($menLeagueHtml, $existingMenMap, $menHistoryMap, false) : array();
+$menHistoryMap = $menCalHtml ? ejlExtractSeasonHistory($menCalHtml, 36, false, $menLiveByTeam) : array();
+$menStandings  = $menLeagueHtml ? ejlParseStandingsTable($menLeagueHtml, $existingMenMap, $menHistoryMap, false, $menLiveByTeam) : array();
 
 // 2. Fetch Naiste Meistriliiga Standings & Calendar (25 rounds)
+$womenLiveByTeam = array();
 $womenLeagueHtml = ejlFetchUrl('https://jalgpall.ee/voistlused/naised/63/naiste-meistriliiga', 10);
 $womenCalHtml    = ejlFetchUrl('https://jalgpall.ee/voistlused/63/liigad/calendar?season=2026', 10);
-$womenHistoryMap = $womenCalHtml ? ejlExtractSeasonHistory($womenCalHtml, 25, true) : array();
-$womenStandings  = $womenLeagueHtml ? ejlParseStandingsTable($womenLeagueHtml, $existingWomenMap, $womenHistoryMap, true) : array();
+$womenHistoryMap = $womenCalHtml ? ejlExtractSeasonHistory($womenCalHtml, 25, true, $womenLiveByTeam) : array();
+$womenStandings  = $womenLeagueHtml ? ejlParseStandingsTable($womenLeagueHtml, $existingWomenMap, $womenHistoryMap, true, $womenLiveByTeam) : array();
 
 $updatedAny = false;
 if (count($menStandings) >= 10) {
