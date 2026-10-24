@@ -362,14 +362,14 @@ function discoverPaideProtocols() {
 // ============================================================================
 // MAIN EXECUTION WITH 20-SECOND CACHE
 // ============================================================================
-// Pin the 4-0 PLN vs ELVA match (protocol 141643) by default unless ?auto=1 or another ?protocol_id= is specified
-$defaultPinnedProtocol = (isset($_GET['auto']) && $_GET['auto'] === '1') ? '' : '141643';
+// Pin the 0-1 KUR vs PLM match (protocol 143893) by default unless ?auto=1 or another ?protocol_id= is specified
+$defaultPinnedProtocol = (isset($_GET['auto']) && $_GET['auto'] === '1') ? '' : '143893';
 $requestedProtocol = isset($_GET['protocol_id'])
     ? preg_replace('/[^0-9]/', '', $_GET['protocol_id'])
     : $defaultPinnedProtocol;
 $forceRefresh = isset($_GET['force']) && $_GET['force'] === '1';
 
-$cacheKey = $requestedProtocol !== '' ? 'paide_live_proto_v4_' . $requestedProtocol : 'paide_live_auto_v4';
+$cacheKey = $requestedProtocol !== '' ? 'paide_live_proto_v5_' . $requestedProtocol : 'paide_live_auto_v5';
 $cacheFile = rtrim(sys_get_temp_dir(), '/\\') . DIRECTORY_SEPARATOR . $cacheKey . '.json';
 $cacheTtl = 15; // 15 seconds cache
 

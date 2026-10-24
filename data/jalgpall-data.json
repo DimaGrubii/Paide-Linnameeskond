@@ -2,7 +2,7 @@
   "metadata": {
     "source": "Eesti Jalgpalli Liit (EJL)",
     "sourceUrl": "https://jalgpall.ee/voistlused/52/team/5",
-    "lastUpdated": "2026-10-24T12:28:09.986459",
+    "lastUpdated": "2026-10-24T16:23:25.414010",
     "season": "2026",
     "status": "success"
   },
@@ -412,6 +412,29 @@
       }
     ],
     "recent": [
+      {
+        "type": "finished",
+        "meta": "PL 24.10.2026 Kell 14:30",
+        "tournament": "A. Le Coq Premium Liiga",
+        "round": "33. voor",
+        "dateDisplay": "Laupäev, 24. oktoober",
+        "timeDisplay": "14:30",
+        "homeTeam": "FC Kuressaare",
+        "score": "0 - 1",
+        "awayTeam": "Paide Linnameeskond",
+        "venue": "Kuressaare linnastaadion",
+        "attendance": 139,
+        "protocolUrl": "https://jalgpall.ee/voistlused/protocol/143893",
+        "scorers": [
+          {
+            "minute": "38'",
+            "player": "Juan Sebastian Palacios Murillo",
+            "team": "Paide Linnameeskond",
+            "runningScore": "0 : 1",
+            "isPaide": true
+          }
+        ]
+      },
       {
         "type": "finished",
         "meta": "PL 18.10.2026 Kell 17:00",

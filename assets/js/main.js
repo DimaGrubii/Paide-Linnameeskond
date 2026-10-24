@@ -226,20 +226,20 @@ function updateTrackerCard(gender) {
       if (badge) badge.textContent = 'NAISTE MEISTRILIIGA';
       if (season) season.textContent = 'HOOAEG 2026';
       if (title) title.textContent = 'VÕITLUS MEISTRITIITLI NIMEL';
-      if (desc) desc.textContent = 'Paide Linnanaiskond alistas kodus Tallinna FC Flora 2:0 ning tõusis 45 punktiga liidriga samale pulgale, võideldes meistritiitli nimel!';
+      if (desc) desc.textContent = 'Paide Linnanaiskond alistas kodus FC Elva 4:0 ning tõusis 48 punktiga Naiste Meistriliiga ainuliidriks, edestades Tallinna FC Florat 3 punktiga!';
       if (gapLabel) gapLabel.textContent = 'Edu 3. koha ees (Saku):';
-      if (gapVal) gapVal.textContent = '+7 punkti';
-      if (progress) progress.style.width = '91.7%';
-      if (played) played.textContent = 'Mängitud 22/24 vooru';
+      if (gapVal) gapVal.textContent = '+10 punkti';
+      if (progress) progress.style.width = '92.0%';
+      if (played) played.textContent = 'Mängitud 23/25 vooru';
     } else {
       if (badge) badge.textContent = 'UEFA CONFERENCE LEAGUE';
       if (season) season.textContent = 'HOOAEG 2026';
       if (title) title.textContent = 'EUROSARJA PÄÄSE';
-      if (desc) desc.textContent = 'Paide hoiab pärast 2:1 võitu JK Narva Transi üle Premium Liigas 57 punktiga 3. positsiooni, püsides vaid ühe punkti kaugusel 2. kohast ja tugeval kursil UEFA Konverentsiliigasse!';
+      if (desc) desc.textContent = 'Paide tõusis pärast 1:0 võitu FC Kuressaare üle Premium Liigas 60 punktiga 2. positsioonile, edestades Tallinna FC Florat 2 punktiga ja püsides kindlal kursil UEFA Konverentsiliigasse!';
       if (gapLabel) gapLabel.textContent = 'Edu 4. koha ees (Kalju):';
-      if (gapVal) gapVal.textContent = '+6 punkti';
-      if (progress) progress.style.width = '88.9%';
-      if (played) played.textContent = 'Mängitud 32/36 vooru';
+      if (gapVal) gapVal.textContent = '+9 punkti';
+      if (progress) progress.style.width = '91.7%';
+      if (played) played.textContent = 'Mängitud 33/36 vooru';
     }
     card.style.opacity = '1';
   }, 120);
