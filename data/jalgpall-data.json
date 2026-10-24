@@ -2,7 +2,7 @@
   "metadata": {
     "source": "Eesti Jalgpalli Liit (EJL)",
     "sourceUrl": "https://jalgpall.ee/voistlused/52/team/5",
-    "lastUpdated": "2026-10-24T16:23:25.414010",
+    "lastUpdated": "2026-10-24T22:15:57.812581",
     "season": "2026",
     "status": "success"
   },
@@ -854,22 +854,16 @@
         "team": "Tallinna FCI Levadia",
         "logo": "https://jalgpall.ee/images/logos/057147CE8C38CC81522C3741AADA2D4B",
         "localLogo": "assets/img/jalgpall_logos/levadia.png",
-        "played": 32,
-        "won": 25,
+        "played": 33,
+        "won": 26,
         "drawn": 6,
         "lost": 1,
-        "goalsFor": 87,
-        "goalsAgainst": 22,
-        "goalDifference": "+65",
-        "points": 81,
+        "goalsFor": 89,
+        "goalsAgainst": 23,
+        "goalDifference": "+66",
+        "points": 84,
         "isPaide": false,
         "form": [
-          {
-            "result": "V",
-            "type": "win",
-            "score": "1:0 vs Paide Linnameeskond",
-            "opponent": "Paide Linnameeskond"
-          },
           {
             "result": "V",
             "type": "win",
@@ -881,6 +875,12 @@
             "type": "win",
             "score": "2:0 vs FC Kuressaare",
             "opponent": "FC Kuressaare"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "2:1 vs Harju JK Laagri",
+            "opponent": "Harju JK Laagri"
           }
         ],
         "seasonHistory": [
@@ -1270,10 +1270,10 @@
           },
           {
             "round": 33,
-            "type": "upcoming",
-            "result": "-",
-            "score": "vs Harju JK Laagri",
-            "matchScore": "-",
+            "type": "win",
+            "result": "V",
+            "score": "2:1 vs Harju JK Laagri",
+            "matchScore": "2:1",
             "homeTeam": "Tallinna FCI Levadia",
             "awayTeam": "Harju JK Laagri",
             "opponent": "Harju JK Laagri",
@@ -3199,22 +3199,16 @@
         "team": "Harju JK Laagri",
         "logo": "https://jalgpall.ee/images/clubs/B35E6F475CFD782B9499B3FAF26C3A55",
         "localLogo": "assets/img/jalgpall_logos/harju.png",
-        "played": 33,
+        "played": 34,
         "won": 15,
         "drawn": 2,
-        "lost": 16,
-        "goalsFor": 48,
-        "goalsAgainst": 48,
-        "goalDifference": "0",
+        "lost": 17,
+        "goalsFor": 49,
+        "goalsAgainst": 50,
+        "goalDifference": "-1",
         "points": 47,
         "isPaide": false,
         "form": [
-          {
-            "result": "V",
-            "type": "win",
-            "score": "2:0 vs FC Nõmme United",
-            "opponent": "FC Nõmme United"
-          },
           {
             "result": "V",
             "type": "win",
@@ -3226,6 +3220,12 @@
             "type": "win",
             "score": "3:1 vs Tallinna FC Flora",
             "opponent": "Tallinna FC Flora"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "1:2 vs Tallinna FCI Levadia",
+            "opponent": "Tallinna FCI Levadia"
           }
         ],
         "seasonHistory": [
@@ -3615,10 +3615,10 @@
           },
           {
             "round": 33,
-            "type": "upcoming",
-            "result": "-",
-            "score": "vs Tallinna FCI Levadia",
-            "matchScore": "-",
+            "type": "loss",
+            "result": "K",
+            "score": "1:2 vs Tallinna FCI Levadia",
+            "matchScore": "2:1",
             "homeTeam": "Tallinna FCI Levadia",
             "awayTeam": "Harju JK Laagri",
             "opponent": "Tallinna FCI Levadia",
