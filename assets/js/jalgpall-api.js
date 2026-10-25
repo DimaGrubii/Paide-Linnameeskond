@@ -198,6 +198,7 @@ const JalgpallSync = (function () {
 
     // 3. Update Matchday Strip (Men & Women)
     if (data.matches && data.matches.next) {
+      const topTickerMatch = document.getElementById('top-ticker-match');
       const nextHome = document.getElementById('match-next-hometeam');
       const nextAway = document.getElementById('match-next-awayteam');
       const nextDate = document.getElementById('match-next-date');
@@ -206,6 +207,10 @@ const JalgpallSync = (function () {
       const nextVenue = document.getElementById('match-next-venue');
       const nextHomeLogo = document.getElementById('match-next-homelogo');
       const nextAwayLogo = document.getElementById('match-next-awaylogo');
+
+      if (topTickerMatch) {
+        topTickerMatch.innerHTML = 'Premium Liiga: <strong class="text-white">Paide Linnameeskond vs Nõmme Kalju FC</strong> • Kolmapäev, 28. okt kell 19:00 • Paide kunstmuruväljak';
+      }
 
       if (nextHome) nextHome.innerHTML = '<span class="sm:hidden">PLM</span><span class="hidden sm:inline">PAIDE LM</span>';
       if (nextAway) nextAway.innerHTML = '<span class="sm:hidden">NKFC</span><span class="hidden sm:inline">NÕMME KALJU</span>';
