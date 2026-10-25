@@ -2,7 +2,7 @@
   "metadata": {
     "source": "Eesti Jalgpalli Liit (EJL)",
     "sourceUrl": "https://jalgpall.ee/voistlused/52/team/5",
-    "lastUpdated": "2026-10-24T22:15:57.812581",
+    "lastUpdated": "2026-10-25T12:59:11.890583",
     "season": "2026",
     "status": "success"
   },
@@ -1792,22 +1792,16 @@
         "team": "Tallinna FC Flora",
         "logo": "https://www.jalgpall.ee/images/teams/9FA11522AB09B90003E8875D5B25116A",
         "localLogo": "assets/img/jalgpall_logos/flora.png",
-        "played": 33,
+        "played": 34,
         "won": 19,
         "drawn": 1,
-        "lost": 13,
-        "goalsFor": 63,
-        "goalsAgainst": 47,
-        "goalDifference": "+16",
+        "lost": 14,
+        "goalsFor": 64,
+        "goalsAgainst": 49,
+        "goalDifference": "+15",
         "points": 58,
         "isPaide": false,
         "form": [
-          {
-            "result": "K",
-            "type": "loss",
-            "score": "1:3 vs Tallinna FCI Levadia",
-            "opponent": "Tallinna FCI Levadia"
-          },
           {
             "result": "V",
             "type": "win",
@@ -1819,6 +1813,12 @@
             "type": "loss",
             "score": "1:3 vs Harju JK Laagri",
             "opponent": "Harju JK Laagri"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "1:2 vs Nõmme Kalju FC",
+            "opponent": "Nõmme Kalju FC"
           }
         ],
         "seasonHistory": [
@@ -2208,10 +2208,10 @@
           },
           {
             "round": 33,
-            "type": "upcoming",
-            "result": "-",
-            "score": "vs Nõmme Kalju FC",
-            "matchScore": "-",
+            "type": "loss",
+            "result": "K",
+            "score": "1:2 vs Nõmme Kalju FC",
+            "matchScore": "2:1",
             "homeTeam": "Nõmme Kalju FC",
             "awayTeam": "Tallinna FC Flora",
             "opponent": "Nõmme Kalju FC",
@@ -2261,22 +2261,16 @@
         "team": "Nõmme Kalju FC",
         "logo": "https://jalgpall.ee/images/logos/C287B9A18B8C02FDA9A7E921E6D3E645",
         "localLogo": "assets/img/jalgpall_logos/kalju.png",
-        "played": 32,
-        "won": 15,
+        "played": 33,
+        "won": 16,
         "drawn": 6,
         "lost": 11,
-        "goalsFor": 54,
-        "goalsAgainst": 33,
-        "goalDifference": "+21",
-        "points": 51,
+        "goalsFor": 56,
+        "goalsAgainst": 34,
+        "goalDifference": "+22",
+        "points": 54,
         "isPaide": false,
         "form": [
-          {
-            "result": "K",
-            "type": "loss",
-            "score": "0:1 vs Harju JK Laagri",
-            "opponent": "Harju JK Laagri"
-          },
           {
             "result": "V",
             "type": "draw",
@@ -2288,6 +2282,12 @@
             "type": "loss",
             "score": "0:3 vs FC Nõmme United",
             "opponent": "FC Nõmme United"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "2:1 vs Tallinna FC Flora",
+            "opponent": "Tallinna FC Flora"
           }
         ],
         "seasonHistory": [
@@ -2677,10 +2677,10 @@
           },
           {
             "round": 33,
-            "type": "upcoming",
-            "result": "-",
-            "score": "vs Tallinna FC Flora",
-            "matchScore": "-",
+            "type": "win",
+            "result": "V",
+            "score": "2:1 vs Tallinna FC Flora",
+            "matchScore": "2:1",
             "homeTeam": "Nõmme Kalju FC",
             "awayTeam": "Tallinna FC Flora",
             "opponent": "Tallinna FC Flora",
