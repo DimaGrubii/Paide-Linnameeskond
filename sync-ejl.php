@@ -372,6 +372,7 @@ function ejlParseStandingsTable($html, $existingTeamsMap, $seasonHistoryMap, $is
         $teamHistory = !empty($seasonHistoryMap[$teamName]) ? $seasonHistoryMap[$teamName] : $fallbackHistory;
 
         // If EJL's live table prematurely included an in-progress (Hetkeseis) match, subtract it until Lõppseis
+        $rowAdjusted = false;
         if (!empty($liveMatchesByTeam[$teamName]) && is_array($teamHistory)) {
             $finishedCount = 0;
             foreach ($teamHistory as $hm) {
@@ -395,6 +396,7 @@ function ejlParseStandingsTable($html, $existingTeamsMap, $seasonHistoryMap, $is
                         $points = max(0, $points - 1);
                     }
                     $adjustedAnyLive = true;
+                    $rowAdjusted = true;
                 }
             }
         }
@@ -420,22 +422,64 @@ function ejlParseStandingsTable($html, $existingTeamsMap, $seasonHistoryMap, $is
             'points'         => $points,
             'isPaide'        => (stripos($teamName, 'Paide') !== false),
             'form'           => $formData,
-            'seasonHistory'  => $teamHistory
+            'seasonHistory'  => $teamHistory,
+            '_wasAdjusted'   => $rowAdjusted
         );
     }
 
     if ($adjustedAnyLive && count($standings) > 1) {
         usort($standings, function ($a, $b) {
             if ($a['points'] !== $b['points']) return $b['points'] - $a['points'];
-            if ($a['won'] !== $b['won']) return $b['won'] - $a['won'];
-            $gdA = $a['goalsFor'] - $a['goalsAgainst'];
-            $gdB = $b['goalsFor'] - $b['goalsAgainst'];
+            // Preserve official EJL table order when neither team had a live match subtracted
+            if (empty($a['_wasAdjusted']) && empty($b['_wasAdjusted'])) {
+                return $a['position'] - $b['position'];
+            }
+            // Otherwise evaluate head-to-head (omavahelised mängud) first per EJL regulations
+            $ptsA = 0; $ptsB = 0; $gdA = 0; $gdB = 0;
+            $oppName = isset($b['team']) ? $b['team'] : '';
+            if (!empty($a['seasonHistory']) && is_array($a['seasonHistory'])) {
+                foreach ($a['seasonHistory'] as $m) {
+                    if (isset($m['opponent'], $m['type']) && $m['opponent'] === $oppName && in_array($m['type'], array('win', 'draw', 'loss'), true)) {
+                        if ($m['type'] === 'win') {
+                            $ptsA += 3;
+                        } elseif ($m['type'] === 'draw') {
+                            $ptsA += 1;
+                            $ptsB += 1;
+                        } else {
+                            $ptsB += 3;
+                        }
+                        if (!empty($m['matchScore']) && strpos($m['matchScore'], ':') !== false) {
+                            $parts = explode(':', $m['matchScore']);
+                            $hg = (int) trim($parts[0]);
+                            $ag = (int) trim($parts[1]);
+                            if (!empty($m['isHome'])) {
+                                $gdA += ($hg - $ag);
+                                $gdB += ($ag - $hg);
+                            } else {
+                                $gdA += ($ag - $hg);
+                                $gdB += ($hg - $ag);
+                            }
+                        }
+                    }
+                }
+            }
+            if ($ptsA !== $ptsB) return $ptsB - $ptsA;
             if ($gdA !== $gdB) return $gdB - $gdA;
+            if ($a['won'] !== $b['won']) return $b['won'] - $a['won'];
+            $totGdA = $a['goalsFor'] - $a['goalsAgainst'];
+            $totGdB = $b['goalsFor'] - $b['goalsAgainst'];
+            if ($totGdA !== $totGdB) return $totGdB - $totGdA;
             if ($a['goalsFor'] !== $b['goalsFor']) return $b['goalsFor'] - $a['goalsFor'];
             return $a['position'] - $b['position'];
         });
         foreach ($standings as $idx => &$row) {
             $row['position'] = $idx + 1;
+            unset($row['_wasAdjusted']);
+        }
+        unset($row);
+    } else {
+        foreach ($standings as &$row) {
+            unset($row['_wasAdjusted']);
         }
         unset($row);
     }

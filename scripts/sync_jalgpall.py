@@ -12,6 +12,10 @@ import re
 import os
 import sys
 from datetime import datetime
+from functools import cmp_to_key
+from zoneinfo import ZoneInfo
+
+TALLINN_TZ = ZoneInfo('Europe/Tallinn')
 
 def fetch_url(url):
     ctx = ssl._create_unverified_context()
@@ -302,13 +306,13 @@ def parse_date_ts(date_str):
     day, month, year = int(dm.group(1)), int(dm.group(2)), int(dm.group(3))
     hour = int(dm.group(4)) if dm.group(4) else 0
     minute = int(dm.group(5)) if dm.group(5) else 0
-    return int(datetime(year, month, day, hour, minute).timestamp())
+    return int(datetime(year, month, day, hour, minute, tzinfo=TALLINN_TZ).timestamp())
 
 def is_match_still_live(ev_html, date_str):
     ko_ts = parse_date_ts(date_str)
     if ko_ts <= 0:
         return False
-    now_ts = int(datetime.now().timestamp())
+    now_ts = int(datetime.now(TALLINN_TZ).timestamp())
     elapsed = now_ts - ko_ts
     if elapsed < -1800 or elapsed > 12600:
         return False
@@ -454,10 +458,35 @@ def compute_recent_form(season_history, fallback_form=None):
         for m in last3
     ]
 
+def compute_h2h_stats(row_a, row_b):
+    pts_a = pts_b = gd_a = gd_b = 0
+    opp_name = row_b.get('team', '')
+    for m in row_a.get('seasonHistory', []):
+        if m.get('opponent') == opp_name and m.get('type') in ('win', 'draw', 'loss'):
+            if m['type'] == 'win':
+                pts_a += 3
+            elif m['type'] == 'draw':
+                pts_a += 1
+                pts_b += 1
+            else:
+                pts_b += 3
+            ms = m.get('matchScore', '')
+            if ':' in ms:
+                parts = ms.split(':')
+                if len(parts) == 2 and parts[0].isdigit() and parts[1].isdigit():
+                    hg, ag = int(parts[0]), int(parts[1])
+                    if m.get('isHome'):
+                        gd_a += (hg - ag)
+                        gd_b += (ag - hg)
+                    else:
+                        gd_a += (ag - hg)
+                        gd_b += (hg - ag)
+    return pts_a, pts_b, gd_a, gd_b
+
 def adjust_standings_for_live_matches(standings, live_matches_by_team):
     if not live_matches_by_team or not standings:
         return standings
-    adjusted_any = False
+    adjusted_teams = set()
     for row in standings:
         t_name = row['team']
         live_list = live_matches_by_team.get(t_name, [])
@@ -481,9 +510,31 @@ def adjust_standings_for_live_matches(standings, live_matches_by_team):
                     row['points'] = max(0, row['points'] - 1)
                 gd = row['goalsFor'] - row['goalsAgainst']
                 row['goalDifference'] = f'+{gd}' if gd > 0 else str(gd)
-                adjusted_any = True
-    if adjusted_any:
-        standings.sort(key=lambda r: (-r['points'], -r['won'], -(r['goalsFor'] - r['goalsAgainst']), -r['goalsFor'], r['position']))
+                adjusted_teams.add(t_name)
+    if adjusted_teams:
+        def cmp_rows(a, b):
+            if a['points'] != b['points']:
+                return b['points'] - a['points']
+            # If neither team was adjusted, preserve EJL's official tiebreaker position order
+            if a['team'] not in adjusted_teams and b['team'] not in adjusted_teams:
+                return a['position'] - b['position']
+            # Otherwise apply EJL head-to-head tiebreaker first, then wins, GD, GF, and EJL position
+            pts_a, pts_b, gd_a, gd_b = compute_h2h_stats(a, b)
+            if pts_a != pts_b:
+                return pts_b - pts_a
+            if gd_a != gd_b:
+                return gd_b - gd_a
+            if a['won'] != b['won']:
+                return b['won'] - a['won']
+            total_gd_a = a['goalsFor'] - a['goalsAgainst']
+            total_gd_b = b['goalsFor'] - b['goalsAgainst']
+            if total_gd_a != total_gd_b:
+                return total_gd_b - total_gd_a
+            if a['goalsFor'] != b['goalsFor']:
+                return b['goalsFor'] - a['goalsFor']
+            return a['position'] - b['position']
+
+        standings.sort(key=cmp_to_key(cmp_rows))
         for idx, row in enumerate(standings):
             row['position'] = idx + 1
     return standings

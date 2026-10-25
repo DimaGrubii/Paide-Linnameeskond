@@ -226,9 +226,9 @@ function updateTrackerCard(gender) {
       if (badge) badge.textContent = 'NAISTE MEISTRILIIGA';
       if (season) season.textContent = 'HOOAEG 2026';
       if (title) title.textContent = 'VÕITLUS MEISTRITIITLI NIMEL';
-      if (desc) desc.textContent = 'Paide Linnanaiskond alistas kodus FC Elva 4:0 ning tõusis 48 punktiga Naiste Meistriliiga ainuliidriks, edestades Tallinna FC Florat 3 punktiga!';
+      if (desc) desc.textContent = 'Paide Linnanaiskond alistas kodus FC Elva 4:0 ning on 48 punktiga liidri Tallinna FC Floraga samal pulgal 2. positsioonil, võideldes meistritiitli nimel!';
       if (gapLabel) gapLabel.textContent = 'Edu 3. koha ees (Saku):';
-      if (gapVal) gapVal.textContent = '+10 punkti';
+      if (gapVal) gapVal.textContent = '+7 punkti';
       if (progress) progress.style.width = '92.0%';
       if (played) played.textContent = 'Mängitud 23/25 vooru';
     } else {
@@ -237,7 +237,7 @@ function updateTrackerCard(gender) {
       if (title) title.textContent = 'EUROSARJA PÄÄSE';
       if (desc) desc.textContent = 'Paide tõusis pärast 1:0 võitu FC Kuressaare üle Premium Liigas 60 punktiga 2. positsioonile, edestades Tallinna FC Florat 2 punktiga ja püsides kindlal kursil UEFA Konverentsiliigasse!';
       if (gapLabel) gapLabel.textContent = 'Edu 4. koha ees (Kalju):';
-      if (gapVal) gapVal.textContent = '+9 punkti';
+      if (gapVal) gapVal.textContent = '+6 punkti';
       if (progress) progress.style.width = '91.7%';
       if (played) played.textContent = 'Mängitud 33/36 vooru';
     }
