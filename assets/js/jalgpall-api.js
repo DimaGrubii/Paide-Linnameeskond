@@ -1649,6 +1649,10 @@ const JalgpallSync = (function () {
       return;
     }
 
+    // Keep Kuressaare vs Paide result card hidden unless demo_live=1 is active
+    card.classList.add('hidden');
+    return;
+
     // 1. Try local PHP endpoint first (works on production / PHP server)
     try {
       const controller = new AbortController();
@@ -1750,7 +1754,7 @@ const JalgpallSync = (function () {
   function initLiveMatchTracker() {
     const card = document.getElementById('matchday-latest-result');
     if (!card) return;
-    card.classList.remove('hidden');
+    card.classList.add('hidden');
 
     // Optional URL test mode (?demo_live=1) to preview an active 77:52 live match with goals
     try {

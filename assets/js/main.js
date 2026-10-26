@@ -514,13 +514,13 @@ function initMatchdayToggle() {
 /* 6. HERO EDITORIAL STORIES SWITCHER                                         */
 /* -------------------------------------------------------------------------- */
 const defaultHeroStory = {
-  tag: 'NAISTE MEISTRILIIGA • PAIDE 2:0 FLORA',
-  title: 'LINNANAISKOND ALISTAS FLORA JA TÕUSIS TIITLIHEITLUSES ÜHELE PULGALE!',
-  date: '17. OKTOOBER 2026',
+  tag: 'NAISTE MEISTRILIIGA • PAIDE 4:0 ELVA',
+  title: 'LINNANAISKOND ALISTAS ELVA JA JÄTKAB MEISTRITIITLI JAHTI!',
+  date: '26. OKTOOBER 2026',
   readTime: '2 MIN LUGEMIST',
-  desc: 'Paide Linnanaiskond alistas reedel, 16. oktoobril Paide kunstmuruväljakul naiste Meistriliiga senise tabeliliidri FC Flora tulemusega 2:0 ning tõusis seeläbi pealinna rohelistega võrdsele punktisummale. Võitlus Eesti meistritiitli nimel jätkub täie hooga!',
-  image: 'assets/img/news/PLN_FCF_Victory.JPEG',
-  link: 'artikkel-linnanaiskond-flora-voit.html',
+  desc: 'Paide Linnanaiskond jätkas naiste Meistriliiga hooaja lõpusirgel võidulainel, kui laupäeval, 24. oktoobril alistati kodusel kunstmuruväljakul FC Elva naiskond kindlalt 4:0. Kaks väravat said kirja nii Lisandra Rannasto kui ka Katriin Rodi!',
+  image: 'assets/img/news/PLN_Elva_Victory.JPEG',
+  link: 'artikkel-linnanaiskond-elva-voit.html',
   btnText: 'Loe täispikka uudist'
 };
 
@@ -1031,6 +1031,16 @@ function initNewsFilters() {
       },
       secondary: [
         {
+          href: 'artikkel-linnanaiskond-elva-voit.html',
+          img: 'assets/img/news/PLN_Elva_Victory.JPEG',
+          alt: 'Linnanaiskond alistas Elva ja jätkab meistritiitli jahti!',
+          badge: 'NAISMEESKOND',
+          badgeClass: 'bg-crimson',
+          date: '26. OKTOOBER 2026 • 2 MIN',
+          title: 'Linnanaiskond alistas Elva ja jätkab meistritiitli jahti!',
+          excerpt: 'Paide Linnanaiskond alistas kodusel kunstmuruväljakul FC Elva naiskonna kindlalt 4:0. Kaks väravat said kirja nii Lisandra Rannasto kui ka Katriin Rodi!'
+        },
+        {
           href: 'artikkel-linnanaiskond-flora-voit.html',
           img: 'assets/img/news/PLN_FCF_Victory.JPEG',
           alt: 'Linnanaiskond alistas Flora ja tõusis tiitliheitluses ühele pulgale!',
@@ -1049,16 +1059,6 @@ function initNewsFilters() {
           date: '15. OKTOOBER 2026 • 2 MIN',
           title: 'Lilanderi üleminutite värav tõi Linnameeskonnale magusa võidu Tammeka üle!',
           excerpt: 'Paide Linnameeskond teenis Premium liiga 31. voorus koduväljakul väärtusliku 2:1 võidu Tartu JK Tammeka üle. Kohtumise kangelaseks kerkis Michael Lilander!'
-        },
-        {
-          href: 'artikkel-linnanaiskond-mayo.html',
-          img: 'assets/img/photos/Mayo_presentation_1_web.jpg',
-          alt: 'Kennedy Avery Mayo esitleb Paide särki',
-          badge: 'NAISMEESKOND',
-          badgeClass: 'bg-crimson',
-          date: '18. SEPTEMBER 2026 • 2 MIN',
-          title: 'Linnanaiskond sai esimese välismängija',
-          excerpt: 'Paide Linnanaiskonnaga liitus 23-aastane ameeriklannast ründaja Kennedy Avery Mayo (#21), kes toob naiskonda uut teravust.'
         }
       ]
     },
@@ -1113,21 +1113,31 @@ function initNewsFilters() {
     },
     naiskond: {
       lead: {
-        img: 'assets/img/news/PLN_FCF_Victory.JPEG',
-        alt: 'Paide Linnanaiskonna võidurõõm FC Flora üle',
+        img: 'assets/img/news/PLN_Elva_Victory.JPEG',
+        alt: 'Paide Linnanaiskonna 4:0 võit FC Elva üle',
         badge1: 'NAISTE MEISTRILIIGA',
-        badge2: 'PUBLIKUREKORD 172',
-        metaLeft: 'Paide Linnanaiskond 2 : 0 Tallinna FC Flora',
-        metaRight: '17. OKTOOBER 2026',
+        badge2: 'PAIDE 4:0 ELVA',
+        metaLeft: 'Paide Linnanaiskond 4 : 0 FC Elva',
+        metaRight: '26. OKTOOBER 2026',
         kicker: 'PAIDE LINNANAISKOND • MÄNGUÜLEVAADE',
-        title: 'Linnanaiskond alistas Flora ja tõusis tiitliheitluses ühele pulgale!',
-        href: 'artikkel-linnanaiskond-flora-voit.html',
-        excerpt: 'Paide Linnanaiskond alistas reedel, 16. oktoobril Paide kunstmuruväljakul naiste Meistriliiga senise tabeliliidri FC Flora tulemusega 2:0 ning tõusis seeläbi pealinna rohelistega võrdsele punktisummale. Võitlus Eesti meistritiitli nimel jätkub täie hooga!',
+        title: 'Linnanaiskond alistas Elva ja jätkab meistritiitli jahti!',
+        href: 'artikkel-linnanaiskond-elva-voit.html',
+        excerpt: 'Paide Linnanaiskond jätkas naiste Meistriliiga hooaja lõpusirgel võidulainel, kui laupäeval, 24. oktoobril alistati kodusel kunstmuruväljakul FC Elva naiskond kindlalt 4:0. Kaks väravat said kirja nii Lisandra Rannasto kui ka Katriin Rodi!',
         author: 'Paide Linnanaiskond',
         avatar: 'assets/img/photos/female_team_article.jpg',
         ctaText: 'Loe täispikka uudist'
       },
       secondary: [
+        {
+          href: 'artikkel-linnanaiskond-flora-voit.html',
+          img: 'assets/img/news/PLN_FCF_Victory.JPEG',
+          alt: 'Linnanaiskond alistas Flora ja tõusis tiitliheitluses ühele pulgale!',
+          badge: 'NAISMEESKOND',
+          badgeClass: 'bg-crimson',
+          date: '17. OKTOOBER 2026 • 2 MIN',
+          title: 'Linnanaiskond alistas Flora ja tõusis tiitliheitluses ühele pulgale!',
+          excerpt: 'Paide Linnanaiskond alistas reedel, 16. oktoobril naiste Meistriliiga senise tabeliliidri FC Flora 2:0 ning tõusis pealinna rohelistega võrdsele punktisummale!'
+        },
         {
           href: 'artikkel-linnanaiskond-mayo.html',
           img: 'assets/img/photos/Mayo_presentation_1_web.jpg',
@@ -1147,16 +1157,6 @@ function initNewsFilters() {
           date: '06. AUGUST 2026 • 2 MIN',
           title: 'Naiskond täiendas ridu äärekaitsjaga',
           excerpt: 'Paide Linnanaiskonnaga liitus Eesti noortekoondise äärekaitsja Nora-Mai Kool, tuues naiskonna kaitseliini lisajõudu ja kiirust.'
-        },
-        {
-          href: 'artikkel-naiskond-eversheds.html',
-          img: 'assets/img/news/linnanaiskonna-toetajaks-saab-tunnustatud-advokaadiburoo.jpg',
-          alt: 'Linnanaiskond tervitab uut toetajat',
-          badge: 'NAISMEESKOND',
-          badgeClass: 'bg-crimson',
-          date: '20. MÄRTS 2026 • 3 MIN',
-          title: 'Linnanaiskond tervitab uut toetajat',
-          excerpt: 'Rahvusvaheline advokaadibüroo Eversheds Sutherland liitub Paide Linnanaiskonna toetajate ringiga, aidates kaasa naiste jalgpalli arengule Järvamaal.'
         }
       ]
     },
