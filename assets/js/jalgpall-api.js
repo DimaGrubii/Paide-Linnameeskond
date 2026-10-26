@@ -804,12 +804,12 @@ const JalgpallSync = (function () {
         const activeLabel = document.getElementById('squad-active-filter-label');
         if (activeLabel) {
           const titles = {
-            'all': 'KÕIK MÄNGIJAD JA PERSONAL (36)',
+            'all': 'KÕIK MÄNGIJAD JA PERSONAL (37)',
             'VV': 'VÄRAVAVAHID (3)',
-            'K': 'KAITSJAD (9)',
+            'K': 'KAITSJAD (10)',
             'PK': 'POOLKAITSJAD (8)',
-            'R': 'RÜNDAJAD (9)',
-            'STAFF': 'TREENERID JA PERSONAL (7)'
+            'R': 'RÜNDAJAD (8)',
+            'STAFF': 'TREENERID JA PERSONAL (8)'
           };
           activeLabel.textContent = titles[selectedPos] || 'MÄNGIJAD';
         }

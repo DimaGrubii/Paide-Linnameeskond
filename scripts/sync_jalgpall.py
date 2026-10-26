@@ -63,7 +63,7 @@ PLAYER_PHOTOS = {
 
 ADDITIONAL_SQUAD_MEMBERS = [
     {'number': '1', 'name': 'Mattias Sapp', 'positionCode': 'VV', 'position': 'Väravavaht', 'birthDate': '17.07.2001', 'citizenship': 'Eesti', 'photo': 'assets/img/players/sapp.jpeg'},
-    {'number': '13', 'name': 'Romet Nigula', 'positionCode': 'R', 'position': 'Ründaja', 'birthDate': '25.12.2007', 'citizenship': 'Eesti', 'photo': 'assets/img/players/nigula.jpeg'},
+    {'number': '24', 'name': 'Romet Nigula', 'positionCode': 'K', 'position': 'Kaitsja', 'birthDate': '25.12.2007', 'citizenship': 'Eesti', 'photo': 'assets/img/players/nigula.jpeg'},
     {'number': '15', 'name': 'Ramon Smirnov', 'positionCode': 'PK', 'position': 'Poolkaitsja', 'birthDate': '25.08.2004', 'citizenship': 'Eesti', 'photo': 'assets/img/players/smirnov.jpeg'},
     {'number': '16', 'name': 'Aleksandr Šurõgin', 'positionCode': 'PK', 'position': 'Poolkaitsja', 'birthDate': '11.02.2006', 'citizenship': 'Eesti', 'photo': 'assets/img/players/surog.jpeg'},
     {'number': '21', 'name': 'Gerdo Juhkam', 'positionCode': 'K', 'position': 'Kaitsja', 'birthDate': '19.06.1994', 'citizenship': 'Eesti', 'photo': 'assets/img/players/juhkam.jpeg'},
