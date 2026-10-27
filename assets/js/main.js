@@ -515,7 +515,7 @@ function initMatchdayToggle() {
 /* -------------------------------------------------------------------------- */
 const defaultHeroStory = {
   tag: 'KLUBI & PARTNERLUS • CONNECTO EESTI',
-  title: 'PAIDE LINNAMEESKOND JA CONNECTO ALUSTASID KOOSTÖÖD! 🤝',
+  title: 'PAIDE LINNAMEESKOND JA CONNECTO ALUSTASID KOOSTÖÖD!',
   date: '27. OKTOOBER 2026',
   readTime: '3 MIN LUGEMIST',
   desc: 'Paide Linnameeskond ja AS Connecto Eesti alustasid koostööd, mille tulemusena liitub Connecto klubi toetajate ringiga. Koostöö hõlmab ühiseid turundustegevusi, sisuloomet ning noorte jalgpallitalentide esiletõstmist – partnerluse kaalukust peegeldab Connecto logo jõudmine Paide Linnameeskonna esindusmeeskonna võistlusvormi esiküljele.',
@@ -1033,11 +1033,11 @@ function initNewsFilters() {
         {
           href: 'artikkel-connecto-koostoo.html',
           img: 'assets/img/news/connecto_sponsor.jpeg',
-          alt: 'Paide Linnameeskond ja Connecto alustasid koostööd! 🤝',
+          alt: 'Paide Linnameeskond ja Connecto alustasid koostööd!',
           badge: 'KLUBI & PARTNERLUS',
           badgeClass: 'bg-crimson',
           date: '27. OKTOOBER 2026 • 3 MIN',
-          title: 'Paide Linnameeskond ja Connecto alustasid koostööd! 🤝',
+          title: 'Paide Linnameeskond ja Connecto alustasid koostööd!',
           excerpt: 'Paide Linnameeskond ja AS Connecto Eesti alustasid koostööd, mille tulemusena liitub Connecto klubi toetajate ringiga ning Connecto logo jõuab esindusmeeskonna võistlusvormi esiküljele!'
         },
         {
@@ -1065,13 +1065,13 @@ function initNewsFilters() {
     esindus: {
       lead: {
         img: 'assets/img/news/connecto_sponsor.jpeg',
-        alt: 'Paide Linnameeskond ja Connecto alustasid koostööd! 🤝',
+        alt: 'Paide Linnameeskond ja Connecto alustasid koostööd!',
         badge1: 'KLUBI & PARTNERLUS',
         badge2: 'ESINDUSMEESKOND',
         metaLeft: 'Paide Linnameeskond & AS Connecto Eesti',
         metaRight: '27. OKTOOBER 2026',
         kicker: 'ESINDUSMEESKOND • PARTNERLUS',
-        title: 'Paide Linnameeskond ja Connecto alustasid koostööd! 🤝',
+        title: 'Paide Linnameeskond ja Connecto alustasid koostööd!',
         href: 'artikkel-connecto-koostoo.html',
         excerpt: 'Paide Linnameeskond ja AS Connecto Eesti alustasid koostööd, mille tulemusena liitub Connecto klubi toetajate ringiga. Koostöö hõlmab ühiseid turundustegevusi, sisuloomet ning noorte jalgpallitalentide esiletõstmist – partnerluse kaalukust peegeldab Connecto logo jõudmine esindusmeeskonna võistlusvormi esiküljele.',
         author: 'Klubi meedia',
