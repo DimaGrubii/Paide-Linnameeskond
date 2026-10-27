@@ -514,13 +514,13 @@ function initMatchdayToggle() {
 /* 6. HERO EDITORIAL STORIES SWITCHER                                         */
 /* -------------------------------------------------------------------------- */
 const defaultHeroStory = {
-  tag: 'A. LE COQ PREMIUM LIIGA • KURESSAARE 0:1 PAIDE',
-  title: 'PAIDE LINNAMEESKOND TÕUSIS KURESSAARES TEENITUD VÕIDUGA LIIGATABELIS TEISEKS!',
+  tag: 'KLUBI & PARTNERLUS • CONNECTO EESTI',
+  title: 'PAIDE LINNAMEESKOND JA CONNECTO ALUSTASID KOOSTÖÖD! 🤝',
   date: '27. OKTOOBER 2026',
-  readTime: '2 MIN LUGEMIST',
-  desc: 'Paide Linnameeskond naasis Saaremaalt kolme väärtusliku punktiga, kui A. Le Coq Premium liiga 33. voorus alistati võõrsil FC Kuressaare tulemusega 1:0. Järgmine lahing ootab ees kolmapäeval, 28. oktoobril kell 19.00 Nõmme Kalju FC vastu!',
-  image: 'assets/img/news/1920x1080.jpg',
-  link: 'artikkel-kuressaare-voit-teiseks.html',
+  readTime: '3 MIN LUGEMIST',
+  desc: 'Paide Linnameeskond ja AS Connecto Eesti alustasid koostööd, mille tulemusena liitub Connecto klubi toetajate ringiga. Koostöö hõlmab ühiseid turundustegevusi, sisuloomet ning noorte jalgpallitalentide esiletõstmist – partnerluse kaalukust peegeldab Connecto logo jõudmine Paide Linnameeskonna esindusmeeskonna võistlusvormi esiküljele.',
+  image: 'assets/img/news/connecto_sponsor.jpeg',
+  link: 'artikkel-connecto-koostoo.html',
   btnText: 'Loe täispikka uudist'
 };
 
@@ -1031,6 +1031,16 @@ function initNewsFilters() {
       },
       secondary: [
         {
+          href: 'artikkel-connecto-koostoo.html',
+          img: 'assets/img/news/connecto_sponsor.jpeg',
+          alt: 'Paide Linnameeskond ja Connecto alustasid koostööd! 🤝',
+          badge: 'KLUBI & PARTNERLUS',
+          badgeClass: 'bg-crimson',
+          date: '27. OKTOOBER 2026 • 3 MIN',
+          title: 'Paide Linnameeskond ja Connecto alustasid koostööd! 🤝',
+          excerpt: 'Paide Linnameeskond ja AS Connecto Eesti alustasid koostööd, mille tulemusena liitub Connecto klubi toetajate ringiga ning Connecto logo jõuab esindusmeeskonna võistlusvormi esiküljele!'
+        },
+        {
           href: 'artikkel-kuressaare-voit-teiseks.html',
           img: 'assets/img/news/1920x1080.jpg',
           alt: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
@@ -1049,36 +1059,36 @@ function initNewsFilters() {
           date: '26. OKTOOBER 2026 • 2 MIN',
           title: 'Linnanaiskond alistas Elva ja jätkab meistritiitli jahti!',
           excerpt: 'Paide Linnanaiskond alistas kodusel kunstmuruväljakul FC Elva naiskonna kindlalt 4:0. Kaks väravat said kirja nii Lisandra Rannasto kui ka Katriin Rodi!'
-        },
-        {
-          href: 'artikkel-linnanaiskond-flora-voit.html',
-          img: 'assets/img/news/PLN_FCF_Victory.JPEG',
-          alt: 'Linnanaiskond alistas Flora ja tõusis tiitliheitluses ühele pulgale!',
-          badge: 'NAISMEESKOND',
-          badgeClass: 'bg-crimson',
-          date: '17. OKTOOBER 2026 • 2 MIN',
-          title: 'Linnanaiskond alistas Flora ja tõusis tiitliheitluses ühele pulgale!',
-          excerpt: 'Paide Linnanaiskond alistas reedel, 16. oktoobril naiste Meistriliiga senise tabeliliidri FC Flora 2:0 ning tõusis pealinna rohelistega võrdsele punktisummale!'
         }
       ]
     },
     esindus: {
       lead: {
-        img: 'assets/img/news/1920x1080.jpg',
-        alt: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
-        badge1: 'PREMIUM LIIGA',
+        img: 'assets/img/news/connecto_sponsor.jpeg',
+        alt: 'Paide Linnameeskond ja Connecto alustasid koostööd! 🤝',
+        badge1: 'KLUBI & PARTNERLUS',
         badge2: 'ESINDUSMEESKOND',
-        metaLeft: 'FC Kuressaare 0 : 1 Paide Linnameeskond',
+        metaLeft: 'Paide Linnameeskond & AS Connecto Eesti',
         metaRight: '27. OKTOOBER 2026',
-        kicker: 'ESINDUSMEESKOND • MÄNGUÜLEVAADE',
-        title: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
-        href: 'artikkel-kuressaare-voit-teiseks.html',
-        excerpt: 'Paide Linnameeskond naasis Saaremaalt kolme väärtusliku punktiga, kui A. Le Coq Premium liiga 33. voorus alistati võõrsil FC Kuressaare tulemusega 1:0. Kohtumise ainsa värava eest hoolitses Juan Sebastian Palacios Murillo, kelle meisterlik tabamus aitas meie meeskonna liigatabelis teisele kohale!',
+        kicker: 'ESINDUSMEESKOND • PARTNERLUS',
+        title: 'Paide Linnameeskond ja Connecto alustasid koostööd! 🤝',
+        href: 'artikkel-connecto-koostoo.html',
+        excerpt: 'Paide Linnameeskond ja AS Connecto Eesti alustasid koostööd, mille tulemusena liitub Connecto klubi toetajate ringiga. Koostöö hõlmab ühiseid turundustegevusi, sisuloomet ning noorte jalgpallitalentide esiletõstmist – partnerluse kaalukust peegeldab Connecto logo jõudmine esindusmeeskonna võistlusvormi esiküljele.',
         author: 'Klubi meedia',
         avatar: 'assets/img/photos/main_team_article.jpeg',
         ctaText: 'Loe täispikka uudist'
       },
       secondary: [
+        {
+          href: 'artikkel-kuressaare-voit-teiseks.html',
+          img: 'assets/img/news/1920x1080.jpg',
+          alt: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
+          badge: 'ESINDUSMEESKOND',
+          badgeClass: 'bg-navy',
+          date: '27. OKTOOBER 2026 • 2 MIN',
+          title: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
+          excerpt: 'Paide Linnameeskond naasis Saaremaalt kolme väärtusliku punktiga, alistades võõrsil FC Kuressaare 1:0 Juan Sebastian Palaciose tabamusest!'
+        },
         {
           href: 'artikkel-lilander-tammeka-voit.html',
           img: 'assets/img/news/lilander_winning_goal_tammeka.JPEG',
@@ -1098,16 +1108,6 @@ function initNewsFilters() {
           date: '08. SEPTEMBER 2026 • 3 MIN',
           title: 'Abdourahman Badamosi siirdus Tšehhi kõrgliigasse',
           excerpt: 'Paide Linnameeskonna ründaja Abdourahman Badamosi sõlmis lepingu Tšehhi kõrgliigaklubiga FK Teplice.'
-        },
-        {
-          href: 'artikkel-dawda-darboe.html',
-          img: 'assets/img/news/paidega-liitus-gambia-rundaja-dawda-darboe.jpg',
-          alt: 'Paidega liitus Gambia ründaja Dawda Darboe',
-          badge: 'ESINDUSMEESKOND',
-          badgeClass: 'bg-navy',
-          date: '21. AUGUST 2026 • 2 MIN',
-          title: 'Paidega liitus Gambia ründaja Dawda Darboe',
-          excerpt: 'Paide Linnameeskonnaga sõlmis mitmeaastase lepingu 21-aastane Gambia noortekoondise ründaja Dawda Darboe, kes hakkab kandma särginumbrit 29.'
         }
       ]
     },
