@@ -514,13 +514,13 @@ function initMatchdayToggle() {
 /* 6. HERO EDITORIAL STORIES SWITCHER                                         */
 /* -------------------------------------------------------------------------- */
 const defaultHeroStory = {
-  tag: 'NAISTE MEISTRILIIGA • PAIDE 4:0 ELVA',
-  title: 'LINNANAISKOND ALISTAS ELVA JA JÄTKAB MEISTRITIITLI JAHTI!',
-  date: '26. OKTOOBER 2026',
+  tag: 'A. LE COQ PREMIUM LIIGA • KURESSAARE 0:1 PAIDE',
+  title: 'PAIDE LINNAMEESKOND TÕUSIS KURESSAARES TEENITUD VÕIDUGA LIIGATABELIS TEISEKS!',
+  date: '27. OKTOOBER 2026',
   readTime: '2 MIN LUGEMIST',
-  desc: 'Paide Linnanaiskond jätkas naiste Meistriliiga hooaja lõpusirgel võidulainel, kui laupäeval, 24. oktoobril alistati kodusel kunstmuruväljakul FC Elva naiskond kindlalt 4:0. Kaks väravat said kirja nii Lisandra Rannasto kui ka Katriin Rodi!',
-  image: 'assets/img/news/PLN_Elva_Victory.JPEG',
-  link: 'artikkel-linnanaiskond-elva-voit.html',
+  desc: 'Paide Linnameeskond naasis Saaremaalt kolme väärtusliku punktiga, kui A. Le Coq Premium liiga 33. voorus alistati võõrsil FC Kuressaare tulemusega 1:0. Järgmine lahing ootab ees kolmapäeval, 28. oktoobril kell 19.00 Nõmme Kalju FC vastu!',
+  image: 'assets/img/news/1920x1080.jpg',
+  link: 'artikkel-kuressaare-voit-teiseks.html',
   btnText: 'Loe täispikka uudist'
 };
 
@@ -1031,6 +1031,16 @@ function initNewsFilters() {
       },
       secondary: [
         {
+          href: 'artikkel-kuressaare-voit-teiseks.html',
+          img: 'assets/img/news/1920x1080.jpg',
+          alt: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
+          badge: 'ESINDUSMEESKOND',
+          badgeClass: 'bg-navy',
+          date: '27. OKTOOBER 2026 • 2 MIN',
+          title: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
+          excerpt: 'Paide Linnameeskond naasis Saaremaalt kolme väärtusliku punktiga, alistades võõrsil FC Kuressaare 1:0 Juan Sebastian Palaciose tabamusest!'
+        },
+        {
           href: 'artikkel-linnanaiskond-elva-voit.html',
           img: 'assets/img/news/PLN_Elva_Victory.JPEG',
           alt: 'Linnanaiskond alistas Elva ja jätkab meistritiitli jahti!',
@@ -1049,7 +1059,26 @@ function initNewsFilters() {
           date: '17. OKTOOBER 2026 • 2 MIN',
           title: 'Linnanaiskond alistas Flora ja tõusis tiitliheitluses ühele pulgale!',
           excerpt: 'Paide Linnanaiskond alistas reedel, 16. oktoobril naiste Meistriliiga senise tabeliliidri FC Flora 2:0 ning tõusis pealinna rohelistega võrdsele punktisummale!'
-        },
+        }
+      ]
+    },
+    esindus: {
+      lead: {
+        img: 'assets/img/news/1920x1080.jpg',
+        alt: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
+        badge1: 'PREMIUM LIIGA',
+        badge2: 'ESINDUSMEESKOND',
+        metaLeft: 'FC Kuressaare 0 : 1 Paide Linnameeskond',
+        metaRight: '27. OKTOOBER 2026',
+        kicker: 'ESINDUSMEESKOND • MÄNGUÜLEVAADE',
+        title: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
+        href: 'artikkel-kuressaare-voit-teiseks.html',
+        excerpt: 'Paide Linnameeskond naasis Saaremaalt kolme väärtusliku punktiga, kui A. Le Coq Premium liiga 33. voorus alistati võõrsil FC Kuressaare tulemusega 1:0. Kohtumise ainsa värava eest hoolitses Juan Sebastian Palacios Murillo, kelle meisterlik tabamus aitas meie meeskonna liigatabelis teisele kohale!',
+        author: 'Klubi meedia',
+        avatar: 'assets/img/photos/main_team_article.jpeg',
+        ctaText: 'Loe täispikka uudist'
+      },
+      secondary: [
         {
           href: 'artikkel-lilander-tammeka-voit.html',
           img: 'assets/img/news/lilander_winning_goal_tammeka.JPEG',
@@ -1059,26 +1088,7 @@ function initNewsFilters() {
           date: '15. OKTOOBER 2026 • 2 MIN',
           title: 'Lilanderi üleminutite värav tõi Linnameeskonnale magusa võidu Tammeka üle!',
           excerpt: 'Paide Linnameeskond teenis Premium liiga 31. voorus koduväljakul väärtusliku 2:1 võidu Tartu JK Tammeka üle. Kohtumise kangelaseks kerkis Michael Lilander!'
-        }
-      ]
-    },
-    esindus: {
-      lead: {
-        img: 'assets/img/news/lilander_winning_goal_tammeka.JPEG',
-        alt: 'Lilanderi üleminutite värav tõi Linnameeskonnale magusa võidu Tammeka üle!',
-        badge1: 'PREMIUM LIIGA',
-        badge2: 'ESINDUSMEESKOND',
-        metaLeft: 'Paide Linnameeskond 2 : 1 Tartu JK Tammeka',
-        metaRight: '15. OKTOOBER 2026',
-        kicker: 'ESINDUSMEESKOND • MÄNGUÜLEVAADE',
-        title: 'Lilanderi üleminutite värav tõi Linnameeskonnale magusa võidu Tammeka üle!',
-        href: 'artikkel-lilander-tammeka-voit.html',
-        excerpt: 'Paide Linnameeskond teenis kolmapäeval, 14. oktoobril A. Le Coq Premium liiga 31. voorus koduväljakul väärtusliku 2:1 võidu Tartu JK Tammeka üle. Kohtumise kangelaseks kerkis Michael Lilander, kelle neljandal üleminutil löödud tabamus jättis kolm punkti Eestimaa südamesse!',
-        author: 'Klubi meedia',
-        avatar: 'assets/img/photos/main_team_article.jpeg',
-        ctaText: 'Loe täispikka uudist'
-      },
-      secondary: [
+        },
         {
           href: 'artikkel-badamosi-tsehhi-korgliigasse.html',
           img: 'assets/img/news/badamosi-tsehhi-korgliigasse.jpeg',
@@ -1098,16 +1108,6 @@ function initNewsFilters() {
           date: '21. AUGUST 2026 • 2 MIN',
           title: 'Paidega liitus Gambia ründaja Dawda Darboe',
           excerpt: 'Paide Linnameeskonnaga sõlmis mitmeaastase lepingu 21-aastane Gambia noortekoondise ründaja Dawda Darboe, kes hakkab kandma särginumbrit 29.'
-        },
-        {
-          href: 'artikkel-palacios-kolumbia.html',
-          img: 'assets/img/news/paide-hankis-aarerundaja-kolumbiast.jpg',
-          alt: 'Paide hankis ääreründaja Kolumbiast',
-          badge: 'ESINDUSMEESKOND',
-          badgeClass: 'bg-navy',
-          date: '17. AUGUST 2026 • 2 MIN',
-          title: 'Paide hankis ääreründaja Kolumbiast',
-          excerpt: 'Paide Linnameeskond täiendas rünnakut Kolumbia ääreründaja Juan Palaciosega, kes liitus meeskonnaga laenulepingu alusel ostuvõimalusega.'
         }
       ]
     },
