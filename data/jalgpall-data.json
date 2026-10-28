@@ -2,7 +2,7 @@
   "metadata": {
     "source": "Eesti Jalgpalli Liit (EJL)",
     "sourceUrl": "https://jalgpall.ee/voistlused/52/team/5",
-    "lastUpdated": "2026-10-28T14:53:29.026877",
+    "lastUpdated": "2026-10-28T23:54:32.756338",
     "season": "2026",
     "status": "success"
   },
@@ -1317,22 +1317,16 @@
         "team": "Paide Linnameeskond",
         "logo": "https://jalgpall.ee/images/clubs/04DA1E5682F6B6CACC9A577CED953711",
         "localLogo": "assets/img/jalgpall_logos/paide.png",
-        "played": 33,
+        "played": 34,
         "won": 18,
         "drawn": 6,
-        "lost": 9,
+        "lost": 10,
         "goalsFor": 53,
-        "goalsAgainst": 39,
-        "goalDifference": "+14",
+        "goalsAgainst": 41,
+        "goalDifference": "+12",
         "points": 60,
         "isPaide": true,
         "form": [
-          {
-            "result": "V",
-            "type": "win",
-            "score": "2:1 vs Tartu JK Tammeka",
-            "opponent": "Tartu JK Tammeka"
-          },
           {
             "result": "V",
             "type": "win",
@@ -1344,6 +1338,12 @@
             "type": "win",
             "score": "1:0 vs FC Kuressaare",
             "opponent": "FC Kuressaare"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "0:2 vs Nõmme Kalju FC",
+            "opponent": "Nõmme Kalju FC"
           }
         ],
         "seasonHistory": [
@@ -1745,10 +1745,10 @@
           },
           {
             "round": 34,
-            "type": "upcoming",
-            "result": "-",
-            "score": "vs Nõmme Kalju FC",
-            "matchScore": "-",
+            "type": "loss",
+            "result": "K",
+            "score": "0:2 vs Nõmme Kalju FC",
+            "matchScore": "0:2",
             "homeTeam": "Paide Linnameeskond",
             "awayTeam": "Nõmme Kalju FC",
             "opponent": "Nõmme Kalju FC",
@@ -2255,22 +2255,16 @@
         "team": "Nõmme Kalju FC",
         "logo": "https://jalgpall.ee/images/logos/C287B9A18B8C02FDA9A7E921E6D3E645",
         "localLogo": "assets/img/jalgpall_logos/kalju.png",
-        "played": 33,
-        "won": 16,
+        "played": 34,
+        "won": 17,
         "drawn": 6,
         "lost": 11,
-        "goalsFor": 56,
+        "goalsFor": 58,
         "goalsAgainst": 34,
-        "goalDifference": "+22",
-        "points": 54,
+        "goalDifference": "+24",
+        "points": 57,
         "isPaide": false,
         "form": [
-          {
-            "result": "V",
-            "type": "draw",
-            "score": "2:2 vs Pärnu JK Vaprus",
-            "opponent": "Pärnu JK Vaprus"
-          },
           {
             "result": "K",
             "type": "loss",
@@ -2282,6 +2276,12 @@
             "type": "win",
             "score": "2:1 vs Tallinna FC Flora",
             "opponent": "Tallinna FC Flora"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "2:0 vs Paide Linnameeskond",
+            "opponent": "Paide Linnameeskond"
           }
         ],
         "seasonHistory": [
@@ -2683,10 +2683,10 @@
           },
           {
             "round": 34,
-            "type": "upcoming",
-            "result": "-",
-            "score": "vs Paide Linnameeskond",
-            "matchScore": "-",
+            "type": "win",
+            "result": "V",
+            "score": "2:0 vs Paide Linnameeskond",
+            "matchScore": "0:2",
             "homeTeam": "Paide Linnameeskond",
             "awayTeam": "Nõmme Kalju FC",
             "opponent": "Paide Linnameeskond",
@@ -4131,22 +4131,16 @@
         "team": "Pärnu JK Vaprus",
         "logo": "https://jalgpall.ee/images/clubs/D8034B13F45C52A82CC8EAFFB756EABF",
         "localLogo": "assets/img/jalgpall_logos/vaprus.png",
-        "played": 33,
+        "played": 34,
         "won": 10,
-        "drawn": 6,
+        "drawn": 7,
         "lost": 17,
-        "goalsFor": 45,
-        "goalsAgainst": 67,
+        "goalsFor": 46,
+        "goalsAgainst": 68,
         "goalDifference": "-22",
-        "points": 36,
+        "points": 37,
         "isPaide": false,
         "form": [
-          {
-            "result": "V",
-            "type": "draw",
-            "score": "2:2 vs Nõmme Kalju FC",
-            "opponent": "Nõmme Kalju FC"
-          },
           {
             "result": "K",
             "type": "loss",
@@ -4158,6 +4152,12 @@
             "type": "loss",
             "score": "2:4 vs FC Nõmme United",
             "opponent": "FC Nõmme United"
+          },
+          {
+            "result": "V",
+            "type": "draw",
+            "score": "1:1 vs FC Kuressaare",
+            "opponent": "FC Kuressaare"
           }
         ],
         "seasonHistory": [
@@ -4559,10 +4559,10 @@
           },
           {
             "round": 34,
-            "type": "upcoming",
-            "result": "-",
-            "score": "vs FC Kuressaare",
-            "matchScore": "-",
+            "type": "draw",
+            "result": "V",
+            "score": "1:1 vs FC Kuressaare",
+            "matchScore": "1:1",
             "homeTeam": "Pärnu JK Vaprus",
             "awayTeam": "FC Kuressaare",
             "opponent": "FC Kuressaare",
@@ -4600,22 +4600,16 @@
         "team": "FC Kuressaare",
         "logo": "https://jalgpall.ee/images/logos/82513CF228618115FBB68121D90A730F",
         "localLogo": "assets/img/jalgpall_logos/kuressaare.png",
-        "played": 33,
+        "played": 34,
         "won": 10,
-        "drawn": 5,
+        "drawn": 6,
         "lost": 18,
-        "goalsFor": 34,
-        "goalsAgainst": 52,
+        "goalsFor": 35,
+        "goalsAgainst": 53,
         "goalDifference": "-18",
-        "points": 35,
+        "points": 36,
         "isPaide": false,
         "form": [
-          {
-            "result": "V",
-            "type": "win",
-            "score": "1:0 vs JK Narva Trans",
-            "opponent": "JK Narva Trans"
-          },
           {
             "result": "K",
             "type": "loss",
@@ -4627,6 +4621,12 @@
             "type": "loss",
             "score": "0:1 vs Paide Linnameeskond",
             "opponent": "Paide Linnameeskond"
+          },
+          {
+            "result": "V",
+            "type": "draw",
+            "score": "1:1 vs Pärnu JK Vaprus",
+            "opponent": "Pärnu JK Vaprus"
           }
         ],
         "seasonHistory": [
@@ -5028,10 +5028,10 @@
           },
           {
             "round": 34,
-            "type": "upcoming",
-            "result": "-",
-            "score": "vs Pärnu JK Vaprus",
-            "matchScore": "-",
+            "type": "draw",
+            "result": "V",
+            "score": "1:1 vs Pärnu JK Vaprus",
+            "matchScore": "1:1",
             "homeTeam": "Pärnu JK Vaprus",
             "awayTeam": "FC Kuressaare",
             "opponent": "Pärnu JK Vaprus",
