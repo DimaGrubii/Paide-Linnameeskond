@@ -1042,7 +1042,7 @@ function initNewsFilters() {
         },
         {
           href: 'artikkel-kuressaare-voit-teiseks.html',
-          img: 'assets/img/news/1920x1080.jpg',
+          img: 'assets/img/news/kuressaare_PLM_Victory.JPEG',
           alt: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
           badge: 'ESINDUSMEESKOND',
           badgeClass: 'bg-navy',
@@ -1081,7 +1081,7 @@ function initNewsFilters() {
       secondary: [
         {
           href: 'artikkel-kuressaare-voit-teiseks.html',
-          img: 'assets/img/news/1920x1080.jpg',
+          img: 'assets/img/news/kuressaare_PLM_Victory.JPEG',
           alt: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
           badge: 'ESINDUSMEESKOND',
           badgeClass: 'bg-navy',
