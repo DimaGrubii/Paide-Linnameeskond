@@ -209,22 +209,22 @@ const JalgpallSync = (function () {
       const nextAwayLogo = document.getElementById('match-next-awaylogo');
 
       if (topTickerMatch) {
-        topTickerMatch.innerHTML = 'Premium Liiga: <strong class="text-white">Paide Linnameeskond vs Nõmme Kalju FC</strong> • Kolmapäev, 28. okt kell 19:00 • Paide kunstmuruväljak';
+        topTickerMatch.innerHTML = 'Premium Liiga: <strong class="text-white">Pärnu JK Vaprus vs Paide Linnameeskond</strong> • Laupäev, 31. okt kell 14:30 • Pärnu Rannastaadion';
       }
 
-      if (nextHome) nextHome.innerHTML = '<span class="sm:hidden">PLM</span><span class="hidden sm:inline">PAIDE LM</span>';
-      if (nextAway) nextAway.innerHTML = '<span class="sm:hidden">NKFC</span><span class="hidden sm:inline">NÕMME KALJU</span>';
-      if (nextDate) nextDate.textContent = 'Kolmapäev, 28. oktoober';
-      if (nextTime) nextTime.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>Avavile: 19:00</span>';
-      if (nextRound) nextRound.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-crimson animate-ping flex-shrink-0"></span> <span class="whitespace-nowrap">Premium Liiga • 34. Voor</span>';
-      if (nextVenue) nextVenue.textContent = 'Paide kunstmuruväljak';
+      if (nextHome) nextHome.innerHTML = '<span class="sm:hidden">VAP</span><span class="hidden sm:inline">PÄRNU JK VAPRUS</span>';
+      if (nextAway) nextAway.innerHTML = '<span class="sm:hidden">PLM</span><span class="hidden sm:inline">PAIDE LM</span>';
+      if (nextDate) nextDate.textContent = 'Laupäev, 31. oktoober';
+      if (nextTime) nextTime.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>Avavile: 14:30</span>';
+      if (nextRound) nextRound.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-crimson animate-ping flex-shrink-0"></span> <span class="whitespace-nowrap">Premium Liiga • 35. Voor</span>';
+      if (nextVenue) nextVenue.textContent = 'Pärnu Rannastaadion';
       if (nextHomeLogo) {
-        nextHomeLogo.src = 'assets/img/jalgpall_logos/paide.png';
-        nextHomeLogo.alt = 'Paide Linnameeskond Ametlik Logo';
+        nextHomeLogo.src = 'assets/img/jalgpall_logos/vaprus.png';
+        nextHomeLogo.alt = 'Pärnu JK Vaprus Ametlik Logo';
       }
       if (nextAwayLogo) {
-        nextAwayLogo.src = 'assets/img/jalgpall_logos/kalju.png';
-        nextAwayLogo.alt = 'Nõmme Kalju FC Ametlik Logo';
+        nextAwayLogo.src = 'assets/img/jalgpall_logos/paide.png';
+        nextAwayLogo.alt = 'Paide Linnameeskond Ametlik Logo';
       }
     }
 

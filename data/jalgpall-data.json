@@ -383,13 +383,13 @@
   "matches": {
     "next": {
       "type": "upcoming",
-      "homeTeam": "Paide Linnameeskond",
-      "awayTeam": "Nõmme Kalju FC",
-      "date": "PL 28.10.2026 19:00",
-      "venue": "Paide kunstmuruväljak",
-      "round": "Premium Liiga • 34. Voor",
+      "homeTeam": "Pärnu JK Vaprus",
+      "awayTeam": "Paide Linnameeskond",
+      "date": "PL 31.10.2026 14:30",
+      "venue": "Pärnu Rannastaadion",
+      "round": "Premium Liiga • 35. Voor",
       "broadcast": "OTSE: SOCCERNET TV / JALGPALL.EE",
-      "matchInfoUrl": "https://jalgpall.ee/voistlused/match_info/186275"
+      "matchInfoUrl": "https://jalgpall.ee/voistlused/match_info/186277"
     },
     "upcoming": [
       {
@@ -403,12 +403,6 @@
         "homeTeam": "Pärnu JK Vaprus",
         "date": "PL 31.10.2026 14:30",
         "awayTeam": "Paide Linnameeskond"
-      },
-      {
-        "type": "upcoming",
-        "homeTeam": "Paide Linnameeskond",
-        "date": "PL 28.10.2026 19:00",
-        "awayTeam": "Nõmme Kalju FC"
       }
     ],
     "recent": [
