@@ -372,7 +372,13 @@ a:focus-visible, button:focus-visible {
 #tab-standings-men.bg-navy:focus,
 #tab-standings-women.bg-navy,
 #tab-standings-women.bg-navy:hover,
-#tab-standings-women.bg-navy:focus {
+#tab-standings-women.bg-navy:focus,
+#tab-poll-men.bg-navy,
+#tab-poll-men.bg-navy:hover,
+#tab-poll-men.bg-navy:focus,
+#tab-poll-women.bg-navy,
+#tab-poll-women.bg-navy:hover,
+#tab-poll-women.bg-navy:focus {
   background-color: var(--color-navy) !important;
   color: #ffffff !important;
   border-color: var(--color-navy) !important;
@@ -382,4 +388,86 @@ a:focus-visible, button:focus-visible {
 .women-squad-filter-btn:not(.active):hover {
   color: var(--color-navy) !important;
   border-color: var(--color-navy) !important;
+}
+
+/* ========================================================================== */
+/* Player of the Season Poll Showcase & Modal Dialog                          */
+/* ========================================================================== */
+.poll-card-crimson {
+  background-color: #ffffff;
+}
+
+.poll-card-navy {
+  background-color: #ffffff;
+}
+
+/* Strong bottom-only gradient overlay so white player names are 100% legible
+   while keeping the upper part of the player photo completely clean */
+.poll-card-crimson .poll-card-overlay {
+  background:
+    linear-gradient(
+      to top,
+      rgba(7, 21, 43, 0.96) 0%,
+      rgba(190, 41, 49, 0.82) 24%,
+      rgba(190, 41, 49, 0.28) 40%,
+      rgba(190, 41, 49, 0) 52%
+    );
+}
+
+.poll-card-navy .poll-card-overlay {
+  background:
+    linear-gradient(
+      to top,
+      rgba(7, 21, 43, 0.96) 0%,
+      rgba(11, 32, 62, 0.85) 24%,
+      rgba(11, 32, 62, 0.30) 40%,
+      rgba(11, 32, 62, 0) 52%
+    );
+}
+
+.poll-player-caption {
+  text-shadow: 0 2px 8px rgba(4, 12, 26, 0.95), 0 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+.poll-showcase-tile {
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.36s ease, box-shadow 0.3s ease;
+  will-change: transform, opacity;
+}
+
+.poll-showcase-tile:hover {
+  transform: translateY(-3px);
+}
+
+.poll-showcase-tile.is-shuffling {
+  opacity: 0;
+  transform: translateY(10px) scale(0.94);
+}
+
+#player-poll-dialog::backdrop {
+  background-color: rgba(7, 21, 43, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Form validation (:user-invalid / :user-valid + fallback) */
+.poll-email-field input:user-invalid,
+.poll-email-field input.user-invalid-fallback {
+  border-color: #d93025 !important;
+  background-color: #fce8e6 !important;
+}
+
+.poll-email-field input:user-valid,
+.poll-email-field input.user-valid-fallback {
+  border-color: #188038 !important;
+}
+
+.poll-email-field:has(input:user-invalid) .poll-email-hint,
+.poll-email-field:has(input.user-invalid-fallback) .poll-email-hint {
+  color: #d93025;
+  font-weight: 600;
+}
+
+.poll-email-field:has(input:user-valid) .poll-email-hint,
+.poll-email-field:has(input.user-valid-fallback) .poll-email-hint {
+  color: #188038;
 }

@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTicketModal();
   initLanguageSwitcher();
   initNewsletterForms();
+  initSeasonPlayerPoll();
 });
 
 /* -------------------------------------------------------------------------- */
@@ -1453,5 +1454,930 @@ function initNewsletterForms() {
     });
   });
 }
+
+/* -------------------------------------------------------------------------- */
+/* 13. PLAYER OF THE SEASON 2026 SHOWCASE & INTERACTIVE STEP-BY-STEP POLL      */
+/* -------------------------------------------------------------------------- */
+function initSeasonPlayerPoll() {
+  const section = document.getElementById('player-of-season-poll');
+  if (!section) return;
+
+  const row1El = document.getElementById('poll-showcase-row-1');
+  const row2El = document.getElementById('poll-showcase-row-2');
+  const tabMen = document.getElementById('tab-poll-men');
+  const tabWomen = document.getElementById('tab-poll-women');
+  const kickerEl = document.getElementById('poll-showcase-kicker');
+  const headlineEl = document.getElementById('poll-showcase-headline');
+  const showcaseTrigger = document.getElementById('poll-showcase-trigger');
+  const votedBadge = document.getElementById('poll-voted-badge');
+  const ctaLabel = document.getElementById('poll-cta-label');
+  const dialog = document.getElementById('player-poll-dialog');
+  const dialogCloseBtn = document.getElementById('poll-dialog-close');
+
+  if (!row1El || !row2El || !dialog) return;
+
+  const ROLE_META = {
+    VV: {
+      code: 'VV',
+      singular: 'Väravavaht',
+      plural: 'Väravavahid',
+      desc: 'Kindlad käed ja otsustavad tõrjed väravasuul'
+    },
+    K: {
+      code: 'K',
+      singular: 'Kaitsja',
+      plural: 'Kaitsjad',
+      desc: 'Kaitseliini tugitalad ja äärekaitsjad'
+    },
+    PK: {
+      code: 'PK',
+      singular: 'Poolkaitsja',
+      plural: 'Poolkaitsjad',
+      desc: 'Mängu mootorid ja loovad keskväljamängijad'
+    },
+    R: {
+      code: 'R',
+      singular: 'Ründaja',
+      plural: 'Ründajad',
+      desc: 'Väravakütid ja teravad ääreründajad'
+    }
+  };
+
+  function formatTitleCase(str) {
+    return String(str || '')
+      .toLowerCase()
+      .replace(/(^|[\s-])(\S)/g, (m, p1, p2) => p1 + p2.toUpperCase());
+  }
+
+  function splitDisplayName(fullName) {
+    const clean = String(fullName || '').trim().replace(/\s+/g, ' ');
+    const parts = clean.split(' ');
+    if (parts.length === 1) {
+      return { firstName: '', lastName: parts[0] };
+    }
+    const lastName = parts[parts.length - 1];
+    const firstName = formatTitleCase(parts.slice(0, -1).join(' '));
+    return { firstName, lastName };
+  }
+
+  function extractSquadFromDOM(containerSelector, itemSelector, squadKey) {
+    const container = document.querySelector(containerSelector);
+    if (!container) return [];
+    const cards = container.querySelectorAll(itemSelector);
+    const list = [];
+
+    cards.forEach((card, idx) => {
+      const pos = (card.getAttribute('data-pos') || '').trim();
+      if (!pos || pos === 'STAFF' || !ROLE_META[pos]) return;
+
+      const imgEl = card.querySelector('img');
+      const nameEl = card.querySelector('.squad-player-name, h3');
+      const numEl = card.querySelector('span.font-grotesk');
+
+      const rawName = (nameEl ? nameEl.textContent : imgEl ? imgEl.alt : '').trim().replace(/\s+/g, ' ');
+      if (!rawName) return;
+
+      const img = imgEl ? imgEl.getAttribute('src') : 'assets/img/jalgpall_logos/paide.png';
+      const number = numEl ? numEl.textContent.trim() : '';
+      const { firstName, lastName } = splitDisplayName(rawName);
+      const slug = rawName
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
+
+      list.push({
+        id: `${squadKey}-${slug || idx}`,
+        squad: squadKey,
+        name: rawName,
+        firstName,
+        lastName,
+        number,
+        role: pos,
+        roleLabel: ROLE_META[pos].singular,
+        img
+      });
+    });
+
+    return list;
+  }
+
+  const squads = {
+    men: extractSquadFromDOM('#squad-cards-grid', '.squad-card-item', 'men'),
+    women: extractSquadFromDOM('#women-squad-cards-grid', '.women-squad-card-item', 'women')
+  };
+
+  // Non-duplicating round-robin shuffle queues so every single player in the squad
+  // is showcased before a new cycle starts, and no player ever duplicates in the same 11-card turn.
+  const deckState = {
+    men: { queue: [], turn: 0 },
+    women: { queue: [], turn: 0 }
+  };
+
+  function shuffleArray(arr) {
+    const copy = arr.slice();
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const tmp = copy[i];
+      copy[i] = copy[j];
+      copy[j] = tmp;
+    }
+    return copy;
+  }
+
+  function getNextShowcaseBatch(squadKey, count = 11) {
+    const pool = squads[squadKey] || [];
+    if (pool.length === 0) return [];
+    const state = deckState[squadKey];
+    const batch = [];
+    const usedIds = new Set();
+
+    while (batch.length < Math.min(count, pool.length)) {
+      if (state.queue.length === 0) {
+        // Refill queue with all players in random order; avoid repeating players already in current batch first
+        const remainingPool = pool.filter((p) => !usedIds.has(p.id));
+        const alreadyInBatchPool = pool.filter((p) => usedIds.has(p.id));
+        state.queue = shuffleArray(remainingPool).concat(shuffleArray(alreadyInBatchPool));
+      }
+      const candidate = state.queue.shift();
+      if (candidate && !usedIds.has(candidate.id)) {
+        usedIds.add(candidate.id);
+        batch.push(candidate);
+      }
+    }
+
+    state.turn += 1;
+    return batch;
+  }
+
+  let activeSquad = 'men';
+  let selectedRole = null;
+  let selectedPlayer = null;
+  let shuffleTimer = null;
+  let isHoverPaused = false;
+  let serverLeaderboard = { men: { total: 0, leaderboard: [] }, women: { total: 0, leaderboard: [] } };
+
+  const LOCAL_VOTES_KEY = 'paide_season_poll_2026_votes_v1';
+
+  function getLocalVotes() {
+    try {
+      const raw = localStorage.getItem(LOCAL_VOTES_KEY);
+      return raw ? JSON.parse(raw) : { men: {}, women: {} };
+    } catch (e) {
+      return { men: {}, women: {} };
+    }
+  }
+
+  function hasVotedLocally(squadKey) {
+    const store = getLocalVotes();
+    return Boolean(store && store[squadKey] && store[squadKey].lastVotedPlayer);
+  }
+
+  function recordLocalVote(squadKey, email, player) {
+    try {
+      const store = getLocalVotes();
+      if (!store[squadKey]) store[squadKey] = {};
+      const normEmail = String(email || '').trim().toLowerCase();
+      if (!store[squadKey].emails) store[squadKey].emails = {};
+      store[squadKey].emails[normEmail] = {
+        playerId: player.id,
+        playerName: player.name,
+        votedAt: new Date().toISOString()
+      };
+      store[squadKey].lastVotedPlayer = {
+        id: player.id,
+        name: player.name,
+        role: player.role,
+        number: player.number,
+        img: player.img
+      };
+      store.lastEmail = normEmail;
+      if (!store[squadKey].counts) store[squadKey].counts = {};
+      store[squadKey].counts[player.id] = {
+        id: player.id,
+        name: player.name,
+        role: player.role,
+        votes: ((store[squadKey].counts[player.id] && store[squadKey].counts[player.id].votes) || 0) + 1
+      };
+      localStorage.setItem(LOCAL_VOTES_KEY, JSON.stringify(store));
+    } catch (e) {
+      // Ignore storage quota errors
+    }
+  }
+
+  function getLastVoterEmail() {
+    const store = getLocalVotes();
+    return (store && store.lastEmail) ? String(store.lastEmail) : '';
+  }
+
+  function hasEmailVotedLocally(squadKey, email) {
+    const store = getLocalVotes();
+    const normEmail = String(email || '').trim().toLowerCase();
+    return Boolean(
+      store &&
+      store[squadKey] &&
+      store[squadKey].emails &&
+      store[squadKey].emails[normEmail]
+    );
+  }
+
+  function renderShowcaseCardHTML(player, colorClass, index) {
+    const isCrimson = colorClass === 'poll-card-crimson';
+    const topRibbonClass = isCrimson ? 'bg-crimson text-white' : 'bg-navy text-white';
+    const numberBadge = player.number
+      ? `<span class="absolute top-2 right-2 z-10 px-1.5 py-0.5 rounded-md ${topRibbonClass} font-grotesk font-bold text-[10px] sm:text-xs shadow-sm select-none pointer-events-none">#${player.number}</span>`
+      : '';
+    return `
+      <div class="poll-showcase-tile ${colorClass} rounded-xl sm:rounded-2xl aspect-[4/4.8] relative overflow-hidden shadow-md group/tile"
+           data-player-id="${player.id}"
+           data-player-role="${player.role}"
+           style="transition-delay: ${index * 22}ms">
+        ${numberBadge}
+        <img src="${player.img}"
+             alt="${player.name}"
+             loading="lazy"
+             class="w-full h-full object-cover object-top transform group-hover/tile:scale-105 transition-transform duration-500 pointer-events-none">
+        <div class="poll-card-overlay absolute inset-0 z-[5] pointer-events-none"></div>
+        <div class="poll-player-caption absolute bottom-2 sm:bottom-3 inset-x-1.5 text-center text-white z-10 pointer-events-none leading-tight">
+          ${player.firstName ? `<div class="text-[11px] sm:text-xs font-semibold text-slate-200 truncate font-sans">${player.firstName}</div>` : ''}
+          <div class="font-display font-black text-xs sm:text-[17px] uppercase tracking-tight text-white truncate mt-0.5">${player.lastName}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderShowcaseBatch(animate = true) {
+    const batch = getNextShowcaseBatch(activeSquad, 11);
+    const row1Players = batch.slice(0, 6);
+    const row2Players = batch.slice(6, 11);
+
+    const applyUpdate = () => {
+      // Chessboard alternating Red (poll-card-crimson) and Blue (poll-card-navy)
+      // Row 1 (6 cards): Red, Blue, Red, Blue, Red, Blue
+      row1El.innerHTML = row1Players
+        .map((p, i) =>
+          renderShowcaseCardHTML(
+            p,
+            i % 2 === 0 ? 'poll-card-crimson' : 'poll-card-navy',
+            i
+          )
+        )
+        .join('');
+
+      // Row 2 (5 centered cards): Blue, Red, Blue, Red, Blue
+      row2El.innerHTML = row2Players
+        .map((p, i) =>
+          renderShowcaseCardHTML(
+            p,
+            i % 2 === 0 ? 'poll-card-navy' : 'poll-card-crimson',
+            i + 6
+          )
+        )
+        .join('');
+    };
+
+    if (!animate || row1El.children.length === 0) {
+      applyUpdate();
+      return;
+    }
+
+    const currentTiles = section.querySelectorAll('.poll-showcase-tile');
+    currentTiles.forEach((tile) => tile.classList.add('is-shuffling'));
+
+    setTimeout(() => {
+      applyUpdate();
+      const newTiles = section.querySelectorAll('.poll-showcase-tile');
+      newTiles.forEach((tile) => tile.classList.add('is-shuffling'));
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          newTiles.forEach((tile) => tile.classList.remove('is-shuffling'));
+        });
+      });
+    }, 220);
+  }
+
+  function updateSquadUI(squadKey, animateCards = false) {
+    const switcherEl = document.getElementById('poll-squad-switcher');
+    const womenEnabled = Boolean(
+      switcherEl &&
+      !switcherEl.classList.contains('hidden') &&
+      switcherEl.style.display !== 'none'
+    );
+    activeSquad = womenEnabled && squadKey === 'women' ? 'women' : 'men';
+    const isMen = activeSquad === 'men';
+
+    if (tabMen && tabWomen) {
+      if (isMen) {
+        tabMen.classList.add('bg-navy', 'text-white', 'shadow-sm');
+        tabMen.classList.remove('text-slate-600');
+        tabMen.setAttribute('aria-selected', 'true');
+
+        tabWomen.classList.remove('bg-navy', 'text-white', 'shadow-sm');
+        tabWomen.classList.add('text-slate-600');
+        tabWomen.setAttribute('aria-selected', 'false');
+      } else {
+        tabWomen.classList.add('bg-navy', 'text-white', 'shadow-sm');
+        tabWomen.classList.remove('text-slate-600');
+        tabWomen.setAttribute('aria-selected', 'true');
+
+        tabMen.classList.remove('bg-navy', 'text-white', 'shadow-sm');
+        tabMen.classList.add('text-slate-600');
+        tabMen.setAttribute('aria-selected', 'false');
+      }
+    }
+
+    // Sync modal squad switcher buttons
+    const modalSquadBtns = dialog.querySelectorAll('.modal-squad-btn');
+    modalSquadBtns.forEach((btn) => {
+      const btnSquad = btn.getAttribute('data-modal-squad');
+      if (btnSquad === activeSquad) {
+        btn.classList.add('bg-navy', 'text-white', 'shadow-sm');
+        btn.classList.remove('text-slate-600');
+      } else {
+        btn.classList.remove('bg-navy', 'text-white', 'shadow-sm');
+        btn.classList.add('text-slate-600');
+      }
+    });
+
+    if (kickerEl) {
+      kickerEl.textContent = 'Kõik võistlussarjad kokku • Hääletamine lõppeb teisipäeval 3. novembril kell 17.00.';
+    }
+    if (headlineEl) {
+      headlineEl.textContent = 'KES ON HOOAJA 2026 PARIM MÄNGIJA?';
+    }
+
+    renderShowcaseBatch(animateCards);
+  }
+
+  function startShuffleInterval() {
+    if (shuffleTimer) clearInterval(shuffleTimer);
+    shuffleTimer = setInterval(() => {
+      if (isHoverPaused || dialog.open || document.hidden) return;
+      renderShowcaseBatch(true);
+    }, 3000);
+  }
+
+  // Pause shuffling briefly while user focuses or hovers over the modal open state
+  if (tabMen) {
+    tabMen.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (activeSquad !== 'men') {
+        updateSquadUI('men', false);
+        startShuffleInterval();
+      }
+    });
+  }
+
+  if (tabWomen) {
+    tabWomen.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (activeSquad !== 'women') {
+        updateSquadUI('women', false);
+        startShuffleInterval();
+      }
+    });
+  }
+
+  // Also sync with the league standings table switcher only when the poll squad switcher is visible
+  const pollSquadSwitcher = document.getElementById('poll-squad-switcher');
+  const isWomenPollEnabled = () => Boolean(pollSquadSwitcher && !pollSquadSwitcher.classList.contains('hidden'));
+  const standingsMenBtn = document.getElementById('tab-standings-men');
+  const standingsWomenBtn = document.getElementById('tab-standings-women');
+  if (standingsMenBtn) {
+    standingsMenBtn.addEventListener('click', () => {
+      if (isWomenPollEnabled() && activeSquad !== 'men') updateSquadUI('men', false);
+    });
+  }
+  if (standingsWomenBtn) {
+    standingsWomenBtn.addEventListener('click', () => {
+      if (isWomenPollEnabled() && activeSquad !== 'women') updateSquadUI('women', false);
+    });
+  }
+
+  /* ------------------------------------------------------------------------ */
+  /* STEP-BY-STEP MODAL DIALOG LOGIC                                          */
+  /* ------------------------------------------------------------------------ */
+  const step1El = document.getElementById('poll-step-1');
+  const step2El = document.getElementById('poll-step-2');
+  const step3El = document.getElementById('poll-step-3');
+  const step4El = document.getElementById('poll-step-4');
+  const stepBadgeEl = document.getElementById('poll-dialog-step-badge');
+  const roleGridEl = document.getElementById('poll-role-grid');
+  const rolePlayersGridEl = document.getElementById('poll-role-players-grid');
+  const selectedRoleBadgeEl = document.getElementById('poll-selected-role-badge');
+  const backToRolesBtn = document.getElementById('poll-back-to-roles');
+  const backToPlayersBtn = document.getElementById('poll-back-to-players');
+  const voteForm = document.getElementById('poll-vote-form');
+  const emailInput = document.getElementById('poll-voter-email');
+  const formErrorEl = document.getElementById('poll-form-error');
+  const submitBtn = document.getElementById('poll-submit-btn');
+  const submitBtnText = document.getElementById('poll-submit-btn-text');
+  const voteOtherSquadBtn = document.getElementById('poll-vote-other-squad-btn');
+  const doneCloseBtn = document.getElementById('poll-done-close-btn');
+
+  // Light-dismiss fallback for browsers without native <dialog closedby="any"> support (e.g. Safari)
+  if (!('closedBy' in HTMLDialogElement.prototype)) {
+    dialog.addEventListener('click', (event) => {
+      if (event.target !== dialog) return;
+      const rect = dialog.getBoundingClientRect();
+      const isOutside =
+        event.clientY < rect.top ||
+        event.clientY > rect.bottom ||
+        event.clientX < rect.left ||
+        event.clientX > rect.right;
+      if (isOutside) {
+        dialog.close();
+      }
+    });
+  }
+
+  // Validate input after interaction (:user-invalid fallback + aria-invalid sync)
+  if (voteForm && emailInput) {
+    if (!CSS.supports('selector(:user-invalid)')) {
+      const interactedInputs = new WeakMap();
+      const updateFallbackClasses = (el) => {
+        if (!interactedInputs.get(el) || !el.willValidate) return;
+        const isValid = el.checkValidity();
+        el.classList.toggle('user-invalid-fallback', !isValid);
+        el.classList.toggle('user-valid-fallback', isValid);
+      };
+      voteForm.addEventListener('blur', (e) => {
+        if (e.target.form === voteForm) {
+          interactedInputs.set(e.target, true);
+          updateFallbackClasses(e.target);
+        }
+      }, true);
+      voteForm.addEventListener('input', (e) => updateFallbackClasses(e.target));
+    }
+
+    const syncAriaInvalid = (e) => {
+      const el = e.target;
+      if (!el || !el.matches) return;
+      const isInvalid =
+        (CSS.supports('selector(:user-invalid)') && el.matches(':user-invalid')) ||
+        el.classList.contains('user-invalid-fallback');
+      el.setAttribute('aria-invalid', isInvalid ? 'true' : 'false');
+    };
+    voteForm.addEventListener('blur', syncAriaInvalid, true);
+    voteForm.addEventListener('input', syncAriaInvalid);
+  }
+
+  function showStep(stepNumber) {
+    [step1El, step2El, step3El, step4El].forEach((el, idx) => {
+      if (!el) return;
+      el.classList.toggle('hidden', idx + 1 !== stepNumber);
+    });
+
+    if (stepBadgeEl) {
+      if (stepNumber === 1) stepBadgeEl.textContent = 'SAMM 1 / 3 • VALI POSITSIOON';
+      else if (stepNumber === 2) stepBadgeEl.textContent = 'SAMM 2 / 3 • VALI MÄNGIJA';
+      else if (stepNumber === 3) stepBadgeEl.textContent = 'SAMM 3 / 3 • KINNITA HÄÄL';
+      else stepBadgeEl.textContent = 'HÄÄLETUS KINNITATUD';
+    }
+  }
+
+  function renderStep1Roles() {
+    if (!roleGridEl) return;
+    const pool = squads[activeSquad] || [];
+    const roleOrder = ['VV', 'K', 'PK', 'R'];
+
+    roleGridEl.innerHTML = roleOrder
+      .map((roleCode, idx) => {
+        const meta = ROLE_META[roleCode];
+        const rolePlayers = pool.filter((p) => p.role === roleCode);
+        const previewAvatars = rolePlayers
+          .slice(0, 4)
+          .map(
+            (p) =>
+              `<img src="${p.img}" alt="${p.name}" class="w-9 h-9 rounded-full object-cover object-top border-2 border-white shadow-sm bg-navy">`
+          )
+          .join('');
+        const badgeColorClass = idx % 2 === 0 ? 'bg-crimson' : 'bg-navy';
+
+        return `
+          <button type="button"
+                  data-select-role="${roleCode}"
+                  class="group/role text-left p-4 sm:p-5 rounded-2xl bg-white hover:bg-slate-50 hairline-border shadow-sm hover:shadow-md transition-all flex flex-col justify-between gap-4 cursor-pointer">
+            <div class="flex items-start justify-between gap-3 w-full">
+              <div>
+                <span class="inline-block px-2.5 py-0.5 rounded-md ${badgeColorClass} text-white text-[10px] font-bold uppercase tracking-wider font-sans">
+                  ${rolePlayers.length} mängijat
+                </span>
+                <h5 class="font-display font-black text-xl text-navy group-hover/role:text-crimson uppercase mt-2 transition-colors">
+                  ${meta.plural}
+                </h5>
+              </div>
+              <div class="w-8 h-8 rounded-full bg-slate-100 group-hover/role:bg-crimson group-hover/role:text-white text-navy flex items-center justify-center transition-colors flex-shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-2 border-t border-slate-100 w-full">
+              <div class="flex -space-x-2 overflow-hidden">
+                ${previewAvatars}
+              </div>
+              <span class="text-[11px] font-bold text-navy group-hover/role:text-crimson uppercase tracking-wider font-sans">
+                Vaata mängijaid →
+              </span>
+            </div>
+          </button>
+        `;
+      })
+      .join('');
+
+    roleGridEl.querySelectorAll('[data-select-role]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const roleCode = btn.getAttribute('data-select-role');
+        openStep2ForRole(roleCode);
+      });
+    });
+  }
+
+  function openStep2ForRole(roleCode) {
+    selectedRole = roleCode;
+    const meta = ROLE_META[roleCode] || ROLE_META.R;
+    if (selectedRoleBadgeEl) {
+      selectedRoleBadgeEl.textContent = meta.plural.toUpperCase();
+    }
+
+    const pool = (squads[activeSquad] || []).filter((p) => p.role === roleCode);
+    if (rolePlayersGridEl) {
+      rolePlayersGridEl.innerHTML = pool
+        .map((player, idx) => {
+          const isCrimson = idx % 2 === 0;
+          const bgClass = isCrimson ? 'poll-card-crimson' : 'poll-card-navy';
+          const badgeClass = isCrimson ? 'bg-crimson text-white' : 'bg-navy text-white';
+          return `
+            <button type="button"
+                    data-select-player="${player.id}"
+                    class="group/pcard text-left rounded-2xl overflow-hidden hairline-border bg-white shadow-sm hover:shadow-lg transition-all flex flex-col cursor-pointer">
+              <div class="w-full aspect-[4/4.5] ${bgClass} relative overflow-hidden">
+                ${player.number ? `<span class="absolute top-2 right-2 z-10 px-1.5 py-0.5 rounded-md ${badgeClass} font-grotesk font-bold text-xs shadow-sm">#${player.number}</span>` : ''}
+                <img src="${player.img}" alt="${player.name}" loading="lazy"
+                     class="w-full h-full object-cover object-top group-hover/pcard:scale-105 transition-transform duration-300">
+                <div class="poll-card-overlay absolute inset-0 z-[5]"></div>
+                <div class="poll-player-caption absolute bottom-2.5 inset-x-2 text-white text-center z-10">
+                  ${player.firstName ? `<div class="text-[11px] font-semibold text-slate-200 font-sans truncate">${player.firstName}</div>` : ''}
+                  <div class="font-display font-black text-sm sm:text-base uppercase tracking-tight text-white truncate mt-0.5">${player.lastName}</div>
+                </div>
+              </div>
+              <div class="p-2.5 text-center bg-white group-hover/pcard:bg-navy group-hover/pcard:text-white transition-colors">
+                <span class="text-[11px] font-bold uppercase tracking-wider font-sans">Vali mängija →</span>
+              </div>
+            </button>
+          `;
+        })
+        .join('');
+
+      rolePlayersGridEl.querySelectorAll('[data-select-player]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const pId = btn.getAttribute('data-select-player');
+          const found = (squads[activeSquad] || []).find((p) => p.id === pId);
+          if (found) openStep3ForPlayer(found);
+        });
+      });
+    }
+
+    showStep(2);
+  }
+
+  function openStep3ForPlayer(player) {
+    selectedPlayer = player;
+    const confirmImg = document.getElementById('poll-confirm-img');
+    const confirmSquad = document.getElementById('poll-confirm-squad');
+    const confirmName = document.getElementById('poll-confirm-name');
+    const confirmMeta = document.getElementById('poll-confirm-meta');
+
+    if (confirmImg) {
+      confirmImg.src = player.img;
+      confirmImg.alt = player.name;
+    }
+    if (confirmSquad) {
+      confirmSquad.textContent = activeSquad === 'men' ? 'ESINDUSMEESKOND' : 'LINNANAISKOND';
+    }
+    if (confirmName) {
+      confirmName.textContent = player.name;
+    }
+    if (confirmMeta) {
+      confirmMeta.textContent = `${player.number ? '#' + player.number + ' • ' : ''}${player.roleLabel}`;
+    }
+    if (emailInput && !emailInput.value.trim()) {
+      const savedEmail = getLastVoterEmail();
+      if (savedEmail) {
+        emailInput.value = savedEmail;
+      }
+    }
+    if (formErrorEl) {
+      formErrorEl.classList.add('hidden');
+      formErrorEl.textContent = '';
+    }
+
+    showStep(3);
+  }
+
+  function renderLeaderboardOnSuccess(squadKey, apiResult) {
+    const lbContainer = document.getElementById('poll-live-leaderboard');
+    const totalEl = document.getElementById('poll-live-total-votes');
+    if (!lbContainer) return;
+
+    let topList = [];
+    let totalVotes = 1;
+
+    if (
+      apiResult &&
+      apiResult.standings &&
+      apiResult.standings[squadKey] &&
+      typeof apiResult.standings[squadKey] === 'object'
+    ) {
+      const entries = Object.entries(apiResult.standings[squadKey]).map(([name, votes]) => ({
+        name,
+        votes: Number(votes) || 0
+      }));
+      entries.sort((a, b) => b.votes - a.votes);
+      topList = entries.slice(0, 3);
+      totalVotes =
+        (apiResult.total_votes && Number(apiResult.total_votes[squadKey])) ||
+        entries.reduce((acc, r) => acc + r.votes, 0) ||
+        1;
+    } else if (apiResult && Array.isArray(apiResult.leaderboard) && apiResult.leaderboard.length > 0) {
+      topList = apiResult.leaderboard.slice(0, 3);
+      totalVotes = apiResult.totalSquadVotes || topList.reduce((acc, r) => acc + (r.votes || 0), 0);
+    } else {
+      const localStore = getLocalVotes();
+      const countsObj = (localStore[squadKey] && localStore[squadKey].counts) || {};
+      const arr = Object.values(countsObj).sort((a, b) => (b.votes || 0) - (a.votes || 0));
+      topList = arr.slice(0, 3);
+      totalVotes = arr.reduce((acc, r) => acc + (r.votes || 0), 0) || 1;
+    }
+
+    if (totalEl) {
+      totalEl.textContent = `Kokku hääli: ${totalVotes}`;
+    }
+
+    lbContainer.innerHTML = topList
+      .map((item, idx) => {
+        const pct = totalVotes > 0 ? Math.round(((item.votes || 1) / totalVotes) * 100) : 100;
+        return `
+          <div class="space-y-1">
+            <div class="flex items-center justify-between text-xs font-sans">
+              <span class="font-bold text-navy truncate">${idx + 1}. ${item.name}</span>
+              <span class="font-mono font-bold text-crimson">${item.votes || 1} (${pct}%)</span>
+            </div>
+            <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
+              <div class="h-full ${idx === 0 ? 'bg-crimson' : 'bg-navy'} rounded-full" style="width: ${pct}%"></div>
+            </div>
+          </div>
+        `;
+      })
+      .join('');
+  }
+
+  function openPollModal(preselectedPlayer = null) {
+    renderStep1Roles();
+    if (preselectedPlayer) {
+      selectedRole = preselectedPlayer.role;
+      openStep2ForRole(preselectedPlayer.role);
+      openStep3ForPlayer(preselectedPlayer);
+    } else {
+      showStep(1);
+    }
+    if (!dialog.open) {
+      dialog.showModal();
+    }
+  }
+
+  // Clicking on the massive showcase opens the poll modal.
+  // If user clicked directly on a player tile, we still start at Step 1 (Role) as requested ("step by step, first is role, then we see only the players in that role"),
+  // so the user always experiences the compact step-by-step flow.
+  if (showcaseTrigger) {
+    showcaseTrigger.addEventListener('click', () => {
+      openPollModal(null);
+    });
+    showcaseTrigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openPollModal(null);
+      }
+    });
+  }
+
+  if (dialogCloseBtn) {
+    dialogCloseBtn.addEventListener('click', () => dialog.close());
+  }
+  if (doneCloseBtn) {
+    doneCloseBtn.addEventListener('click', () => dialog.close());
+  }
+  if (backToRolesBtn) {
+    backToRolesBtn.addEventListener('click', () => {
+      renderStep1Roles();
+      showStep(1);
+    });
+  }
+  if (backToPlayersBtn) {
+    backToPlayersBtn.addEventListener('click', () => {
+      if (selectedRole) openStep2ForRole(selectedRole);
+      else showStep(1);
+    });
+  }
+
+  // Modal internal squad switcher
+  dialog.querySelectorAll('.modal-squad-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const targetSquad = btn.getAttribute('data-modal-squad');
+      if (targetSquad && targetSquad !== activeSquad) {
+        updateSquadUI(targetSquad, false);
+        renderStep1Roles();
+        showStep(1);
+      }
+    });
+  });
+
+  if (voteOtherSquadBtn) {
+    voteOtherSquadBtn.addEventListener('click', () => {
+      const nextSquad = activeSquad === 'men' ? 'women' : 'men';
+      updateSquadUI(nextSquad, false);
+      renderStep1Roles();
+      showStep(1);
+    });
+  }
+
+  // Handle vote form submission
+  if (voteForm) {
+    voteForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!selectedPlayer) return;
+
+      const email = emailInput ? emailInput.value.trim() : '';
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+      if (!email || !emailRegex.test(email)) {
+        if (formErrorEl) {
+          formErrorEl.textContent = 'Palun sisesta korrektne e-posti aadress.';
+          formErrorEl.classList.remove('hidden');
+        }
+        if (emailInput) emailInput.focus();
+        return;
+      }
+
+      // Check local duplicate vote for this email + current squad first
+      // (1 email can vote ONCE for 'women' and ONCE for 'men')
+      const otherSquad = activeSquad === 'men' ? 'women' : 'men';
+      if (hasEmailVotedLocally(activeSquad, email)) {
+        const alreadyVotedBoth = hasEmailVotedLocally(otherSquad, email);
+        if (formErrorEl) {
+          if (!isWomenPollEnabled() || alreadyVotedBoth) {
+            formErrorEl.textContent =
+              'Selle e-posti aadressiga on hääletusel juba hääl antud.';
+          } else {
+            const currentLabel = activeSquad === 'men' ? 'Esindusmeeskonna' : 'Linnanaiskonna';
+            const otherLabel = otherSquad === 'men' ? 'Esindusmeeskonna' : 'Linnanaiskonna';
+            formErrorEl.innerHTML = `
+              <div>Selle e-posti aadressiga on ${currentLabel} kategoorias juba hääletatud! Küll aga saad sama e-posti aadressiga veel hääletada ${otherLabel} kategoorias.</div>
+              <button type="button" id="poll-error-switch-squad" class="mt-2 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-navy text-white text-[11px] font-bold uppercase tracking-wider hover:bg-crimson transition-colors cursor-pointer">
+                Hääleta ${otherLabel} kategoorias →
+              </button>
+            `;
+            const switchBtn = document.getElementById('poll-error-switch-squad');
+            if (switchBtn) {
+              switchBtn.addEventListener('click', () => {
+                updateSquadUI(otherSquad, false);
+                renderStep1Roles();
+                showStep(1);
+              });
+            }
+          }
+          formErrorEl.classList.remove('hidden');
+        }
+        return;
+      }
+
+      if (formErrorEl) formErrorEl.classList.add('hidden');
+      const originalBtnLabel = submitBtnText ? submitBtnText.textContent : 'Kinnita hääl';
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitBtnText) submitBtnText.textContent = 'Salvestame häält...';
+
+      const payload = {
+        email,
+        squad: activeSquad,
+        role: selectedPlayer.role,
+        player_role: selectedPlayer.roleLabel,
+        playerId: selectedPlayer.id,
+        playerName: selectedPlayer.name,
+        player_name: selectedPlayer.name,
+        playerNumber: selectedPlayer.number,
+        player_number: selectedPlayer.number,
+        website_url: voteForm.querySelector('input[name="website_url"]')?.value || ''
+      };
+
+      let apiResult = null;
+      let duplicateError = null;
+      let duplicateData = null;
+
+      for (const endpoint of ['poll-vote.php', 'api/poll-vote.php']) {
+        try {
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json().catch(() => null);
+          if (res.ok && data && data.ok) {
+            apiResult = data;
+            break;
+          }
+          if (res.status === 409 && data && data.error) {
+            duplicateError = data.error;
+            duplicateData = data;
+            break;
+          }
+        } catch (networkErr) {
+          // Continue to fallback if PHP server isn't running in static preview
+        }
+      }
+
+      if (submitBtn) submitBtn.disabled = false;
+      if (submitBtnText) submitBtnText.textContent = originalBtnLabel;
+
+      if (duplicateError) {
+        if (formErrorEl) {
+          if (isWomenPollEnabled() && duplicateData && duplicateData.has_voted_other_squad === false) {
+            const otherLabel = otherSquad === 'men' ? 'Esindusmeeskonna' : 'Linnanaiskonna';
+            formErrorEl.innerHTML = `
+              <div>${duplicateError}</div>
+              <button type="button" id="poll-error-switch-squad" class="mt-2 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-navy text-white text-[11px] font-bold uppercase tracking-wider hover:bg-crimson transition-colors cursor-pointer">
+                Hääleta ${otherLabel} kategoorias →
+              </button>
+            `;
+            const switchBtn = document.getElementById('poll-error-switch-squad');
+            if (switchBtn) {
+              switchBtn.addEventListener('click', () => {
+                updateSquadUI(otherSquad, false);
+                renderStep1Roles();
+                showStep(1);
+              });
+            }
+          } else {
+            formErrorEl.textContent = 'Selle e-posti aadressiga on hääletusel juba hääl antud!';
+          }
+          formErrorEl.classList.remove('hidden');
+        }
+        return;
+      }
+
+      // Save locally as well so browser remembers voted state
+      recordLocalVote(activeSquad, email, selectedPlayer);
+      updateSquadUI(activeSquad, false);
+
+      const votedOtherSquad =
+        (apiResult && apiResult.has_voted_other_squad === true) ||
+        hasEmailVotedLocally(otherSquad, email);
+
+      // Populate Step 4 confirmation screen
+      const successImg = document.getElementById('poll-success-img');
+      const successSquad = document.getElementById('poll-success-squad');
+      const successName = document.getElementById('poll-success-name');
+      const successRole = document.getElementById('poll-success-role');
+      const successDesc = document.getElementById('poll-success-desc');
+
+      if (successImg) {
+        successImg.src = selectedPlayer.img;
+        successImg.alt = selectedPlayer.name;
+      }
+      if (successSquad) {
+        successSquad.textContent = activeSquad === 'men' ? 'ESINDUSMEESKOND' : 'LINNANAISKOND';
+      }
+      if (successName) {
+        successName.textContent = selectedPlayer.name;
+      }
+      if (successRole) {
+        successRole.textContent = `${selectedPlayer.number ? '#' + selectedPlayer.number + ' • ' : ''}${selectedPlayer.roleLabel}`;
+      }
+      if (voteOtherSquadBtn) {
+        if (!isWomenPollEnabled() || votedOtherSquad) {
+          voteOtherSquadBtn.classList.add('hidden');
+        } else {
+          voteOtherSquadBtn.classList.remove('hidden');
+          voteOtherSquadBtn.textContent =
+            activeSquad === 'men'
+              ? 'Hääleta nüüd naiskonna kategoorias →'
+              : 'Hääleta nüüd esindusmeeskonna kategoorias →';
+        }
+      }
+
+      renderLeaderboardOnSuccess(activeSquad, apiResult);
+      showStep(4);
+    });
+  }
+
+  // Initialize first showcase view and start 3-second shuffle cycle
+  updateSquadUI('men', false);
+  startShuffleInterval();
+}
+
 
 
