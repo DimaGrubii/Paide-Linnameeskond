@@ -2,7 +2,7 @@
   "metadata": {
     "source": "Eesti Jalgpalli Liit (EJL)",
     "sourceUrl": "https://jalgpall.ee/voistlused/52/team/5",
-    "lastUpdated": "2026-10-30T14:52:12.433285",
+    "lastUpdated": "2026-10-30T23:29:01.488973",
     "season": "2026",
     "status": "success"
   },
@@ -5540,22 +5540,16 @@
         "team": "Tallinna FC Flora",
         "logo": "https://www.jalgpall.ee/images/teams/D0B9D494E357FA0E0A979DD18804391C",
         "localLogo": "assets/img/jalgpall_logos/flora_women.png",
-        "played": 23,
+        "played": 24,
         "won": 15,
         "drawn": 3,
-        "lost": 5,
+        "lost": 6,
         "goalsFor": 70,
-        "goalsAgainst": 27,
-        "goalDifference": "+43",
+        "goalsAgainst": 30,
+        "goalDifference": "+40",
         "points": 48,
         "isPaide": false,
         "form": [
-          {
-            "result": "V",
-            "type": "win",
-            "score": "6:0 vs Harju JK Laagri",
-            "opponent": "Harju JK Laagri"
-          },
           {
             "result": "K",
             "type": "loss",
@@ -5567,6 +5561,12 @@
             "type": "win",
             "score": "4:1 vs Viimsi JK",
             "opponent": "Viimsi JK"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "0:3 vs Saku Sporting",
+            "opponent": "Saku Sporting"
           }
         ],
         "seasonHistory": [
@@ -5848,10 +5848,10 @@
           },
           {
             "round": 24,
-            "type": "upcoming",
-            "result": "-",
-            "score": "vs Saku Sporting",
-            "matchScore": "-",
+            "type": "loss",
+            "result": "K",
+            "score": "0:3 vs Saku Sporting",
+            "matchScore": "3:0",
             "homeTeam": "Saku Sporting",
             "awayTeam": "Tallinna FC Flora",
             "opponent": "Saku Sporting",
@@ -6214,22 +6214,16 @@
         "team": "Saku Sporting",
         "logo": "https://jalgpall.ee/images/clubs/8A0B6929BDA0849072EC802923A683D1",
         "localLogo": "assets/img/jalgpall_logos/saku.png",
-        "played": 23,
-        "won": 13,
+        "played": 24,
+        "won": 14,
         "drawn": 2,
         "lost": 8,
-        "goalsFor": 63,
+        "goalsFor": 66,
         "goalsAgainst": 49,
-        "goalDifference": "+14",
-        "points": 41,
+        "goalDifference": "+17",
+        "points": 44,
         "isPaide": false,
         "form": [
-          {
-            "result": "V",
-            "type": "win",
-            "score": "3:0 vs Paide Linnanaiskond",
-            "opponent": "Paide Linnanaiskond"
-          },
           {
             "result": "V",
             "type": "win",
@@ -6241,6 +6235,12 @@
             "type": "win",
             "score": "5:1 vs Harju JK Laagri",
             "opponent": "Harju JK Laagri"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "3:0 vs Tallinna FC Flora",
+            "opponent": "Tallinna FC Flora"
           }
         ],
         "seasonHistory": [
@@ -6522,10 +6522,10 @@
           },
           {
             "round": 24,
-            "type": "upcoming",
-            "result": "-",
-            "score": "vs Tallinna FC Flora",
-            "matchScore": "-",
+            "type": "win",
+            "result": "V",
+            "score": "3:0 vs Tallinna FC Flora",
+            "matchScore": "3:0",
             "homeTeam": "Saku Sporting",
             "awayTeam": "Tallinna FC Flora",
             "opponent": "Tallinna FC Flora",
