@@ -712,23 +712,23 @@ function initVideoModal() {
   const playlistItems = document.querySelectorAll('#video-playlist-container .video-item');
 
   function extractInitialVideoId() {
-    if (!mainIframe) return 'oWMw6sEdOg0';
+    if (!mainIframe) return '0ZzLeLraqmk';
     const dataId = mainIframe.getAttribute('data-video-id');
     if (dataId) return dataId;
     const src = mainIframe.getAttribute('src') || '';
     const match = src.match(/\/embed\/([^?&/]+)/);
-    return match ? match[1] : 'oWMw6sEdOg0';
+    return match ? match[1] : '0ZzLeLraqmk';
   }
 
   const initialVideoId = extractInitialVideoId();
   const defaultVideoData = {
     videoId: initialVideoId,
-    title: featuredTitle ? featuredTitle.textContent.trim() : 'IIZI TALK EP2 | Jalgpalliakadeemiast ja noore teekonnast tippu',
+    title: featuredTitle ? featuredTitle.textContent.trim() : 'IIZI TALK EP3 | Tänaste Linnanaiskonna mängijate toonastest väliskarjääridest',
     category: featuredCategory ? featuredCategory.textContent.trim() : 'IIZI TALK PODCAST',
-    duration: '51:15',
-    views: featuredViews ? featuredViews.textContent.trim() : '1.6K vaatamist',
-    time: featuredTime ? featuredTime.textContent.trim() : '9 päeva tagasi',
-    desc: featuredDesc ? featuredDesc.textContent.trim() : 'Klubi ametlik podcast noortetööst ja Paide Jalgpalliakadeemiast.',
+    duration: '1:19:19',
+    views: featuredViews ? featuredViews.textContent.trim() : '540+ vaatamist',
+    time: featuredTime ? featuredTime.textContent.trim() : 'Uus episood',
+    desc: featuredDesc ? featuredDesc.textContent.trim() : 'IIZI TALK on tagasi ja kolmandas episoodis võtame jutuks Paide Linnanaiskonna jalgpallurite varasemad väliskarjäärid!',
     url: featuredExtLink ? featuredExtLink.getAttribute('href') : `https://www.youtube.com/watch?v=${initialVideoId}`
   };
 
@@ -736,6 +736,12 @@ function initVideoModal() {
 
   function getEmbedUrl(videoId, autoplay = false) {
     const autoParam = autoplay ? 'autoplay=1&' : '';
+    if (videoId === '0ZzLeLraqmk') {
+      return `https://www.youtube.com/embed/0ZzLeLraqmk?si=fobh9JI9F99d1DLC&${autoParam}enablejsapi=1`;
+    }
+    if (videoId === '0i9-Bkcieq4') {
+      return `https://www.youtube.com/embed/0i9-Bkcieq4?si=o2MzTM80yAjFQGMb&${autoParam}enablejsapi=1`;
+    }
     if (videoId === 'oWMw6sEdOg0') {
       return `https://www.youtube.com/embed/oWMw6sEdOg0?si=bKcqwEyGmYoyri5v&${autoParam}enablejsapi=1`;
     }
@@ -1708,9 +1714,11 @@ function initSeasonPlayerPoll() {
   }
 
   function renderShowcaseBatch(animate = true) {
-    const batch = getNextShowcaseBatch(activeSquad, 11);
+    const isMobile = window.matchMedia && window.matchMedia('(max-width: 639px)').matches;
+    const batchCount = isMobile ? 9 : 11;
+    const batch = getNextShowcaseBatch(activeSquad, batchCount);
     const row1Players = batch.slice(0, 6);
-    const row2Players = batch.slice(6, 11);
+    const row2Players = batch.slice(6, batchCount);
 
     const applyUpdate = () => {
       // Chessboard alternating Red (poll-card-crimson) and Blue (poll-card-navy)
@@ -1725,15 +1733,16 @@ function initSeasonPlayerPoll() {
         )
         .join('');
 
-      // Row 2 (5 centered cards): Blue, Red, Blue, Red, Blue
+      // Row 2:
+      // - On desktop (5 centered cards): Blue, Red, Blue, Red, Blue
+      // - On mobile (3 cards, forming the 3rd row of the 3x3 grid after Row 1's 2x3): Red, Blue, Red
       row2El.innerHTML = row2Players
-        .map((p, i) =>
-          renderShowcaseCardHTML(
-            p,
-            i % 2 === 0 ? 'poll-card-navy' : 'poll-card-crimson',
-            i + 6
-          )
-        )
+        .map((p, i) => {
+          const colorClass = isMobile
+            ? (i % 2 === 0 ? 'poll-card-crimson' : 'poll-card-navy')
+            : (i % 2 === 0 ? 'poll-card-navy' : 'poll-card-crimson');
+          return renderShowcaseCardHTML(p, colorClass, i + 6);
+        })
         .join('');
     };
 
