@@ -514,13 +514,13 @@ function initMatchdayToggle() {
 /* 6. HERO EDITORIAL STORIES SWITCHER                                         */
 /* -------------------------------------------------------------------------- */
 const defaultHeroStory = {
-  tag: 'KLUBI & PARTNERLUS • CONNECTO INFRA',
-  title: 'PAIDE LINNAMEESKOND JA CONNECTO ALUSTASID KOOSTÖÖD!',
-  date: '27. OKTOOBER 2026',
-  readTime: '3 MIN LUGEMIST',
-  desc: 'Paide Linnameeskond ja AS Connecto Infra alustasid koostööd, mille tulemusena liitub Connecto klubi toetajate ringiga. Koostöö hõlmab ühiseid turundustegevusi, sisuloomet ning noorte jalgpallitalentide esiletõstmist – partnerluse kaalukust peegeldab Connecto logo jõudmine Paide Linnameeskonna esindusmeeskonna võistlusvormi esiküljele.',
-  image: 'assets/img/news/connecto_sponsor.jpeg',
-  link: 'artikkel-connecto-koostoo.html',
+  tag: 'A. LE COQ PREMIUM LIIGA • PAIDE 0:2 NÕMME KALJU',
+  title: 'PAIDE LINNAMEESKOND JÄI KODUVÄLJAKUL NÕMME KALJULE ALLA',
+  date: '30. OKTOOBER 2026',
+  readTime: '2 MIN LUGEMIST',
+  desc: 'Paide Linnameeskond pidi kolmapäeval, 28. oktoobril A. Le Coq Premium liiga 34. voorus tunnistama koduväljakul Nõmme Kalju FC 2:0 paremust. Medalikohtade nimel heitlevate meeskondade vastasseisus lõid külalised värava kummalgi poolajal.',
+  image: 'assets/img/news/PLM-Kalju_loss.JPEG',
+  link: 'artikkel-nomme-kalju-kaotus.html',
   btnText: 'Loe täispikka uudist'
 };
 
@@ -1031,6 +1031,55 @@ function initNewsFilters() {
       },
       secondary: [
         {
+          href: 'artikkel-nomme-kalju-kaotus.html',
+          img: 'assets/img/news/PLM-Kalju_loss.JPEG',
+          alt: 'Paide Linnameeskond jäi koduväljakul Nõmme Kaljule alla',
+          badge: 'ESINDUSMEESKOND',
+          badgeClass: 'bg-navy',
+          date: '30. OKTOOBER 2026 • 2 MIN',
+          title: 'Paide Linnameeskond jäi koduväljakul Nõmme Kaljule alla',
+          excerpt: 'Paide Linnameeskond pidi kolmapäeval, 28. oktoobril A. Le Coq Premium liiga 34. voorus tunnistama koduväljakul Nõmme Kalju FC 2:0 paremust.'
+        },
+        {
+          href: 'artikkel-connecto-koostoo.html',
+          img: 'assets/img/news/connecto_sponsor.jpeg',
+          alt: 'Paide Linnameeskond ja Connecto alustasid koostööd!',
+          badge: 'KLUBI & PARTNERLUS',
+          badgeClass: 'bg-crimson',
+          date: '27. OKTOOBER 2026 • 3 MIN',
+          title: 'Paide Linnameeskond ja Connecto alustasid koostööd!',
+          excerpt: 'Paide Linnameeskond ja AS Connecto Infra alustasid koostööd, mille tulemusena liitub Connecto klubi toetajate ringiga ning Connecto logo jõuab esindusmeeskonna võistlusvormi esiküljele!'
+        },
+        {
+          href: 'artikkel-kuressaare-voit-teiseks.html',
+          img: 'assets/img/news/kuressaare_PLM_Victory.JPEG',
+          alt: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
+          badge: 'ESINDUSMEESKOND',
+          badgeClass: 'bg-navy',
+          date: '27. OKTOOBER 2026 • 2 MIN',
+          title: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
+          excerpt: 'Paide Linnameeskond naasis Saaremaalt kolme väärtusliku punktiga, alistades võõrsil FC Kuressaare 1:0 Juan Sebastian Palaciose tabamusest!'
+        }
+      ]
+    },
+    esindus: {
+      lead: {
+        img: 'assets/img/news/PLM-Kalju_loss.JPEG',
+        alt: 'Paide Linnameeskond jäi koduväljakul Nõmme Kaljule alla',
+        badge1: 'PREMIUM LIIGA',
+        badge2: 'ESINDUSMEESKOND',
+        metaLeft: 'Paide Linnameeskond 0 : 2 Nõmme Kalju FC',
+        metaRight: '30. OKTOOBER 2026',
+        kicker: 'ESINDUSMEESKOND • MÄNGUÜLEVAADE',
+        title: 'Paide Linnameeskond jäi koduväljakul Nõmme Kaljule alla',
+        href: 'artikkel-nomme-kalju-kaotus.html',
+        excerpt: 'Paide Linnameeskond pidi kolmapäeval, 28. oktoobril A. Le Coq Premium liiga 34. voorus tunnistama koduväljakul Nõmme Kalju FC 2:0 paremust. Medalikohtade nimel heitlevate meeskondade vastasseisus lõid külalised värava kummalgi poolajal.',
+        author: 'Klubi meedia',
+        avatar: 'assets/img/photos/main_team_article.jpeg',
+        ctaText: 'Loe täispikka uudist'
+      },
+      secondary: [
+        {
           href: 'artikkel-connecto-koostoo.html',
           img: 'assets/img/news/connecto_sponsor.jpeg',
           alt: 'Paide Linnameeskond ja Connecto alustasid koostööd!',
@@ -1051,45 +1100,6 @@ function initNewsFilters() {
           excerpt: 'Paide Linnameeskond naasis Saaremaalt kolme väärtusliku punktiga, alistades võõrsil FC Kuressaare 1:0 Juan Sebastian Palaciose tabamusest!'
         },
         {
-          href: 'artikkel-linnanaiskond-elva-voit.html',
-          img: 'assets/img/news/PLN_Elva_Victory.JPEG',
-          alt: 'Linnanaiskond alistas Elva ja jätkab meistritiitli jahti!',
-          badge: 'NAISMEESKOND',
-          badgeClass: 'bg-crimson',
-          date: '26. OKTOOBER 2026 • 2 MIN',
-          title: 'Linnanaiskond alistas Elva ja jätkab meistritiitli jahti!',
-          excerpt: 'Paide Linnanaiskond alistas kodusel kunstmuruväljakul FC Elva naiskonna kindlalt 4:0. Kaks väravat said kirja nii Lisandra Rannasto kui ka Katriin Rodi!'
-        }
-      ]
-    },
-    esindus: {
-      lead: {
-        img: 'assets/img/news/connecto_sponsor.jpeg',
-        alt: 'Paide Linnameeskond ja Connecto alustasid koostööd!',
-        badge1: 'KLUBI & PARTNERLUS',
-        badge2: 'ESINDUSMEESKOND',
-        metaLeft: 'Paide Linnameeskond & AS Connecto Infra',
-        metaRight: '27. OKTOOBER 2026',
-        kicker: 'ESINDUSMEESKOND • PARTNERLUS',
-        title: 'Paide Linnameeskond ja Connecto alustasid koostööd!',
-        href: 'artikkel-connecto-koostoo.html',
-        excerpt: 'Paide Linnameeskond ja AS Connecto Infra alustasid koostööd, mille tulemusena liitub Connecto klubi toetajate ringiga. Koostöö hõlmab ühiseid turundustegevusi, sisuloomet ning noorte jalgpallitalentide esiletõstmist – partnerluse kaalukust peegeldab Connecto logo jõudmine esindusmeeskonna võistlusvormi esiküljele.',
-        author: 'Klubi meedia',
-        avatar: 'assets/img/photos/main_team_article.jpeg',
-        ctaText: 'Loe täispikka uudist'
-      },
-      secondary: [
-        {
-          href: 'artikkel-kuressaare-voit-teiseks.html',
-          img: 'assets/img/news/kuressaare_PLM_Victory.JPEG',
-          alt: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
-          badge: 'ESINDUSMEESKOND',
-          badgeClass: 'bg-navy',
-          date: '27. OKTOOBER 2026 • 2 MIN',
-          title: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
-          excerpt: 'Paide Linnameeskond naasis Saaremaalt kolme väärtusliku punktiga, alistades võõrsil FC Kuressaare 1:0 Juan Sebastian Palaciose tabamusest!'
-        },
-        {
           href: 'artikkel-lilander-tammeka-voit.html',
           img: 'assets/img/news/lilander_winning_goal_tammeka.JPEG',
           alt: 'Lilanderi üleminutite värav tõi Linnameeskonnale magusa võidu Tammeka üle!',
@@ -1098,16 +1108,6 @@ function initNewsFilters() {
           date: '15. OKTOOBER 2026 • 2 MIN',
           title: 'Lilanderi üleminutite värav tõi Linnameeskonnale magusa võidu Tammeka üle!',
           excerpt: 'Paide Linnameeskond teenis Premium liiga 31. voorus koduväljakul väärtusliku 2:1 võidu Tartu JK Tammeka üle. Kohtumise kangelaseks kerkis Michael Lilander!'
-        },
-        {
-          href: 'artikkel-badamosi-tsehhi-korgliigasse.html',
-          img: 'assets/img/news/badamosi-tsehhi-korgliigasse.jpeg',
-          alt: 'Abdourahman Badamosi siirdus Tšehhi kõrgliigasse',
-          badge: 'ESINDUSMEESKOND',
-          badgeClass: 'bg-navy',
-          date: '08. SEPTEMBER 2026 • 3 MIN',
-          title: 'Abdourahman Badamosi siirdus Tšehhi kõrgliigasse',
-          excerpt: 'Paide Linnameeskonna ründaja Abdourahman Badamosi sõlmis lepingu Tšehhi kõrgliigaklubiga FK Teplice.'
         }
       ]
     },
