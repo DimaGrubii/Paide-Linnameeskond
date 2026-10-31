@@ -80,18 +80,7 @@ function ejlApiGet($path, $params = array(), $timeout = 12) {
 
         $raw = curl_exec($ch);
         $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $err = curl_error($ch);
         curl_close($ch);
-        $GLOBALS['EJL_DEBUG_LOG'][] = array(
-            'via'      => 'curl',
-            'url'      => $url,
-            'code'     => $code,
-            'err'      => $err,
-            'len'      => is_string($raw) ? strlen($raw) : -1,
-            'tokLen'   => strlen($cfg['token']),
-            'tokMask'  => substr($cfg['token'], 0, 4) . '...' . substr($cfg['token'], -4),
-            'bodyHead' => is_string($raw) ? substr($raw, 0, 200) : '',
-        );
         if (is_string($raw) && $code >= 200 && $code < 300) {
             $decoded = json_decode($raw, true);
             if (is_array($decoded)) {
