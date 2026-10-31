@@ -409,3 +409,342 @@ function ejlExtractGameGoals($gameDetail) {
 
     return $goals;
 }
+
+/**
+ * Extracts full timeline events (goals, yellow/red cards, substitutions),
+ * team stats (cards, subs, half-by-half goals), confirmed lineups (starters, bench, coach),
+ * and match officials from a `/api/v1/games/{id}` payload.
+ */
+function ejlExtractFullGameDetails($gameDetail) {
+    if (!is_array($gameDetail)) {
+        return array(
+            'goals'     => array(),
+            'timeline'  => array(),
+            'stats'     => array(),
+            'lineups'   => array(),
+            'officials' => array(),
+        );
+    }
+
+    $homeTeamObj = $gameDetail['teams']['home'] ?? array();
+    $awayTeamObj = $gameDetail['teams']['away'] ?? array();
+    $homeTeamId = isset($homeTeamObj['id']) ? (int)$homeTeamObj['id'] : 0;
+    $awayTeamId = isset($awayTeamObj['id']) ? (int)$awayTeamObj['id'] : 0;
+    $homeTeamName = ejlCleanTeamName($homeTeamObj['name'] ?? '');
+    $awayTeamName = ejlCleanTeamName($awayTeamObj['name'] ?? '');
+
+    // Build player lookup map (name + shirtNumber) from home & away lineups
+    $playerMap = array();
+    foreach (array('home' => $homeTeamObj, 'away' => $awayTeamObj) as $sideKey => $tObj) {
+        if (!empty($tObj['players']) && is_array($tObj['players'])) {
+            foreach ($tObj['players'] as $p) {
+                $pid = isset($p['id']) ? (int)$p['id'] : 0;
+                if ($pid > 0) {
+                    $fullName = trim(($p['forename'] ?? '') . ' ' . ($p['surname'] ?? ''));
+                    $playerMap[$pid] = array(
+                        'id'          => $pid,
+                        'name'        => $fullName,
+                        'shortName'   => ejlFormatShortPlayerName($fullName),
+                        'shirtNumber' => isset($p['shirtNumber']) && $p['shirtNumber'] !== null ? (int)$p['shirtNumber'] : null,
+                        'side'        => $sideKey,
+                    );
+                }
+            }
+        }
+    }
+
+    $resolvePlayer = function ($pid) use (&$playerMap) {
+        $pid = (int)$pid;
+        if ($pid <= 0) {
+            return array('id' => 0, 'name' => '', 'shortName' => '', 'shirtNumber' => null);
+        }
+        if (isset($playerMap[$pid])) {
+            return $playerMap[$pid];
+        }
+        $pInfo = ejlApiGet("/api/v1/players/{$pid}", array(), 4);
+        $fullName = is_array($pInfo) ? trim(($pInfo['forename'] ?? '') . ' ' . ($pInfo['surname'] ?? '')) : '';
+        $entry = array(
+            'id'          => $pid,
+            'name'        => $fullName,
+            'shortName'   => ejlFormatShortPlayerName($fullName),
+            'shirtNumber' => isset($pInfo['shirtNumber']) && $pInfo['shirtNumber'] !== null ? (int)$pInfo['shirtNumber'] : null,
+        );
+        $playerMap[$pid] = $entry;
+        return $entry;
+    };
+
+    $events = isset($gameDetail['events']) && is_array($gameDetail['events']) ? $gameDetail['events'] : array();
+    $goals = array();
+    $timeline = array();
+
+    $stats = array(
+        'goals'           => array('home' => 0, 'away' => 0),
+        'firstHalfGoals'  => array('home' => 0, 'away' => 0),
+        'secondHalfGoals' => array('home' => 0, 'away' => 0),
+        'yellowCards'     => array('home' => 0, 'away' => 0),
+        'redCards'        => array('home' => 0, 'away' => 0),
+        'substitutions'   => array('home' => 0, 'away' => 0),
+        'penalties'       => array('home' => 0, 'away' => 0),
+    );
+
+    // Track per-player match badges for lineup display
+    $playerBadges = array();
+    $ensureBadge = function ($pid) use (&$playerBadges) {
+        if (!isset($playerBadges[$pid])) {
+            $playerBadges[$pid] = array(
+                'goals'     => 0,
+                'yellow'    => 0,
+                'red'       => 0,
+                'subInMin'  => null,
+                'subOutMin' => null,
+            );
+        }
+    };
+
+    $runningHome = 0;
+    $runningAway = 0;
+
+    foreach ($events as $ev) {
+        $typeObj = $ev['type'] ?? array();
+        $code = strtoupper((string)($typeObj['code'] ?? ''));
+        $typeId = isset($typeObj['id']) ? (int)$typeObj['id'] : 0;
+
+        $evTeamId = isset($ev['teamId']) ? (int)$ev['teamId'] : 0;
+        $teamSide = ($evTeamId === $homeTeamId) ? 'home' : 'away';
+
+        $min = isset($ev['minute']) ? (int)$ev['minute'] : 0;
+        $extra = isset($ev['extraMinute']) && $ev['extraMinute'] !== null ? (int)$ev['extraMinute'] : null;
+        $minuteStr = $min > 0 ? ($extra !== null && $extra > 0 ? "{$min}+{$extra}'" : "{$min}'") : '';
+
+        $pid = isset($ev['playerId']) ? (int)$ev['playerId'] : 0;
+        $pData = $resolvePlayer($pid);
+
+        $isGoal = ($code === 'GOAL' || $typeId === 1);
+        $isOwnGoal = ($code === 'OWN_GOAL' || $typeId === 2);
+        $isPenalty = ($code === 'PENALTY' || $typeId === 3);
+        $isMissedPen = ($code === 'MISSED_PENALTY' || $typeId === 4);
+        $isYellow = ($code === 'YELLOW_CARD' || $typeId === 5);
+        $isRed = ($code === 'RED_CARD' || $typeId === 6);
+        $isSub = ($code === 'SUBSTITUTION' || $typeId === 7);
+
+        if ($isGoal || $isOwnGoal || $isPenalty) {
+            $scoringSide = $isOwnGoal ? (($teamSide === 'home') ? 'away' : 'home') : $teamSide;
+            if ($scoringSide === 'home') {
+                $runningHome++;
+            } else {
+                $runningAway++;
+            }
+
+            $stats['goals'][$scoringSide]++;
+            if ($min <= 45) {
+                $stats['firstHalfGoals'][$scoringSide]++;
+            } else {
+                $stats['secondHalfGoals'][$scoringSide]++;
+            }
+            if ($isPenalty) {
+                $stats['penalties'][$scoringSide]++;
+            }
+
+            if ($pid > 0 && !$isOwnGoal) {
+                $ensureBadge($pid);
+                $playerBadges[$pid]['goals']++;
+            }
+
+            $goalType = $isPenalty ? 'pen' : ($isOwnGoal ? 'ov' : '');
+            $scoringTeamName = ($scoringSide === 'home') ? $homeTeamName : $awayTeamName;
+            $isPaide = (mb_stripos($scoringTeamName, 'paide', 0, 'UTF-8') !== false);
+
+            $goalEntry = array(
+                'side'         => $scoringSide,
+                'minute'       => $minuteStr,
+                'player'       => $pData['name'],
+                'shortPlayer'  => $pData['shortName'],
+                'shirtNumber'  => $pData['shirtNumber'],
+                'team'         => $scoringTeamName,
+                'runningScore' => "{$runningHome} : {$runningAway}",
+                'goalType'     => $goalType,
+                'isPaide'      => $isPaide,
+            );
+            $goals[] = $goalEntry;
+
+            $timeline[] = array(
+                'kind'         => $isPenalty ? 'penalty_goal' : ($isOwnGoal ? 'own_goal' : 'goal'),
+                'side'         => $scoringSide,
+                'minute'       => $min,
+                'extraMinute'  => $extra,
+                'minuteStr'    => $minuteStr,
+                'player'       => $pData['name'],
+                'shortPlayer'  => $pData['shortName'],
+                'shirtNumber'  => $pData['shirtNumber'],
+                'runningScore' => "{$runningHome} : {$runningAway}",
+                'goalType'     => $goalType,
+                'isPaide'      => $isPaide,
+            );
+        } elseif ($isYellow || $isRed) {
+            if ($isYellow) {
+                $stats['yellowCards'][$teamSide]++;
+                if ($pid > 0) {
+                    $ensureBadge($pid);
+                    $playerBadges[$pid]['yellow']++;
+                }
+            } else {
+                $stats['redCards'][$teamSide]++;
+                if ($pid > 0) {
+                    $ensureBadge($pid);
+                    $playerBadges[$pid]['red']++;
+                }
+            }
+            $reasonName = trim((string)($ev['reason']['name'] ?? ''));
+            $teamName = ($teamSide === 'home') ? $homeTeamName : $awayTeamName;
+
+            $timeline[] = array(
+                'kind'        => $isYellow ? 'yellow_card' : 'red_card',
+                'side'        => $teamSide,
+                'minute'      => $min,
+                'extraMinute' => $extra,
+                'minuteStr'   => $minuteStr,
+                'player'      => $pData['name'],
+                'shortPlayer' => $pData['shortName'],
+                'shirtNumber' => $pData['shirtNumber'],
+                'reason'      => $reasonName,
+                'isPaide'     => (mb_stripos($teamName, 'paide', 0, 'UTF-8') !== false),
+            );
+        } elseif ($isSub) {
+            $stats['substitutions'][$teamSide]++;
+            $subOutId = isset($ev['substitutedPlayerId']) ? (int)$ev['substitutedPlayerId'] : 0;
+            $pOutData = $resolvePlayer($subOutId);
+
+            if ($pid > 0) {
+                $ensureBadge($pid);
+                $playerBadges[$pid]['subInMin'] = $minuteStr;
+            }
+            if ($subOutId > 0) {
+                $ensureBadge($subOutId);
+                $playerBadges[$subOutId]['subOutMin'] = $minuteStr;
+            }
+
+            $teamName = ($teamSide === 'home') ? $homeTeamName : $awayTeamName;
+            $timeline[] = array(
+                'kind'           => 'substitution',
+                'side'           => $teamSide,
+                'minute'         => $min,
+                'extraMinute'    => $extra,
+                'minuteStr'      => $minuteStr,
+                'playerIn'       => $pData['name'],
+                'shortPlayerIn'  => $pData['shortName'],
+                'shirtIn'        => $pData['shirtNumber'],
+                'playerOut'      => $pOutData['name'],
+                'shortPlayerOut' => $pOutData['shortName'],
+                'shirtOut'       => $pOutData['shirtNumber'],
+                'isPaide'        => (mb_stripos($teamName, 'paide', 0, 'UTF-8') !== false),
+            );
+        } elseif ($isMissedPen) {
+            $teamName = ($teamSide === 'home') ? $homeTeamName : $awayTeamName;
+            $timeline[] = array(
+                'kind'        => 'missed_penalty',
+                'side'        => $teamSide,
+                'minute'      => $min,
+                'extraMinute' => $extra,
+                'minuteStr'   => $minuteStr,
+                'player'      => $pData['name'],
+                'shortPlayer' => $pData['shortName'],
+                'shirtNumber' => $pData['shirtNumber'],
+                'isPaide'     => (mb_stripos($teamName, 'paide', 0, 'UTF-8') !== false),
+            );
+        }
+    }
+
+    // Build lineups (starters, bench, head coach) for home and away
+    $buildTeamLineup = function ($tObj) use ($playerBadges) {
+        $starters = array();
+        $bench = array();
+        $headCoach = '';
+
+        if (!empty($tObj['teamOfficials']) && is_array($tObj['teamOfficials'])) {
+            foreach ($tObj['teamOfficials'] as $off) {
+                $roleCode = strtoupper((string)($off['role']['code'] ?? ''));
+                $roleId = isset($off['role']['id']) ? (int)$off['role']['id'] : 0;
+                if ($roleCode === 'HEAD_COACH' || $roleId === 14) {
+                    $headCoach = trim(($off['forename'] ?? '') . ' ' . ($off['surname'] ?? ''));
+                    break;
+                }
+            }
+        }
+
+        if (!empty($tObj['players']) && is_array($tObj['players'])) {
+            foreach ($tObj['players'] as $p) {
+                $pid = isset($p['id']) ? (int)$p['id'] : 0;
+                $fullName = trim(($p['forename'] ?? '') . ' ' . ($p['surname'] ?? ''));
+                $posName = trim((string)($p['startingPosition']['name'] ?? ''));
+                $badges = $playerBadges[$pid] ?? array(
+                    'goals'     => 0,
+                    'yellow'    => 0,
+                    'red'       => 0,
+                    'subInMin'  => null,
+                    'subOutMin' => null,
+                );
+                $entry = array(
+                    'id'        => $pid,
+                    'number'    => isset($p['shirtNumber']) && $p['shirtNumber'] !== null ? (int)$p['shirtNumber'] : null,
+                    'name'      => $fullName,
+                    'shortName' => ejlFormatShortPlayerName($fullName),
+                    'position'  => $posName,
+                    'isCaptain' => !empty($p['isCaptain']),
+                    'goals'     => $badges['goals'],
+                    'yellow'    => $badges['yellow'],
+                    'red'       => $badges['red'],
+                    'subInMin'  => $badges['subInMin'],
+                    'subOutMin' => $badges['subOutMin'],
+                );
+                if (!empty($p['isStarting'])) {
+                    $starters[] = $entry;
+                } else {
+                    $bench[] = $entry;
+                }
+            }
+        }
+
+        return array(
+            'confirmed' => !empty($tObj['lineupConfirmed']),
+            'headCoach' => $headCoach,
+            'starters'  => $starters,
+            'bench'     => $bench,
+        );
+    };
+
+    $lineups = array(
+        'home' => $buildTeamLineup($homeTeamObj),
+        'away' => $buildTeamLineup($awayTeamObj),
+    );
+
+    // Extract match officials (referee, assistants, VAR)
+    $referee = '';
+    $varReferee = '';
+    $assistants = array();
+    if (!empty($gameDetail['gameOfficials']) && is_array($gameDetail['gameOfficials'])) {
+        foreach ($gameDetail['gameOfficials'] as $off) {
+            $rCode = strtoupper((string)($off['role']['code'] ?? ''));
+            $fullName = trim(($off['forename'] ?? '') . ' ' . ($off['surname'] ?? ''));
+            if ($rCode === 'REFEREE') {
+                $referee = $fullName;
+            } elseif ($rCode === 'VAR') {
+                $varReferee = $fullName;
+            } elseif ($rCode === 'FIRST_ASSISTANT_REFEREE' || $rCode === 'SECOND_ASSISTANT_REFEREE') {
+                $assistants[] = $fullName;
+            }
+        }
+    }
+
+    return array(
+        'goals'     => $goals,
+        'timeline'  => $timeline,
+        'stats'     => $stats,
+        'lineups'   => $lineups,
+        'officials' => array(
+            'referee'    => $referee,
+            'var'        => $varReferee,
+            'assistants' => $assistants,
+        ),
+    );
+}
+

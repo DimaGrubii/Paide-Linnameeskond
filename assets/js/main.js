@@ -524,6 +524,11 @@ function initMatchdayToggle() {
   if (!btnMen || !btnWomen || !cardMen || !cardWomen) return;
 
   const setActive = (team) => {
+    if (window.JalgpallSync && typeof window.JalgpallSync.syncMatchHubView === 'function') {
+      window.JalgpallSync.syncMatchHubView(team);
+      return;
+    }
+
     if (team === 'men') {
       btnMen.classList.add('bg-white', 'text-navy', 'shadow-sm', 'font-bold');
       btnMen.classList.remove('text-slate-600', 'hover:text-navy');

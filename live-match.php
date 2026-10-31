@@ -81,7 +81,8 @@ function ejlBuildLiveMatchPayload($gameDetail) {
         $htScoreStr = ((int)$ht['home']) . ' : ' . ((int)$ht['away']);
     }
 
-    $goals = ejlExtractGameGoals($gameDetail);
+    $fullDetails = ejlExtractFullGameDetails($gameDetail);
+    $goals = $fullDetails['goals'];
     if (($homeScore === null || $awayScore === null) && !empty($goals)) {
         $lastGoal = $goals[count($goals) - 1];
         if (preg_match('/(\d+)\s*:\s*(\d+)/', $lastGoal['runningScore'], $gm)) {
@@ -124,6 +125,11 @@ function ejlBuildLiveMatchPayload($gameDetail) {
     $venueName = trim((string)($gameDetail['field']['name'] ?? ''));
     $attendance = isset($gameDetail['attendance']) && $gameDetail['attendance'] !== null ? (int)$gameDetail['attendance'] : null;
 
+    $broadcasterName = trim((string)($gameDetail['coverage']['broadcaster']['name'] ?? ''));
+    $broadcastUrl = trim((string)($gameDetail['coverage']['links']['broadcastPage'] ?? $gameDetail['coverage']['links']['stream'] ?? ''));
+    $ticketUrl = trim((string)($gameDetail['links']['tickets'] ?? ''));
+    $weatherComment = trim((string)($gameDetail['comment'] ?? ''));
+
     return array(
         'gameId'            => (string)$gameId,
         'protocolId'        => (string)$gameId,
@@ -133,10 +139,15 @@ function ejlBuildLiveMatchPayload($gameDetail) {
         'round'             => $roundStr,
         'dateStr'           => $dtParsed['dateStr'],
         'timeStr'           => $dtParsed['timeStr'],
+        'dateDisplay'       => $dtParsed['dateDisplay'],
         'dateTime'          => $dtParsed['dateTimeStr'],
         'kickoffTimestamp'  => $kickoffTs,
         'venue'             => $venueName,
         'attendance'        => $attendance,
+        'weatherComment'    => $weatherComment,
+        'broadcaster'       => $broadcasterName,
+        'broadcastUrl'      => $broadcastUrl,
+        'ticketUrl'         => $ticketUrl,
         'homeTeam'          => $homeTeam,
         'awayTeam'          => $awayTeam,
         'homeLogo'          => ejlResolveLocalLogo($homeTeam),
@@ -154,6 +165,10 @@ function ejlBuildLiveMatchPayload($gameDetail) {
         'liveExtraMinute'   => $liveExtraMinute,
         'lineupConfirmed'   => (bool)(($homeObj['lineupConfirmed'] ?? false) || ($awayObj['lineupConfirmed'] ?? false)),
         'goals'             => $goals,
+        'timeline'          => $fullDetails['timeline'],
+        'stats'             => $fullDetails['stats'],
+        'lineups'           => $fullDetails['lineups'],
+        'officials'         => $fullDetails['officials'],
         'matchState'        => $matchState,
     );
 }

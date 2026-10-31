@@ -1006,34 +1006,48 @@ const JalgpallSync = (function () {
   // GOOGLE-STYLE LIVE MATCH SCOREBOARD & REAL-TIME TRACKER (MEN & WOMEN)
   // =========================================================================
   let liveMatchState = {
-    protocolId: '143893',
-    protocolUrl: 'https://jalgpall.ee/voistlused/protocol/143893',
+    isActiveLive: false,
+    protocolId: '186277',
+    protocolUrl: 'https://jalgpall.ee/voistlused/protocol/186277',
     teamCategory: 'men', // 'women' | 'men'
     competition: 'A. Le Coq Premium liiga',
-    round: '33. voor',
-    kickoffDateStr: '24.10.2026',
+    round: '35. voor',
+    kickoffDateStr: '31.10.2026',
     kickoffTimeStr: '14:30',
-    kickoffTimestamp: new Date(2026, 9, 24, 14, 30, 0).getTime(),
-    venue: 'Kuressaare linnastaadion',
-    attendance: 139,
-    homeTeam: 'FC Kuressaare',
+    kickoffTimestamp: new Date(2026, 9, 31, 14, 30, 0).getTime(),
+    venue: 'Pärnu Rannastaadion',
+    attendance: 412,
+    weatherComment: 'Mänguolud: +8°C, muruväljak heas seisukorras',
+    broadcaster: 'Soccernet.ee',
+    broadcastUrl: 'https://www.youtube.com/watch?v=AQW3QjKWU2c',
+    homeTeam: 'Pärnu JK Vaprus',
     awayTeam: 'Paide Linnameeskond',
-    homeScore: 0,
-    awayScore: 1,
+    homeScore: 1,
+    awayScore: 2,
     halftimeScore: '0 : 1',
-    statusLabel: 'Lõppseis', // 'Hetkeseis' | 'Lõppseis'
-    goals: [
-      {
-        side: 'away',
-        minute: "38'",
-        player: 'Juan Sebastian Palacios Murillo',
-        shortPlayer: 'J. Murillo',
-        runningScore: '0 : 1',
-        goalType: ''
-      }
-    ],
+    statusLabel: 'Hetkeseis', // 'Hetkeseis' | 'Lõppseis' | 'Mängupäev'
+    liveMinute: null,
+    liveExtraMinute: null,
+    goals: [],
+    timeline: [],
+    stats: {
+      goals: { home: 1, away: 2 },
+      firstHalfGoals: { home: 0, away: 1 },
+      secondHalfGoals: { home: 1, away: 1 },
+      yellowCards: { home: 2, away: 1 },
+      redCards: { home: 0, away: 0 },
+      substitutions: { home: 2, away: 2 },
+      penalties: { home: 0, away: 1 }
+    },
+    lineups: { home: null, away: null },
+    officials: { referee: '', var: '', assistants: [] },
     demoOffsetMs: null
   };
+
+  let activeHubTab = 'men'; // 'men' | 'women'
+  let activeLineupSide = 'away'; // 'home' | 'away'
+  let liveDrawerExpanded = false;
+  let liveAutoSwitchedOnce = false;
 
   let liveClockInterval = null;
   let livePollInterval = null;
@@ -1158,23 +1172,380 @@ const JalgpallSync = (function () {
   }
 
   /**
-   * Renders the current liveMatchState into #matchday-latest-result
+   * Synchronizes the unified Matchday Hub (#match-hub-container) between
+   * Next Match mode and Live Match mode based on activeHubTab and liveMatchState.
+   */
+  function syncMatchHubView(selectedTab) {
+    if (selectedTab === 'men' || selectedTab === 'women') {
+      activeHubTab = selectedTab;
+    }
+
+    const btnMen = document.getElementById('match-toggle-men');
+    const btnWomen = document.getElementById('match-toggle-women');
+    const cardMen = document.getElementById('match-card-men');
+    const cardWomen = document.getElementById('match-card-women');
+    const cardLive = document.getElementById('match-card-live');
+
+    const headerEl = document.getElementById('match-hub-header');
+    const dotPingEl = document.getElementById('match-hub-dot-ping');
+    const dotEl = document.getElementById('match-hub-dot');
+    const titleEl = document.getElementById('match-hub-title');
+    const livePillEl = document.getElementById('match-hub-live-pill');
+    const livePillTextEl = document.getElementById('match-hub-live-pill-text');
+    const tabDotMen = document.getElementById('match-tab-live-dot-men');
+    const tabDotWomen = document.getElementById('match-tab-live-dot-women');
+
+    const isLiveNow = Boolean(liveMatchState && liveMatchState.isActiveLive && isPaideMatch(liveMatchState.homeTeam, liveMatchState.awayTeam));
+    const liveCat = isLiveNow ? (liveMatchState.teamCategory || 'men') : null;
+
+    // Show pulsing green indicator inside whichever team tab is currently playing live
+    if (tabDotMen) {
+      tabDotMen.classList.toggle('hidden', liveCat !== 'men');
+    }
+    if (tabDotWomen) {
+      tabDotWomen.classList.toggle('hidden', liveCat !== 'women');
+    }
+
+    // Update tab button active styles
+    if (btnMen && btnWomen) {
+      if (activeHubTab === 'men') {
+        btnMen.classList.add('bg-white', 'text-navy', 'shadow-sm', 'font-bold');
+        btnMen.classList.remove('text-slate-600', 'hover:text-navy');
+        btnMen.setAttribute('aria-selected', 'true');
+        btnWomen.classList.remove('bg-white', 'text-navy', 'shadow-sm', 'font-bold');
+        btnWomen.classList.add('text-slate-600', 'hover:text-navy');
+        btnWomen.setAttribute('aria-selected', 'false');
+      } else {
+        btnWomen.classList.add('bg-white', 'text-navy', 'shadow-sm', 'font-bold');
+        btnWomen.classList.remove('text-slate-600', 'hover:text-navy');
+        btnWomen.setAttribute('aria-selected', 'true');
+        btnMen.classList.remove('bg-white', 'text-navy', 'shadow-sm', 'font-bold');
+        btnMen.classList.add('text-slate-600', 'hover:text-navy');
+        btnMen.setAttribute('aria-selected', 'false');
+      }
+    }
+
+    const showLiveView = isLiveNow && activeHubTab === liveCat;
+
+    if (showLiveView) {
+      if (cardMen) cardMen.classList.add('hidden');
+      if (cardWomen) cardWomen.classList.add('hidden');
+      if (cardLive) cardLive.classList.remove('hidden');
+
+      if (headerEl) {
+        headerEl.className = 'px-5 py-3.5 bg-emerald-50/60 hairline-b flex flex-wrap items-center justify-between gap-3 transition-colors duration-300';
+      }
+      if (dotPingEl) {
+        dotPingEl.className = 'animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75';
+      }
+      if (dotEl) {
+        dotEl.className = 'relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500';
+      }
+      if (titleEl) {
+        titleEl.textContent = 'OTSEÜLEKANNE / LIVE MATCH';
+      }
+      if (livePillEl) {
+        livePillEl.classList.remove('hidden');
+        livePillEl.classList.add('inline-flex');
+      }
+      if (livePillTextEl) {
+        livePillTextEl.textContent = liveCat === 'women' ? 'LINNANAISKOND • OTSE' : 'ESINDUSMEESKOND • OTSE';
+      }
+    } else {
+      if (cardLive) cardLive.classList.add('hidden');
+      if (activeHubTab === 'women') {
+        if (cardWomen) cardWomen.classList.remove('hidden');
+        if (cardMen) cardMen.classList.add('hidden');
+      } else {
+        if (cardMen) cardMen.classList.remove('hidden');
+        if (cardWomen) cardWomen.classList.add('hidden');
+      }
+
+      if (headerEl) {
+        headerEl.className = 'px-5 py-3.5 bg-slate-50/80 hairline-b flex flex-wrap items-center justify-between gap-3 transition-colors duration-300';
+      }
+      if (dotPingEl) {
+        dotPingEl.className = 'animate-ping absolute inline-flex h-full w-full rounded-full bg-crimson opacity-75';
+      }
+      if (dotEl) {
+        dotEl.className = 'relative inline-flex rounded-full h-2.5 w-2.5 bg-crimson';
+      }
+      if (titleEl) {
+        titleEl.textContent = 'JÄRGMINE MÄNG / NEXT MATCH';
+      }
+      if (livePillEl) {
+        livePillEl.classList.add('hidden');
+        livePillEl.classList.remove('inline-flex');
+      }
+    }
+  }
+
+  /**
+   * Renders the expandable drawer panels (Timeline, Stats Bars & Officials, Lineups)
+   */
+  function renderLiveDrawerPanels(homeMeta, awayMeta) {
+    const timelineEl = document.getElementById('live-drawer-timeline');
+    const statsEl = document.getElementById('live-drawer-stats');
+    const officialsEl = document.getElementById('live-drawer-officials');
+    const lineupsEl = document.getElementById('live-drawer-lineups');
+    const tabHomeBtn = document.getElementById('live-lineup-tab-home');
+    const tabAwayBtn = document.getElementById('live-lineup-tab-away');
+
+    // 1. Timeline Events
+    if (timelineEl) {
+      const events = Array.isArray(liveMatchState.timeline) && liveMatchState.timeline.length > 0
+        ? liveMatchState.timeline
+        : (liveMatchState.goals || []).map(g => ({
+            kind: g.goalType === 'pen' ? 'penalty_goal' : (g.goalType === 'ov' ? 'own_goal' : 'goal'),
+            side: g.side || 'home',
+            minuteStr: g.minute || '',
+            player: g.player || g.shortPlayer || '',
+            shortPlayer: g.shortPlayer || g.player || '',
+            runningScore: g.runningScore || '',
+            goalType: g.goalType || ''
+          }));
+
+      if (events.length === 0) {
+        timelineEl.innerHTML = `
+          <div class="py-8 text-center text-xs text-slate-400">
+            Mängusündmused (väravad, kaardid, vahetused) ilmuvad siia reaalajas.
+          </div>
+        `;
+      } else {
+        timelineEl.innerHTML = events.map(ev => {
+          const isHome = ev.side === 'home';
+          const isPaideSide = (isHome && homeMeta.isPaide) || (!isHome && awayMeta.isPaide);
+          const teamBadge = isHome ? homeMeta.short : awayMeta.short;
+          const teamBadgeClass = isPaideSide
+            ? 'bg-crimson text-white'
+            : 'bg-slate-200 text-slate-700';
+
+          let iconHtml = '';
+          let titleHtml = '';
+          let subtitleHtml = '';
+          let rightPillHtml = '';
+
+          if (ev.kind === 'goal' || ev.kind === 'penalty_goal' || ev.kind === 'own_goal') {
+            const suffix = ev.kind === 'penalty_goal' ? ' <span class="text-[10px] font-mono text-crimson uppercase">(Penalti)</span>'
+              : (ev.kind === 'own_goal' ? ' <span class="text-[10px] font-mono text-amber-700 uppercase">(Omavärav)</span>' : '');
+            iconHtml = `<span class="w-6 h-6 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center text-xs font-bold flex-shrink-0" title="Värav">⚽</span>`;
+            titleHtml = `<span class="font-bold text-navy">${ev.player || ev.shortPlayer}</span>${suffix}`;
+            rightPillHtml = ev.runningScore
+              ? `<span class="ml-auto font-mono text-[11px] font-black px-2 py-0.5 rounded bg-navy text-white flex-shrink-0">${ev.runningScore}</span>`
+              : '';
+          } else if (ev.kind === 'yellow_card') {
+            iconHtml = `<span class="w-6 h-6 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center flex-shrink-0" title="Kollane kaart"><span class="w-2.5 h-3.5 rounded-[2px] bg-amber-400 border border-amber-500/40"></span></span>`;
+            titleHtml = `<span class="font-bold text-slate-800">${ev.player || ev.shortPlayer}</span>`;
+            if (ev.reason) {
+              subtitleHtml = `<div class="text-[10px] text-slate-400 leading-tight mt-0.5">${ev.reason}</div>`;
+            }
+          } else if (ev.kind === 'red_card') {
+            iconHtml = `<span class="w-6 h-6 rounded-full bg-rose-50 border border-rose-200 flex items-center justify-center flex-shrink-0" title="Punane kaart"><span class="w-2.5 h-3.5 rounded-[2px] bg-rose-600 border border-rose-700/40"></span></span>`;
+            titleHtml = `<span class="font-bold text-rose-700">${ev.player || ev.shortPlayer}</span> <span class="text-[10px] font-mono font-bold text-rose-600 uppercase">(Eemaldamine)</span>`;
+            if (ev.reason) {
+              subtitleHtml = `<div class="text-[10px] text-rose-500 leading-tight mt-0.5">${ev.reason}</div>`;
+            }
+          } else if (ev.kind === 'substitution') {
+            iconHtml = `<span class="w-6 h-6 rounded-full bg-slate-100 border border-slate-200 text-emerald-600 flex items-center justify-center flex-shrink-0" title="Vahetus">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg>
+            </span>`;
+            titleHtml = `<span class="text-emerald-700 font-bold">↑ ${ev.playerIn || ev.shortPlayerIn || ''}</span>`;
+            if (ev.playerOut || ev.shortPlayerOut) {
+              subtitleHtml = `<div class="text-[10px] text-rose-500 font-medium leading-tight mt-0.5">↓ ${ev.playerOut || ev.shortPlayerOut}</div>`;
+            }
+          } else {
+            iconHtml = `<span class="w-6 h-6 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center text-xs flex-shrink-0">•</span>`;
+            titleHtml = `<span class="font-semibold text-slate-700">${ev.player || ''}</span>`;
+          }
+
+          return `
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50/80 hairline-border text-xs">
+              <span class="font-mono font-black text-[11px] text-navy w-9 pt-1 text-right flex-shrink-0">${ev.minuteStr || ''}</span>
+              ${iconHtml}
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-1.5 flex-wrap">
+                  <span class="px-1.5 py-0.2 rounded text-[9px] font-mono font-extrabold uppercase ${teamBadgeClass}">${teamBadge}</span>
+                  ${titleHtml}
+                </div>
+                ${subtitleHtml}
+              </div>
+              ${rightPillHtml}
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    // 2. Match Statistics Comparison Bars & Officials
+    const st = liveMatchState.stats || {};
+    const homeGoals = liveMatchState.homeScore ?? (st.goals ? st.goals.home : 0);
+    const awayGoals = liveMatchState.awayScore ?? (st.goals ? st.goals.away : 0);
+    const htParts = (liveMatchState.halftimeScore || '').split(':').map(s => parseInt(s.trim(), 10));
+    const htHome = (!isNaN(htParts[0])) ? htParts[0] : (st.firstHalfGoals ? st.firstHalfGoals.home : 0);
+    const htAway = (!isNaN(htParts[1])) ? htParts[1] : (st.firstHalfGoals ? st.firstHalfGoals.away : 0);
+    const shHome = Math.max(0, homeGoals - htHome);
+    const shAway = Math.max(0, awayGoals - htAway);
+    const ycHome = st.yellowCards ? st.yellowCards.home : 0;
+    const ycAway = st.yellowCards ? st.yellowCards.away : 0;
+    const rcHome = st.redCards ? st.redCards.home : 0;
+    const rcAway = st.redCards ? st.redCards.away : 0;
+    const subHome = st.substitutions ? st.substitutions.home : 0;
+    const subAway = st.substitutions ? st.substitutions.away : 0;
+
+    // Update top compact pills as well
+    const pillYc = document.getElementById('live-pill-yc');
+    const pillRc = document.getElementById('live-pill-rc');
+    const pillSubs = document.getElementById('live-pill-subs');
+    if (pillYc) pillYc.textContent = `${ycHome} - ${ycAway}`;
+    if (pillRc) pillRc.textContent = `${rcHome} - ${rcAway}`;
+    if (pillSubs) pillSubs.textContent = `${subHome} - ${subAway}`;
+
+    if (statsEl) {
+      const statRows = [
+        { label: 'Väravad kokku', home: homeGoals, away: awayGoals },
+        { label: '1. poolaja väravad', home: htHome, away: htAway },
+        { label: '2. poolaja väravad', home: shHome, away: shAway },
+        { label: 'Kollased kaardid', home: ycHome, away: ycAway },
+        { label: 'Punased kaardid', home: rcHome, away: rcAway },
+        { label: 'Vahetused', home: subHome, away: subAway }
+      ];
+
+      statsEl.innerHTML = statRows.map(r => {
+        const total = r.home + r.away;
+        const homePct = total > 0 ? Math.round((r.home / total) * 100) : 50;
+        const awayPct = 100 - homePct;
+        const homeBarColor = total === 0 ? 'bg-slate-200' : (homeMeta.isPaide ? 'bg-crimson' : 'bg-navy');
+        const awayBarColor = total === 0 ? 'bg-slate-200' : (awayMeta.isPaide ? 'bg-crimson' : 'bg-slate-400');
+
+        return `
+          <div class="space-y-1">
+            <div class="flex items-center justify-between text-xs font-bold">
+              <span class="font-mono ${homeMeta.isPaide ? 'text-crimson font-black' : 'text-navy'}">${r.home}</span>
+              <span class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">${r.label}</span>
+              <span class="font-mono ${awayMeta.isPaide ? 'text-crimson font-black' : 'text-navy'}">${r.away}</span>
+            </div>
+            <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden flex gap-0.5">
+              <div class="${homeBarColor} h-full transition-all duration-300" style="width: ${homePct}%"></div>
+              <div class="${awayBarColor} h-full transition-all duration-300" style="width: ${awayPct}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    if (officialsEl) {
+      const off = liveMatchState.officials || {};
+      const lines = [];
+      if (off.referee) {
+        lines.push(`<div class="flex justify-between gap-2"><span class="text-slate-400">Peakohtunik:</span><span class="font-semibold text-navy text-right">${off.referee}</span></div>`);
+      }
+      if (off.var) {
+        lines.push(`<div class="flex justify-between gap-2"><span class="text-slate-400">Videokohtunik (VAR):</span><span class="font-semibold text-navy text-right">${off.var}</span></div>`);
+      }
+      if (liveMatchState.attendance) {
+        lines.push(`<div class="flex justify-between gap-2"><span class="text-slate-400">Pealtvaatajaid:</span><span class="font-mono font-bold text-navy text-right">${liveMatchState.attendance}</span></div>`);
+      }
+      if (liveMatchState.weatherComment) {
+        lines.push(`<div class="text-[10px] text-slate-400 pt-1 italic">${liveMatchState.weatherComment}</div>`);
+      }
+      officialsEl.innerHTML = lines.length > 0
+        ? lines.join('')
+        : `<div class="text-[11px] text-slate-400">Ametlikud mänguandmed: Eesti Jalgpalli Liit (EJL OpenData API)</div>`;
+    }
+
+    // 3. Confirmed Lineups (Kodu vs Võõrsil)
+    if (tabHomeBtn && tabAwayBtn) {
+      tabHomeBtn.textContent = homeMeta.short;
+      tabAwayBtn.textContent = awayMeta.short;
+      if (activeLineupSide === 'home') {
+        tabHomeBtn.className = 'px-2.5 py-1 rounded-md bg-white text-navy shadow-2xs cursor-pointer transition-all';
+        tabAwayBtn.className = 'px-2.5 py-1 rounded-md text-slate-500 hover:text-navy cursor-pointer transition-all';
+      } else {
+        tabAwayBtn.className = 'px-2.5 py-1 rounded-md bg-white text-navy shadow-2xs cursor-pointer transition-all';
+        tabHomeBtn.className = 'px-2.5 py-1 rounded-md text-slate-500 hover:text-navy cursor-pointer transition-all';
+      }
+    }
+
+    if (lineupsEl) {
+      const sideData = liveMatchState.lineups ? liveMatchState.lineups[activeLineupSide] : null;
+      const sideTeamName = activeLineupSide === 'home' ? liveMatchState.homeTeam : liveMatchState.awayTeam;
+
+      if (!sideData || (!Array.isArray(sideData.starters) || sideData.starters.length === 0)) {
+        lineupsEl.innerHTML = `
+          <div class="py-8 text-center text-xs text-slate-400">
+            Meeskonna <strong>${sideTeamName}</strong> algkoosseis kinnitatakse enne avavilet.
+          </div>
+        `;
+      } else {
+        const renderPlayerRow = (p) => {
+          const badges = [];
+          if (p.isCaptain) {
+            badges.push(`<span class="px-1 py-0.2 rounded bg-navy text-white font-mono text-[9px] font-black" title="Kapten">C</span>`);
+          }
+          if (p.goals > 0) {
+            badges.push(`<span class="text-[11px]" title="${p.goals} värav(at)">${'⚽'.repeat(p.goals)}</span>`);
+          }
+          if (p.yellow > 0) {
+            badges.push(`<span class="inline-block w-2 h-3 rounded-[1px] bg-amber-400 border border-amber-500/40" title="Kollane kaart"></span>`);
+          }
+          if (p.red > 0) {
+            badges.push(`<span class="inline-block w-2 h-3 rounded-[1px] bg-rose-600 border border-rose-700/40" title="Punane kaart"></span>`);
+          }
+          if (p.subOutMin) {
+            badges.push(`<span class="text-[10px] font-mono text-rose-500 font-bold" title="Vahetatud välja">↓${p.subOutMin}</span>`);
+          }
+          if (p.subInMin) {
+            badges.push(`<span class="text-[10px] font-mono text-emerald-600 font-bold" title="Vahetatud sisse">↑${p.subInMin}</span>`);
+          }
+
+          return `
+            <div class="flex items-center justify-between gap-2 py-1.5 px-2 rounded hover:bg-slate-50 text-xs border-b border-slate-50 last:border-b-0">
+              <div class="flex items-center gap-2 min-w-0">
+                <span class="font-mono font-bold text-[11px] text-slate-400 w-5 text-right flex-shrink-0">${p.number != null ? `#${p.number}` : ''}</span>
+                <span class="font-semibold text-navy truncate">${p.name}</span>
+                ${badges.join(' ')}
+              </div>
+              ${p.position ? `<span class="text-[10px] font-mono text-slate-400 uppercase flex-shrink-0">${p.position}</span>` : ''}
+            </div>
+          `;
+        };
+
+        const coachHtml = sideData.headCoach
+          ? `<div class="mb-2.5 px-2 py-1.5 rounded-lg bg-slate-50 hairline-border flex items-center justify-between text-[11px]">
+               <span class="text-slate-400 font-semibold uppercase">Peatreener:</span>
+               <span class="font-bold text-navy">${sideData.headCoach}</span>
+             </div>`
+          : '';
+
+        const startersHtml = sideData.starters.map(renderPlayerRow).join('');
+        const benchHtml = Array.isArray(sideData.bench) && sideData.bench.length > 0
+          ? `<div class="mt-3 pt-2 border-t border-slate-100">
+               <div class="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 px-2 mb-1">Vahetusmängijad (${sideData.bench.length})</div>
+               ${sideData.bench.map(renderPlayerRow).join('')}
+             </div>`
+          : '';
+
+        lineupsEl.innerHTML = `
+          ${coachHtml}
+          <div class="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 px-2 mb-1">Algkoosseis (${sideData.starters.length})</div>
+          <div class="divide-y divide-slate-50">${startersHtml}</div>
+          ${benchHtml}
+        `;
+      }
+    }
+  }
+
+  /**
+   * Renders the current liveMatchState into the Unified Live Match Hub (#match-card-live)
    */
   function renderLiveScoreboardDOM() {
-    const card = document.getElementById('matchday-latest-result');
-    if (!card || !liveMatchState) return;
-
-    // Never display a match unless at least one team is Paide's male or female team
-    if (!isPaideMatch(liveMatchState.homeTeam, liveMatchState.awayTeam)) {
-      card.classList.add('hidden');
-      return;
-    }
+    if (!liveMatchState) return;
 
     const roundEl = document.getElementById('latest-match-round');
     const dateEl = document.getElementById('latest-match-date');
     const timeEl = document.getElementById('latest-match-time');
+    const halftimeEl = document.getElementById('live-hub-halftime');
     const venueEl = document.getElementById('latest-match-venue');
-    const attEl = document.getElementById('latest-match-attendance');
     const homeLogoEl = document.getElementById('latest-match-homelogo');
     const awayLogoEl = document.getElementById('latest-match-awaylogo');
     const homeTeamEl = document.getElementById('latest-match-hometeam');
@@ -1182,12 +1553,16 @@ const JalgpallSync = (function () {
     const homeScoreEl = document.getElementById('latest-match-score-home');
     const awayScoreEl = document.getElementById('latest-match-score-away');
     const scorersEl = document.getElementById('latest-match-scorers');
+    const broadcastBadgeEl = document.getElementById('live-hub-broadcast-badge');
+    const streamBtnEl = document.getElementById('live-hub-stream-btn');
+    const streamLabelEl = document.getElementById('live-hub-stream-label');
+    const protocolLinkEl = document.getElementById('live-hub-protocol-link');
 
     const homeMeta = resolveLiveTeamDisplay(liveMatchState.homeTeam, liveMatchState.teamCategory);
     const awayMeta = resolveLiveTeamDisplay(liveMatchState.awayTeam, liveMatchState.teamCategory);
 
     if (roundEl) {
-      const compTitle = liveMatchState.competition || (liveMatchState.teamCategory === 'women' ? 'Naiste Meistriliiga' : 'Premium Liiga');
+      const compTitle = (liveMatchState.competition || (liveMatchState.teamCategory === 'women' ? 'Naiste Meistriliiga' : 'Premium Liiga')).replace(/^A\.\s*Le\s*Coq\s*/i, '');
       const roundSuffix = liveMatchState.round ? ` • ${liveMatchState.round}` : '';
       roundEl.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping flex-shrink-0"></span> <span class="whitespace-nowrap">${compTitle}${roundSuffix}</span>`;
     }
@@ -1197,16 +1572,12 @@ const JalgpallSync = (function () {
     }
 
     if (timeEl && liveMatchState.kickoffTimeStr) {
-      timeEl.innerHTML = `<span>Avavile: ${liveMatchState.kickoffTimeStr}</span>`;
+      timeEl.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>Avavile: ${liveMatchState.kickoffTimeStr}</span>`;
     }
 
     if (venueEl && liveMatchState.venue) {
       venueEl.textContent = liveMatchState.venue.replace(/,\s*Paide$/i, '').trim();
     }
-
-    const sepEl = document.getElementById('latest-match-meta-sep');
-    if (sepEl) sepEl.remove();
-    if (attEl) attEl.remove();
 
     if (homeLogoEl) {
       homeLogoEl.src = homeMeta.logo;
@@ -1220,29 +1591,46 @@ const JalgpallSync = (function () {
     if (homeTeamEl) {
       homeTeamEl.innerHTML = `<span class="sm:hidden">${homeMeta.short}</span><span class="hidden sm:inline">${homeMeta.full}</span>`;
       homeTeamEl.className = homeMeta.isPaide
-        ? 'font-display font-black text-sm sm:text-lg md:text-xl text-navy uppercase tracking-tight leading-none truncate'
-        : 'font-display font-bold text-sm sm:text-lg md:text-xl text-slate-600 uppercase tracking-tight leading-none truncate';
+        ? 'font-display font-black text-base sm:text-xl text-navy mt-1.5 tracking-wide uppercase whitespace-nowrap'
+        : 'font-display font-bold text-base sm:text-xl text-slate-600 mt-1.5 tracking-wide uppercase whitespace-nowrap';
     }
 
     if (awayTeamEl) {
       awayTeamEl.innerHTML = `<span class="sm:hidden">${awayMeta.short}</span><span class="hidden sm:inline">${awayMeta.full}</span>`;
       awayTeamEl.className = awayMeta.isPaide
-        ? 'font-display font-black text-sm sm:text-lg md:text-xl text-navy uppercase tracking-tight leading-none truncate'
-        : 'font-display font-bold text-sm sm:text-lg md:text-xl text-slate-600 uppercase tracking-tight leading-none truncate';
+        ? 'font-display font-black text-base sm:text-xl text-navy mt-1.5 tracking-wide uppercase whitespace-nowrap'
+        : 'font-display font-bold text-base sm:text-xl text-slate-600 mt-1.5 tracking-wide uppercase whitespace-nowrap';
     }
 
     if (homeScoreEl) {
       homeScoreEl.textContent = String(liveMatchState.homeScore ?? 0);
+      homeScoreEl.style.webkitTextStroke = '1.25px currentColor';
       homeScoreEl.className = homeMeta.isPaide
-        ? 'font-serif text-3xl sm:text-4xl md:text-5xl text-navy leading-none tracking-tight select-none'
-        : 'font-serif text-3xl sm:text-4xl md:text-5xl text-slate-500 leading-none tracking-tight select-none';
+        ? 'font-grotesk font-black text-[4.25rem] sm:text-[5.75rem] text-navy leading-[0.82] tracking-tighter select-none'
+        : 'font-grotesk font-black text-[4.25rem] sm:text-[5.75rem] text-slate-500 leading-[0.82] tracking-tighter select-none';
     }
 
     if (awayScoreEl) {
       awayScoreEl.textContent = String(liveMatchState.awayScore ?? 0);
+      awayScoreEl.style.webkitTextStroke = '1.25px currentColor';
       awayScoreEl.className = awayMeta.isPaide
-        ? 'font-serif text-3xl sm:text-4xl md:text-5xl text-navy leading-none tracking-tight select-none'
-        : 'font-serif text-3xl sm:text-4xl md:text-5xl text-slate-500 leading-none tracking-tight select-none';
+        ? 'font-grotesk font-black text-[4.25rem] sm:text-[5.75rem] text-navy leading-[0.82] tracking-tighter select-none'
+        : 'font-grotesk font-black text-[4.25rem] sm:text-[5.75rem] text-slate-500 leading-[0.82] tracking-tighter select-none';
+    }
+
+    if (broadcastBadgeEl) {
+      const bName = liveMatchState.broadcaster ? liveMatchState.broadcaster.toUpperCase() : 'SOCCERNET TV / EJL';
+      broadcastBadgeEl.textContent = `OTSE: ${bName}`;
+    }
+
+    if (streamBtnEl) {
+      streamBtnEl.href = liveMatchState.broadcastUrl || liveMatchState.protocolUrl || 'https://jalgpall.ee';
+    }
+    if (streamLabelEl) {
+      streamLabelEl.textContent = liveMatchState.broadcaster ? `Otse: ${liveMatchState.broadcaster}` : 'Vaata otseülekannet';
+    }
+    if (protocolLinkEl && liveMatchState.protocolUrl) {
+      protocolLinkEl.href = liveMatchState.protocolUrl;
     }
 
     if (scorersEl) {
@@ -1250,19 +1638,20 @@ const JalgpallSync = (function () {
         const rowsHtml = liveMatchState.goals.map(g => {
           const isPaideScorer = (g.side === 'home' && homeMeta.isPaide) || (g.side === 'away' && awayMeta.isPaide);
           const minClass = isPaideScorer
-            ? 'font-serif text-[13px] text-crimson w-7 text-right flex-shrink-0'
-            : 'font-serif text-[13px] text-slate-400 w-7 text-right flex-shrink-0';
+            ? 'font-serif text-xs sm:text-[13px] text-crimson font-bold w-9 text-right flex-shrink-0'
+            : 'font-serif text-xs sm:text-[13px] text-slate-400 w-9 text-right flex-shrink-0';
           const nameClass = isPaideScorer
-            ? 'font-serif text-[13px] sm:text-[14px] text-navy tracking-wide truncate'
-            : 'font-serif text-[13px] sm:text-[14px] text-slate-500 tracking-wide truncate';
+            ? 'font-serif text-xs sm:text-[14px] text-navy font-bold tracking-wide truncate'
+            : 'font-serif text-xs sm:text-[14px] text-slate-600 tracking-wide truncate';
           const scorePillClass = isPaideScorer
-            ? 'ml-auto font-serif text-[12px] text-navy bg-slate-100 px-1.5 py-0.5 rounded flex-shrink-0'
-            : 'ml-auto font-serif text-[12px] text-slate-500 bg-slate-50 px-1.5 py-0.5 rounded flex-shrink-0';
+            ? 'ml-auto font-mono text-[11px] font-bold text-navy bg-slate-100 px-2 py-0.5 rounded flex-shrink-0'
+            : 'ml-auto font-mono text-[11px] font-semibold text-slate-500 bg-slate-50 px-2 py-0.5 rounded flex-shrink-0';
           const penSuffix = g.goalType && g.goalType.toLowerCase().includes('pen') ? ' (pen)' : (g.goalType && g.goalType.toLowerCase().includes('ov') ? ' (ov)' : '');
 
           return `
-            <div class="flex items-center justify-between lg:justify-start gap-2.5 text-xs leading-tight">
+            <div class="flex items-center justify-between gap-2.5 text-xs leading-tight py-0.5">
               <span class="${minClass}">${g.minute}</span>
+              <span class="text-[11px] flex-shrink-0">⚽</span>
               <span class="${nameClass}">${g.shortPlayer || g.player}${penSuffix}</span>
               <span class="${scorePillClass}">${g.runningScore}</span>
             </div>
@@ -1275,19 +1664,17 @@ const JalgpallSync = (function () {
           ? 'Väravaid selles kohtumises ei löödud'
           : 'Väravad ja mängusündmused uuenevad automaatselt';
         scorersEl.innerHTML = `
-          <div class="flex items-center justify-between lg:justify-start gap-2.5 text-xs leading-tight">
+          <div class="flex items-center justify-center gap-2 text-xs text-slate-500 py-0.5">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0"></span>
-            <span class="font-serif text-[13px] sm:text-[14px] text-navy tracking-wide truncate">${subText}</span>
-            <a href="${liveMatchState.protocolUrl}" target="_blank" rel="noopener" class="ml-auto font-mono text-[10px] font-bold uppercase tracking-wider text-emerald-700 hover:text-crimson bg-emerald-50 hover:bg-red-50 px-2 py-0.5 rounded border border-emerald-200/70 transition-colors flex-shrink-0">Protokoll ↗</a>
-          </div>
-          <div class="flex items-center justify-between lg:justify-start gap-2 text-[11px] text-slate-400 leading-tight">
-            <span class="font-mono uppercase tracking-wider text-[10px] text-slate-400">Algkoosseisud kinnitatud • EJL Live</span>
+            <span class="font-serif text-xs sm:text-[13px] text-navy tracking-wide truncate">${subText}</span>
           </div>
         `;
       }
     }
 
+    renderLiveDrawerPanels(homeMeta, awayMeta);
     updateLiveClockDisplay();
+    syncMatchHubView();
   }
 
   /**
@@ -1300,22 +1687,7 @@ const JalgpallSync = (function () {
     const dotEl = document.getElementById('live-match-dot');
     const statusLabelEl = document.getElementById('live-match-status-label');
     const timerEl = document.getElementById('live-match-timer');
-    const dateEl = document.getElementById('latest-match-date');
-    const dtRow = document.getElementById('latest-match-datetime-row') || (dateEl ? dateEl.parentElement : null);
     if (!statusLabelEl || !timerEl) return;
-
-    const setDateTimeRowVisible = (visible) => {
-      if (!dtRow) return;
-      if (visible) {
-        dtRow.classList.remove('hidden');
-        dtRow.classList.add('flex');
-        dtRow.style.display = '';
-      } else {
-        dtRow.classList.add('hidden');
-        dtRow.classList.remove('flex');
-        dtRow.style.display = 'none';
-      }
-    };
 
     const nowMs = liveMatchState.demoOffsetMs
       ? (liveMatchState.kickoffTimestamp + liveMatchState.demoOffsetMs + (Date.now() - liveMatchState.demoStartedAt))
@@ -1325,7 +1697,6 @@ const JalgpallSync = (function () {
     const koMs = liveMatchState.kickoffTimestamp;
 
     if (isFinishedOnEJL) {
-      setDateTimeRowVisible(false);
       statusLabelEl.textContent = 'LÕPPSEIS';
       timerEl.textContent = "90' LÕPP";
       if (pingEl) pingEl.className = 'hidden';
@@ -1335,7 +1706,6 @@ const JalgpallSync = (function () {
     }
 
     if (!koMs) {
-      setDateTimeRowVisible(false);
       statusLabelEl.textContent = 'OTSE';
       timerEl.textContent = liveMatchState.kickoffTimeStr || 'LIVE';
       return;
@@ -1345,7 +1715,6 @@ const JalgpallSync = (function () {
 
     // 1. Pre-match countdown (before kickoff): show date & hour
     if (diffSec < 0) {
-      setDateTimeRowVisible(true);
       const absSec = Math.abs(diffSec);
       statusLabelEl.textContent = absSec <= 7200 ? 'OTSE TÄNA' : 'MÄNGUPÄEV';
       if (absSec <= 3600) {
@@ -1360,9 +1729,6 @@ const JalgpallSync = (function () {
       if (badgeEl) badgeEl.className = 'inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-700 font-mono text-[10px] font-bold uppercase tracking-widest shadow-sm';
       return;
     }
-
-    // Match has started: hide date & hour for a cleaner, denser scoreboard on mobile and desktop
-    setDateTimeRowVisible(false);
 
     // Check if any 2nd-half goal (46'+) has already been recorded on EJL
     const hasSecondHalfGoal = (liveMatchState.goals || []).some(g => {
@@ -1437,16 +1803,17 @@ const JalgpallSync = (function () {
 
   /**
    * Fetches live match updates from our backend EJL OpenData API endpoint (live-match.php).
-   * Automatically shows #matchday-latest-result when a Paide men's or women's match is live or in pre-match countdown.
+   * Automatically transforms the Matchday Hub (#match-hub-container) into Live Match mode
+   * when either the Men's or Women's team has an active live match.
    */
   async function pollLiveMatchData() {
-    const card = document.getElementById('matchday-latest-result');
-    if (!card) return;
+    const cardLive = document.getElementById('match-card-live');
+    if (!cardLive) return;
 
-    // If demo mode (?demo_live=1) is active, keep demo state
+    // If demo mode (?demo_live=1 or ?demo_live=women) is active, keep demo state
     if (liveMatchState && liveMatchState.demoOffsetMs) {
-      card.classList.remove('hidden');
       updateLiveClockDisplay();
+      syncMatchHubView();
       return;
     }
 
@@ -1483,8 +1850,14 @@ const JalgpallSync = (function () {
               ? m.kickoffTimestamp * 1000
               : parseKickoffTimestamp(m.dateStr || liveMatchState.kickoffDateStr, m.timeStr || liveMatchState.kickoffTimeStr);
 
+            const homeMeta = resolveLiveTeamDisplay(m.homeTeam, inferredWomen ? 'women' : 'men');
+            if (!liveAutoSwitchedOnce) {
+              activeLineupSide = homeMeta.isPaide ? 'home' : 'away';
+            }
+
             liveMatchState = {
               ...liveMatchState,
+              isActiveLive: true,
               protocolId: String(m.gameId || m.protocolId || liveMatchState.protocolId),
               protocolUrl: m.protocolUrl || `https://jalgpall.ee/voistlused/protocol/${m.gameId || m.protocolId || liveMatchState.protocolId}`,
               teamCategory: inferredWomen ? 'women' : 'men',
@@ -1495,6 +1868,9 @@ const JalgpallSync = (function () {
               kickoffTimestamp: koTs || liveMatchState.kickoffTimestamp,
               venue: m.venue || liveMatchState.venue,
               attendance: m.attendance || liveMatchState.attendance,
+              weatherComment: m.weatherComment || '',
+              broadcaster: m.broadcaster || '',
+              broadcastUrl: m.broadcastUrl || '',
               homeTeam: m.homeTeam,
               awayTeam: m.awayTeam,
               homeScore: m.homeScore ?? m.scoreHome ?? 0,
@@ -1503,9 +1879,18 @@ const JalgpallSync = (function () {
               statusLabel: m.statusLabel || 'Hetkeseis',
               liveMinute: m.liveMinute ?? null,
               liveExtraMinute: m.liveExtraMinute ?? null,
-              goals: normalizedGoals
+              goals: normalizedGoals,
+              timeline: Array.isArray(m.timeline) ? m.timeline : [],
+              stats: m.stats || liveMatchState.stats,
+              lineups: m.lineups || liveMatchState.lineups,
+              officials: m.officials || liveMatchState.officials
             };
-            card.classList.remove('hidden');
+
+            if (!liveAutoSwitchedOnce) {
+              activeHubTab = liveMatchState.teamCategory;
+              liveAutoSwitchedOnce = true;
+            }
+
             renderLiveScoreboardDOM();
             return;
           }
@@ -1515,33 +1900,188 @@ const JalgpallSync = (function () {
       // Backend endpoint not active or no live match currently in progress
     }
 
-    card.classList.add('hidden');
+    liveMatchState.isActiveLive = false;
+    syncMatchHubView();
   }
 
   function initLiveMatchTracker() {
-    const card = document.getElementById('matchday-latest-result');
-    if (!card) return;
-    card.classList.add('hidden');
+    const cardLive = document.getElementById('match-card-live');
+    if (!cardLive) return;
 
-    // Optional URL test mode (?demo_live=1) to preview an active 77:52 live match with goals
+    // Wire up the Expandable Drawer toggle button (arrow underneath)
+    const drawerToggleBtn = document.getElementById('live-hub-drawer-toggle');
+    const drawerEl = document.getElementById('live-hub-drawer');
+    const drawerArrowEl = document.getElementById('live-hub-drawer-arrow');
+    const drawerTextEl = document.getElementById('live-hub-drawer-toggle-text');
+
+    if (drawerToggleBtn && drawerEl) {
+      drawerToggleBtn.addEventListener('click', () => {
+        liveDrawerExpanded = !liveDrawerExpanded;
+        drawerToggleBtn.setAttribute('aria-expanded', liveDrawerExpanded ? 'true' : 'false');
+        if (liveDrawerExpanded) {
+          drawerEl.classList.remove('hidden');
+          if (drawerArrowEl) drawerArrowEl.classList.add('rotate-180');
+          if (drawerTextEl) drawerTextEl.textContent = 'Peida mängu statistika ja koosseisud';
+        } else {
+          drawerEl.classList.add('hidden');
+          if (drawerArrowEl) drawerArrowEl.classList.remove('rotate-180');
+          if (drawerTextEl) drawerTextEl.textContent = 'Vaata mängu sündmusi, statistikat ja koosseise';
+        }
+      });
+    }
+
+    // Wire up Kodu / Võõrsil lineup switcher inside the drawer
+    const tabHomeBtn = document.getElementById('live-lineup-tab-home');
+    const tabAwayBtn = document.getElementById('live-lineup-tab-away');
+    if (tabHomeBtn && tabAwayBtn) {
+      tabHomeBtn.addEventListener('click', () => {
+        activeLineupSide = 'home';
+        const hm = resolveLiveTeamDisplay(liveMatchState.homeTeam, liveMatchState.teamCategory);
+        const am = resolveLiveTeamDisplay(liveMatchState.awayTeam, liveMatchState.teamCategory);
+        renderLiveDrawerPanels(hm, am);
+      });
+      tabAwayBtn.addEventListener('click', () => {
+        activeLineupSide = 'away';
+        const hm = resolveLiveTeamDisplay(liveMatchState.homeTeam, liveMatchState.teamCategory);
+        const am = resolveLiveTeamDisplay(liveMatchState.awayTeam, liveMatchState.teamCategory);
+        renderLiveDrawerPanels(hm, am);
+      });
+    }
+
+    // Wire up "Vaata liigatabelit" in live card to switch standings tab if women's team is live
+    const liveTableBtn = document.getElementById('live-hub-table-btn');
+    if (liveTableBtn) {
+      liveTableBtn.addEventListener('click', () => {
+        const targetTab = document.getElementById(liveMatchState.teamCategory === 'women' ? 'tab-standings-women' : 'tab-standings-men');
+        if (targetTab) targetTab.click();
+      });
+    }
+
+    // Optional URL test mode (?demo_live=1 or ?demo_live=women) to preview the transformed Live Match Hub & Drawer
     try {
       const params = new URLSearchParams(window.location.search);
-      if (params.get('demo_live') === '1') {
+      const demoParam = params.get('demo_live');
+      if (demoParam === '1' || demoParam === 'men' || demoParam === 'women') {
+        const isWomenDemo = demoParam === 'women';
+        activeHubTab = isWomenDemo ? 'women' : 'men';
+        activeLineupSide = 'away';
+        liveAutoSwitchedOnce = true;
+
         liveMatchState = {
           ...liveMatchState,
-          homeScore: 2,
-          awayScore: 1,
-          halftimeScore: '1 : 0',
+          isActiveLive: true,
+          protocolId: isWomenDemo ? '187058' : '186277',
+          protocolUrl: isWomenDemo ? 'https://jalgpall.ee/voistlused/protocol/187058' : 'https://jalgpall.ee/voistlused/protocol/186277',
+          teamCategory: isWomenDemo ? 'women' : 'men',
+          competition: isWomenDemo ? 'Naiste Meistriliiga' : 'A. Le Coq Premium liiga',
+          round: isWomenDemo ? '24. voor' : '35. voor',
+          kickoffDateStr: '31.10.2026',
+          kickoffTimeStr: isWomenDemo ? '17:00' : '14:30',
+          kickoffTimestamp: Date.now() - (67 * 60 + 42 + 19 * 60) * 1000,
+          venue: isWomenDemo ? 'Viimsi staadion' : 'Pärnu Rannastaadion',
+          attendance: isWomenDemo ? 148 : 425,
+          weatherComment: 'Mänguolud: +8°C, selge ilm, väljak väga heas seisukorras',
+          broadcaster: isWomenDemo ? 'Jalgpall.ee' : 'Soccernet TV',
+          broadcastUrl: isWomenDemo ? 'https://jalgpall.ee' : 'https://www.youtube.com/watch?v=AQW3QjKWU2c',
+          homeTeam: isWomenDemo ? 'Viimsi JK' : 'Pärnu JK Vaprus',
+          awayTeam: isWomenDemo ? 'Paide Linnanaiskond' : 'Paide Linnameeskond',
+          homeScore: 1,
+          awayScore: 2,
+          halftimeScore: '0 : 1',
           statusLabel: 'Hetkeseis',
-          demoOffsetMs: (77 * 60 + 52 + 19 * 60) * 1000, // 77:52 in 2nd half
+          demoOffsetMs: (67 * 60 + 42 + 19 * 60) * 1000, // 67:42 in 2nd half
           demoStartedAt: Date.now(),
-          goals: [
-            { side: 'home', minute: "34'", shortPlayer: 'K. Treiel', runningScore: '1 : 0', goalType: '' },
-            { side: 'away', minute: "61'", shortPlayer: 'L. Tammik', runningScore: '1 : 1', goalType: '' },
-            { side: 'home', minute: "74'", shortPlayer: 'T.T.K. Nka', runningScore: '2 : 1', goalType: '' }
-          ]
+          goals: isWomenDemo
+            ? [
+                { side: 'away', minute: "22'", player: 'Kirkeliis Lillemets', shortPlayer: 'K. Lillemets', runningScore: '0 : 1', goalType: '' },
+                { side: 'home', minute: "51'", player: 'Liisa Rebane', shortPlayer: 'L. Rebane', runningScore: '1 : 1', goalType: '' },
+                { side: 'away', minute: "63'", player: 'Lisette Tammik', shortPlayer: 'L. Tammik', runningScore: '1 : 2', goalType: '' }
+              ]
+            : [
+                { side: 'away', minute: "28'", player: 'Henri Anier', shortPlayer: 'H. Anier', runningScore: '0 : 1', goalType: '' },
+                { side: 'home', minute: "53'", player: 'Kevin Kauber', shortPlayer: 'K. Kauber', runningScore: '1 : 1', goalType: '' },
+                { side: 'away', minute: "64'", player: 'Modou Sohna', shortPlayer: 'M. Sohna', runningScore: '1 : 2', goalType: 'pen' }
+              ],
+          timeline: isWomenDemo
+            ? [
+                { kind: 'goal', side: 'away', minuteStr: "22'", player: 'Kirkeliis Lillemets', runningScore: '0 : 1' },
+                { kind: 'yellow_card', side: 'home', minuteStr: "39'", player: 'Kätrin Välba', reason: 'Ebasportlik käitumine - hoolimatu viga' },
+                { kind: 'goal', side: 'home', minuteStr: "51'", player: 'Liisa Rebane', runningScore: '1 : 1' },
+                { kind: 'substitution', side: 'away', minuteStr: "58'", playerIn: 'Lisandra Rannasto', playerOut: 'Annegret Kala' },
+                { kind: 'goal', side: 'away', minuteStr: "63'", player: 'Lisette Tammik', runningScore: '1 : 2' }
+              ]
+            : [
+                { kind: 'yellow_card', side: 'home', minuteStr: "19'", player: 'Uku Kõrre', reason: 'Ebasportlik käitumine - hoolimatu viga' },
+                { kind: 'goal', side: 'away', minuteStr: "28'", player: 'Henri Anier', runningScore: '0 : 1' },
+                { kind: 'yellow_card', side: 'away', minuteStr: "41'", player: 'Daniel Cabral', reason: 'Lubava rünnaku peatamine' },
+                { kind: 'goal', side: 'home', minuteStr: "53'", player: 'Kevin Kauber', runningScore: '1 : 1' },
+                { kind: 'substitution', side: 'away', minuteStr: "59'", playerIn: 'Juan Sebastian Palacios Murillo', playerOut: 'Siim Luts' },
+                { kind: 'yellow_card', side: 'home', minuteStr: "63'", player: 'Magnus Villota', reason: 'Ilmse väravavõimaluse ärahoidmine' },
+                { kind: 'penalty_goal', side: 'away', minuteStr: "64'", player: 'Modou Sohna', runningScore: '1 : 2', goalType: 'pen' }
+              ],
+          stats: {
+            goals: { home: 1, away: 2 },
+            firstHalfGoals: { home: 0, away: 1 },
+            secondHalfGoals: { home: 1, away: 1 },
+            yellowCards: { home: 2, away: 1 },
+            redCards: { home: 0, away: 0 },
+            substitutions: { home: 1, away: 2 },
+            penalties: { home: 0, away: 1 }
+          },
+          officials: {
+            referee: 'Joonas Jaanovits',
+            var: 'Juri Frischer',
+            assistants: ['Aron Härsing', 'Maikel Mikson']
+          },
+          lineups: {
+            home: {
+              confirmed: true,
+              headCoach: isWomenDemo ? 'Martin Kaalma' : 'Igor Prins',
+              starters: [
+                { number: 1, name: 'Ott Nõmm', position: 'VV', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 4, name: 'Magnus Villota', position: 'K', isCaptain: true, goals: 0, yellow: 1, red: 0 },
+                { number: 5, name: 'Uku Kõrre', position: 'K', isCaptain: false, goals: 0, yellow: 1, red: 0 },
+                { number: 14, name: 'Martin Kase', position: 'K', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 23, name: 'Ranet Ristikivi', position: 'K', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 6, name: 'Kristjan Kask', position: 'PK', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 8, name: 'Sander Kapper', position: 'PK', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 10, name: 'Enrico Veensalu', position: 'PK', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 17, name: 'tristan Pajo', position: 'PK', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 7, name: 'Ronaldo Tiismaa', position: 'R', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 9, name: 'Kevin Kauber', position: 'R', isCaptain: false, goals: 1, yellow: 0, red: 0 }
+              ],
+              bench: [
+                { number: 12, name: 'Hendrik Vainu', position: 'VV', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 19, name: 'Mathias Villota', position: 'PK', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 27, name: 'Marten-Chris Paalberg', position: 'R', isCaptain: false, goals: 0, yellow: 0, red: 0 }
+              ]
+            },
+            away: {
+              confirmed: true,
+              headCoach: isWomenDemo ? 'Sirje Kapper' : 'Tarmo Kink',
+              starters: [
+                { number: 99, name: 'Ebrima Jarju', position: 'VV', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 2, name: 'Michael Lilander', position: 'K', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 5, name: 'Gerdo Juhkam', position: 'K', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 27, name: 'Nikita Baranov', position: 'K', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 15, name: 'Hindrek Ojamaa', position: 'K', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 6, name: 'Daniel Cabral De Oliveira', position: 'PK', isCaptain: false, goals: 0, yellow: 1, red: 0 },
+                { number: 28, name: 'Oskar Hõim', position: 'PK', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 8, name: 'Henrik Ojamaa', position: 'PK', isCaptain: true, goals: 0, yellow: 0, red: 0 },
+                { number: 11, name: 'Siim Luts', position: 'PK', isCaptain: false, goals: 0, yellow: 0, red: 0, subOutMin: "59'" },
+                { number: 20, name: 'Modou Sohna', position: 'R', isCaptain: false, goals: 1, yellow: 0, red: 0 },
+                { number: 9, name: 'Henri Anier', position: 'R', isCaptain: false, goals: 1, yellow: 0, red: 0 }
+              ],
+              bench: [
+                { number: 56, name: 'Mattias Sapp', position: 'VV', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 3, name: 'Victor Hugo Dos Santos De Sa', position: 'K', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 18, name: 'Martin Miller', position: 'PK', isCaptain: false, goals: 0, yellow: 0, red: 0 },
+                { number: 77, name: 'Juan Sebastian Palacios Murillo', position: 'R', isCaptain: false, goals: 0, yellow: 0, red: 0, subInMin: "59'" },
+                { number: 19, name: 'Daniel Luts', position: 'R', isCaptain: false, goals: 0, yellow: 0, red: 0 }
+              ]
+            }
+          }
         };
-        card.classList.remove('hidden');
       }
     } catch (e) {}
 
@@ -1581,6 +2121,7 @@ const JalgpallSync = (function () {
     fetchRealtimeData,
     applyDataToDOM,
     pollLiveMatchData,
+    syncMatchHubView,
     getCachedData: () => cachedData
   };
 })();
