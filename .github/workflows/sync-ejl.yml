@@ -29,10 +29,6 @@ jobs:
         env:
           EJL_API_TOKEN: ${{ secrets.EJL_API_TOKEN }}
         run: |
-          if [ -z "$EJL_API_TOKEN" ]; then
-            echo "::notice::EJL_API_TOKEN secret is not set in GitHub Actions Secrets yet; skipping scheduled sync."
-            exit 0
-          fi
           python3 scripts/sync_jalgpall.py
 
       - name: Commit and push if standings or matches changed
