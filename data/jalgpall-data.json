@@ -2,7 +2,7 @@
   "metadata": {
     "source": "Eesti Jalgpalli Liit (EJL OpenData API v1)",
     "sourceUrl": "https://opendata.jalgpall.ee/api/v1",
-    "lastUpdated": "2026-10-31T06:47:55.397035+02:00",
+    "lastUpdated": "2026-10-31T22:47:52.782283+02:00",
     "season": "2026",
     "status": "success"
   },
@@ -366,6 +366,18 @@
     },
     {
       "rank": "3",
+      "id": 20292,
+      "name": "Martin Miller",
+      "leagueGoals": "5",
+      "cupGoals": "1",
+      "totalGoals": "6",
+      "assists": "2",
+      "apiAssists": "2",
+      "gamesPlayed": 31,
+      "minutesPlayed": 2332
+    },
+    {
+      "rank": "4",
       "id": 110900,
       "name": "Juan Sebastian Palacios Murillo",
       "leagueGoals": "6",
@@ -373,20 +385,8 @@
       "totalGoals": "6",
       "assists": "1",
       "apiAssists": "1",
-      "gamesPlayed": 11,
-      "minutesPlayed": 750
-    },
-    {
-      "rank": "4",
-      "id": 20292,
-      "name": "Martin Miller",
-      "leagueGoals": "4",
-      "cupGoals": "1",
-      "totalGoals": "5",
-      "assists": "2",
-      "apiAssists": "2",
-      "gamesPlayed": 30,
-      "minutesPlayed": 2260
+      "gamesPlayed": 12,
+      "minutesPlayed": 840
     },
     {
       "rank": "5",
@@ -397,8 +397,8 @@
       "totalGoals": "5",
       "assists": "3",
       "apiAssists": "3",
-      "gamesPlayed": 36,
-      "minutesPlayed": 2253
+      "gamesPlayed": 37,
+      "minutesPlayed": 2310
     },
     {
       "rank": "6",
@@ -409,8 +409,8 @@
       "totalGoals": "5",
       "assists": "2",
       "apiAssists": "2",
-      "gamesPlayed": 30,
-      "minutesPlayed": 1948
+      "gamesPlayed": 31,
+      "minutesPlayed": 1966
     },
     {
       "rank": "7",
@@ -433,8 +433,8 @@
       "totalGoals": "9",
       "assists": "1",
       "apiAssists": "1",
-      "gamesPlayed": 25,
-      "minutesPlayed": 1041
+      "gamesPlayed": 26,
+      "minutesPlayed": 1044
     },
     {
       "rank": "9",
@@ -457,42 +457,27 @@
       "totalGoals": "2",
       "assists": "0",
       "apiAssists": "0",
-      "gamesPlayed": 23,
-      "minutesPlayed": 1028
+      "gamesPlayed": 24,
+      "minutesPlayed": 1118
     }
   ],
   "matches": {
     "next": {
-      "id": 186277,
+      "id": 186282,
       "type": "upcoming",
-      "homeTeam": "Pärnu JK Vaprus",
-      "awayTeam": "Paide Linnameeskond",
-      "date": "PL 31.10.2026 14:30",
-      "dateStr": "31.10.2026",
-      "timeStr": "14:30",
-      "dateDisplay": "Laupäev, 31. oktoober",
-      "venue": "Pärnu Rannastaadion",
-      "round": "A. Le Coq Premium liiga • 35. Voor",
-      "broadcast": "OTSE: SOCCERNET.EE",
-      "ticketUrl": "https://www.piletitasku.ee/et/event/9347",
-      "matchInfoUrl": "https://jalgpall.ee/voistlused/protocol/186277"
+      "homeTeam": "Paide Linnameeskond",
+      "awayTeam": "Tallinna FC Flora",
+      "date": "PL 07.11.2026 12:30",
+      "dateStr": "07.11.2026",
+      "timeStr": "12:30",
+      "dateDisplay": "Laupäev, 7. november",
+      "venue": "Paide kunstmuruväljak",
+      "round": "A. Le Coq Premium liiga • 36. Voor",
+      "broadcast": "OTSE: ETV2",
+      "ticketUrl": null,
+      "matchInfoUrl": "https://jalgpall.ee/voistlused/protocol/186282"
     },
     "upcoming": [
-      {
-        "id": 186277,
-        "type": "upcoming",
-        "homeTeam": "Pärnu JK Vaprus",
-        "awayTeam": "Paide Linnameeskond",
-        "date": "PL 31.10.2026 14:30",
-        "dateStr": "31.10.2026",
-        "timeStr": "14:30",
-        "dateDisplay": "Laupäev, 31. oktoober",
-        "venue": "Pärnu Rannastaadion",
-        "round": "A. Le Coq Premium liiga • 35. Voor",
-        "broadcast": "OTSE: SOCCERNET.EE",
-        "ticketUrl": "https://www.piletitasku.ee/et/event/9347",
-        "matchInfoUrl": "https://jalgpall.ee/voistlused/protocol/186277"
-      },
       {
         "id": 186282,
         "type": "upcoming",
@@ -510,6 +495,35 @@
       }
     ],
     "recent": [
+      {
+        "id": 186277,
+        "type": "finished",
+        "meta": "PL 31.10.2026 Kell 14:30",
+        "tournament": "A. Le Coq Premium liiga",
+        "round": "35. voor",
+        "dateDisplay": "Laupäev, 31. oktoober",
+        "timeDisplay": "14:30",
+        "homeTeam": "Pärnu JK Vaprus",
+        "score": "0 - 1",
+        "homeScore": 0,
+        "awayScore": 1,
+        "awayTeam": "Paide Linnameeskond",
+        "venue": "Pärnu Rannastaadion",
+        "attendance": 386,
+        "protocolUrl": "https://jalgpall.ee/voistlused/protocol/186277",
+        "scorers": [
+          {
+            "side": "away",
+            "minute": "15'",
+            "player": "Martin Miller",
+            "shortPlayer": "M. Miller",
+            "team": "Paide Linnameeskond",
+            "runningScore": "0 : 1",
+            "goalType": "",
+            "isPaide": true
+          }
+        ]
+      },
       {
         "id": 186275,
         "type": "finished",
@@ -692,18 +706,7 @@
         "venue": "A. Le Coq Arena",
         "attendance": 472,
         "protocolUrl": "https://jalgpall.ee/voistlused/protocol/186254",
-        "scorers": [
-          {
-            "side": "home",
-            "minute": "89'",
-            "player": "Geovani Reis Nascimento Junior",
-            "shortPlayer": "G.R.N. Junior",
-            "team": "Tallinna FCI Levadia",
-            "runningScore": "1 : 0",
-            "goalType": "",
-            "isPaide": false
-          }
-        ]
+        "scorers": []
       },
       {
         "id": 186248,
@@ -866,24 +869,6 @@
         "attendance": 0,
         "protocolUrl": "https://jalgpall.ee/voistlused/protocol/195465",
         "scorers": []
-      },
-      {
-        "id": 195464,
-        "type": "finished",
-        "meta": "UEFA KL 06.08.2026 Kell 19:00",
-        "tournament": "UEFA Konverentsiliiga",
-        "round": "1. voor",
-        "dateDisplay": "Neljapäev, 6. august",
-        "timeDisplay": "19:00",
-        "homeTeam": "Paide Linnameeskond",
-        "score": "1 - 4",
-        "homeScore": 1,
-        "awayScore": 4,
-        "awayTeam": "SK Rapid Wien",
-        "venue": "A. Le Coq Arena",
-        "attendance": 5569,
-        "protocolUrl": "https://jalgpall.ee/voistlused/protocol/195464",
-        "scorers": []
       }
     ]
   },
@@ -895,22 +880,16 @@
         "teamId": 11,
         "logo": "https://jalgpall.ee/images/logos/057147CE8C38CC81522C3741AADA2D4B",
         "localLogo": "assets/img/jalgpall_logos/levadia.png",
-        "played": 34,
-        "won": 27,
+        "played": 35,
+        "won": 28,
         "drawn": 6,
         "lost": 1,
-        "goalsFor": 91,
-        "goalsAgainst": 24,
-        "goalDifference": "+67",
-        "points": 87,
+        "goalsFor": 95,
+        "goalsAgainst": 27,
+        "goalDifference": "+68",
+        "points": 90,
         "isPaide": false,
         "form": [
-          {
-            "result": "V",
-            "type": "win",
-            "score": "1:0 vs Paide Linnameeskond",
-            "opponent": "Paide Linnameeskond"
-          },
           {
             "result": "V",
             "type": "win",
@@ -934,6 +913,12 @@
             "type": "win",
             "score": "2:1 vs Tartu JK Tammeka",
             "opponent": "Tartu JK Tammeka"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "3:4 vs FC Nõmme United",
+            "opponent": "FC Nõmme United"
           }
         ],
         "seasonHistory": [
@@ -1344,6 +1329,18 @@
             "date": "27.10.2026 18:00",
             "isHome": true,
             "round": 34
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "3:4 vs FC Nõmme United",
+            "matchScore": "3:4",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Tallinna FCI Levadia",
+            "opponent": "FC Nõmme United",
+            "date": "31.10.2026 15:00",
+            "isHome": false,
+            "round": 35
           }
         ]
       },
@@ -1353,22 +1350,16 @@
         "teamId": 5,
         "logo": "https://jalgpall.ee/images/clubs/04DA1E5682F6B6CACC9A577CED953711",
         "localLogo": "assets/img/jalgpall_logos/paide.png",
-        "played": 34,
-        "won": 18,
+        "played": 35,
+        "won": 19,
         "drawn": 6,
         "lost": 10,
-        "goalsFor": 53,
+        "goalsFor": 54,
         "goalsAgainst": 41,
-        "goalDifference": "+12",
-        "points": 60,
+        "goalDifference": "+13",
+        "points": 63,
         "isPaide": true,
         "form": [
-          {
-            "result": "K",
-            "type": "loss",
-            "score": "1:0 vs Tallinna FCI Levadia",
-            "opponent": "Tallinna FCI Levadia"
-          },
           {
             "result": "V",
             "type": "win",
@@ -1392,6 +1383,12 @@
             "type": "loss",
             "score": "0:2 vs Nõmme Kalju FC",
             "opponent": "Nõmme Kalju FC"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "0:1 vs Pärnu JK Vaprus",
+            "opponent": "Pärnu JK Vaprus"
           }
         ],
         "seasonHistory": [
@@ -1802,6 +1799,18 @@
             "date": "28.10.2026 19:00",
             "isHome": true,
             "round": 34
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "0:1 vs Pärnu JK Vaprus",
+            "matchScore": "0:1",
+            "homeTeam": "Pärnu JK Vaprus",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "Pärnu JK Vaprus",
+            "date": "31.10.2026 14:30",
+            "isHome": false,
+            "round": 35
           }
         ]
       },
@@ -2727,22 +2736,16 @@
         "teamId": 1382,
         "logo": "https://jalgpall.ee/images/clubs/81AD4B4CED48E03076052BE2AD56B0B6",
         "localLogo": "assets/img/jalgpall_logos/tammeka.png",
-        "played": 34,
-        "won": 16,
+        "played": 35,
+        "won": 17,
         "drawn": 2,
         "lost": 16,
-        "goalsFor": 48,
-        "goalsAgainst": 54,
-        "goalDifference": "-6",
-        "points": 50,
+        "goalsFor": 50,
+        "goalsAgainst": 55,
+        "goalDifference": "-5",
+        "points": 53,
         "isPaide": false,
         "form": [
-          {
-            "result": "V",
-            "type": "win",
-            "score": "4:0 vs FC Nõmme United",
-            "opponent": "FC Nõmme United"
-          },
           {
             "result": "K",
             "type": "loss",
@@ -2766,6 +2769,12 @@
             "type": "loss",
             "score": "2:1 vs Tallinna FCI Levadia",
             "opponent": "Tallinna FCI Levadia"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "2:1 vs Harju JK Laagri",
+            "opponent": "Harju JK Laagri"
           }
         ],
         "seasonHistory": [
@@ -3176,6 +3185,18 @@
             "date": "27.10.2026 18:00",
             "isHome": false,
             "round": 34
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "2:1 vs Harju JK Laagri",
+            "matchScore": "2:1",
+            "homeTeam": "Tartu JK Tammeka",
+            "awayTeam": "Harju JK Laagri",
+            "opponent": "Harju JK Laagri",
+            "date": "31.10.2026 14:30",
+            "isHome": true,
+            "round": 35
           }
         ]
       },
@@ -3185,22 +3206,16 @@
         "teamId": 3573,
         "logo": "https://jalgpall.ee/images/clubs/B35E6F475CFD782B9499B3FAF26C3A55",
         "localLogo": "assets/img/jalgpall_logos/harju.png",
-        "played": 34,
+        "played": 35,
         "won": 15,
         "drawn": 2,
-        "lost": 17,
-        "goalsFor": 49,
-        "goalsAgainst": 50,
-        "goalDifference": "-1",
+        "lost": 18,
+        "goalsFor": 50,
+        "goalsAgainst": 52,
+        "goalDifference": "-2",
         "points": 47,
         "isPaide": false,
         "form": [
-          {
-            "result": "V",
-            "type": "win",
-            "score": "0:1 vs Nõmme Kalju FC",
-            "opponent": "Nõmme Kalju FC"
-          },
           {
             "result": "V",
             "type": "win",
@@ -3224,6 +3239,12 @@
             "type": "loss",
             "score": "2:1 vs Tallinna FCI Levadia",
             "opponent": "Tallinna FCI Levadia"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "2:1 vs Tartu JK Tammeka",
+            "opponent": "Tartu JK Tammeka"
           }
         ],
         "seasonHistory": [
@@ -3634,6 +3655,18 @@
             "date": "24.10.2026 17:00",
             "isHome": false,
             "round": 34
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "2:1 vs Tartu JK Tammeka",
+            "matchScore": "2:1",
+            "homeTeam": "Tartu JK Tammeka",
+            "awayTeam": "Harju JK Laagri",
+            "opponent": "Tartu JK Tammeka",
+            "date": "31.10.2026 14:30",
+            "isHome": false,
+            "round": 35
           }
         ]
       },
@@ -3643,22 +3676,16 @@
         "teamId": 6314,
         "logo": "https://jalgpall.ee/images/logos/5C7E20E45CE3FC3318DB9A2BF36EACA6",
         "localLogo": "assets/img/jalgpall_logos/united.png",
-        "played": 34,
+        "played": 35,
         "won": 12,
         "drawn": 1,
-        "lost": 21,
-        "goalsFor": 55,
-        "goalsAgainst": 76,
-        "goalDifference": "-21",
+        "lost": 22,
+        "goalsFor": 58,
+        "goalsAgainst": 80,
+        "goalDifference": "-22",
         "points": 37,
         "isPaide": false,
         "form": [
-          {
-            "result": "K",
-            "type": "loss",
-            "score": "4:0 vs Tartu JK Tammeka",
-            "opponent": "Tartu JK Tammeka"
-          },
           {
             "result": "K",
             "type": "loss",
@@ -3682,6 +3709,12 @@
             "type": "win",
             "score": "0:1 vs JK Narva Trans",
             "opponent": "JK Narva Trans"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "3:4 vs Tallinna FCI Levadia",
+            "opponent": "Tallinna FCI Levadia"
           }
         ],
         "seasonHistory": [
@@ -4092,6 +4125,18 @@
             "date": "27.10.2026 18:00",
             "isHome": false,
             "round": 34
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "3:4 vs Tallinna FCI Levadia",
+            "matchScore": "3:4",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Tallinna FCI Levadia",
+            "opponent": "Tallinna FCI Levadia",
+            "date": "31.10.2026 15:00",
+            "isHome": true,
+            "round": 35
           }
         ]
       },
@@ -4101,22 +4146,16 @@
         "teamId": 5387,
         "logo": "https://jalgpall.ee/images/clubs/D8034B13F45C52A82CC8EAFFB756EABF",
         "localLogo": "assets/img/jalgpall_logos/vaprus.png",
-        "played": 34,
+        "played": 35,
         "won": 10,
         "drawn": 7,
-        "lost": 17,
+        "lost": 18,
         "goalsFor": 46,
-        "goalsAgainst": 68,
-        "goalDifference": "-22",
+        "goalsAgainst": 69,
+        "goalDifference": "-23",
         "points": 37,
         "isPaide": false,
         "form": [
-          {
-            "result": "X",
-            "type": "draw",
-            "score": "2:2 vs JK Narva Trans",
-            "opponent": "JK Narva Trans"
-          },
           {
             "result": "X",
             "type": "draw",
@@ -4140,6 +4179,12 @@
             "type": "draw",
             "score": "1:1 vs FC Kuressaare",
             "opponent": "FC Kuressaare"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "0:1 vs Paide Linnameeskond",
+            "opponent": "Paide Linnameeskond"
           }
         ],
         "seasonHistory": [
@@ -4550,6 +4595,18 @@
             "date": "28.10.2026 18:00",
             "isHome": true,
             "round": 34
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "0:1 vs Paide Linnameeskond",
+            "matchScore": "0:1",
+            "homeTeam": "Pärnu JK Vaprus",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "Paide Linnameeskond",
+            "date": "31.10.2026 14:30",
+            "isHome": true,
+            "round": 35
           }
         ]
       },
@@ -5473,6 +5530,344 @@
     "naisteMeistriliiga": [
       {
         "position": 1,
+        "team": "Paide Linnanaiskond",
+        "teamId": 3521,
+        "logo": "https://jalgpall.ee/images/clubs/04DA1E5682F6B6CACC9A577CED953711",
+        "localLogo": "assets/img/jalgpall_logos/paide.png",
+        "played": 24,
+        "won": 17,
+        "drawn": 0,
+        "lost": 7,
+        "goalsFor": 74,
+        "goalsAgainst": 34,
+        "goalDifference": "+40",
+        "points": 51,
+        "isPaide": true,
+        "form": [
+          {
+            "result": "V",
+            "type": "win",
+            "score": "9:1 vs FC Elva",
+            "opponent": "FC Elva"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "3:0 vs Saku Sporting",
+            "opponent": "Saku Sporting"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "2:0 vs Tallinna FC Flora",
+            "opponent": "Tallinna FC Flora"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "4:0 vs FC Elva",
+            "opponent": "FC Elva"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "0:5 vs Viimsi JK",
+            "opponent": "Viimsi JK"
+          }
+        ],
+        "seasonHistory": [
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "3:0 vs Viimsi JK",
+            "matchScore": "3:0",
+            "homeTeam": "Viimsi JK",
+            "awayTeam": "Paide Linnanaiskond",
+            "opponent": "Viimsi JK",
+            "date": "21.03.2026 17:00",
+            "isHome": false,
+            "round": 1
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "5:1 vs Harju JK Laagri",
+            "matchScore": "5:1",
+            "homeTeam": "Paide Linnanaiskond",
+            "awayTeam": "Harju JK Laagri",
+            "opponent": "Harju JK Laagri",
+            "date": "05.04.2026 15:00",
+            "isHome": true,
+            "round": 2
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:4 vs Saku Sporting",
+            "matchScore": "1:4",
+            "homeTeam": "Saku Sporting",
+            "awayTeam": "Paide Linnanaiskond",
+            "opponent": "Saku Sporting",
+            "date": "24.04.2026 19:00",
+            "isHome": false,
+            "round": 3
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "4:0 vs FC Elva",
+            "matchScore": "4:0",
+            "homeTeam": "Paide Linnanaiskond",
+            "awayTeam": "FC Elva",
+            "opponent": "FC Elva",
+            "date": "02.05.2026 19:00",
+            "isHome": true,
+            "round": 4
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "2:4 vs Tallinna FC Flora",
+            "matchScore": "2:4",
+            "homeTeam": "Paide Linnanaiskond",
+            "awayTeam": "Tallinna FC Flora",
+            "opponent": "Tallinna FC Flora",
+            "date": "09.05.2026 19:00",
+            "isHome": true,
+            "round": 5
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "3:2 vs Saku Sporting",
+            "matchScore": "3:2",
+            "homeTeam": "Paide Linnanaiskond",
+            "awayTeam": "Saku Sporting",
+            "opponent": "Saku Sporting",
+            "date": "16.05.2026 19:00",
+            "isHome": true,
+            "round": 6
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:4 vs Harju JK Laagri",
+            "matchScore": "1:4",
+            "homeTeam": "Harju JK Laagri",
+            "awayTeam": "Paide Linnanaiskond",
+            "opponent": "Harju JK Laagri",
+            "date": "29.05.2026 19:00",
+            "isHome": false,
+            "round": 7
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "1:2 vs Viimsi JK",
+            "matchScore": "1:2",
+            "homeTeam": "Paide Linnanaiskond",
+            "awayTeam": "Viimsi JK",
+            "opponent": "Viimsi JK",
+            "date": "13.06.2026 19:00",
+            "isHome": true,
+            "round": 8
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "0:3 vs FC Elva",
+            "matchScore": "0:3",
+            "homeTeam": "FC Elva",
+            "awayTeam": "Paide Linnanaiskond",
+            "opponent": "FC Elva",
+            "date": "20.06.2026 19:00",
+            "isHome": false,
+            "round": 9
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "4:2 vs Saku Sporting",
+            "matchScore": "4:2",
+            "homeTeam": "Saku Sporting",
+            "awayTeam": "Paide Linnanaiskond",
+            "opponent": "Saku Sporting",
+            "date": "26.07.2026 19:00",
+            "isHome": false,
+            "round": 10
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "5:0 vs Harju JK Laagri",
+            "matchScore": "5:0",
+            "homeTeam": "Paide Linnanaiskond",
+            "awayTeam": "Harju JK Laagri",
+            "opponent": "Harju JK Laagri",
+            "date": "01.08.2026 15:00",
+            "isHome": true,
+            "round": 11
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "1:2 vs Tallinna FC Flora",
+            "matchScore": "1:2",
+            "homeTeam": "Paide Linnanaiskond",
+            "awayTeam": "Tallinna FC Flora",
+            "opponent": "Tallinna FC Flora",
+            "date": "05.08.2026 19:00",
+            "isHome": true,
+            "round": 12
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:3 vs Viimsi JK",
+            "matchScore": "1:3",
+            "homeTeam": "Viimsi JK",
+            "awayTeam": "Paide Linnanaiskond",
+            "opponent": "Viimsi JK",
+            "date": "09.08.2026 15:00",
+            "isHome": false,
+            "round": 13
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "4:2 vs Tallinna FC Flora",
+            "matchScore": "4:2",
+            "homeTeam": "Tallinna FC Flora",
+            "awayTeam": "Paide Linnanaiskond",
+            "opponent": "Tallinna FC Flora",
+            "date": "15.08.2026 12:30",
+            "isHome": false,
+            "round": 14
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:4 vs FC Elva",
+            "matchScore": "1:4",
+            "homeTeam": "FC Elva",
+            "awayTeam": "Paide Linnanaiskond",
+            "opponent": "FC Elva",
+            "date": "20.08.2026 17:00",
+            "isHome": false,
+            "round": 15
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "2:1 vs Viimsi JK",
+            "matchScore": "2:1",
+            "homeTeam": "Paide Linnanaiskond",
+            "awayTeam": "Viimsi JK",
+            "opponent": "Viimsi JK",
+            "date": "29.08.2026 12:30",
+            "isHome": true,
+            "round": 16
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "0:3 vs Harju JK Laagri",
+            "matchScore": "0:3",
+            "homeTeam": "Harju JK Laagri",
+            "awayTeam": "Paide Linnanaiskond",
+            "opponent": "Harju JK Laagri",
+            "date": "05.09.2026 12:30",
+            "isHome": false,
+            "round": 17
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:2 vs Tallinna FC Flora",
+            "matchScore": "1:2",
+            "homeTeam": "Tallinna FC Flora",
+            "awayTeam": "Paide Linnanaiskond",
+            "opponent": "Tallinna FC Flora",
+            "date": "12.09.2026 12:30",
+            "isHome": false,
+            "round": 18
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "4:2 vs Saku Sporting",
+            "matchScore": "4:2",
+            "homeTeam": "Paide Linnanaiskond",
+            "awayTeam": "Saku Sporting",
+            "opponent": "Saku Sporting",
+            "date": "19.09.2026 12:30",
+            "isHome": true,
+            "round": 19
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "9:1 vs FC Elva",
+            "matchScore": "9:1",
+            "homeTeam": "Paide Linnanaiskond",
+            "awayTeam": "FC Elva",
+            "opponent": "FC Elva",
+            "date": "26.09.2026 12:30",
+            "isHome": true,
+            "round": 20
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "3:0 vs Saku Sporting",
+            "matchScore": "3:0",
+            "homeTeam": "Saku Sporting",
+            "awayTeam": "Paide Linnanaiskond",
+            "opponent": "Saku Sporting",
+            "date": "03.10.2026 15:00",
+            "isHome": false,
+            "round": 21
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "2:0 vs Tallinna FC Flora",
+            "matchScore": "2:0",
+            "homeTeam": "Paide Linnanaiskond",
+            "awayTeam": "Tallinna FC Flora",
+            "opponent": "Tallinna FC Flora",
+            "date": "16.10.2026 19:00",
+            "isHome": true,
+            "round": 22
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "4:0 vs FC Elva",
+            "matchScore": "4:0",
+            "homeTeam": "Paide Linnanaiskond",
+            "awayTeam": "FC Elva",
+            "opponent": "FC Elva",
+            "date": "24.10.2026 12:30",
+            "isHome": true,
+            "round": 23
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "0:5 vs Viimsi JK",
+            "matchScore": "0:5",
+            "homeTeam": "Viimsi JK",
+            "awayTeam": "Paide Linnanaiskond",
+            "opponent": "Viimsi JK",
+            "date": "31.10.2026 17:00",
+            "isHome": false,
+            "round": 24
+          }
+        ]
+      },
+      {
+        "position": 2,
         "team": "Tallinna FC Flora",
         "teamId": 59,
         "logo": "https://jalgpall.ee/images/teams/D0B9D494E357FA0E0A979DD18804391C",
@@ -5806,332 +6201,6 @@
             "date": "30.10.2026 18:00",
             "isHome": false,
             "round": 24
-          }
-        ]
-      },
-      {
-        "position": 2,
-        "team": "Paide Linnanaiskond",
-        "teamId": 3521,
-        "logo": "https://jalgpall.ee/images/clubs/04DA1E5682F6B6CACC9A577CED953711",
-        "localLogo": "assets/img/jalgpall_logos/paide.png",
-        "played": 23,
-        "won": 16,
-        "drawn": 0,
-        "lost": 7,
-        "goalsFor": 69,
-        "goalsAgainst": 34,
-        "goalDifference": "+35",
-        "points": 48,
-        "isPaide": true,
-        "form": [
-          {
-            "result": "V",
-            "type": "win",
-            "score": "4:2 vs Saku Sporting",
-            "opponent": "Saku Sporting"
-          },
-          {
-            "result": "V",
-            "type": "win",
-            "score": "9:1 vs FC Elva",
-            "opponent": "FC Elva"
-          },
-          {
-            "result": "K",
-            "type": "loss",
-            "score": "3:0 vs Saku Sporting",
-            "opponent": "Saku Sporting"
-          },
-          {
-            "result": "V",
-            "type": "win",
-            "score": "2:0 vs Tallinna FC Flora",
-            "opponent": "Tallinna FC Flora"
-          },
-          {
-            "result": "V",
-            "type": "win",
-            "score": "4:0 vs FC Elva",
-            "opponent": "FC Elva"
-          }
-        ],
-        "seasonHistory": [
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "3:0 vs Viimsi JK",
-            "matchScore": "3:0",
-            "homeTeam": "Viimsi JK",
-            "awayTeam": "Paide Linnanaiskond",
-            "opponent": "Viimsi JK",
-            "date": "21.03.2026 17:00",
-            "isHome": false,
-            "round": 1
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "5:1 vs Harju JK Laagri",
-            "matchScore": "5:1",
-            "homeTeam": "Paide Linnanaiskond",
-            "awayTeam": "Harju JK Laagri",
-            "opponent": "Harju JK Laagri",
-            "date": "05.04.2026 15:00",
-            "isHome": true,
-            "round": 2
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "1:4 vs Saku Sporting",
-            "matchScore": "1:4",
-            "homeTeam": "Saku Sporting",
-            "awayTeam": "Paide Linnanaiskond",
-            "opponent": "Saku Sporting",
-            "date": "24.04.2026 19:00",
-            "isHome": false,
-            "round": 3
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "4:0 vs FC Elva",
-            "matchScore": "4:0",
-            "homeTeam": "Paide Linnanaiskond",
-            "awayTeam": "FC Elva",
-            "opponent": "FC Elva",
-            "date": "02.05.2026 19:00",
-            "isHome": true,
-            "round": 4
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "2:4 vs Tallinna FC Flora",
-            "matchScore": "2:4",
-            "homeTeam": "Paide Linnanaiskond",
-            "awayTeam": "Tallinna FC Flora",
-            "opponent": "Tallinna FC Flora",
-            "date": "09.05.2026 19:00",
-            "isHome": true,
-            "round": 5
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "3:2 vs Saku Sporting",
-            "matchScore": "3:2",
-            "homeTeam": "Paide Linnanaiskond",
-            "awayTeam": "Saku Sporting",
-            "opponent": "Saku Sporting",
-            "date": "16.05.2026 19:00",
-            "isHome": true,
-            "round": 6
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "1:4 vs Harju JK Laagri",
-            "matchScore": "1:4",
-            "homeTeam": "Harju JK Laagri",
-            "awayTeam": "Paide Linnanaiskond",
-            "opponent": "Harju JK Laagri",
-            "date": "29.05.2026 19:00",
-            "isHome": false,
-            "round": 7
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "1:2 vs Viimsi JK",
-            "matchScore": "1:2",
-            "homeTeam": "Paide Linnanaiskond",
-            "awayTeam": "Viimsi JK",
-            "opponent": "Viimsi JK",
-            "date": "13.06.2026 19:00",
-            "isHome": true,
-            "round": 8
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "0:3 vs FC Elva",
-            "matchScore": "0:3",
-            "homeTeam": "FC Elva",
-            "awayTeam": "Paide Linnanaiskond",
-            "opponent": "FC Elva",
-            "date": "20.06.2026 19:00",
-            "isHome": false,
-            "round": 9
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "4:2 vs Saku Sporting",
-            "matchScore": "4:2",
-            "homeTeam": "Saku Sporting",
-            "awayTeam": "Paide Linnanaiskond",
-            "opponent": "Saku Sporting",
-            "date": "26.07.2026 19:00",
-            "isHome": false,
-            "round": 10
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "5:0 vs Harju JK Laagri",
-            "matchScore": "5:0",
-            "homeTeam": "Paide Linnanaiskond",
-            "awayTeam": "Harju JK Laagri",
-            "opponent": "Harju JK Laagri",
-            "date": "01.08.2026 15:00",
-            "isHome": true,
-            "round": 11
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "1:2 vs Tallinna FC Flora",
-            "matchScore": "1:2",
-            "homeTeam": "Paide Linnanaiskond",
-            "awayTeam": "Tallinna FC Flora",
-            "opponent": "Tallinna FC Flora",
-            "date": "05.08.2026 19:00",
-            "isHome": true,
-            "round": 12
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "1:3 vs Viimsi JK",
-            "matchScore": "1:3",
-            "homeTeam": "Viimsi JK",
-            "awayTeam": "Paide Linnanaiskond",
-            "opponent": "Viimsi JK",
-            "date": "09.08.2026 15:00",
-            "isHome": false,
-            "round": 13
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "4:2 vs Tallinna FC Flora",
-            "matchScore": "4:2",
-            "homeTeam": "Tallinna FC Flora",
-            "awayTeam": "Paide Linnanaiskond",
-            "opponent": "Tallinna FC Flora",
-            "date": "15.08.2026 12:30",
-            "isHome": false,
-            "round": 14
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "1:4 vs FC Elva",
-            "matchScore": "1:4",
-            "homeTeam": "FC Elva",
-            "awayTeam": "Paide Linnanaiskond",
-            "opponent": "FC Elva",
-            "date": "20.08.2026 17:00",
-            "isHome": false,
-            "round": 15
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "2:1 vs Viimsi JK",
-            "matchScore": "2:1",
-            "homeTeam": "Paide Linnanaiskond",
-            "awayTeam": "Viimsi JK",
-            "opponent": "Viimsi JK",
-            "date": "29.08.2026 12:30",
-            "isHome": true,
-            "round": 16
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "0:3 vs Harju JK Laagri",
-            "matchScore": "0:3",
-            "homeTeam": "Harju JK Laagri",
-            "awayTeam": "Paide Linnanaiskond",
-            "opponent": "Harju JK Laagri",
-            "date": "05.09.2026 12:30",
-            "isHome": false,
-            "round": 17
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "1:2 vs Tallinna FC Flora",
-            "matchScore": "1:2",
-            "homeTeam": "Tallinna FC Flora",
-            "awayTeam": "Paide Linnanaiskond",
-            "opponent": "Tallinna FC Flora",
-            "date": "12.09.2026 12:30",
-            "isHome": false,
-            "round": 18
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "4:2 vs Saku Sporting",
-            "matchScore": "4:2",
-            "homeTeam": "Paide Linnanaiskond",
-            "awayTeam": "Saku Sporting",
-            "opponent": "Saku Sporting",
-            "date": "19.09.2026 12:30",
-            "isHome": true,
-            "round": 19
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "9:1 vs FC Elva",
-            "matchScore": "9:1",
-            "homeTeam": "Paide Linnanaiskond",
-            "awayTeam": "FC Elva",
-            "opponent": "FC Elva",
-            "date": "26.09.2026 12:30",
-            "isHome": true,
-            "round": 20
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "3:0 vs Saku Sporting",
-            "matchScore": "3:0",
-            "homeTeam": "Saku Sporting",
-            "awayTeam": "Paide Linnanaiskond",
-            "opponent": "Saku Sporting",
-            "date": "03.10.2026 15:00",
-            "isHome": false,
-            "round": 21
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "2:0 vs Tallinna FC Flora",
-            "matchScore": "2:0",
-            "homeTeam": "Paide Linnanaiskond",
-            "awayTeam": "Tallinna FC Flora",
-            "opponent": "Tallinna FC Flora",
-            "date": "16.10.2026 19:00",
-            "isHome": true,
-            "round": 22
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "4:0 vs FC Elva",
-            "matchScore": "4:0",
-            "homeTeam": "Paide Linnanaiskond",
-            "awayTeam": "FC Elva",
-            "opponent": "FC Elva",
-            "date": "24.10.2026 12:30",
-            "isHome": true,
-            "round": 23
           }
         ]
       },
@@ -6479,22 +6548,16 @@
         "teamId": 5729,
         "logo": "https://jalgpall.ee/images/clubs/E46062B8726073630372AC79A944A4EB",
         "localLogo": "assets/img/jalgpall_logos/viimsi.png",
-        "played": 23,
+        "played": 24,
         "won": 11,
         "drawn": 4,
-        "lost": 8,
+        "lost": 9,
         "goalsFor": 51,
-        "goalsAgainst": 40,
-        "goalDifference": "+11",
+        "goalsAgainst": 45,
+        "goalDifference": "+6",
         "points": 37,
         "isPaide": false,
         "form": [
-          {
-            "result": "V",
-            "type": "win",
-            "score": "9:1 vs FC Elva",
-            "opponent": "FC Elva"
-          },
           {
             "result": "V",
             "type": "win",
@@ -6518,6 +6581,12 @@
             "type": "loss",
             "score": "4:1 vs Tallinna FC Flora",
             "opponent": "Tallinna FC Flora"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "0:5 vs Paide Linnanaiskond",
+            "opponent": "Paide Linnanaiskond"
           }
         ],
         "seasonHistory": [
@@ -6796,6 +6865,18 @@
             "date": "25.10.2026 13:00",
             "isHome": false,
             "round": 23
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "0:5 vs Paide Linnanaiskond",
+            "matchScore": "0:5",
+            "homeTeam": "Viimsi JK",
+            "awayTeam": "Paide Linnanaiskond",
+            "opponent": "Paide Linnanaiskond",
+            "date": "31.10.2026 17:00",
+            "isHome": true,
+            "round": 24
           }
         ]
       },
@@ -6805,22 +6886,16 @@
         "teamId": 7004,
         "logo": "https://jalgpall.ee/images/clubs/B35E6F475CFD782B9499B3FAF26C3A55",
         "localLogo": "assets/img/jalgpall_logos/harju.png",
-        "played": 23,
-        "won": 4,
+        "played": 24,
+        "won": 5,
         "drawn": 3,
         "lost": 16,
-        "goalsFor": 33,
-        "goalsAgainst": 69,
-        "goalDifference": "-36",
-        "points": 15,
+        "goalsFor": 38,
+        "goalsAgainst": 71,
+        "goalDifference": "-33",
+        "points": 18,
         "isPaide": false,
         "form": [
-          {
-            "result": "K",
-            "type": "loss",
-            "score": "0:5 vs Tallinna FC Flora",
-            "opponent": "Tallinna FC Flora"
-          },
           {
             "result": "K",
             "type": "loss",
@@ -6844,6 +6919,12 @@
             "type": "loss",
             "score": "5:1 vs Saku Sporting",
             "opponent": "Saku Sporting"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "5:2 vs FC Elva",
+            "opponent": "FC Elva"
           }
         ],
         "seasonHistory": [
@@ -7122,6 +7203,18 @@
             "date": "25.10.2026 17:30",
             "isHome": false,
             "round": 23
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "5:2 vs FC Elva",
+            "matchScore": "5:2",
+            "homeTeam": "Harju JK Laagri",
+            "awayTeam": "FC Elva",
+            "opponent": "FC Elva",
+            "date": "31.10.2026 17:00",
+            "isHome": true,
+            "round": 24
           }
         ]
       },
@@ -7131,22 +7224,16 @@
         "teamId": 3897,
         "logo": "https://jalgpall.ee/images/clubs/3588A0ED0A261C73F01FBD519F6A523F",
         "localLogo": "assets/img/jalgpall_logos/elva.png",
-        "played": 23,
+        "played": 24,
         "won": 3,
         "drawn": 2,
-        "lost": 18,
-        "goalsFor": 30,
-        "goalsAgainst": 97,
-        "goalDifference": "-67",
+        "lost": 19,
+        "goalsFor": 32,
+        "goalsAgainst": 102,
+        "goalDifference": "-70",
         "points": 11,
         "isPaide": false,
         "form": [
-          {
-            "result": "K",
-            "type": "loss",
-            "score": "9:1 vs Viimsi JK",
-            "opponent": "Viimsi JK"
-          },
           {
             "result": "K",
             "type": "loss",
@@ -7170,6 +7257,12 @@
             "type": "loss",
             "score": "4:0 vs Paide Linnanaiskond",
             "opponent": "Paide Linnanaiskond"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "5:2 vs Harju JK Laagri",
+            "opponent": "Harju JK Laagri"
           }
         ],
         "seasonHistory": [
@@ -7448,6 +7541,18 @@
             "date": "24.10.2026 12:30",
             "isHome": false,
             "round": 23
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "5:2 vs Harju JK Laagri",
+            "matchScore": "5:2",
+            "homeTeam": "Harju JK Laagri",
+            "awayTeam": "FC Elva",
+            "opponent": "Harju JK Laagri",
+            "date": "31.10.2026 17:00",
+            "isHome": false,
+            "round": 24
           }
         ]
       }
@@ -7737,20 +7842,20 @@
       "totalGoals": "20",
       "assists": "7",
       "apiAssists": "0",
-      "gamesPlayed": 26,
-      "minutesPlayed": 2167
+      "gamesPlayed": 27,
+      "minutesPlayed": 2225
     },
     {
       "rank": "2",
       "id": 23134,
       "name": "Lisette Tammik",
-      "leagueGoals": "14",
+      "leagueGoals": "17",
       "cupGoals": "2",
-      "totalGoals": "16",
+      "totalGoals": "19",
       "assists": "9",
       "apiAssists": "0",
-      "gamesPlayed": 22,
-      "minutesPlayed": 1694
+      "gamesPlayed": 23,
+      "minutesPlayed": 1784
     },
     {
       "rank": "3",
@@ -7761,8 +7866,8 @@
       "totalGoals": "13",
       "assists": "0",
       "apiAssists": "0",
-      "gamesPlayed": 26,
-      "minutesPlayed": 2205
+      "gamesPlayed": 27,
+      "minutesPlayed": 2273
     },
     {
       "rank": "4",
@@ -7773,8 +7878,8 @@
       "totalGoals": "6",
       "assists": "0",
       "apiAssists": "0",
-      "gamesPlayed": 25,
-      "minutesPlayed": 2178
+      "gamesPlayed": 26,
+      "minutesPlayed": 2268
     },
     {
       "rank": "5",
@@ -7785,11 +7890,23 @@
       "totalGoals": "6",
       "assists": "0",
       "apiAssists": "0",
-      "gamesPlayed": 23,
-      "minutesPlayed": 852
+      "gamesPlayed": 24,
+      "minutesPlayed": 884
     },
     {
       "rank": "6",
+      "id": 111119,
+      "name": "Kennedy Avery Mayo",
+      "leagueGoals": "6",
+      "cupGoals": "0",
+      "totalGoals": "6",
+      "assists": "0",
+      "apiAssists": "0",
+      "gamesPlayed": 6,
+      "minutesPlayed": 444
+    },
+    {
+      "rank": "7",
       "id": 51346,
       "name": "Nicole Kelli",
       "leagueGoals": "4",
@@ -7801,7 +7918,7 @@
       "minutesPlayed": 1133
     },
     {
-      "rank": "7",
+      "rank": "8",
       "id": 48593,
       "name": "Aleksandra Kelli",
       "leagueGoals": "2",
@@ -7809,20 +7926,8 @@
       "totalGoals": "4",
       "assists": "0",
       "apiAssists": "0",
-      "gamesPlayed": 25,
-      "minutesPlayed": 1629
-    },
-    {
-      "rank": "8",
-      "id": 111119,
-      "name": "Kennedy Avery Mayo",
-      "leagueGoals": "4",
-      "cupGoals": "0",
-      "totalGoals": "4",
-      "assists": "0",
-      "apiAssists": "0",
-      "gamesPlayed": 5,
-      "minutesPlayed": 386
+      "gamesPlayed": 26,
+      "minutesPlayed": 1687
     },
     {
       "rank": "9",
@@ -7833,8 +7938,8 @@
       "totalGoals": "3",
       "assists": "0",
       "apiAssists": "0",
-      "gamesPlayed": 18,
-      "minutesPlayed": 711
+      "gamesPlayed": 19,
+      "minutesPlayed": 733
     },
     {
       "rank": "10",
@@ -7845,42 +7950,27 @@
       "totalGoals": "3",
       "assists": "0",
       "apiAssists": "0",
-      "gamesPlayed": 21,
-      "minutesPlayed": 618
+      "gamesPlayed": 22,
+      "minutesPlayed": 650
     }
   ],
   "womenMatches": {
     "next": {
-      "id": 187058,
+      "id": 187061,
       "type": "upcoming",
-      "homeTeam": "Viimsi JK",
-      "awayTeam": "Paide Linnanaiskond",
-      "date": "N.ML 31.10.2026 17:00",
-      "dateStr": "31.10.2026",
+      "homeTeam": "Paide Linnanaiskond",
+      "awayTeam": "Harju JK Laagri",
+      "date": "N.ML 08.11.2026 17:00",
+      "dateStr": "08.11.2026",
       "timeStr": "17:00",
-      "dateDisplay": "Laupäev, 31. oktoober",
-      "venue": "Viimsi staadion",
-      "round": "Naiste Meistriliiga • 24. Voor",
-      "broadcast": "OTSE: SOCCERNET TV / JALGPALL.EE",
-      "ticketUrl": null,
-      "matchInfoUrl": "https://jalgpall.ee/voistlused/protocol/187058"
+      "dateDisplay": "Pühapäev, 8. november",
+      "venue": "Paide kunstmuruväljak",
+      "round": "Naiste Meistriliiga • 25. Voor",
+      "broadcast": "OTSE: SOCCERNET.EE",
+      "ticketUrl": "https://www.piletilevi.ee/piletid/46NB6KN74L/naiste-meistriliiga-25-voor-paide-linnanaiskond-vs-harju-jk-laagri-n",
+      "matchInfoUrl": "https://jalgpall.ee/voistlused/protocol/187061"
     },
     "upcoming": [
-      {
-        "id": 187058,
-        "type": "upcoming",
-        "homeTeam": "Viimsi JK",
-        "awayTeam": "Paide Linnanaiskond",
-        "date": "N.ML 31.10.2026 17:00",
-        "dateStr": "31.10.2026",
-        "timeStr": "17:00",
-        "dateDisplay": "Laupäev, 31. oktoober",
-        "venue": "Viimsi staadion",
-        "round": "Naiste Meistriliiga • 24. Voor",
-        "broadcast": "OTSE: SOCCERNET TV / JALGPALL.EE",
-        "ticketUrl": null,
-        "matchInfoUrl": "https://jalgpall.ee/voistlused/protocol/187058"
-      },
       {
         "id": 187061,
         "type": "upcoming",
@@ -7898,6 +7988,75 @@
       }
     ],
     "recent": [
+      {
+        "id": 187058,
+        "type": "finished",
+        "meta": "N.ML 31.10.2026 Kell 17:00",
+        "tournament": "Naiste Meistriliiga",
+        "round": "24. voor",
+        "dateDisplay": "Laupäev, 31. oktoober",
+        "timeDisplay": "17:00",
+        "homeTeam": "Viimsi JK",
+        "score": "0 - 5",
+        "homeScore": 0,
+        "awayScore": 5,
+        "awayTeam": "Paide Linnanaiskond",
+        "venue": "Viimsi staadion",
+        "attendance": 57,
+        "protocolUrl": "https://jalgpall.ee/voistlused/protocol/187058",
+        "scorers": [
+          {
+            "side": "away",
+            "minute": "12'",
+            "player": "Kennedy Avery Mayo",
+            "shortPlayer": "K.A. Mayo",
+            "team": "Paide Linnanaiskond",
+            "runningScore": "0 : 1",
+            "goalType": "",
+            "isPaide": true
+          },
+          {
+            "side": "away",
+            "minute": "17'",
+            "player": "Lisette Tammik",
+            "shortPlayer": "L. Tammik",
+            "team": "Paide Linnanaiskond",
+            "runningScore": "0 : 2",
+            "goalType": "",
+            "isPaide": true
+          },
+          {
+            "side": "away",
+            "minute": "23'",
+            "player": "Kennedy Avery Mayo",
+            "shortPlayer": "K.A. Mayo",
+            "team": "Paide Linnanaiskond",
+            "runningScore": "0 : 3",
+            "goalType": "",
+            "isPaide": true
+          },
+          {
+            "side": "away",
+            "minute": "33'",
+            "player": "Lisette Tammik",
+            "shortPlayer": "L. Tammik",
+            "team": "Paide Linnanaiskond",
+            "runningScore": "0 : 4",
+            "goalType": "",
+            "isPaide": true
+          },
+          {
+            "side": "away",
+            "minute": "58'",
+            "player": "Lisette Tammik",
+            "shortPlayer": "L. Tammik",
+            "team": "Paide Linnanaiskond",
+            "runningScore": "0 : 5",
+            "goalType": "",
+            "isPaide": true
+          }
+        ]
+      },
       {
         "id": 187055,
         "type": "finished",
@@ -8180,68 +8339,7 @@
         "venue": "Paide kunstmuruväljak",
         "attendance": 82,
         "protocolUrl": "https://jalgpall.ee/voistlused/protocol/187041",
-        "scorers": [
-          {
-            "side": "home",
-            "minute": "20'",
-            "player": "Kennedy Avery Mayo",
-            "shortPlayer": "K.A. Mayo",
-            "team": "Paide Linnanaiskond",
-            "runningScore": "1 : 0",
-            "goalType": "",
-            "isPaide": true
-          },
-          {
-            "side": "home",
-            "minute": "36'",
-            "player": "Lisette Tammik",
-            "shortPlayer": "L. Tammik",
-            "team": "Paide Linnanaiskond",
-            "runningScore": "2 : 0",
-            "goalType": "",
-            "isPaide": true
-          },
-          {
-            "side": "away",
-            "minute": "41'",
-            "player": "Viktoria Toding",
-            "shortPlayer": "V. Toding",
-            "team": "Saku Sporting",
-            "runningScore": "2 : 1",
-            "goalType": "",
-            "isPaide": false
-          },
-          {
-            "side": "home",
-            "minute": "52'",
-            "player": "Kirkeliis Lillemets",
-            "shortPlayer": "K. Lillemets",
-            "team": "Paide Linnanaiskond",
-            "runningScore": "3 : 1",
-            "goalType": "",
-            "isPaide": true
-          },
-          {
-            "side": "away",
-            "minute": "53'",
-            "player": "Emma Treiberg",
-            "shortPlayer": "E. Treiberg",
-            "team": "Saku Sporting",
-            "runningScore": "3 : 2",
-            "goalType": "",
-            "isPaide": false
-          },
-          {
-            "side": "home",
-            "minute": "60'",
-            "player": "Grete Kraus",
-            "shortPlayer": "G. Kraus",
-            "team": "Paide Linnanaiskond",
-            "runningScore": "4 : 2",
-            "goalType": "",
-            "isPaide": true
-          }
-        ]
+        "scorers": []
       },
       {
         "id": 187038,
@@ -8404,34 +8502,16 @@
         "attendance": 53,
         "protocolUrl": "https://jalgpall.ee/voistlused/protocol/187018",
         "scorers": []
-      },
-      {
-        "id": 187011,
-        "type": "finished",
-        "meta": "N.ML 20.06.2026 Kell 19:00",
-        "tournament": "Naiste Meistriliiga",
-        "round": "9. voor",
-        "dateDisplay": "Laupäev, 20. juuni",
-        "timeDisplay": "19:00",
-        "homeTeam": "FC Elva",
-        "score": "0 - 3",
-        "homeScore": 0,
-        "awayScore": 3,
-        "awayTeam": "Paide Linnanaiskond",
-        "venue": "Elva linnastaadion",
-        "attendance": 101,
-        "protocolUrl": "https://jalgpall.ee/voistlused/protocol/187011",
-        "scorers": []
       }
     ]
   },
   "teamStats": {
-    "gamesPlayed": 53,
-    "goals": 66,
-    "assists": 33,
-    "yellowCards": 83,
+    "gamesPlayed": 54,
+    "goals": 67,
+    "assists": 34,
+    "yellowCards": 84,
     "redCards": 8,
-    "viewers": 21783,
+    "viewers": 22169,
     "topAssists": [
       {
         "rank": 1,
@@ -8477,6 +8557,12 @@
       },
       {
         "rank": 5,
+        "id": 29849,
+        "name": "Aleksandr Šurõgin",
+        "assists": 2
+      },
+      {
+        "rank": 5,
         "id": 31471,
         "name": "Oskar Hõim",
         "assists": 2
@@ -8486,22 +8572,16 @@
         "id": 106054,
         "name": "Victor Hugo Dos Santos De Sa",
         "assists": 2
-      },
-      {
-        "rank": 5,
-        "id": 106982,
-        "name": "Daniel Cabral De Oliveira",
-        "assists": 2
       }
     ]
   },
   "womenTeamStats": {
-    "gamesPlayed": 32,
-    "goals": 90,
+    "gamesPlayed": 33,
+    "goals": 95,
     "assists": 0,
-    "yellowCards": 20,
+    "yellowCards": 21,
     "redCards": 0,
-    "viewers": 2745,
+    "viewers": 2802,
     "topAssists": []
   }
 }

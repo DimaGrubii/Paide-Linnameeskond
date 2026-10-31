@@ -254,19 +254,28 @@ function updateTrackerCard(gender) {
         ? apiData.standings.naisteMeistriliiga
         : [];
       const paideRow = wTable.find(r => r.isPaide || (r.team || '').toLowerCase().includes('paide')) || null;
+      const secondRow = wTable.find(r => Number(r.position) === 2) || wTable[1] || null;
       const thirdRow = wTable.find(r => Number(r.position) === 3) || wTable[2] || null;
-      const playedGames = paideRow ? Number(paideRow.played || 23) : 23;
+      const playedGames = paideRow ? Number(paideRow.played || 24) : 24;
       const totalRounds = 25;
-      const paidePts = paideRow ? Number(paideRow.points || 48) : 48;
-      const paideRank = paideRow ? Number(paideRow.position || 2) : 2;
+      const paidePts = paideRow ? Number(paideRow.points || 51) : 51;
+      const paideRank = paideRow ? Number(paideRow.position || 1) : 1;
+      const secondPts = secondRow ? Number(secondRow.points || 48) : 48;
       const thirdPts = thirdRow ? Number(thirdRow.points || 44) : 44;
+      const diffSecond = paidePts - secondPts;
       const diffPts = paidePts - thirdPts;
       const pct = Math.min(100, Math.max(0, (playedGames / totalRounds) * 100)).toFixed(1);
 
       if (badge) badge.textContent = 'NAISTE MEISTRILIIGA';
       if (season) season.textContent = 'HOOAEG 2026';
       if (title) title.textContent = 'VÕITLUS MEISTRITIITLI NIMEL';
-      if (desc) desc.textContent = `Paide Linnanaiskond on Naiste Meistriliigas ${paidePts} punktiga ${paideRank}. positsioonil, võideldes hooaja lõpusirgel meistritiitli ja medalite nimel!`;
+      if (desc) {
+        if (paideRank === 1) {
+          desc.textContent = `Paide Linnanaiskond hoiab Naiste Meistriliigas ${paidePts} punktiga 1. positsiooni, edestades 2. koha Tallinna FC Florat ${diffSecond} punktiga ja võideldes viimases voorus meistritiitli nimel!`;
+        } else {
+          desc.textContent = `Paide Linnanaiskond on Naiste Meistriliigas ${paidePts} punktiga ${paideRank}. positsioonil, võideldes hooaja lõpusirgel meistritiitli ja medalite nimel!`;
+        }
+      }
       if (gapLabel) gapLabel.textContent = 'Edu 3. koha ees (Saku):';
       if (gapVal) gapVal.textContent = `${diffPts >= 0 ? '+' : ''}${diffPts} punkti`;
       if (progress) progress.style.width = `${pct}%`;
@@ -278,9 +287,9 @@ function updateTrackerCard(gender) {
       const paideRow = mTable.find(r => r.isPaide || (r.team || '').toLowerCase().includes('paide')) || null;
       const fourthRow = mTable.find(r => Number(r.position) === 4) || mTable[3] || null;
       const thirdRow = mTable.find(r => Number(r.position) === 3) || mTable[2] || null;
-      const playedGames = paideRow ? Number(paideRow.played || 34) : 34;
+      const playedGames = paideRow ? Number(paideRow.played || 35) : 35;
       const totalRounds = 36;
-      const paidePts = paideRow ? Number(paideRow.points || 60) : 60;
+      const paidePts = paideRow ? Number(paideRow.points || 63) : 63;
       const paideRank = paideRow ? Number(paideRow.position || 2) : 2;
       const fourthPts = fourthRow ? Number(fourthRow.points || 57) : 57;
       const thirdPts = thirdRow ? Number(thirdRow.points || 58) : 58;

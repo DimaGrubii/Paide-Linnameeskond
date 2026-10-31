@@ -2135,6 +2135,7 @@ const JalgpallSync = (function () {
     getCachedData: () => cachedData
   };
 })();
+window.JalgpallSync = JalgpallSync;
 
 // Auto-run when DOM is loaded
 if (document.readyState === 'loading') {
