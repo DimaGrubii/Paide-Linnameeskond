@@ -149,17 +149,18 @@ function ejlApiGet($path, $params = array(), $timeout = 12) {
 
     if (function_exists('curl_init')) {
         $ch = curl_init($url);
-        curl_setopt_array($ch, array(
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_MAXREDIRS      => 3,
-            CURLOPT_CONNECTTIMEOUT => 6,
-            CURLOPT_TIMEOUT        => $timeout,
-            CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_SSL_VERIFYHOST => 0,
-            CURLOPT_ENCODING       => '',
-            CURLOPT_HTTPHEADER     => $headers,
-        ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 6);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        if (defined('CURLOPT_ENCODING')) {
+            @curl_setopt($ch, CURLOPT_ENCODING, '');
+        }
+        @curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        @curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
+
         $raw = curl_exec($ch);
         $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);

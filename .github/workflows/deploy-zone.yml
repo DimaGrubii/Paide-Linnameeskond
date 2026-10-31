@@ -165,8 +165,9 @@ jobs:
                   continue
               all_files.append(path)
 
-          # Upload HTML/JS/CSS/JSON first so code & data updates appear immediately
-          all_files.sort(key=lambda p: (0 if p.suffix.lower() in ALWAYS_UPLOAD_EXTS else 1, p.as_posix()))
+          # Upload PHP/HTML/JS/CSS/JSON first so live endpoints & code updates appear within 2 seconds
+          PRIORITY_EXTS = {".php": 0, ".js": 1, ".html": 2, ".css": 3, ".json": 4}
+          all_files.sort(key=lambda p: (PRIORITY_EXTS.get(p.suffix.lower(), 5 if p.suffix.lower() in ALWAYS_UPLOAD_EXTS else 9), p.as_posix()))
 
           uploaded = 0
           skipped = 0
