@@ -7,6 +7,7 @@
 # Environment & secrets
 .env
 .env.*
+config/ejl-secret.php
 
 # Local EJL HTML scrape cache (large raw HTML files)
 data/cache/

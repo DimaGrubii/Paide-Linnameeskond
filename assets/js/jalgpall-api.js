@@ -56,89 +56,14 @@ const JalgpallSync = (function () {
   };
 
   /**
-   * Parses live HTML from jalgpall.ee/voistlused/52/premium-liiga
-   */
-  function parseEJLStandingsHTML(html) {
-    if (!html || typeof html !== 'string') return null;
-    try {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-      const tables = doc.querySelectorAll('table');
-      let targetTable = null;
-
-      for (const tbl of tables) {
-        const text = tbl.textContent || '';
-        if (text.includes('Paide Linnameeskond') && (text.includes('Võistkond') || text.includes('Mänge'))) {
-          targetTable = tbl;
-          break;
-        }
-      }
-
-      if (!targetTable) return null;
-
-      const rows = targetTable.querySelectorAll('tr');
-      const parsedTeams = [];
-
-      rows.forEach(tr => {
-        const tds = tr.querySelectorAll('td');
-        if (tds.length >= 9) {
-          const pos = parseInt(tds[0].textContent.trim(), 10);
-          if (isNaN(pos)) return;
-
-          const link = tds[2].querySelector('a') || tds[2];
-          const teamName = link ? link.textContent.trim() : '';
-          if (!teamName) return;
-
-          const played = parseInt(tds[3].textContent.trim(), 10);
-          const won = parseInt(tds[4].textContent.trim(), 10);
-          const drawn = parseInt(tds[5].textContent.trim(), 10);
-          const lost = parseInt(tds[6].textContent.trim(), 10);
-          const goalsRaw = tds[7].textContent.trim();
-          const points = parseInt(tds[8].textContent.trim(), 10);
-
-          const parts = goalsRaw.split(':');
-          const gf = parts[0] ? parseInt(parts[0].trim(), 10) : 0;
-          const ga = parts[1] ? parseInt(parts[1].trim(), 10) : 0;
-          const diff = gf - ga;
-          const diffStr = diff > 0 ? `+${diff}` : `${diff}`;
-
-          const imgEl = tds[1].querySelector('img');
-          const logoUrl = imgEl ? imgEl.getAttribute('src') : '';
-
-          parsedTeams.push({
-            position: pos,
-            team: teamName,
-            logo: logoUrl,
-            localLogo: LOCAL_LOGOS[teamName] || logoUrl,
-            played: isNaN(played) ? 0 : played,
-            won: isNaN(won) ? 0 : won,
-            drawn: isNaN(drawn) ? 0 : drawn,
-            lost: isNaN(lost) ? 0 : lost,
-            goalsFor: gf,
-            goalsAgainst: ga,
-            goalDifference: diffStr,
-            points: isNaN(points) ? 0 : points,
-            isPaide: teamName.toLowerCase().includes('paide')
-          });
-        }
-      });
-
-      return parsedTeams.length >= 10 ? parsedTeams : null;
-    } catch (e) {
-      console.warn('[EJL Parser] Failed to parse HTML:', e);
-      return null;
-    }
-  }
-
-  /**
-   * Fetches the latest Estonian FA data via Zone.ee server-side sync (sync-ejl.php)
-   * with fallback to local snapshot and CORS proxies.
+   * Fetches the latest Estonian FA data via Zone.ee server-side EJL OpenData API sync (sync-ejl.php)
+   * with fallback to the API-synced local JSON snapshot (data/jalgpall-data.json).
    */
   async function fetchRealtimeData(forceLive = false) {
     try {
       try { localStorage.removeItem('plm_cached_live_standings'); } catch (e) {}
 
-      // 0. Try Zone.ee server-side PHP sync first (Estonian IP -> jalgpall.ee, excludes live Hetkeseis matches until Lõppseis)
+      // 1. Query server-side PHP EJL OpenData API endpoint (keeps Bearer token strictly on the backend)
       try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), forceLive ? 8000 : 4500);
@@ -157,25 +82,25 @@ const JalgpallSync = (function () {
           }
         }
       } catch (zoneErr) {
-        // Zone.ee PHP runtime not active locally; proceed to local JSON snapshot
+        // PHP runtime not active locally; proceed to API-synced JSON snapshot
       }
 
-      // 1. Load curated structured JSON snapshot (excludes in-progress matches until Lõppseis)
-      const response = await fetch(`${DATA_ENDPOINT}?v=20261025-final&_t=${Date.now()}`, { cache: 'no-store' });
+      // 2. Load API-synced structured JSON snapshot (data/jalgpall-data.json)
+      const response = await fetch(`${DATA_ENDPOINT}?_t=${Date.now()}`, { cache: 'no-store' });
       if (!response.ok) {
         throw new Error(`Failed to load data: ${response.status}`);
       }
       cachedData = await response.json();
       return cachedData;
     } catch (err) {
-      console.warn('[EJL Sync] Falling back to pre-rendered state or local cache:', err);
+      console.warn('[EJL API Sync] Falling back to pre-rendered state or local cache:', err);
       if (cachedData) return cachedData;
       return null;
     }
   }
 
   /**
-   * Updates all UI modules with the synced Estonian FA data
+   * Updates all UI modules with the synced Estonian FA OpenData API data
    */
   function applyDataToDOM(data) {
     if (!data) return;
@@ -185,7 +110,7 @@ const JalgpallSync = (function () {
     const now = new Date();
     const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
     syncBadges.forEach(el => {
-      el.textContent = `Sünkroonitud: Täna kell ${timeStr} (EJL)`;
+      el.textContent = `Sünkroonitud: Täna kell ${timeStr} (EJL API)`;
     });
 
     // 2. Update Club Crests across header, navigation & footer
@@ -196,8 +121,12 @@ const JalgpallSync = (function () {
       });
     }
 
-    // 3. Update Matchday Strip (Men & Women)
+    // 3. Update Matchday Strip (Men & Women) from EJL OpenData API matches.next
     if (data.matches && data.matches.next) {
+      const nextM = data.matches.next;
+      const homeMeta = resolveLiveTeamDisplay(nextM.homeTeam, 'men');
+      const awayMeta = resolveLiveTeamDisplay(nextM.awayTeam, 'men');
+
       const topTickerMatch = document.getElementById('top-ticker-match');
       const nextHome = document.getElementById('match-next-hometeam');
       const nextAway = document.getElementById('match-next-awayteam');
@@ -208,27 +137,36 @@ const JalgpallSync = (function () {
       const nextHomeLogo = document.getElementById('match-next-homelogo');
       const nextAwayLogo = document.getElementById('match-next-awaylogo');
 
+      const dateHuman = nextM.dateDisplay || parseEstonianDateHuman(nextM.dateStr || nextM.date || '') || 'Laupäev, 31. oktoober';
+      const timeKickoff = nextM.timeStr || ((nextM.date || '').match(/(\d{1,2}:\d{2})/) || [])[1] || '14:30';
+      const roundLabel = (nextM.round || 'Premium Liiga • 35. Voor').replace(/^A\.\s*Le\s*Coq\s*/i, '');
+      const venueLabel = nextM.venue || 'Pärnu Rannastaadion';
+
       if (topTickerMatch) {
-        topTickerMatch.innerHTML = 'Premium Liiga: <strong class="text-white">Pärnu JK Vaprus vs Paide Linnameeskond</strong> • Laupäev, 31. okt kell 14:30 • Pärnu Rannastaadion';
+        topTickerMatch.innerHTML = `Premium Liiga: <strong class="text-white">${nextM.homeTeam} vs ${nextM.awayTeam}</strong> • ${dateHuman} kell ${timeKickoff} • ${venueLabel}`;
       }
 
-      if (nextHome) nextHome.innerHTML = '<span class="sm:hidden">VAP</span><span class="hidden sm:inline">PÄRNU JK VAPRUS</span>';
-      if (nextAway) nextAway.innerHTML = '<span class="sm:hidden">PLM</span><span class="hidden sm:inline">PAIDE LM</span>';
-      if (nextDate) nextDate.textContent = 'Laupäev, 31. oktoober';
-      if (nextTime) nextTime.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>Avavile: 14:30</span>';
-      if (nextRound) nextRound.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-crimson animate-ping flex-shrink-0"></span> <span class="whitespace-nowrap">Premium Liiga • 35. Voor</span>';
-      if (nextVenue) nextVenue.textContent = 'Pärnu Rannastaadion';
+      if (nextHome) nextHome.innerHTML = `<span class="sm:hidden">${homeMeta.short}</span><span class="hidden sm:inline">${homeMeta.full}</span>`;
+      if (nextAway) nextAway.innerHTML = `<span class="sm:hidden">${awayMeta.short}</span><span class="hidden sm:inline">${awayMeta.full}</span>`;
+      if (nextDate) nextDate.textContent = dateHuman;
+      if (nextTime) nextTime.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>Avavile: ${timeKickoff}</span>`;
+      if (nextRound) nextRound.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-crimson animate-ping flex-shrink-0"></span> <span class="whitespace-nowrap">${roundLabel}</span>`;
+      if (nextVenue) nextVenue.textContent = venueLabel;
       if (nextHomeLogo) {
-        nextHomeLogo.src = 'assets/img/jalgpall_logos/vaprus.png';
-        nextHomeLogo.alt = 'Pärnu JK Vaprus Ametlik Logo';
+        nextHomeLogo.src = homeMeta.logo;
+        nextHomeLogo.alt = `${nextM.homeTeam} Ametlik Logo`;
       }
       if (nextAwayLogo) {
-        nextAwayLogo.src = 'assets/img/jalgpall_logos/paide.png';
-        nextAwayLogo.alt = 'Paide Linnameeskond Ametlik Logo';
+        nextAwayLogo.src = awayMeta.logo;
+        nextAwayLogo.alt = `${nextM.awayTeam} Ametlik Logo`;
       }
     }
 
     if (data.womenMatches && data.womenMatches.next) {
+      const nextW = data.womenMatches.next;
+      const wHomeMeta = resolveLiveTeamDisplay(nextW.homeTeam, 'women');
+      const wAwayMeta = resolveLiveTeamDisplay(nextW.awayTeam, 'women');
+
       const wHome = document.getElementById('match-women-hometeam');
       const wAway = document.getElementById('match-women-awayteam');
       const wHomeLogo = document.getElementById('match-women-homelogo');
@@ -238,43 +176,66 @@ const JalgpallSync = (function () {
       const wTime = document.getElementById('match-women-time');
       const wVenue = document.getElementById('match-women-venue');
 
-      if (wHome) wHome.innerHTML = '<span class="sm:hidden">VII</span><span class="hidden sm:inline">VIIMSI JK</span>';
-      if (wAway) wAway.innerHTML = '<span class="sm:hidden">PLN</span><span class="hidden sm:inline">PAIDE NAISKOND</span>';
+      const wDateHuman = nextW.dateDisplay || parseEstonianDateHuman(nextW.dateStr || nextW.date || '') || 'Laupäev, 31. oktoober';
+      const wTimeKickoff = nextW.timeStr || ((nextW.date || '').match(/(\d{1,2}:\d{2})/) || [])[1] || '17:00';
+      const wRoundLabel = nextW.round || 'Naiste Meistriliiga • 24. Voor';
+      const wVenueLabel = nextW.venue || 'Viimsi staadion';
+
+      if (wHome) wHome.innerHTML = `<span class="sm:hidden">${wHomeMeta.short}</span><span class="hidden sm:inline">${wHomeMeta.full}</span>`;
+      if (wAway) wAway.innerHTML = `<span class="sm:hidden">${wAwayMeta.short}</span><span class="hidden sm:inline">${wAwayMeta.full}</span>`;
       if (wHomeLogo) {
-        wHomeLogo.src = 'assets/img/jalgpall_logos/viimsi.png';
-        wHomeLogo.alt = 'Viimsi JK';
+        wHomeLogo.src = wHomeMeta.logo;
+        wHomeLogo.alt = nextW.homeTeam;
       }
       if (wAwayLogo) {
-        wAwayLogo.src = 'assets/img/jalgpall_logos/paide.png';
-        wAwayLogo.alt = 'Paide Linnanaiskond';
+        wAwayLogo.src = wAwayMeta.logo;
+        wAwayLogo.alt = nextW.awayTeam;
       }
 
-      if (wRound) wRound.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-crimson animate-ping flex-shrink-0"></span> <span class="whitespace-nowrap">Naiste Meistriliiga • 24. Voor</span>';
-      if (wDate) wDate.textContent = 'Laupäev, 31. oktoober';
-      if (wTime) wTime.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>Avavile: 17:00</span>';
-      if (wVenue) wVenue.textContent = 'Viimsi staadion';
+      if (wRound) wRound.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-crimson animate-ping flex-shrink-0"></span> <span class="whitespace-nowrap">${wRoundLabel}</span>`;
+      if (wDate) wDate.textContent = wDateHuman;
+      if (wTime) wTime.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>Avavile: ${wTimeKickoff}</span>`;
+      if (wVenue) wVenue.textContent = wVenueLabel;
     }
 
-    // 3.5 Update Recent Results Bar (Men & Women)
+    // 3.5 Update Recent Results Bar (Men & Women) from EJL OpenData API matches.recent
     if (data.matches && data.matches.recent && data.matches.recent.length > 0) {
+      const latestM = data.matches.recent[0];
+      const rmHomeMeta = resolveLiveTeamDisplay(latestM.homeTeam, 'men');
+      const rmAwayMeta = resolveLiveTeamDisplay(latestM.awayTeam, 'men');
       const rmHome = document.getElementById('recent-men-hometeam');
       const rmScore = document.getElementById('recent-men-score');
       const rmAway = document.getElementById('recent-men-awayteam');
       const rmBadge = document.getElementById('recent-men-badge');
 
       if (rmHome) {
-        rmHome.className = 'text-slate-600';
-        rmHome.innerHTML = '<span class="sm:hidden">KUR</span><span class="hidden sm:inline">FC Kuressaare</span>';
+        rmHome.className = rmHomeMeta.isPaide ? 'font-bold text-crimson' : 'text-slate-600';
+        rmHome.innerHTML = `<span class="sm:hidden">${rmHomeMeta.short}</span><span class="hidden sm:inline">${rmHomeMeta.isPaide ? 'Paide LM' : latestM.homeTeam}</span>`;
       }
-      if (rmScore) rmScore.textContent = '0 : 1';
+      if (rmScore) {
+        rmScore.textContent = (latestM.score || '').replace(/\s*-\s*/, ' : ');
+      }
       if (rmAway) {
-        rmAway.className = 'font-bold text-crimson';
-        rmAway.innerHTML = '<span class="sm:hidden">PLM</span><span class="hidden sm:inline">Paide LM</span>';
+        rmAway.className = rmAwayMeta.isPaide ? 'font-bold text-crimson' : 'text-slate-600';
+        rmAway.innerHTML = `<span class="sm:hidden">${rmAwayMeta.short}</span><span class="hidden sm:inline">${rmAwayMeta.isPaide ? 'Paide LM' : latestM.awayTeam}</span>`;
       }
 
       if (rmBadge) {
-        rmBadge.textContent = 'Võit';
-        rmBadge.className = 'px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 uppercase';
+        const scores = (latestM.score || '').split(/[-:]/).map(s => parseInt(s.trim(), 10));
+        if (scores.length === 2 && !isNaN(scores[0]) && !isNaN(scores[1])) {
+          const paideScore = rmHomeMeta.isPaide ? scores[0] : scores[1];
+          const oppScore = rmHomeMeta.isPaide ? scores[1] : scores[0];
+          if (paideScore > oppScore) {
+            rmBadge.textContent = 'Võit';
+            rmBadge.className = 'px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 uppercase';
+          } else if (paideScore < oppScore) {
+            rmBadge.textContent = 'Kaotus';
+            rmBadge.className = 'px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800 uppercase';
+          } else {
+            rmBadge.textContent = 'Viik';
+            rmBadge.className = 'px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 uppercase';
+          }
+        }
       }
     }
 
@@ -291,7 +252,7 @@ const JalgpallSync = (function () {
 
       if (rwBadge) {
         const isPaideHome = (latestW.homeTeam || '').toLowerCase().includes('paide');
-        const scores = (latestW.score || '').split('-').map(s => parseInt(s.trim(), 10));
+        const scores = (latestW.score || '').split(/[-:]/).map(s => parseInt(s.trim(), 10));
         if (scores.length === 2 && !isNaN(scores[0]) && !isNaN(scores[1])) {
           const paideScore = isPaideHome ? scores[0] : scores[1];
           const oppScore = isPaideHome ? scores[1] : scores[0];
@@ -1197,167 +1158,6 @@ const JalgpallSync = (function () {
   }
 
   /**
-   * Parses an EJL match protocol HTML document (https://jalgpall.ee/voistlused/protocol/<id>)
-   */
-  function parseEJLProtocolHTML(html, protocolId) {
-    if (!html || typeof html !== 'string' || !html.includes('teams')) return null;
-    try {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
-
-      const teamEls = doc.querySelectorAll('.teams .team');
-      if (teamEls.length < 2) return null;
-
-      const homeTeam = (teamEls[0].textContent || '').replace(/\s+/g, ' ').replace(/\s*\(N\)\s*$/i, '').trim();
-      const awayTeam = (teamEls[1].textContent || '').replace(/\s+/g, ' ').replace(/\s*\(N\)\s*$/i, '').trim();
-
-      // Strictly require either the male Paide team (Paide Linnameeskond) or female Paide team (Paide Linnanaiskond)
-      if (!isPaideMatch(homeTeam, awayTeam)) return null;
-
-      const scoreMd = doc.querySelector('.spacer.multi .p-md');
-      let homeScore = 0;
-      let awayScore = 0;
-      let statusLabel = 'Hetkeseis';
-      let hasNumericScore = false;
-
-      if (scoreMd) {
-        const smallEl = scoreMd.querySelector('small');
-        if (smallEl && smallEl.textContent) {
-          statusLabel = smallEl.textContent.trim();
-        }
-        const clone = scoreMd.cloneNode(true);
-        const s = clone.querySelector('small');
-        if (s) s.remove();
-        const rawScore = (clone.textContent || '').trim();
-        const sm = rawScore.match(/(\d+)\s*[-:]\s*(\d+)/);
-        if (sm) {
-          homeScore = parseInt(sm[1], 10);
-          awayScore = parseInt(sm[2], 10);
-          hasNumericScore = true;
-        }
-      }
-
-      let halftimeScore = null;
-      const scoreSm = doc.querySelector('.spacer.multi .p-sm');
-      if (scoreSm) {
-        const cloneSm = scoreSm.cloneNode(true);
-        const s = cloneSm.querySelector('small');
-        if (s) s.remove();
-        const rawHt = (cloneSm.textContent || '').trim();
-        const htm = rawHt.match(/(\d+)\s*[-:]\s*(\d+)/);
-        if (htm) {
-          halftimeScore = `${htm[1]} : ${htm[2]}`;
-        }
-      }
-
-      let competition = '';
-      let round = '';
-      let dateStr = '';
-      let timeStr = '';
-      let venue = '';
-      let attendance = null;
-
-      const infoLis = doc.querySelectorAll('.info ul li');
-      infoLis.forEach(li => {
-        const txt = (li.textContent || '').replace(/\s+/g, ' ').trim();
-        if (li.classList.contains('type')) {
-          competition = txt;
-        } else if (li.classList.contains('date')) {
-          const dm = txt.match(/(\d{2}\.\d{2}\.\d{4})/);
-          const tm = txt.match(/(\d{1,2}:\d{2})/);
-          if (dm) dateStr = dm[1];
-          if (tm) timeStr = tm[1];
-        } else if (li.classList.contains('location')) {
-          venue = txt;
-        } else if (li.classList.contains('group') || txt.toLowerCase().includes('pealtvaataja')) {
-          const am = txt.match(/(\d+)/);
-          if (am) attendance = parseInt(am[1], 10);
-        } else if (txt.toLowerCase().includes('voor')) {
-          round = txt.replace(/\bvoor\b/i, 'Voor');
-        }
-      });
-
-      const goals = [];
-      const goalRows = doc.querySelectorAll('.goals-list .goal-single');
-      goalRows.forEach(row => {
-        const playerDivs = Array.from(row.querySelectorAll(':scope > .player'));
-        const centerScore = row.querySelector(':scope > .score') || row.children[1];
-        const leftPlayer = playerDivs[0] || row.children[0];
-        const rightPlayer = playerDivs[1] || row.children[2];
-        if (!leftPlayer || !centerScore || !rightPlayer) return;
-
-        const runningScore = (centerScore.textContent || '').replace(/\s+/g, ' ').trim().replace('-', ':');
-        const isHomeGoal = !leftPlayer.classList.contains('empty') && (leftPlayer.textContent || '').trim().length > 0;
-        const activePlayerDiv = isHomeGoal ? leftPlayer : rightPlayer;
-        if (!activePlayerDiv || activePlayerDiv.classList.contains('empty')) return;
-
-        const timeEl = activePlayerDiv.querySelector('.time');
-        const rawMinute = timeEl ? (timeEl.textContent || '').trim().replace(/[′']/g, "'") : '';
-        const nameLink = activePlayerDiv.querySelector('a');
-        let playerName = nameLink ? (nameLink.textContent || '').trim() : '';
-        if (!playerName) {
-          const cloneP = activePlayerDiv.cloneNode(true);
-          const t = cloneP.querySelector('.time');
-          const st = cloneP.querySelector('.status');
-          if (t) t.remove();
-          if (st) st.remove();
-          playerName = (cloneP.textContent || '').replace(/\s+/g, ' ').trim();
-        }
-        const statusEl = activePlayerDiv.querySelector('.status');
-        const goalType = statusEl ? (statusEl.textContent || '').trim() : '';
-
-        if (playerName) {
-          goals.push({
-            side: isHomeGoal ? 'home' : 'away',
-            minute: rawMinute,
-            player: playerName,
-            shortPlayer: formatPlayerShortName(playerName),
-            runningScore: runningScore.replace(/\s*:\s*/, ' : '),
-            goalType
-          });
-        }
-      });
-
-      // If goals were logged, ensure homeScore/awayScore reflect at least the latest goal
-      if (goals.length > 0 && !hasNumericScore) {
-        const lastGoal = goals[goals.length - 1];
-        const gm = (lastGoal.runningScore || '').match(/(\d+)\s*:\s*(\d+)/);
-        if (gm) {
-          homeScore = parseInt(gm[1], 10);
-          awayScore = parseInt(gm[2], 10);
-        }
-      }
-
-      const isWomen = (competition || '').toLowerCase().includes('naiste') ||
-                      homeTeam.toLowerCase().includes('naiskond') ||
-                      awayTeam.toLowerCase().includes('naiskond');
-
-      return {
-        protocolId: String(protocolId),
-        protocolUrl: `https://jalgpall.ee/voistlused/protocol/${protocolId}`,
-        teamCategory: isWomen ? 'women' : 'men',
-        competition: competition || (isWomen ? 'Naiste Meistriliiga' : 'Premium Liiga'),
-        round: round || '',
-        kickoffDateStr: dateStr,
-        kickoffTimeStr: timeStr,
-        kickoffTimestamp: parseKickoffTimestamp(dateStr, timeStr),
-        venue: venue || '',
-        attendance,
-        homeTeam,
-        awayTeam,
-        homeScore,
-        awayScore,
-        halftimeScore,
-        statusLabel,
-        goals
-      };
-    } catch (err) {
-      console.warn('[LiveMatch] Protocol parse error:', err);
-      return null;
-    }
-  }
-
-  /**
    * Renders the current liveMatchState into #matchday-latest-result
    */
   function renderLiveScoreboardDOM() {
@@ -1636,7 +1436,8 @@ const JalgpallSync = (function () {
   }
 
   /**
-   * Fetches live protocol updates from live-match.php (or CORS proxy fallback when running locally)
+   * Fetches live match updates from our backend EJL OpenData API endpoint (live-match.php).
+   * Automatically shows #matchday-latest-result when a Paide men's or women's match is live or in pre-match countdown.
    */
   async function pollLiveMatchData() {
     const card = document.getElementById('matchday-latest-result');
@@ -1649,23 +1450,18 @@ const JalgpallSync = (function () {
       return;
     }
 
-    // Keep Kuressaare vs Paide result card hidden unless demo_live=1 is active
-    card.classList.add('hidden');
-    return;
-
-    // 1. Try local PHP endpoint first (works on production / PHP server)
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 4500);
-      const phpRes = await fetch(`live-match.php?protocol_id=143893&_t=${Date.now()}`, { cache: 'no-store', signal: controller.signal });
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+      const phpRes = await fetch(`live-match.php?_t=${Date.now()}`, { cache: 'no-store', signal: controller.signal });
       clearTimeout(timeoutId);
 
       if (phpRes.ok) {
         const contentType = phpRes.headers.get('content-type') || '';
         if (contentType.includes('application/json')) {
           const json = await phpRes.json();
-          const m = (json && (json.activeMatch || json.match)) || null;
-          if (m && isPaideMatch(m.homeTeam, m.awayTeam)) {
+          const m = json && json.activeMatch ? json.activeMatch : null;
+          if (m && json.isLive && isPaideMatch(m.homeTeam, m.awayTeam)) {
             const normalizedGoals = Array.isArray(m.goals)
               ? m.goals.map(g => ({
                   side: g.side || 'home',
@@ -1675,37 +1471,40 @@ const JalgpallSync = (function () {
                   runningScore: g.runningScore || g.score || '',
                   goalType: g.goalType || g.status || ''
                 }))
-              : liveMatchState.goals;
+              : [];
 
             const inferredWomen =
+              m.teamCategory === 'women' ||
               (m.competition || '').toLowerCase().includes('naiste') ||
               (m.homeTeam || '').toLowerCase().includes('naiskond') ||
               (m.awayTeam || '').toLowerCase().includes('naiskond');
 
+            const koTs = m.kickoffTimestamp
+              ? m.kickoffTimestamp * 1000
+              : parseKickoffTimestamp(m.dateStr || liveMatchState.kickoffDateStr, m.timeStr || liveMatchState.kickoffTimeStr);
+
             liveMatchState = {
               ...liveMatchState,
-              protocolId: String(m.protocolId || liveMatchState.protocolId),
-              protocolUrl: m.protocolUrl || `https://jalgpall.ee/voistlused/protocol/${m.protocolId || liveMatchState.protocolId}`,
+              protocolId: String(m.gameId || m.protocolId || liveMatchState.protocolId),
+              protocolUrl: m.protocolUrl || `https://jalgpall.ee/voistlused/protocol/${m.gameId || m.protocolId || liveMatchState.protocolId}`,
               teamCategory: inferredWomen ? 'women' : 'men',
               competition: m.competition || liveMatchState.competition,
               round: m.round || liveMatchState.round,
               kickoffDateStr: m.dateStr || liveMatchState.kickoffDateStr,
               kickoffTimeStr: m.timeStr || liveMatchState.kickoffTimeStr,
-              kickoffTimestamp: parseKickoffTimestamp(m.dateStr || liveMatchState.kickoffDateStr, m.timeStr || liveMatchState.kickoffTimeStr) || liveMatchState.kickoffTimestamp,
+              kickoffTimestamp: koTs || liveMatchState.kickoffTimestamp,
               venue: m.venue || liveMatchState.venue,
               attendance: m.attendance || liveMatchState.attendance,
               homeTeam: m.homeTeam,
               awayTeam: m.awayTeam,
-              homeScore: m.homeScore ?? m.scoreHome ?? liveMatchState.homeScore,
-              awayScore: m.awayScore ?? m.scoreAway ?? liveMatchState.awayScore,
+              homeScore: m.homeScore ?? m.scoreHome ?? 0,
+              awayScore: m.awayScore ?? m.scoreAway ?? 0,
               halftimeScore: m.halftimeScore ?? m.htScore ?? null,
-              statusLabel: m.statusLabel || liveMatchState.statusLabel,
+              statusLabel: m.statusLabel || 'Hetkeseis',
+              liveMinute: m.liveMinute ?? null,
+              liveExtraMinute: m.liveExtraMinute ?? null,
               goals: normalizedGoals
             };
-            card.classList.remove('hidden');
-            renderLiveScoreboardDOM();
-            return;
-          } else {
             card.classList.remove('hidden');
             renderLiveScoreboardDOM();
             return;
@@ -1713,42 +1512,10 @@ const JalgpallSync = (function () {
         }
       }
     } catch (e) {
-      // PHP endpoint not running locally; fall back to direct EJL protocol scrape via CORS proxy
+      // Backend endpoint not active or no live match currently in progress
     }
 
-    // 2. Fallback: Query EJL protocol directly via CORS proxy
-    const targetProtocolId = liveMatchState.protocolId || '143893';
-    const protocolUrl = `https://jalgpall.ee/voistlused/protocol/${targetProtocolId}`;
-    const proxies = [
-      `https://corsproxy.io/?url=${encodeURIComponent(protocolUrl)}`,
-      `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(protocolUrl)}`,
-      `https://api.allorigins.win/raw?url=${encodeURIComponent(protocolUrl)}`
-    ];
-
-    for (const proxyUrl of proxies) {
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 4000);
-        const res = await fetch(proxyUrl, { cache: 'no-store', signal: controller.signal });
-        clearTimeout(timeoutId);
-
-        if (res.ok) {
-          const html = await res.text();
-          const parsed = parseEJLProtocolHTML(html, targetProtocolId);
-          if (parsed && isPaideMatch(parsed.homeTeam, parsed.awayTeam)) {
-            liveMatchState = {
-              ...liveMatchState,
-              ...parsed
-            };
-            card.classList.remove('hidden');
-            renderLiveScoreboardDOM();
-            return;
-          }
-        }
-      } catch (proxyErr) {
-        // Try next proxy
-      }
-    }
+    card.classList.add('hidden');
   }
 
   function initLiveMatchTracker() {

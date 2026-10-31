@@ -164,42 +164,64 @@ function updateBestPlayer(gender) {
   card.style.opacity = '0.35';
   card.style.transform = 'translateY(2px)';
 
+  const apiData = (window.JalgpallSync && typeof window.JalgpallSync.getCachedData === 'function')
+    ? window.JalgpallSync.getCachedData()
+    : null;
+
   setTimeout(() => {
     if (gender === 'women') {
+      const topW = (apiData && Array.isArray(apiData.womenTopScorers) && apiData.womenTopScorers[0]) || null;
+      const wSquad = (apiData && Array.isArray(apiData.womenSquad)) ? apiData.womenSquad : [];
+      const playerName = (topW && topW.name) ? topW.name : 'Kirkeliis Lillemets';
+      const matchedSquad = wSquad.find(p => (p.name || '').toLowerCase() === playerName.toLowerCase()) || null;
+      const totalGoals = (topW && topW.totalGoals) ? topW.totalGoals : '20';
+      const leagueGoals = (topW && topW.leagueGoals) ? topW.leagueGoals : '16';
+      const cupGoals = (topW && topW.cupGoals) ? topW.cupGoals : '4';
+      const assistCount = (topW && topW.assists) ? topW.assists : '7';
+
       if (label) label.textContent = 'NAISKONNA PARIM';
       if (league) league.textContent = 'NAISTE MEISTRILIIGA 2026';
-      if (name) name.textContent = 'KIRKELIIS LILLEMETS';
-      if (role) role.textContent = 'Ründaja • Paide Linnanaiskond';
+      if (name) name.textContent = playerName.toUpperCase();
+      if (role) role.textContent = `${(matchedSquad && matchedSquad.posName) ? matchedSquad.posName : 'Ründaja'} • Paide Linnanaiskond`;
       if (photo) {
-        photo.src = 'assets/img/players/women/kirkeliis_lillemets.jpg';
-        photo.alt = 'Kirkeliis Lillemets';
+        photo.src = (matchedSquad && matchedSquad.photo) ? matchedSquad.photo : 'assets/img/players/women/kirkeliis_lillemets.jpg';
+        photo.alt = playerName;
       }
-      if (number) number.textContent = '#9';
+      if (number) number.textContent = `#${(matchedSquad && matchedSquad.number) ? matchedSquad.number : '9'}`;
       if (goals) {
-        goals.innerHTML = '20 <span class="text-[10px] font-medium text-slate-400 uppercase">väravat</span>';
-        goals.title = '20 väravat (16 liigas + 4 karikas)';
+        goals.innerHTML = `${totalGoals} <span class="text-[10px] font-medium text-slate-400 uppercase">väravat</span>`;
+        goals.title = `${totalGoals} väravat (${leagueGoals} liigas + ${cupGoals} karikas)`;
       }
       if (assists) {
-        assists.innerHTML = '7 <span class="text-[10px] font-medium text-slate-400 uppercase">söötu</span>';
-        assists.title = '7 väravasöötu';
+        assists.innerHTML = `${assistCount} <span class="text-[10px] font-medium text-slate-400 uppercase">söötu</span>`;
+        assists.title = `${assistCount} väravasöötu`;
       }
     } else {
+      const topM = (apiData && Array.isArray(apiData.topScorers) && apiData.topScorers[0]) || null;
+      const mSquad = (apiData && Array.isArray(apiData.squad)) ? apiData.squad : [];
+      const playerName = (topM && topM.name) ? topM.name : 'Henri Anier';
+      const matchedSquad = mSquad.find(p => (p.name || '').toLowerCase() === playerName.toLowerCase()) || null;
+      const totalGoals = (topM && topM.totalGoals) ? topM.totalGoals : '11';
+      const leagueGoals = (topM && topM.leagueGoals) ? topM.leagueGoals : '10';
+      const cupGoals = (topM && topM.cupGoals) ? topM.cupGoals : '1';
+      const assistCount = (topM && topM.assists) ? topM.assists : '3';
+
       if (label) label.textContent = 'MEESKONNA PARIM';
       if (league) league.textContent = 'PREMIUM LIIGA 2026';
-      if (name) name.textContent = 'HENRI ANIER';
-      if (role) role.textContent = 'Ründaja • Esindusmeeskond';
+      if (name) name.textContent = playerName.toUpperCase();
+      if (role) role.textContent = `${(matchedSquad && matchedSquad.position) ? matchedSquad.position : 'Ründaja'} • Esindusmeeskond`;
       if (photo) {
-        photo.src = 'assets/img/players/anier.jpeg';
-        photo.alt = 'Henri Anier';
+        photo.src = (matchedSquad && matchedSquad.photo) ? matchedSquad.photo : 'assets/img/players/anier.jpeg';
+        photo.alt = playerName;
       }
-      if (number) number.textContent = '#9';
+      if (number) number.textContent = `#${(matchedSquad && matchedSquad.number) ? matchedSquad.number : '9'}`;
       if (goals) {
-        goals.innerHTML = '11 <span class="text-[10px] font-medium text-slate-400 uppercase">väravat</span>';
-        goals.title = '11 väravat (10 liigas + 1 karikas)';
+        goals.innerHTML = `${totalGoals} <span class="text-[10px] font-medium text-slate-400 uppercase">väravat</span>`;
+        goals.title = `${totalGoals} väravat (${leagueGoals} liigas + ${cupGoals} karikas)`;
       }
       if (assists) {
-        assists.innerHTML = '6 <span class="text-[10px] font-medium text-slate-400 uppercase">söötu</span>';
-        assists.title = '6 väravasöötu';
+        assists.innerHTML = `${assistCount} <span class="text-[10px] font-medium text-slate-400 uppercase">söötu</span>`;
+        assists.title = `${assistCount} väravasöötu`;
       }
     }
     card.style.opacity = '1';
@@ -222,25 +244,58 @@ function updateTrackerCard(gender) {
 
   card.style.opacity = '0.4';
 
+  const apiData = (window.JalgpallSync && typeof window.JalgpallSync.getCachedData === 'function')
+    ? window.JalgpallSync.getCachedData()
+    : null;
+
   setTimeout(() => {
     if (gender === 'women') {
+      const wTable = (apiData && apiData.standings && Array.isArray(apiData.standings.naisteMeistriliiga))
+        ? apiData.standings.naisteMeistriliiga
+        : [];
+      const paideRow = wTable.find(r => r.isPaide || (r.team || '').toLowerCase().includes('paide')) || null;
+      const thirdRow = wTable.find(r => Number(r.position) === 3) || wTable[2] || null;
+      const playedGames = paideRow ? Number(paideRow.played || 23) : 23;
+      const totalRounds = 25;
+      const paidePts = paideRow ? Number(paideRow.points || 48) : 48;
+      const paideRank = paideRow ? Number(paideRow.position || 2) : 2;
+      const thirdPts = thirdRow ? Number(thirdRow.points || 44) : 44;
+      const diffPts = paidePts - thirdPts;
+      const pct = Math.min(100, Math.max(0, (playedGames / totalRounds) * 100)).toFixed(1);
+
       if (badge) badge.textContent = 'NAISTE MEISTRILIIGA';
       if (season) season.textContent = 'HOOAEG 2026';
       if (title) title.textContent = 'VÕITLUS MEISTRITIITLI NIMEL';
-      if (desc) desc.textContent = 'Paide Linnanaiskond alistas kodus FC Elva 4:0 ning on 48 punktiga liidri Tallinna FC Floraga samal pulgal 2. positsioonil, võideldes meistritiitli nimel!';
+      if (desc) desc.textContent = `Paide Linnanaiskond on Naiste Meistriliigas ${paidePts} punktiga ${paideRank}. positsioonil, võideldes hooaja lõpusirgel meistritiitli ja medalite nimel!`;
       if (gapLabel) gapLabel.textContent = 'Edu 3. koha ees (Saku):';
-      if (gapVal) gapVal.textContent = '+7 punkti';
-      if (progress) progress.style.width = '92.0%';
-      if (played) played.textContent = 'Mängitud 23/25 vooru';
+      if (gapVal) gapVal.textContent = `${diffPts >= 0 ? '+' : ''}${diffPts} punkti`;
+      if (progress) progress.style.width = `${pct}%`;
+      if (played) played.textContent = `Mängitud ${playedGames}/${totalRounds} vooru`;
     } else {
+      const mTable = (apiData && apiData.standings && Array.isArray(apiData.standings.premiumLiiga))
+        ? apiData.standings.premiumLiiga
+        : [];
+      const paideRow = mTable.find(r => r.isPaide || (r.team || '').toLowerCase().includes('paide')) || null;
+      const fourthRow = mTable.find(r => Number(r.position) === 4) || mTable[3] || null;
+      const thirdRow = mTable.find(r => Number(r.position) === 3) || mTable[2] || null;
+      const playedGames = paideRow ? Number(paideRow.played || 34) : 34;
+      const totalRounds = 36;
+      const paidePts = paideRow ? Number(paideRow.points || 60) : 60;
+      const paideRank = paideRow ? Number(paideRow.position || 2) : 2;
+      const fourthPts = fourthRow ? Number(fourthRow.points || 57) : 57;
+      const thirdPts = thirdRow ? Number(thirdRow.points || 58) : 58;
+      const diffFourth = paidePts - fourthPts;
+      const diffThird = paidePts - thirdPts;
+      const pct = Math.min(100, Math.max(0, (playedGames / totalRounds) * 100)).toFixed(1);
+
       if (badge) badge.textContent = 'UEFA CONFERENCE LEAGUE';
       if (season) season.textContent = 'HOOAEG 2026';
       if (title) title.textContent = 'EUROSARJA PÄÄSE';
-      if (desc) desc.textContent = 'Paide tõusis pärast 1:0 võitu FC Kuressaare üle Premium Liigas 60 punktiga 2. positsioonile, edestades Tallinna FC Florat 2 punktiga ja püsides kindlal kursil UEFA Konverentsiliigasse!';
+      if (desc) desc.textContent = `Paide Linnameeskond hoiab Premium Liigas ${paidePts} punktiga ${paideRank}. positsiooni, edestades 3. koha Tallinna FC Florat ${diffThird} punktiga ja püsides kindlal kursil UEFA Konverentsiliigasse!`;
       if (gapLabel) gapLabel.textContent = 'Edu 4. koha ees (Kalju):';
-      if (gapVal) gapVal.textContent = '+6 punkti';
-      if (progress) progress.style.width = '91.7%';
-      if (played) played.textContent = 'Mängitud 33/36 vooru';
+      if (gapVal) gapVal.textContent = `${diffFourth >= 0 ? '+' : ''}${diffFourth} punkti`;
+      if (progress) progress.style.width = `${pct}%`;
+      if (played) played.textContent = `Mängitud ${playedGames}/${totalRounds} vooru`;
     }
     card.style.opacity = '1';
   }, 120);

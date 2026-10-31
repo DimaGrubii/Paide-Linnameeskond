@@ -14,6 +14,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Inject EJL API secret config for Zone.ee (if configured in GitHub Secrets)
+        env:
+          EJL_API_TOKEN: ${{ secrets.EJL_API_TOKEN }}
+        run: |
+          if [ -n "$EJL_API_TOKEN" ]; then
+            mkdir -p config
+            cat <<EOF > config/ejl-secret.php
+          <?php
+          return array(
+              'base_url' => 'https://opendata.jalgpall.ee',
+              'token'    => '${EJL_API_TOKEN}',
+          );
+          EOF
+            echo "Prepared config/ejl-secret.php for Zone.ee deployment."
+          fi
+
       - name: Deploy to Zone.ee
         env:
           ZONE_HOST: ${{ secrets.ZONE_HOST }}
@@ -107,7 +123,7 @@ jobs:
           print(f"Uploading website files to remote directory: {ftp.pwd()}", flush=True)
 
           EXCLUDE_DIRS = {".git", ".github", "scripts", "cache", "__pycache__"}
-          EXCLUDE_FILES = {".gitignore", "README.md", ".DS_Store"}
+          EXCLUDE_FILES = {".gitignore", "README.md", ".DS_Store", ".env"}
           ALWAYS_UPLOAD_EXTS = {".html", ".js", ".css", ".json", ".php", ".xml", ".txt", ".webmanifest"}
 
           ensured_dirs = set()

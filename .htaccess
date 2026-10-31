@@ -1,7 +1,21 @@
 DirectoryIndex index.html index.php
 
+# Block direct HTTP access to secret environment files and internal backend config
+<FilesMatch "^(\.env|.*secret.*\.php|ejl-client\.php)">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # Block direct HTTP access to /config/ directory
+  RewriteRule ^config/ - [F,L]
 
   # Redirect /index.html to clean root URL /
   RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]

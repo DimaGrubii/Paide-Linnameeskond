@@ -1,802 +1,675 @@
 #!/usr/bin/env python3
 """
-Real-time sync script for Paide Linnameeskond from the Estonian Football Association (jalgpall.ee).
-Pulls official squad, coaches, club info, upcoming matches, recent results,
-and league standings tables for both Premium Liiga and Naiste Meistriliiga.
+Paide Linnameeskond — Official EJL OpenData API Sync Script
+Base URL: https://opendata.jalgpall.ee/api/v1
+Documentation: https://opendata.jalgpall.ee/api/documentation
+
+Replaces legacy HTML scraping with official EJL OpenData API v1 requests for:
+  - Men's Premium Liiga standings & season history (/api/v1/competitions/52)
+  - Women's Naiste Meistriliiga standings & season history (/api/v1/competitions/63)
+  - Men's upcoming & recent matches + goal scorers (/api/v1/teams/5/games & /api/v1/games/{id})
+  - Women's upcoming & recent matches + goal scorers (/api/v1/teams/3521/games & /api/v1/games/{id})
+  - Men's & Women's top scorers, assists, and team statistics (/api/v1/teams/{id}/statistics & /api/v1/players/{id}/statistics)
+
+Security: Reads EJL_API_TOKEN from environment variables or gitignored `.env` / `config/ejl-secret.php`.
 """
 
-import urllib.request
-import ssl
+from __future__ import annotations
+
 import json
-import re
 import os
+import re
 import sys
+import urllib.parse
+import urllib.request
 from datetime import datetime
-from functools import cmp_to_key
+from pathlib import Path
 from zoneinfo import ZoneInfo
 
-TALLINN_TZ = ZoneInfo('Europe/Tallinn')
+ROOT_DIR = Path(__file__).resolve().parent.parent
+DATA_FILE = ROOT_DIR / "data" / "jalgpall-data.json"
+TALLINN_TZ = ZoneInfo("Europe/Tallinn")
 
-def fetch_url(url):
-    ctx = ssl._create_unverified_context()
+DAYS_ET = {
+    1: "Esmaspäev",
+    2: "Teisipäev",
+    3: "Kolmapäev",
+    4: "Neljapäev",
+    5: "Reede",
+    6: "Laupäev",
+    7: "Pühapäev",
+}
+
+MONTHS_ET = {
+    1: "jaanuar",
+    2: "veebruar",
+    3: "märts",
+    4: "aprill",
+    5: "mai",
+    6: "juuni",
+    7: "juuli",
+    8: "august",
+    9: "september",
+    10: "oktoober",
+    11: "november",
+    12: "detsember",
+}
+
+LOGO_MAP = {
+    "levadia": "assets/img/jalgpall_logos/levadia.png",
+    "paide": "assets/img/jalgpall_logos/paide.png",
+    "flora": "assets/img/jalgpall_logos/flora.png",
+    "kalju": "assets/img/jalgpall_logos/kalju.png",
+    "vaprus": "assets/img/jalgpall_logos/vaprus.png",
+    "trans": "assets/img/jalgpall_logos/trans.png",
+    "harju": "assets/img/jalgpall_logos/harju.png",
+    "laagri": "assets/img/jalgpall_logos/harju.png",
+    "tammeka": "assets/img/jalgpall_logos/tammeka.png",
+    "kuressaare": "assets/img/jalgpall_logos/kuressaare.png",
+    "united": "assets/img/jalgpall_logos/united.png",
+    "saku": "assets/img/jalgpall_logos/saku.png",
+    "viimsi": "assets/img/jalgpall_logos/viimsi.png",
+    "elva": "assets/img/jalgpall_logos/elva.png",
+    "tabasalu": "assets/img/jalgpall_logos/tabasalu.png",
+}
+
+
+def load_api_config():
+    """Loads EJL_API_TOKEN and EJL_API_BASE_URL from env, .env, or config/ejl-secret.php."""
+    base_url = os.environ.get("EJL_API_BASE_URL", "https://opendata.jalgpall.ee").strip().rstrip("/")
+    token = os.environ.get("EJL_API_TOKEN", "").strip()
+
+    if not token:
+        env_file = ROOT_DIR / ".env"
+        if env_file.is_file():
+            for line in env_file.read_text(encoding="utf-8").splitlines():
+                line = line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                k, v = line.split("=", 1)
+                k = k.strip()
+                v = v.strip().strip("\"'")
+                if k == "EJL_API_TOKEN" and v:
+                    token = v
+                elif k == "EJL_API_BASE_URL" and v:
+                    base_url = v.rstrip("/")
+
+    if not token:
+        secret_php = ROOT_DIR / "config" / "ejl-secret.php"
+        if secret_php.is_file():
+            content = secret_php.read_text(encoding="utf-8")
+            m = re.search(r"['\"]token['\"]\s*=>\s*['\"]([^'\"]+)['\"]", content)
+            if m and m.group(1) != "YOUR_EJL_BEARER_TOKEN_HERE":
+                token = m.group(1).strip()
+
+    if not token:
+        raise RuntimeError(
+            "Missing EJL_API_TOKEN. Set EJL_API_TOKEN in environment, .env, or config/ejl-secret.php."
+        )
+
+    return base_url, token
+
+
+BASE_URL, API_TOKEN = load_api_config()
+
+
+def api_get(path: str, params: dict | None = None, timeout: int = 15):
+    """Performs an authenticated GET request against the EJL OpenData API."""
+    url = f"{BASE_URL}/{path.lstrip('/')}"
+    if params:
+        qs = urllib.parse.urlencode({k: v for k, v in params.items() if v is not None})
+        if qs:
+            url = f"{url}?{qs}"
+
     req = urllib.request.Request(
         url,
         headers={
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Language': 'et,en;q=0.9'
-        }
+            "Authorization": f"Bearer {API_TOKEN}",
+            "Accept": "application/json",
+            "User-Agent": "PaideLinnameeskond-OfficialWebsite/2.0",
+        },
     )
-    return urllib.request.urlopen(req, context=ctx, timeout=15).read().decode('utf-8')
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        return json.loads(resp.read().decode("utf-8"))
 
-PLAYER_PHOTOS = {
-    '1': 'assets/img/players/sapp.jpeg',
-    '2': 'assets/img/players/lilander.jpeg',
-    '3': 'assets/img/players/victor_hugo.jpeg',
-    '4': 'assets/img/players/andrade.jpeg',
-    '6': 'assets/img/players/cabral.jpeg',
-    '7': 'assets/img/players/tur.jpeg',
-    '8': 'assets/img/players/he_ojamaa.jpeg',
-    '9': 'assets/img/players/anier.jpeg',
-    '10': 'assets/img/players/miller.jpeg',
-    '11': 'assets/img/players/sohna.jpeg',
-    '12': 'assets/img/players/meerits.jpeg',
-    '13': 'assets/img/players/nigula.jpeg',
-    '14': 'assets/img/players/jobarteh.jpeg',
-    '15': 'assets/img/players/smirnov.jpeg',
-    '16': 'assets/img/players/surog.jpeg',
-    '17': 'assets/img/players/cham.jpeg',
-    '19': 'assets/img/players/s_luts.jpeg',
-    '20': 'assets/img/players/piht.jpeg',
-    '21': 'assets/img/players/juhkam.jpeg',
-    '23': 'assets/img/players/palacios.jpeg',
-    '24': 'assets/img/players/william.jpeg',
-    '25': 'assets/img/players/hi_ojamaa.jpeg',
-    '27': 'assets/img/players/baranov.jpeg',
-    '28': 'assets/img/players/hoim.jpeg',
-    '29': 'assets/img/players/darboe.jpeg',
-    '33': 'assets/img/players/kanne.jpeg',
-    '44': 'assets/img/players/kait.jpeg',
-    '77': 'assets/img/players/d_luts.jpeg',
-    '99': 'assets/img/players/jarju.jpeg'
-}
 
-ADDITIONAL_SQUAD_MEMBERS = [
-    {'number': '1', 'name': 'Mattias Sapp', 'positionCode': 'VV', 'position': 'Väravavaht', 'birthDate': '17.07.2001', 'citizenship': 'Eesti', 'photo': 'assets/img/players/sapp.jpeg'},
-    {'number': '24', 'name': 'Romet Nigula', 'positionCode': 'K', 'position': 'Kaitsja', 'birthDate': '25.12.2007', 'citizenship': 'Eesti', 'photo': 'assets/img/players/nigula.jpeg'},
-    {'number': '15', 'name': 'Ramon Smirnov', 'positionCode': 'PK', 'position': 'Poolkaitsja', 'birthDate': '25.08.2004', 'citizenship': 'Eesti', 'photo': 'assets/img/players/smirnov.jpeg'},
-    {'number': '16', 'name': 'Aleksandr Šurõgin', 'positionCode': 'PK', 'position': 'Poolkaitsja', 'birthDate': '11.02.2006', 'citizenship': 'Eesti', 'photo': 'assets/img/players/surog.jpeg'},
-    {'number': '21', 'name': 'Gerdo Juhkam', 'positionCode': 'K', 'position': 'Kaitsja', 'birthDate': '19.06.1994', 'citizenship': 'Eesti', 'photo': 'assets/img/players/juhkam.jpeg'},
-    {'number': '24', 'name': 'William Gabriel Lins De Sa', 'positionCode': 'R', 'position': 'Ründaja', 'birthDate': '24.01.2004', 'citizenship': 'Brasiilia', 'photo': 'assets/img/players/william.jpeg'},
-    {'number': '25', 'name': 'Hindrek Ojamaa', 'positionCode': 'K', 'position': 'Kaitsja', 'birthDate': '12.06.1995', 'citizenship': 'Eesti', 'photo': 'assets/img/players/hi_ojamaa.jpeg'},
-    {'number': '33', 'name': 'Kevin Joshua Kanne', 'positionCode': 'K', 'position': 'Kaitsja', 'birthDate': '18.06.2004', 'citizenship': 'Eesti', 'photo': 'assets/img/players/kanne.jpeg'}
-]
+def clean_team_name(name: str) -> str:
+    clean = re.sub(r"\s+", " ", (name or "")).strip()
+    clean = re.sub(r"\s*\(N\)\s*$", "", clean, flags=re.IGNORECASE).strip()
+    return clean
 
-OFFICIAL_STAFF = [
-    {'name': 'Tarmo Kink', 'role': 'Peatreener', 'roleEn': 'Head Coach', 'photo': 'assets/img/players/tarmo_kink.jpeg'},
-    {'name': 'Jüris Sahkur', 'role': 'Väravavahtide treener', 'roleEn': 'Goalkeeping Coach', 'photo': 'assets/img/players/juris.jpeg'},
-    {'name': 'Silver Grauberg', 'role': 'Füüsilise ettevalmistuse treener', 'roleEn': 'Fitness Coach', 'photo': 'assets/img/players/silver.jpeg'},
-    {'name': 'Carl Kalju', 'role': 'Videoanalüütik', 'roleEn': 'Video Analyst', 'photo': 'assets/img/players/kalju.jpeg'},
-    {'name': 'Risto Paju', 'role': 'Treener & Videoanalüütik', 'roleEn': 'Coach & Video Analyst', 'photo': 'assets/img/players/risto.jpeg'},
-    {'name': 'Riina Riisik', 'role': 'Füsioterapeut', 'roleEn': 'Physiotherapist', 'photo': 'assets/img/players/riina.jpeg'},
-    {'name': 'Roger Teor', 'role': 'Füsioterapeut', 'roleEn': 'Physiotherapist', 'photo': 'assets/img/players/roger.jpeg'}
-]
 
-def parse_paide_team_page(html):
-    data = {
-        'club': {
-            'id': 5,
-            'name': 'Paide Linnameeskond',
-            'logo': 'https://jalgpall.ee/images/clubs/04DA1E5682F6B6CACC9A577CED953711',
-            'localLogo': 'assets/img/jalgpall_logos/paide.png',
-            'headCoach': 'Tarmo Kink',
-            'assistants': ['Mika Laurikainen', 'Daniel Bolufer Labella'],
-            'generalRepresentative': 'Jaanus Pruuli',
-            'repPhone': '+372 5033145',
-            'repEmail': 'jaanus@paidelinnameeskond.ee',
-            'sportingDirector': 'Gert Kams',
-            'teamManager': 'Martin Kase',
-            'email': 'info@paidelinnameeskond.ee',
-            'stadium': 'Paide linnastaadion',
-            'stadiumAddress': 'Kooli 1, 72718 Paide',
-            'u21Team': 'Paide Linnameeskond U21 (Esiliiga)'
-        },
-        'squad': [],
-        'stats': {
-            'topScorers': [],
-            'topAssists': [],
-            'mostMinutes': []
-        },
-        'matches': {
-            'next': None,
-            'upcoming': [],
-            'recent': []
+def resolve_local_logo(team_name: str) -> str:
+    lower = (team_name or "").lower()
+    for needle, path in LOGO_MAP.items():
+        if needle in lower:
+            return path
+    return ""
+
+
+def format_short_player_name(full_name: str) -> str:
+    clean = re.sub(r"\s+", " ", (full_name or "")).strip()
+    if not clean:
+        return ""
+    parts = clean.split(" ")
+    if len(parts) == 1:
+        return parts[0]
+    last_name = parts[-1]
+    initials = "".join(f"{p[0]}." for p in parts[:-1] if p)
+    return f"{initials} {last_name}"
+
+
+def parse_ejl_datetime(iso_str: str) -> dict:
+    if not iso_str:
+        return {
+            "timestamp": 0,
+            "dateStr": "",
+            "timeStr": "",
+            "dateDisplay": "",
+            "dateTimeStr": "",
         }
+    dt = datetime.fromisoformat(iso_str).astimezone(TALLINN_TZ)
+    date_str = dt.strftime("%d.%m.%Y")
+    time_str = dt.strftime("%H:%M")
+    dow = DAYS_ET.get(dt.isoweekday(), "")
+    month_et = MONTHS_ET.get(dt.month, "")
+    date_display = f"{dow}, {dt.day}. {month_et}"
+    return {
+        "timestamp": int(dt.timestamp()),
+        "dateStr": date_str,
+        "timeStr": time_str,
+        "dateDisplay": date_display,
+        "dateTimeStr": f"{date_str} {time_str}",
     }
 
-    # Extract tables
-    tables = re.findall(r'<table[^>]*>(.*?)</table>', html, re.DOTALL | re.I)
-    
-    # Table 0: Matches
-    if len(tables) > 0:
-        match_rows = re.findall(r'<tr[^>]*>(.*?)</tr>', tables[0], re.DOTALL | re.I)
-        for r in match_rows:
-            cols = re.findall(r'<t[dh][^>]*>(.*?)</t[dh]>', r, re.DOTALL | re.I)
-            clean_cols = [' '.join(re.sub(r'<[^>]+>', ' ', c).split()) for c in cols]
-            if len(clean_cols) >= 4 and clean_cols[1] and clean_cols[1] != 'Koduvõistkond':
-                # Check if it's upcoming (has date/time like 11.10.2026 14:30) or past (has score like 1 - 3)
-                col1 = clean_cols[0]
-                col2 = clean_cols[1]
-                col3 = clean_cols[2]
-                col4 = clean_cols[3] if len(clean_cols) > 3 else ''
 
-                # Upcoming match pattern
-                if 'PL' in col2 or 'KV' in col2 or ':' in col2 or 'Kell' in col1:
-                    if '-' in col3 and any(char.isdigit() for char in col3):
-                        # Finished match: col1 is date/competition, col2 is home, col3 is score, col4 is away
-                        match_item = {
-                            'type': 'finished',
-                            'meta': col1,
-                            'homeTeam': col2,
-                            'score': col3,
-                            'awayTeam': col4
-                        }
-                        data['matches']['recent'].append(match_item)
-                    else:
-                        # Upcoming match: col1 is home, col2 is competition & date/time, col3 is away
-                        match_item = {
-                            'type': 'upcoming',
-                            'homeTeam': col1,
-                            'date': col2,
-                            'awayTeam': col3
-                        }
-                        data['matches']['upcoming'].append(match_item)
+def extract_game_goals(game_detail: dict) -> list:
+    if not isinstance(game_detail, dict):
+        return []
 
-        if data['matches']['upcoming']:
-            # The closest upcoming match
-            data['matches']['next'] = data['matches']['upcoming'][-1] if 'Tallinna FCI Levadia' in data['matches']['upcoming'][-1]['homeTeam'] else data['matches']['upcoming'][0]
+    home_obj = (game_detail.get("teams") or {}).get("home") or {}
+    away_obj = (game_detail.get("teams") or {}).get("away") or {}
+    home_id = home_obj.get("id")
+    home_name = clean_team_name(home_obj.get("name", ""))
+    away_name = clean_team_name(away_obj.get("name", ""))
 
-    # Table 1: Squad
-    if len(tables) > 1:
-        squad_rows = re.findall(r'<tr[^>]*>(.*?)</tr>', tables[1], re.DOTALL | re.I)
-        pos_map = {
-            'VV': 'Väravavaht',
-            'K': 'Kaitsja',
-            'PK': 'Poolkaitsja',
-            'R': 'Ründaja'
-        }
-        for r in squad_rows[1:]:
-            cols = re.findall(r'<td[^>]*>(.*?)</td>', r, re.DOTALL | re.I)
-            clean_cols = [' '.join(re.sub(r'<[^>]+>', ' ', c).split()) for c in cols]
-            if len(clean_cols) >= 6:
-                number = clean_cols[3]
-                pos_code = clean_cols[1]
-                name = clean_cols[2]
-                birth = clean_cols[4]
-                citizenship = clean_cols[5]
-                data['squad'].append({
-                    'number': number,
-                    'name': name,
-                    'positionCode': pos_code,
-                    'position': pos_map.get(pos_code, pos_code),
-                    'birthDate': birth,
-                    'citizenship': citizenship,
-                    'photo': PLAYER_PHOTOS.get(number, 'assets/img/jalgpall_logos/paide.png')
-                })
+    player_map = {}
+    for t_obj in (home_obj, away_obj):
+        for p in t_obj.get("players") or []:
+            pid = p.get("id")
+            if pid:
+                player_map[pid] = f"{p.get('forename', '').strip()} {p.get('surname', '').strip()}".strip()
 
-        # Add players with official photos if not listed in this specific table
-        existing_numbers = {p['number'] for p in data['squad']}
-        for extra in ADDITIONAL_SQUAD_MEMBERS:
-            if extra['number'] not in existing_numbers:
-                data['squad'].append(extra)
+    goals = []
+    running_home = 0
+    running_away = 0
 
-        # Sort squad by jersey number
-        data['squad'].sort(key=lambda p: int(p['number']) if p['number'].isdigit() else 999)
+    for ev in game_detail.get("events") or []:
+        t_obj = ev.get("type") or {}
+        code = (t_obj.get("code") or "").upper()
+        t_id = t_obj.get("id")
 
-    # Attach official coaching & medical staff
-    data['club']['staff'] = OFFICIAL_STAFF
-
-    # Table 3: Top scorers
-    if len(tables) > 3:
-        scorer_rows = re.findall(r'<tr[^>]*>(.*?)</tr>', tables[3], re.DOTALL | re.I)
-        for r in scorer_rows[1:6]:
-            cols = re.findall(r'<td[^>]*>(.*?)</td>', r, re.DOTALL | re.I)
-            clean_cols = [' '.join(re.sub(r'<[^>]+>', ' ', c).split()) for c in cols]
-            if len(clean_cols) >= 5:
-                data['stats']['topScorers'].append({
-                    'rank': clean_cols[0],
-                    'name': clean_cols[1],
-                    'cupGoals': clean_cols[2],
-                    'leagueGoals': clean_cols[3],
-                    'totalGoals': clean_cols[4]
-                })
-
-    return data
-
-VERIFIED_FORMS_MEN = {
-    'Tallinna FCI Levadia': [
-        {'result': 'V', 'type': 'win', 'score': '4:0 vs Pärnu JK Vaprus', 'opponent': 'Pärnu JK Vaprus'},
-        {'result': 'V', 'type': 'draw', 'score': '1:1 vs JK Narva Trans', 'opponent': 'JK Narva Trans'},
-        {'result': 'V', 'type': 'win', 'score': '1:0 vs Paide Linnameeskond', 'opponent': 'Paide Linnameeskond'}
-    ],
-    'Tallinna FC Flora': [
-        {'result': 'V', 'type': 'win', 'score': '3:2 vs FC Nõmme United', 'opponent': 'FC Nõmme United'},
-        {'result': 'V', 'type': 'win', 'score': '3:2 vs Pärnu JK Vaprus', 'opponent': 'Pärnu JK Vaprus'},
-        {'result': 'K', 'type': 'loss', 'score': '0:2 vs FC Kuressaare', 'opponent': 'FC Kuressaare'}
-    ],
-    'Paide Linnameeskond': [
-        {'result': 'V', 'type': 'win', 'score': '3:1 vs FC Nõmme United', 'opponent': 'FC Nõmme United'},
-        {'result': 'K', 'type': 'loss', 'score': '0:1 vs Tallinna FCI Levadia', 'opponent': 'Tallinna FCI Levadia'},
-        {'result': 'V', 'type': 'win', 'score': '2:1 vs Tartu JK Tammeka', 'opponent': 'Tartu JK Tammeka'}
-    ],
-    'Nõmme Kalju FC': [
-        {'result': 'V', 'type': 'win', 'score': '3:1 vs Tartu JK Tammeka', 'opponent': 'Tartu JK Tammeka'},
-        {'result': 'K', 'type': 'loss', 'score': '0:1 vs Harju JK Laagri', 'opponent': 'Harju JK Laagri'},
-        {'result': 'V', 'type': 'draw', 'score': '2:2 vs Pärnu JK Vaprus', 'opponent': 'Pärnu JK Vaprus'}
-    ],
-    'Tartu JK Tammeka': [
-        {'result': 'K', 'type': 'loss', 'score': '1:3 vs Nõmme Kalju FC', 'opponent': 'Nõmme Kalju FC'},
-        {'result': 'V', 'type': 'win', 'score': '4:0 vs FC Nõmme United', 'opponent': 'FC Nõmme United'},
-        {'result': 'K', 'type': 'loss', 'score': '1:2 vs Paide Linnameeskond', 'opponent': 'Paide Linnameeskond'}
-    ],
-    'Harju JK Laagri': [
-        {'result': 'V', 'type': 'draw', 'score': '0:0 vs FC Kuressaare', 'opponent': 'FC Kuressaare'},
-        {'result': 'V', 'type': 'win', 'score': '1:0 vs Nõmme Kalju FC', 'opponent': 'Nõmme Kalju FC'},
-        {'result': 'V', 'type': 'win', 'score': '2:0 vs FC Nõmme United', 'opponent': 'FC Nõmme United'}
-    ],
-    'Pärnu JK Vaprus': [
-        {'result': 'K', 'type': 'loss', 'score': '2:3 vs Tallinna FC Flora', 'opponent': 'Tallinna FC Flora'},
-        {'result': 'V', 'type': 'draw', 'score': '2:2 vs JK Narva Trans', 'opponent': 'JK Narva Trans'},
-        {'result': 'V', 'type': 'draw', 'score': '2:2 vs Nõmme Kalju FC', 'opponent': 'Nõmme Kalju FC'}
-    ],
-    'FC Kuressaare': [
-        {'result': 'V', 'type': 'draw', 'score': '0:0 vs Harju JK Laagri', 'opponent': 'Harju JK Laagri'},
-        {'result': 'V', 'type': 'win', 'score': '2:0 vs Tallinna FC Flora', 'opponent': 'Tallinna FC Flora'},
-        {'result': 'V', 'type': 'win', 'score': '1:0 vs JK Narva Trans', 'opponent': 'JK Narva Trans'}
-    ],
-    'FC Nõmme United': [
-        {'result': 'K', 'type': 'loss', 'score': '1:3 vs Paide Linnameeskond', 'opponent': 'Paide Linnameeskond'},
-        {'result': 'K', 'type': 'loss', 'score': '0:4 vs Tartu JK Tammeka', 'opponent': 'Tartu JK Tammeka'},
-        {'result': 'K', 'type': 'loss', 'score': '0:2 vs Harju JK Laagri', 'opponent': 'Harju JK Laagri'}
-    ],
-    'JK Narva Trans': [
-        {'result': 'V', 'type': 'draw', 'score': '1:1 vs Tallinna FCI Levadia', 'opponent': 'Tallinna FCI Levadia'},
-        {'result': 'V', 'type': 'draw', 'score': '2:2 vs Pärnu JK Vaprus', 'opponent': 'Pärnu JK Vaprus'},
-        {'result': 'K', 'type': 'loss', 'score': '0:1 vs FC Kuressaare', 'opponent': 'FC Kuressaare'}
-    ]
-}
-
-VERIFIED_FORMS_WOMEN = {
-    'Tallinna FC Flora': [
-        {'result': 'V', 'type': 'win', 'score': '3:1 vs Viimsi JK', 'opponent': 'Viimsi JK'},
-        {'result': 'K', 'type': 'loss', 'score': '1:2 vs Paide Linnanaiskond', 'opponent': 'Paide Linnanaiskond'},
-        {'result': 'V', 'type': 'win', 'score': '5:0 vs Harju JK Laagri', 'opponent': 'Harju JK Laagri'}
-    ],
-    'Paide Linnanaiskond': [
-        {'result': 'V', 'type': 'win', 'score': '4:2 vs Saku Sporting', 'opponent': 'Saku Sporting'},
-        {'result': 'V', 'type': 'win', 'score': '9:1 vs FC Elva', 'opponent': 'FC Elva'},
-        {'result': 'K', 'type': 'loss', 'score': '0:3 vs Saku Sporting', 'opponent': 'Saku Sporting'}
-    ],
-    'Viimsi JK': [
-        {'result': 'V', 'type': 'win', 'score': '3:1 vs Harju JK Laagri', 'opponent': 'Harju JK Laagri'},
-        {'result': 'K', 'type': 'loss', 'score': '0:4 vs Saku Sporting', 'opponent': 'Saku Sporting'},
-        {'result': 'K', 'type': 'loss', 'score': '1:3 vs Tallinna FC Flora', 'opponent': 'Tallinna FC Flora'}
-    ],
-    'Saku Sporting': [
-        {'result': 'K', 'type': 'loss', 'score': '2:4 vs Paide Linnanaiskond', 'opponent': 'Paide Linnanaiskond'},
-        {'result': 'V', 'type': 'win', 'score': '4:0 vs Viimsi JK', 'opponent': 'Viimsi JK'},
-        {'result': 'V', 'type': 'win', 'score': '3:0 vs Paide Linnanaiskond', 'opponent': 'Paide Linnanaiskond'}
-    ],
-    'Harju JK Laagri': [
-        {'result': 'K', 'type': 'loss', 'score': '1:3 vs Viimsi JK', 'opponent': 'Viimsi JK'},
-        {'result': 'K', 'type': 'loss', 'score': '0:5 vs Tallinna FC Flora', 'opponent': 'Tallinna FC Flora'},
-        {'result': 'V', 'type': 'win', 'score': '6:0 vs FC Elva', 'opponent': 'FC Elva'}
-    ],
-    'FC Elva': [
-        {'result': 'K', 'type': 'loss', 'score': '1:9 vs Paide Linnanaiskond', 'opponent': 'Paide Linnanaiskond'},
-        {'result': 'K', 'type': 'loss', 'score': '1:9 vs Viimsi JK', 'opponent': 'Viimsi JK'},
-        {'result': 'K', 'type': 'loss', 'score': '0:6 vs Harju JK Laagri', 'opponent': 'Harju JK Laagri'}
-    ]
-}
-
-def parse_date_ts(date_str):
-    dm = re.search(r'(\d{2})\.(\d{2})\.(\d{4})(?:\s+(\d{1,2}):(\d{2}))?', date_str or '')
-    if not dm:
-        return 0
-    day, month, year = int(dm.group(1)), int(dm.group(2)), int(dm.group(3))
-    hour = int(dm.group(4)) if dm.group(4) else 0
-    minute = int(dm.group(5)) if dm.group(5) else 0
-    return int(datetime(year, month, day, hour, minute, tzinfo=TALLINN_TZ).timestamp())
-
-def is_match_still_live(ev_html, date_str):
-    ko_ts = parse_date_ts(date_str)
-    if ko_ts <= 0:
-        return False
-    now_ts = int(datetime.now(TALLINN_TZ).timestamp())
-    elapsed = now_ts - ko_ts
-    if elapsed < -1800 or elapsed > 12600:
-        return False
-    pm = re.search(r'/voistlused/protocol/(\d+)', ev_html)
-    if pm:
-        try:
-            proto_html = fetch_url(f'https://jalgpall.ee/voistlused/protocol/{pm.group(1)}')
-            if 'Lõppseis' in proto_html:
-                return False
-            if 'Hetkeseis' in proto_html:
-                return True
-        except Exception:
-            pass
-    return 0 <= elapsed < 6600
-
-def extract_season_history(html, total_rounds, clean_women=False, live_matches_by_team=None):
-    if live_matches_by_team is None:
-        live_matches_by_team = {}
-    blocks = re.split(r'<div class="block block-01">', html)[1:]
-    team_rounds = {}
-    for b in blocks:
-        tag_m = re.search(r'<span class="tag">\s*(\d+)\.\s*voor\s*</span>', b, re.I)
-        if not tag_m:
+        is_goal = code == "GOAL" or t_id == 1
+        is_penalty = code == "PENALTY" or t_id == 3
+        is_own_goal = code == "OWN_GOAL" or t_id == 2
+        if not (is_goal or is_penalty or is_own_goal):
             continue
-        r_num = int(tag_m.group(1))
-        events = re.split(r'<div class="event-single"', b)[1:]
-        for ev in events:
-            date_m = re.search(r'<p class="title">\s*([0-9]{2}\.[0-9]{2}\.[0-9]{4}[^<]*)</p>', ev)
-            date_str = ' '.join(date_m.group(1).split()) if date_m else ''
-            teams_m = re.findall(r'<div class="team">.*?<a[^>]*>(.*?)</a>', ev, re.DOTALL)
-            if len(teams_m) < 2:
-                teams_m = re.findall(r'<div class="team">\s*<p>(.*?)</p>', ev, re.DOTALL)
-            if len(teams_m) >= 2:
-                home = re.sub(r'<[^>]+>', '', teams_m[0]).strip()
-                away = re.sub(r'<[^>]+>', '', teams_m[1]).strip()
-                if clean_women:
-                    home = home.replace(' (N)', '').strip()
-                    away = away.replace(' (N)', '').strip()
-                res_m = re.search(r'<div class="result">.*?<p>(.*?)</p>', ev, re.DOTALL)
-                res_inner = re.sub(r'<!--.*?-->', '', res_m.group(1), flags=re.DOTALL) if res_m else ''
-                score_raw = re.sub(r'<[^>]+>', '', res_inner).replace('*', '').strip()
-                score_clean = ' '.join(score_raw.split())
 
-                m_score = re.match(r'^(\d+)\s*-\s*(\d+)$', score_clean)
-                if m_score:
-                    hg, ag = int(m_score.group(1)), int(m_score.group(2))
-                    if is_match_still_live(ev, date_str):
-                        live_matches_by_team.setdefault(home, []).append({'gf': hg, 'ga': ag})
-                        live_matches_by_team.setdefault(away, []).append({'gf': ag, 'ga': hg})
-                        h_type = a_type = 'upcoming'
-                        h_res = a_res = '-'
-                        h_score_str = f'vs {away}'
-                        a_score_str = f'vs {home}'
-                        match_score = '-'
-                    else:
-                        h_type = 'win' if hg > ag else ('loss' if hg < ag else 'draw')
-                        a_type = 'win' if ag > hg else ('loss' if ag < hg else 'draw')
-                        h_res = 'V' if h_type in ('win', 'draw') else 'K'
-                        a_res = 'V' if a_type in ('win', 'draw') else 'K'
-                        h_score_str = f'{hg}:{ag} vs {away}'
-                        a_score_str = f'{ag}:{hg} vs {home}'
-                        match_score = f'{hg}:{ag}'
-                else:
-                    h_type = a_type = 'upcoming'
-                    h_res = a_res = '-'
-                    h_score_str = f'vs {away}'
-                    a_score_str = f'vs {home}'
-                    match_score = '-'
+        ev_team_id = ev.get("teamId")
+        if is_own_goal:
+            side = "away" if ev_team_id == home_id else "home"
+        else:
+            side = "home" if ev_team_id == home_id else "away"
 
-                team_rounds.setdefault(home, {})[r_num] = {
-                    'round': r_num,
-                    'type': h_type,
-                    'result': h_res,
-                    'score': h_score_str,
-                    'matchScore': match_score,
-                    'homeTeam': home,
-                    'awayTeam': away,
-                    'opponent': away,
-                    'date': date_str,
-                    'isHome': True
-                }
-                team_rounds.setdefault(away, {})[r_num] = {
-                    'round': r_num,
-                    'type': a_type,
-                    'result': a_res,
-                    'score': a_score_str,
-                    'matchScore': match_score,
-                    'homeTeam': home,
-                    'awayTeam': away,
-                    'opponent': home,
-                    'date': date_str,
-                    'isHome': False
-                }
+        if side == "home":
+            running_home += 1
+        else:
+            running_away += 1
 
-    result = {}
-    for team, rmap in team_rounds.items():
-        arr = []
-        for r in range(1, total_rounds + 1):
-            if r in rmap:
-                arr.append(rmap[r])
-            else:
-                arr.append({
-                    'round': r,
-                    'type': 'upcoming',
-                    'result': '-',
-                    'score': '',
-                    'matchScore': '-',
-                    'homeTeam': '',
-                    'awayTeam': '',
-                    'opponent': '',
-                    'date': '',
-                    'isHome': True
-                })
-        result[team] = arr
-    return result
+        minute = ev.get("minute") or 0
+        extra = ev.get("extraMinute")
+        minute_str = f"{minute}+{extra}'" if extra else (f"{minute}'" if minute else "")
 
-def compute_recent_form(season_history, fallback_form=None):
-    if not season_history:
-        return fallback_form or []
-    played = [m for m in season_history if m.get('type') in ('win', 'draw', 'loss')]
-    if not played:
-        return fallback_form or []
+        pid = ev.get("playerId")
+        player_name = player_map.get(pid, "")
+        if not player_name and pid:
+            try:
+                p_info = api_get(f"/api/v1/players/{pid}")
+                player_name = f"{p_info.get('forename', '').strip()} {p_info.get('surname', '').strip()}".strip()
+                if player_name:
+                    player_map[pid] = player_name
+            except Exception:
+                pass
 
-    def sort_key(m):
-        d_str = m.get('date', '')
-        dm = re.search(r'(\d{2})\.(\d{2})\.(\d{4})(?:\s+(\d{1,2}):(\d{2}))?', d_str)
-        if dm:
-            day, month, year = int(dm.group(1)), int(dm.group(2)), int(dm.group(3))
-            hour = int(dm.group(4)) if dm.group(4) else 0
-            minute = int(dm.group(5)) if dm.group(5) else 0
-            return (year, month, day, hour, minute, m.get('round', 0))
-        return (9999, 12, 31, 0, 0, m.get('round', 0))
+        goal_type = "pen" if is_penalty else ("ov" if is_own_goal else "")
+        scoring_team = home_name if side == "home" else away_name
 
-    played.sort(key=sort_key)
-    last3 = played[-3:]
-    return [
-        {
-            'result': m.get('result', 'V'),
-            'type': m.get('type', 'win'),
-            'score': m.get('score', ''),
-            'opponent': m.get('opponent', '')
-        }
-        for m in last3
-    ]
+        goals.append({
+            "side": side,
+            "minute": minute_str,
+            "player": player_name,
+            "shortPlayer": format_short_player_name(player_name),
+            "team": scoring_team,
+            "runningScore": f"{running_home} : {running_away}",
+            "goalType": goal_type,
+            "isPaide": "paide" in scoring_team.lower(),
+        })
 
-def compute_h2h_stats(row_a, row_b):
-    pts_a = pts_b = gd_a = gd_b = 0
-    opp_name = row_b.get('team', '')
-    for m in row_a.get('seasonHistory', []):
-        if m.get('opponent') == opp_name and m.get('type') in ('win', 'draw', 'loss'):
-            if m['type'] == 'win':
-                pts_a += 3
-            elif m['type'] == 'draw':
-                pts_a += 1
-                pts_b += 1
-            else:
-                pts_b += 3
-            ms = m.get('matchScore', '')
-            if ':' in ms:
-                parts = ms.split(':')
-                if len(parts) == 2 and parts[0].isdigit() and parts[1].isdigit():
-                    hg, ag = int(parts[0]), int(parts[1])
-                    if m.get('isHome'):
-                        gd_a += (hg - ag)
-                        gd_b += (ag - hg)
-                    else:
-                        gd_a += (ag - hg)
-                        gd_b += (hg - ag)
-    return pts_a, pts_b, gd_a, gd_b
+    return goals
 
-def adjust_standings_for_live_matches(standings, live_matches_by_team):
-    if not live_matches_by_team or not standings:
-        return standings
-    adjusted_teams = set()
-    for row in standings:
-        t_name = row['team']
-        live_list = live_matches_by_team.get(t_name, [])
-        if not live_list:
+
+def fetch_competition_season_history(competition_id: int, season: int) -> dict:
+    team_matches = {}
+    page = 1
+    while page <= 5:
+        resp = api_get(
+            f"/api/v1/competitions/{competition_id}/games",
+            {"season": season, "upcoming": 0, "pageSize": 100, "pageNumber": page},
+        )
+        games = (resp or {}).get("games") or []
+        if not games:
+            break
+
+        for g in games:
+            ft = (g.get("scores") or {}).get("fullTime")
+            if not isinstance(ft, dict) or ft.get("home") is None or ft.get("away") is None:
+                continue
+            hg = int(ft["home"])
+            ag = int(ft["away"])
+            home_team = clean_team_name(((g.get("teams") or {}).get("home") or {}).get("name", ""))
+            away_team = clean_team_name(((g.get("teams") or {}).get("away") or {}).get("name", ""))
+            if not home_team or not away_team:
+                continue
+
+            dt = parse_ejl_datetime(g.get("dateTime", ""))
+            match_score = f"{hg}:{ag}"
+
+            # Home entry
+            h_type, h_res = ("win", "V") if hg > ag else (("loss", "K") if hg < ag else ("draw", "X"))
+            team_matches.setdefault(home_team, []).append({
+                "_ts": dt["timestamp"],
+                "type": h_type,
+                "result": h_res,
+                "score": f"{match_score} vs {away_team}",
+                "matchScore": match_score,
+                "homeTeam": home_team,
+                "awayTeam": away_team,
+                "opponent": away_team,
+                "date": dt["dateTimeStr"],
+                "isHome": True,
+            })
+
+            # Away entry
+            a_type, a_res = ("win", "V") if ag > hg else (("loss", "K") if ag < hg else ("draw", "X"))
+            team_matches.setdefault(away_team, []).append({
+                "_ts": dt["timestamp"],
+                "type": a_type,
+                "result": a_res,
+                "score": f"{match_score} vs {home_team}",
+                "matchScore": match_score,
+                "homeTeam": home_team,
+                "awayTeam": away_team,
+                "opponent": home_team,
+                "date": dt["dateTimeStr"],
+                "isHome": False,
+            })
+
+        total_pages = int((resp or {}).get("totalPages") or 1)
+        if page >= total_pages:
+            break
+        page += 1
+
+    for t_name, m_list in team_matches.items():
+        m_list.sort(key=lambda x: x["_ts"])
+        for idx, item in enumerate(m_list, start=1):
+            item["round"] = idx
+            item.pop("_ts", None)
+
+    return team_matches
+
+
+def fetch_standings(competition_id: int, season: int, existing_rows: list) -> list:
+    comp_resp = api_get(f"/api/v1/competitions/{competition_id}", {"season": season})
+    table = (comp_resp or {}).get("table") or []
+    if not table:
+        return existing_rows
+
+    history_map = fetch_competition_season_history(competition_id, season)
+    existing_by_team = {
+        clean_team_name(r.get("team", "")).lower(): r for r in (existing_rows or []) if r.get("team")
+    }
+
+    standings = []
+    for row in table:
+        team_obj = row.get("team") or {}
+        stats = row.get("stats") or {}
+        team_name = clean_team_name(team_obj.get("name", ""))
+        if not team_name:
             continue
-        finished_count = sum(1 for m in row.get('seasonHistory', []) if m.get('type') in ('win', 'draw', 'loss'))
-        if row['played'] > finished_count:
-            for lm in live_list:
-                if row['played'] <= finished_count:
-                    break
-                row['played'] = max(0, row['played'] - 1)
-                row['goalsFor'] = max(0, row['goalsFor'] - int(lm['gf']))
-                row['goalsAgainst'] = max(0, row['goalsAgainst'] - int(lm['ga']))
-                if lm['gf'] > lm['ga']:
-                    row['won'] = max(0, row['won'] - 1)
-                    row['points'] = max(0, row['points'] - 3)
-                elif lm['gf'] < lm['ga']:
-                    row['lost'] = max(0, row['lost'] - 1)
-                else:
-                    row['drawn'] = max(0, row['drawn'] - 1)
-                    row['points'] = max(0, row['points'] - 1)
-                gd = row['goalsFor'] - row['goalsAgainst']
-                row['goalDifference'] = f'+{gd}' if gd > 0 else str(gd)
-                adjusted_teams.add(t_name)
-    if adjusted_teams:
-        def cmp_rows(a, b):
-            if a['points'] != b['points']:
-                return b['points'] - a['points']
-            # If neither team was adjusted, preserve EJL's official tiebreaker position order
-            if a['team'] not in adjusted_teams and b['team'] not in adjusted_teams:
-                return a['position'] - b['position']
-            # Otherwise apply EJL head-to-head tiebreaker first, then wins, GD, GF, and EJL position
-            pts_a, pts_b, gd_a, gd_b = compute_h2h_stats(a, b)
-            if pts_a != pts_b:
-                return pts_b - pts_a
-            if gd_a != gd_b:
-                return gd_b - gd_a
-            if a['won'] != b['won']:
-                return b['won'] - a['won']
-            total_gd_a = a['goalsFor'] - a['goalsAgainst']
-            total_gd_b = b['goalsFor'] - b['goalsAgainst']
-            if total_gd_a != total_gd_b:
-                return total_gd_b - total_gd_a
-            if a['goalsFor'] != b['goalsFor']:
-                return b['goalsFor'] - a['goalsFor']
-            return a['position'] - b['position']
 
-        standings.sort(key=cmp_to_key(cmp_rows))
-        for idx, row in enumerate(standings):
-            row['position'] = idx + 1
+        rank = int(row.get("rank") or (len(standings) + 1))
+        played = int(stats.get("gamesPlayed") or 0)
+        won = int(stats.get("wins") or 0)
+        drawn = int(stats.get("draws") or 0)
+        lost = int(stats.get("losses") or 0)
+        gf = int(stats.get("goalsScored") or 0)
+        ga = int(stats.get("goalsConceded") or 0)
+        diff = int(stats.get("goalsDiff") if stats.get("goalsDiff") is not None else (gf - ga))
+        points = int(stats.get("points") if stats.get("points") is not None else (won * 3 + drawn))
+        gd_str = f"+{diff}" if diff > 0 else str(diff)
+
+        prev_row = existing_by_team.get(team_name.lower(), {})
+        season_history = history_map.get(team_name) or prev_row.get("seasonHistory") or []
+        form = [
+            {
+                "result": h["result"],
+                "type": h["type"],
+                "score": h["score"],
+                "opponent": h["opponent"],
+            }
+            for h in season_history[-5:]
+        ]
+
+        local_logo = resolve_local_logo(team_name) or prev_row.get("localLogo", "")
+
+        standings.append({
+            "position": rank,
+            "team": team_name,
+            "teamId": team_obj.get("id"),
+            "logo": team_obj.get("logo") or prev_row.get("logo", ""),
+            "localLogo": local_logo,
+            "played": played,
+            "won": won,
+            "drawn": drawn,
+            "lost": lost,
+            "goalsFor": gf,
+            "goalsAgainst": ga,
+            "goalDifference": gd_str,
+            "points": points,
+            "isPaide": "paide" in team_name.lower(),
+            "form": form,
+            "seasonHistory": season_history,
+        })
+
     return standings
 
-def parse_premium_liiga_standings(html, existing_forms=None, season_history_map=None, live_matches_by_team=None):
-    tables = re.findall(r'<table[^>]*>(.*?)</table>', html, re.DOTALL | re.I)
-    standings = []
-    if tables:
-        rows = re.findall(r'<tr[^>]*>(.*?)</tr>', tables[0], re.DOTALL | re.I)
-        for r in rows[1:]:
-            cols = re.findall(r'<t[dh][^>]*>(.*?)</t[dh]>', r, re.DOTALL | re.I)
-            img_m = re.search(r'<img[^>]+src=[\"\']([^\"\']+)[\"\']', r)
-            logo = img_m.group(1) if img_m else ''
-            clean_cols = [' '.join(re.sub(r'<[^>]+>', ' ', c).split()) for c in cols]
-            if len(clean_cols) >= 9:
-                pos = clean_cols[0]
-                team_name = clean_cols[2]
-                played = int(clean_cols[3])
-                won = int(clean_cols[4])
-                drawn = int(clean_cols[5])
-                lost = int(clean_cols[6])
-                goals = clean_cols[7]
-                points = int(clean_cols[8])
-                
-                # Goal difference
-                gf, ga = (0, 0)
-                if ':' in goals:
-                    parts = goals.split(':')
-                    gf, ga = int(parts[0]), int(parts[1])
-                gd = gf - ga
 
-                # Map local logo
-                local_logo = 'assets/img/jalgpall_logos/paide.png'
-                if 'Levadia' in team_name: local_logo = 'assets/img/jalgpall_logos/levadia.png'
-                elif 'Flora' in team_name: local_logo = 'assets/img/jalgpall_logos/flora.png'
-                elif 'Kalju' in team_name: local_logo = 'assets/img/jalgpall_logos/kalju.png'
-                elif 'Tammeka' in team_name: local_logo = 'assets/img/jalgpall_logos/tammeka.png'
-                elif 'Harju' in team_name: local_logo = 'assets/img/jalgpall_logos/harju.png'
-                elif 'Vaprus' in team_name: local_logo = 'assets/img/jalgpall_logos/vaprus.png'
-                elif 'Kuressaare' in team_name: local_logo = 'assets/img/jalgpall_logos/kuressaare.png'
-                elif 'United' in team_name: local_logo = 'assets/img/jalgpall_logos/nomme_united.png'
-                elif 'Trans' in team_name: local_logo = 'assets/img/jalgpall_logos/trans.png'
+def fetch_team_matches(team_id: int, season: int, is_women: bool = False) -> dict:
+    default_code = "N.ML" if is_women else "PL"
+    default_tournament = "Naiste Meistriliiga" if is_women else "A. Le Coq Premium Liiga"
 
-                team_history = (season_history_map or {}).get(team_name, [])
-                fallback_form = (existing_forms or {}).get(team_name) or VERIFIED_FORMS_MEN.get(team_name, [
-                    {'result': 'V', 'type': 'win', 'score': 'Võit', 'opponent': ''},
-                    {'result': 'V', 'type': 'win', 'score': 'Võit', 'opponent': ''},
-                    {'result': 'V', 'type': 'win', 'score': 'Võit', 'opponent': ''}
-                ])
-                form_data = compute_recent_form(team_history, fallback_form)
+    # 1. Upcoming games (upcoming=1)
+    up_resp = api_get(f"/api/v1/teams/{team_id}/games", {"season": season, "upcoming": 1, "pageSize": 20})
+    upcoming_list = []
+    for g in (up_resp or {}).get("games") or []:
+        dt = parse_ejl_datetime(g.get("dateTime", ""))
+        comp = g.get("competition") or {}
+        comp_short = (comp.get("name") or default_code).strip()
+        if comp_short == "ML":
+            comp_short = "PL"
+        comp_long = (comp.get("longName") or default_tournament).strip()
+        tour = str(g.get("tour") or "").strip()
+        round_display = f"{comp_long} • {tour}. Voor" if tour else comp_long
 
-                standings.append({
-                    'position': int(pos) if pos.isdigit() else len(standings) + 1,
-                    'team': team_name,
-                    'logo': logo,
-                    'localLogo': local_logo,
-                    'played': played,
-                    'won': won,
-                    'drawn': drawn,
-                    'lost': lost,
-                    'goalsFor': gf,
-                    'goalsAgainst': ga,
-                    'goalDifference': f'+{gd}' if gd > 0 else str(gd),
-                    'points': points,
-                    'isPaide': 'Paide' in team_name,
-                    'form': form_data,
-                    'seasonHistory': team_history
-                })
-    return adjust_standings_for_live_matches(standings, live_matches_by_team)
+        home_team = clean_team_name(((g.get("teams") or {}).get("home") or {}).get("name", ""))
+        away_team = clean_team_name(((g.get("teams") or {}).get("away") or {}).get("name", ""))
+        venue = ((g.get("field") or {}).get("name") or "").strip()
+        broadcaster = (((g.get("coverage") or {}).get("broadcaster") or {}).get("name") or "").strip()
+        broadcast_str = f"OTSE: {broadcaster.upper()}" if broadcaster else "OTSE: SOCCERNET TV / JALGPALL.EE"
+        ticket_url = (g.get("links") or {}).get("tickets")
+        gid = g.get("id")
 
-def parse_women_standings(html, existing_forms=None, season_history_map=None, live_matches_by_team=None):
-    tables = re.findall(r'<table[^>]*>(.*?)</table>', html, re.DOTALL | re.I)
-    standings = []
-    if tables:
-        rows = re.findall(r'<tr[^>]*>(.*?)</tr>', tables[0], re.DOTALL | re.I)
-        for r in rows[1:]:
-            cols = re.findall(r'<t[dh][^>]*>(.*?)</t[dh]>', r, re.DOTALL | re.I)
-            img_m = re.search(r'<img[^>]+src=[\"\']([^\"\']+)[\"\']', r)
-            logo = img_m.group(1) if img_m else ''
-            clean_cols = [' '.join(re.sub(r'<[^>]+>', ' ', c).split()) for c in cols]
-            if len(clean_cols) >= 9:
-                pos = clean_cols[0]
-                team_name = clean_cols[2].replace(' (N)', '')
-                played = int(clean_cols[3])
-                won = int(clean_cols[4])
-                drawn = int(clean_cols[5])
-                lost = int(clean_cols[6])
-                goals = clean_cols[7]
-                points = int(clean_cols[8])
-                
-                gf, ga = (0, 0)
-                if ':' in goals:
-                    parts = goals.split(':')
-                    gf, ga = int(parts[0]), int(parts[1])
-                gd = gf - ga
+        upcoming_list.append({
+            "_ts": dt["timestamp"],
+            "id": gid,
+            "type": "upcoming",
+            "homeTeam": home_team,
+            "awayTeam": away_team,
+            "date": f"{comp_short} {dt['dateTimeStr']}".strip(),
+            "dateStr": dt["dateStr"],
+            "timeStr": dt["timeStr"],
+            "dateDisplay": dt["dateDisplay"],
+            "venue": venue,
+            "round": round_display,
+            "broadcast": broadcast_str,
+            "ticketUrl": ticket_url,
+            "matchInfoUrl": f"https://jalgpall.ee/voistlused/protocol/{gid}" if gid else "",
+        })
 
-                local_logo = 'assets/img/jalgpall_logos/paide.png'
-                if 'Flora' in team_name: local_logo = 'assets/img/jalgpall_logos/flora_women.png'
-                elif 'Viimsi' in team_name: local_logo = 'assets/img/jalgpall_logos/viimsi.png'
-                elif 'Sporting' in team_name or 'Saku' in team_name: local_logo = 'assets/img/jalgpall_logos/saku.png'
-                elif 'Harju' in team_name: local_logo = 'assets/img/jalgpall_logos/harju.png'
-                elif 'Elva' in team_name: local_logo = 'assets/img/jalgpall_logos/elva.png'
+    upcoming_list.sort(key=lambda x: x["_ts"])
+    for item in upcoming_list:
+        item.pop("_ts", None)
 
-                team_history = (season_history_map or {}).get(team_name, [])
-                fallback_form = (existing_forms or {}).get(team_name) or VERIFIED_FORMS_WOMEN.get(team_name, [
-                    {'result': 'V', 'type': 'win', 'score': 'Võit', 'opponent': ''},
-                    {'result': 'V', 'type': 'win', 'score': 'Võit', 'opponent': ''},
-                    {'result': 'V', 'type': 'win', 'score': 'Võit', 'opponent': ''}
-                ])
-                form_data = compute_recent_form(team_history, fallback_form)
+    next_match = upcoming_list[0] if upcoming_list else None
 
-                standings.append({
-                    'position': int(pos) if pos.isdigit() else len(standings) + 1,
-                    'team': team_name,
-                    'logo': logo,
-                    'localLogo': local_logo,
-                    'played': played,
-                    'won': won,
-                    'drawn': drawn,
-                    'lost': lost,
-                    'goalsFor': gf,
-                    'goalsAgainst': ga,
-                    'goalDifference': f'+{gd}' if gd > 0 else str(gd),
-                    'points': points,
-                    'isPaide': 'Paide' in team_name,
-                    'form': form_data,
-                    'seasonHistory': team_history
-                })
-    return adjust_standings_for_live_matches(standings, live_matches_by_team)
+    # 2. Recent played games (upcoming=0)
+    past_resp = api_get(f"/api/v1/teams/{team_id}/games", {"season": season, "upcoming": 0, "pageSize": 15})
+    recent_list = []
+    for g in (past_resp or {}).get("games") or []:
+        ft = (g.get("scores") or {}).get("fullTime")
+        if not isinstance(ft, dict) or ft.get("home") is None or ft.get("away") is None:
+            continue
 
-def main():
-    print('[jalgpall.ee Sync] Starting synchronization from Estonian FA...')
-    
-    # 0. Load existing forms from local file if available
-    existing_forms_men = {}
-    existing_forms_women = {}
-    existing_data = {}
-    out_file = 'data/jalgpall-data.json'
-    if os.path.exists(out_file):
-        try:
-            with open(out_file, 'r', encoding='utf-8') as f:
-                prev_data = json.load(f)
-                existing_data = prev_data
-                for t in prev_data.get('standings', {}).get('premiumLiiga', []):
-                    if 'team' in t and 'form' in t:
-                        existing_forms_men[t['team']] = t['form']
-                for t in prev_data.get('standings', {}).get('naisteMeistriliiga', []):
-                    if 'team' in t and 'form' in t:
-                        existing_forms_women[t['team']] = t['form']
-            print(f'Loaded existing match forms for {len(existing_forms_men)} men clubs and {len(existing_forms_women)} women clubs.')
-        except Exception as e:
-            print(f'Warning: Could not read previous forms ({e})')
+        gid = g.get("id")
+        dt = parse_ejl_datetime(g.get("dateTime", ""))
+        comp = g.get("competition") or {}
+        comp_short = (comp.get("name") or default_code).strip()
+        if comp_short == "ML":
+            comp_short = "PL"
+        comp_long = (comp.get("longName") or default_tournament).strip()
+        tour = str(g.get("tour") or "").strip()
+        round_str = f"{tour}. voor" if tour else comp_long
 
-    # 1. Fetch Paide team page
-    team_url = 'https://jalgpall.ee/voistlused/52/team/5'
-    try:
-        print(f'Fetching team info from {team_url}...')
-        team_html = fetch_url(team_url)
-    except Exception as e:
-        print(f'Warning: Could not fetch team URL directly ({e}), checking local cache...')
-        cache_path = 'data/cache/paide_team_5.html' if os.path.exists('data/cache/paide_team_5.html') else 'paide_team_5.html'
-        if os.path.exists(cache_path):
-            with open(cache_path, 'r', encoding='utf-8') as f:
-                team_html = f.read()
-        else:
-            raise
+        home_team = clean_team_name(((g.get("teams") or {}).get("home") or {}).get("name", ""))
+        away_team = clean_team_name(((g.get("teams") or {}).get("away") or {}).get("name", ""))
+        home_score = int(ft["home"])
+        away_score = int(ft["away"])
+        venue = ((g.get("field") or {}).get("name") or "").strip()
+        attendance = g.get("attendance")
 
-    team_data = parse_paide_team_page(team_html)
-    print(f"Extracted {len(team_data['squad'])} players in the official squad.")
+        scorers = []
+        if gid and len(recent_list) < 5:
+            try:
+                detail = api_get(f"/api/v1/games/{gid}")
+                scorers = extract_game_goals(detail)
+            except Exception as exc:
+                print(f"Warning: could not fetch game detail {gid}: {exc}")
 
-    # 2. Fetch Premium Liiga standings
-    league_url = 'https://jalgpall.ee/voistlused/52/premium-liiga'
-    try:
-        print(f'Fetching Premium Liiga table from {league_url}...')
-        league_html = fetch_url(league_url)
-    except Exception as e:
-        print(f'Warning: Could not fetch league URL directly ({e}), checking local cache...')
-        cache_path = 'data/cache/premium_liiga_52.html' if os.path.exists('data/cache/premium_liiga_52.html') else 'premium_liiga_52.html'
-        if os.path.exists(cache_path):
-            with open(cache_path, 'r', encoding='utf-8') as f:
-                league_html = f.read()
-        else:
-            raise
+        recent_list.append({
+            "_ts": dt["timestamp"],
+            "id": gid,
+            "type": "finished",
+            "meta": f"{comp_short} {dt['dateStr']} Kell {dt['timeStr']}".strip(),
+            "tournament": comp_long,
+            "round": round_str,
+            "dateDisplay": dt["dateDisplay"],
+            "timeDisplay": dt["timeStr"],
+            "homeTeam": home_team,
+            "score": f"{home_score} - {away_score}",
+            "homeScore": home_score,
+            "awayScore": away_score,
+            "awayTeam": away_team,
+            "venue": venue,
+            "attendance": attendance,
+            "protocolUrl": f"https://jalgpall.ee/voistlused/protocol/{gid}" if gid else "",
+            "scorers": scorers,
+        })
 
-    # 2b. Fetch Premium Liiga full season calendar (36 rounds)
-    cal_men_url = 'https://jalgpall.ee/voistlused/52/liigad/calendar?season=2026'
-    try:
-        print(f'Fetching Premium Liiga calendar from {cal_men_url}...')
-        cal_men_html = fetch_url(cal_men_url)
-    except Exception as e:
-        print(f'Warning: Could not fetch men calendar URL directly ({e}), checking local cache...')
-        cache_path = 'data/cache/calendar_52.html'
-        cal_men_html = open(cache_path, 'r', encoding='utf-8').read() if os.path.exists(cache_path) else ''
-    men_live_by_team = {}
-    men_season_history = extract_season_history(cal_men_html, 36, False, men_live_by_team) if cal_men_html else {}
+    recent_list.sort(key=lambda x: x["_ts"], reverse=True)
+    for item in recent_list:
+        item.pop("_ts", None)
 
-    premium_standings = parse_premium_liiga_standings(league_html, existing_forms_men, men_season_history, men_live_by_team)
-    print(f'Extracted {len(premium_standings)} teams in Premium Liiga.')
-
-    # 3. Fetch Naiste Meistriliiga standings
-    women_url = 'https://jalgpall.ee/voistlused/naised/63/naiste-meistriliiga'
-    try:
-        print(f'Fetching Naiste Meistriliiga table from {women_url}...')
-        women_html = fetch_url(women_url)
-    except Exception as e:
-        print(f'Warning: Could not fetch women URL directly ({e}), checking local cache...')
-        cache_path = 'data/cache/naiste_meistriliiga_63.html' if os.path.exists('data/cache/naiste_meistriliiga_63.html') else 'naiste_meistriliiga_63.html'
-        if os.path.exists(cache_path):
-            with open(cache_path, 'r', encoding='utf-8') as f:
-                women_html = f.read()
-        else:
-            women_html = ''
-
-    # 3b. Fetch Naiste Meistriliiga full season calendar (25 rounds)
-    cal_women_url = 'https://jalgpall.ee/voistlused/63/liigad/calendar?season=2026'
-    try:
-        print(f'Fetching Naiste Meistriliiga calendar from {cal_women_url}...')
-        cal_women_html = fetch_url(cal_women_url)
-    except Exception as e:
-        print(f'Warning: Could not fetch women calendar URL directly ({e}), checking local cache...')
-        cache_path = 'data/cache/calendar_63.html'
-        cal_women_html = open(cache_path, 'r', encoding='utf-8').read() if os.path.exists(cache_path) else ''
-    women_live_by_team = {}
-    women_season_history = extract_season_history(cal_women_html, 25, True, women_live_by_team) if cal_women_html else {}
-
-    women_standings = parse_women_standings(women_html, existing_forms_women, women_season_history, women_live_by_team) if women_html else []
-    print(f'Extracted {len(women_standings)} teams in Naiste Meistriliiga.')
-
-    # Preserve assists in topScorers if already present in existing_data
-    existing_assists = {s.get('name'): s.get('assists') for s in existing_data.get('topScorers', []) if 'name' in s and 'assists' in s}
-    for scorer in team_data['stats']['topScorers']:
-        if scorer.get('name') in existing_assists:
-            scorer['assists'] = existing_assists[scorer['name']]
-
-    # 4. Construct complete JSON dataset (preserving curated squad, staff & match details)
-    final_payload = {
-        'metadata': {
-            'source': 'Eesti Jalgpalli Liit (EJL)',
-            'sourceUrl': 'https://jalgpall.ee/voistlused/52/team/5',
-            'lastUpdated': datetime.now().isoformat(),
-            'season': '2026',
-            'status': 'success'
-        },
-        'club': existing_data.get('club') or team_data['club'],
-        'squad': existing_data.get('squad') or team_data['squad'],
-        'topScorers': team_data['stats']['topScorers'] or existing_data.get('topScorers', []),
-        'matches': existing_data.get('matches') or team_data['matches'],
-        'standings': {
-            'premiumLiiga': premium_standings,
-            'naisteMeistriliiga': women_standings
-        },
-        'womenSquad': existing_data.get('womenSquad', []),
-        'womenStaff': existing_data.get('womenStaff', []),
-        'womenTopScorers': existing_data.get('womenTopScorers', []),
-        'womenMatches': existing_data.get('womenMatches', {})
+    return {
+        "next": next_match,
+        "upcoming": upcoming_list,
+        "recent": recent_list,
     }
 
-    out_file = 'data/jalgpall-data.json'
-    with open(out_file, 'w', encoding='utf-8') as f:
-        json.dump(final_payload, f, ensure_ascii=False, indent=2)
 
-    print(f'[jalgpall.ee Sync] Successfully saved real-time data to {out_file} ({os.path.getsize(out_file)} bytes).')
+def fetch_team_stats_and_scorers(team_id: int, season: int, is_women: bool = False, existing_scorers: list | None = None) -> tuple[list, dict]:
+    stats_resp = api_get(
+        f"/api/v1/teams/{team_id}/statistics",
+        {"season": season, "includeTopPlayers": 1, "limit": 30},
+    )
+    if not isinstance(stats_resp, dict):
+        return existing_scorers or [], {}
 
-if __name__ == '__main__':
+    existing_by_name = {
+        (s.get("name") or "").strip().lower(): s for s in (existing_scorers or []) if s.get("name")
+    }
+
+    assists_map = {}
+    for a_item in stats_resp.get("topPlayersByAssists") or []:
+        p_obj = a_item.get("player") or {}
+        if p_obj.get("id"):
+            assists_map[int(p_obj["id"])] = int(a_item.get("value") or 0)
+
+    league_code = "N.ML" if is_women else "ML"
+    cup_code = "NKV" if is_women else "KV"
+    top_scorers = []
+
+    for idx, g_item in enumerate((stats_resp.get("topPlayersByGoals") or [])[:10], start=1):
+        p_obj = g_item.get("player") or {}
+        pid = int(p_obj.get("id") or 0)
+        full_name = f"{p_obj.get('forename', '').strip()} {p_obj.get('surname', '').strip()}".strip()
+        if not full_name:
+            continue
+
+        team_goals_val = int(g_item.get("value") or 0)
+        league_goals = team_goals_val
+        cup_goals = 0
+        api_assists = assists_map.get(pid, 0)
+        games_played = 0
+        minutes_played = 0
+
+        if pid > 0:
+            try:
+                p_stat = api_get(f"/api/v1/players/{pid}/statistics", {"season": season})
+                lg_goals = 0
+                cp_goals = 0
+                tot_assists = 0
+                for lg in (p_stat or {}).get("leagues") or []:
+                    l_name = (lg.get("leagueName") or "").strip().upper()
+                    if l_name == league_code:
+                        lg_goals += int(lg.get("goals") or 0)
+                        tot_assists += int(lg.get("assists") or 0)
+                        games_played += int(lg.get("gamesPlayed") or 0)
+                        minutes_played += int(lg.get("minutesPlayed") or 0)
+                    elif l_name == cup_code:
+                        cp_goals += int(lg.get("goals") or 0)
+                        tot_assists += int(lg.get("assists") or 0)
+                        games_played += int(lg.get("gamesPlayed") or 0)
+                        minutes_played += int(lg.get("minutesPlayed") or 0)
+                if (lg_goals + cp_goals) > 0:
+                    league_goals = lg_goals
+                    cup_goals = cp_goals
+                    team_goals_val = lg_goals + cp_goals
+                if tot_assists > api_assists:
+                    api_assists = tot_assists
+            except Exception as exc:
+                print(f"Warning: could not fetch player stats {pid}: {exc}")
+
+        prev_scorer = existing_by_name.get(full_name.lower(), {})
+        final_assists = api_assists
+        if final_assists == 0 and prev_scorer.get("assists"):
+            final_assists = int(prev_scorer["assists"])
+
+        top_scorers.append({
+            "rank": str(idx),
+            "id": pid,
+            "name": full_name,
+            "leagueGoals": str(league_goals),
+            "cupGoals": str(cup_goals),
+            "totalGoals": str(team_goals_val),
+            "assists": str(final_assists),
+            "apiAssists": str(api_assists),
+            "gamesPlayed": games_played,
+            "minutesPlayed": minutes_played,
+        })
+
+    top_assists = []
+    for idx, a_item in enumerate((stats_resp.get("topPlayersByAssists") or [])[:10], start=1):
+        p_obj = a_item.get("player") or {}
+        top_assists.append({
+            "rank": int(a_item.get("rank") or idx),
+            "id": int(p_obj.get("id") or 0),
+            "name": f"{p_obj.get('forename', '').strip()} {p_obj.get('surname', '').strip()}".strip(),
+            "assists": int(a_item.get("value") or 0),
+        })
+
+    team_stats = {
+        "gamesPlayed": (stats_resp.get("gamesPlayed") or {}).get("total", 0),
+        "goals": (stats_resp.get("goals") or {}).get("total", 0),
+        "assists": (stats_resp.get("assists") or {}).get("total", 0),
+        "yellowCards": (stats_resp.get("yellowCards") or {}).get("total", 0),
+        "redCards": (stats_resp.get("redCards") or {}).get("total", 0),
+        "viewers": (stats_resp.get("viewers") or {}).get("total", 0),
+        "topAssists": top_assists,
+    }
+
+    return (top_scorers if top_scorers else (existing_scorers or [])), team_stats
+
+
+def main():
+    print("Syncing Paide Linnameeskond data from Official EJL OpenData API v1...")
+    if not DATA_FILE.is_file():
+        print(f"Error: {DATA_FILE} not found.", file=sys.stderr)
+        sys.exit(1)
+
+    data = json.loads(DATA_FILE.read_text(encoding="utf-8"))
+    season = 2026
+
+    # 1. Standings (Competition 52 = Premium Liiga, Competition 63 = Naiste Meistriliiga)
+    print(" -> Fetching Premium Liiga standings & season history (/api/v1/competitions/52)...")
+    men_standings = fetch_standings(52, season, (data.get("standings") or {}).get("premiumLiiga", []))
+    print(f"    Loaded {len(men_standings)} teams in Premium Liiga.")
+
+    print(" -> Fetching Naiste Meistriliiga standings & season history (/api/v1/competitions/63)...")
+    women_standings = fetch_standings(63, season, (data.get("standings") or {}).get("naisteMeistriliiga", []))
+    print(f"    Loaded {len(women_standings)} teams in Naiste Meistriliiga.")
+
+    data.setdefault("standings", {})
+    data["standings"]["premiumLiiga"] = men_standings
+    data["standings"]["naisteMeistriliiga"] = women_standings
+
+    # 2. Matches (Team 5 = Paide Linnameeskond, Team 3521 = Paide Linnanaiskond)
+    print(" -> Fetching Men's upcoming & recent matches (/api/v1/teams/5/games)...")
+    data["matches"] = fetch_team_matches(5, season, is_women=False)
+    print(
+        f"    Loaded {len(data['matches']['upcoming'])} upcoming and {len(data['matches']['recent'])} recent Men's matches."
+    )
+
+    print(" -> Fetching Women's upcoming & recent matches (/api/v1/teams/3521/games)...")
+    data["womenMatches"] = fetch_team_matches(3521, season, is_women=True)
+    print(
+        f"    Loaded {len(data['womenMatches']['upcoming'])} upcoming and {len(data['womenMatches']['recent'])} recent Women's matches."
+    )
+
+    # 3. Top Scorers, Assists & Team Statistics
+    print(" -> Fetching Men's player & team statistics (/api/v1/teams/5/statistics)...")
+    men_scorers, men_team_stats = fetch_team_stats_and_scorers(5, season, is_women=False, existing_scorers=data.get("topScorers"))
+    data["topScorers"] = men_scorers
+    data["teamStats"] = men_team_stats
+    print(f"    Loaded {len(men_scorers)} Men's top scorers and {len(men_team_stats.get('topAssists', []))} assist leaders.")
+
+    print(" -> Fetching Women's player & team statistics (/api/v1/teams/3521/statistics)...")
+    women_scorers, women_team_stats = fetch_team_stats_and_scorers(3521, season, is_women=True, existing_scorers=data.get("womenTopScorers"))
+    data["womenTopScorers"] = women_scorers
+    data["womenTeamStats"] = women_team_stats
+    print(f"    Loaded {len(women_scorers)} Women's top scorers.")
+
+    # 4. Metadata
+    data["metadata"] = {
+        "source": "Eesti Jalgpalli Liit (EJL OpenData API v1)",
+        "sourceUrl": "https://opendata.jalgpall.ee/api/v1",
+        "lastUpdated": datetime.now(TALLINN_TZ).isoformat(),
+        "season": str(season),
+        "status": "success",
+    }
+
+    DATA_FILE.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"Successfully updated {DATA_FILE} via EJL OpenData API!")
+
+
+if __name__ == "__main__":
     main()
