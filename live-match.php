@@ -314,6 +314,14 @@ $output = array(
     'match'       => $activeMatch !== null ? $activeMatch : $recentMatch,
 );
 
+if (isset($_GET['debug']) && $_GET['debug'] === '1') {
+    $output['debug'] = array(
+        'phpVersion' => PHP_VERSION,
+        'candidates' => count($candidates),
+        'httpLog'    => isset($GLOBALS['EJL_DEBUG_LOG']) ? $GLOBALS['EJL_DEBUG_LOG'] : array(),
+    );
+}
+
 $encoded = json_encode($output, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 if ($encoded !== false) {
     @file_put_contents($cacheFile, $encoded);

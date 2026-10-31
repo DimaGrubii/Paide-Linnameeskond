@@ -130,12 +130,13 @@ function ejlGetApiConfig() {
 function ejlApiGet($path, $params = array(), $timeout = 12) {
     $cfg = ejlGetApiConfig();
     if (empty($cfg['token'])) {
+        $GLOBALS['EJL_DEBUG_LOG'][] = 'Missing token';
         return null;
     }
 
     $url = $cfg['base_url'] . '/' . ltrim($path, '/');
     if (!empty($params)) {
-        $qs = http_build_query($params);
+        $qs = http_build_query($params, '', '&');
         if ($qs !== '') {
             $url .= (strpos($url, '?') === false ? '?' : '&') . $qs;
         }
@@ -144,7 +145,7 @@ function ejlApiGet($path, $params = array(), $timeout = 12) {
     $headers = array(
         'Authorization: Bearer ' . $cfg['token'],
         'Accept: application/json',
-        'User-Agent: PaideLinnameeskond-OfficialWebsite/2.0',
+        'User-Agent: Mozilla/5.0 (compatible; PaideLinnameeskond/2.0)',
     );
 
     if (function_exists('curl_init')) {
@@ -155,15 +156,21 @@ function ejlApiGet($path, $params = array(), $timeout = 12) {
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        if (defined('CURLOPT_ENCODING')) {
-            @curl_setopt($ch, CURLOPT_ENCODING, '');
+        if (defined('CURL_IPRESOLVE_V4') && defined('CURLOPT_IPRESOLVE')) {
+            @curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
         }
-        @curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        @curl_setopt($ch, CURLOPT_MAXREDIRS, 3);
 
         $raw = curl_exec($ch);
         $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $err = curl_error($ch);
         curl_close($ch);
+        $GLOBALS['EJL_DEBUG_LOG'][] = array(
+            'via'  => 'curl',
+            'url'  => $url,
+            'code' => $code,
+            'err'  => $err,
+            'len'  => is_string($raw) ? strlen($raw) : -1,
+        );
         if (is_string($raw) && $code >= 200 && $code < 300) {
             $decoded = json_decode($raw, true);
             if (is_array($decoded)) {
