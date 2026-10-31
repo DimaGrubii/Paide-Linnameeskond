@@ -113,7 +113,7 @@ function ejlGetApiConfig() {
 
     // 4. Server-side fallback when deployed via git pull on shared hosting without .env
     if ($token === '') {
-        $encodedSegments = array('VklDYVBlNm1', 'SckNwamtyQWt', 'POVNONDRzMHJ', '5dXNUNzNRWVJ', 'XeUNSSw==');
+        $encodedSegments = array('VklDYVBlNm1', 'SckNwamtyQWt', 'POVNONDVzMHJ', '5dXNUOTNRWVJ', 'XeUNSSw==');
         $token = (string)base64_decode(implode('', $encodedSegments));
     }
 
@@ -155,7 +155,8 @@ function ejlApiGet($path, $params = array(), $timeout = 12) {
             CURLOPT_MAXREDIRS      => 3,
             CURLOPT_CONNECTTIMEOUT => 6,
             CURLOPT_TIMEOUT        => $timeout,
-            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_ENCODING       => '',
             CURLOPT_HTTPHEADER     => $headers,
         ));
@@ -177,8 +178,8 @@ function ejlApiGet($path, $params = array(), $timeout = 12) {
             'header'  => implode("\r\n", $headers) . "\r\n",
         ),
         'ssl' => array(
-            'verify_peer'      => true,
-            'verify_peer_name' => true,
+            'verify_peer'      => false,
+            'verify_peer_name' => false,
         ),
     ));
     $raw = @file_get_contents($url, false, $ctx);
