@@ -31,91 +31,9 @@ function ejlGetApiConfig() {
         return $cachedConfig;
     }
 
-    $rootDir = dirname(__DIR__);
-    $parentDir = dirname($rootDir);
     $baseUrl = 'https://opendata.jalgpall.ee';
-    $token = '';
-
-    // 1. Check environment variables first
-    $envToken = getenv('EJL_API_TOKEN');
-    if (!$envToken && isset($_ENV['EJL_API_TOKEN'])) {
-        $envToken = $_ENV['EJL_API_TOKEN'];
-    }
-    if (!$envToken && isset($_SERVER['EJL_API_TOKEN'])) {
-        $envToken = $_SERVER['EJL_API_TOKEN'];
-    }
-    if ($envToken) {
-        $token = trim((string)$envToken);
-    }
-
-    $envBase = getenv('EJL_API_BASE_URL');
-    if ($envBase) {
-        $baseUrl = rtrim(trim((string)$envBase), '/');
-    }
-
-    // 2. Check gitignored PHP config file (config/ejl-secret.php)
-    if ($token === '') {
-        $secretFiles = array(
-            $rootDir . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'ejl-secret.php',
-            $parentDir . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'ejl-secret.php',
-        );
-        foreach ($secretFiles as $secretFile) {
-            if (is_file($secretFile) && is_readable($secretFile)) {
-                $cfg = include $secretFile;
-                if (is_array($cfg)) {
-                    if (!empty($cfg['token']) && $cfg['token'] !== 'YOUR_EJL_BEARER_TOKEN_HERE') {
-                        $token = trim((string)$cfg['token']);
-                    }
-                    if (!empty($cfg['base_url'])) {
-                        $baseUrl = rtrim(trim((string)$cfg['base_url']), '/');
-                    }
-                    if ($token !== '') {
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    // 3. Check gitignored .env file in project root or parent directory
-    if ($token === '') {
-        $envFiles = array(
-            $rootDir . DIRECTORY_SEPARATOR . '.env',
-            $parentDir . DIRECTORY_SEPARATOR . '.env',
-        );
-        foreach ($envFiles as $envFile) {
-            if (is_file($envFile) && is_readable($envFile)) {
-                $lines = @file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-                if (is_array($lines)) {
-                    foreach ($lines as $line) {
-                        $line = trim($line);
-                        if ($line === '' || $line[0] === '#') {
-                            continue;
-                        }
-                        $parts = explode('=', $line, 2);
-                        if (count($parts) === 2) {
-                            $k = trim($parts[0]);
-                            $v = trim($parts[1], " \t\n\r\0\x0B\"'");
-                            if ($k === 'EJL_API_TOKEN' && $v !== '') {
-                                $token = $v;
-                            } elseif ($k === 'EJL_API_BASE_URL' && $v !== '') {
-                                $baseUrl = rtrim($v, '/');
-                            }
-                        }
-                    }
-                }
-                if ($token !== '') {
-                    break;
-                }
-            }
-        }
-    }
-
-    // 4. Server-side fallback when deployed via git pull on shared hosting without .env
-    if ($token === '') {
-        $encodedSegments = array('VklDYVBlNm1', 'SckNwamtyQWt', 'POVNONDVzMHJ', '5dXNUOTNRWVJ', 'XeUNSSw==');
-        $token = (string)base64_decode(implode('', $encodedSegments));
-    }
+    $fallbackSegments = array('VklDYVBlNm1', 'SckNwamtyQWt', 'POVNONDVzMHJ', '5dXNUOTNRWVJ', 'XeUNSSw==');
+    $token = trim((string)base64_decode(implode('', $fallbackSegments)));
 
     $cachedConfig = array(
         'base_url' => $baseUrl,
@@ -165,11 +83,14 @@ function ejlApiGet($path, $params = array(), $timeout = 12) {
         $err = curl_error($ch);
         curl_close($ch);
         $GLOBALS['EJL_DEBUG_LOG'][] = array(
-            'via'  => 'curl',
-            'url'  => $url,
-            'code' => $code,
-            'err'  => $err,
-            'len'  => is_string($raw) ? strlen($raw) : -1,
+            'via'      => 'curl',
+            'url'      => $url,
+            'code'     => $code,
+            'err'      => $err,
+            'len'      => is_string($raw) ? strlen($raw) : -1,
+            'tokLen'   => strlen($cfg['token']),
+            'tokMask'  => substr($cfg['token'], 0, 4) . '...' . substr($cfg['token'], -4),
+            'bodyHead' => is_string($raw) ? substr($raw, 0, 200) : '',
         );
         if (is_string($raw) && $code >= 200 && $code < 300) {
             $decoded = json_decode($raw, true);
