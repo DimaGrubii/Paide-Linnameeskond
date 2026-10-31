@@ -1,16 +1,14 @@
 <?php
 /**
- * Paide Linnameeskond — Official EJL OpenData API Sync Endpoint
+ * Paide Linnameeskond — Official EJL OpenData API Sync Endpoint (PHP 5.6+ Compatible)
  *
- * Replaces all HTML regex scraping with official EJL OpenData API v1 requests:
+ * Uses official EJL OpenData API v1 requests:
  *   - GET /api/v1/competitions/52 & /api/v1/competitions/52/games (Premium Liiga table & season form)
  *   - GET /api/v1/competitions/63 & /api/v1/competitions/63/games (Naiste Meistriliiga table & season form)
  *   - GET /api/v1/teams/5/games & /api/v1/games/{id} (Men's upcoming & recent matches + scorers)
  *   - GET /api/v1/teams/3521/games & /api/v1/games/{id} (Women's upcoming & recent matches + scorers)
  *   - GET /api/v1/teams/5/statistics & /api/v1/players/{id}/statistics (Men's goals, assists, minutes)
  *   - GET /api/v1/teams/3521/statistics & /api/v1/players/{id}/statistics (Women's goals, assists, minutes)
- *
- * Security: Uses `api/ejl-client.php` so the EJL Bearer token remains strictly confidential on the server.
  */
 
 header('Content-Type: application/json; charset=utf-8');
@@ -48,19 +46,19 @@ function ejlFetchCompetitionSeasonHistory($competitionId, $season) {
         }
 
         foreach ($resp['games'] as $g) {
-            $scores = $g['scores']['fullTime'] ?? null;
+            $scores = isset($g['scores']['fullTime']) ? $g['scores']['fullTime'] : null;
             if (!is_array($scores) || !isset($scores['home']) || !isset($scores['away']) || $scores['home'] === null || $scores['away'] === null) {
                 continue;
             }
             $homeGoals = (int)$scores['home'];
             $awayGoals = (int)$scores['away'];
-            $homeTeam = ejlCleanTeamName($g['teams']['home']['name'] ?? '');
-            $awayTeam = ejlCleanTeamName($g['teams']['away']['name'] ?? '');
+            $homeTeam = ejlCleanTeamName(isset($g['teams']['home']['name']) ? $g['teams']['home']['name'] : '');
+            $awayTeam = ejlCleanTeamName(isset($g['teams']['away']['name']) ? $g['teams']['away']['name'] : '');
             if ($homeTeam === '' || $awayTeam === '') {
                 continue;
             }
 
-            $dtParsed = ejlParseDateTime($g['dateTime'] ?? '');
+            $dtParsed = ejlParseDateTime(ejlVal($g, 'dateTime', ''));
             $sortTs = (int)$dtParsed['timestamp'];
             $dateStr = $dtParsed['dateTimeStr'];
             $matchScore = "{$homeGoals}:{$awayGoals}";
@@ -129,7 +127,10 @@ function ejlFetchCompetitionSeasonHistory($competitionId, $season) {
 
     foreach ($teamMatches as $tName => &$mList) {
         usort($mList, function ($a, $b) {
-            return $a['_sortTs'] <=> $b['_sortTs'];
+            if ($a['_sortTs'] == $b['_sortTs']) {
+                return 0;
+            }
+            return ($a['_sortTs'] < $b['_sortTs']) ? -1 : 1;
         });
         foreach ($mList as $idx => &$item) {
             $item['round'] = $idx + 1;
@@ -166,9 +167,9 @@ function ejlFetchStandingsFromApi($competitionId, $season, $existingRows = array
 
     $standings = array();
     foreach ($compResp['table'] as $row) {
-        $teamObj = $row['team'] ?? array();
-        $statsObj = $row['stats'] ?? array();
-        $teamName = ejlCleanTeamName($teamObj['name'] ?? '');
+        $teamObj = (isset($row['team']) && is_array($row['team'])) ? $row['team'] : array();
+        $statsObj = (isset($row['stats']) && is_array($row['stats'])) ? $row['stats'] : array();
+        $teamName = ejlCleanTeamName(ejlVal($teamObj, 'name', ''));
         if ($teamName === '') {
             continue;
         }
@@ -185,9 +186,11 @@ function ejlFetchStandingsFromApi($competitionId, $season, $existingRows = array
         $gdStr = $diff > 0 ? '+' . $diff : (string)$diff;
 
         $teamKey = mb_strtolower($teamName, 'UTF-8');
-        $prevRow = $existingByTeam[$teamKey] ?? array();
+        $prevRow = isset($existingByTeam[$teamKey]) ? $existingByTeam[$teamKey] : array();
 
-        $seasonHistory = $seasonHistoryMap[$teamName] ?? ($prevRow['seasonHistory'] ?? array());
+        $seasonHistory = isset($seasonHistoryMap[$teamName])
+            ? $seasonHistoryMap[$teamName]
+            : (isset($prevRow['seasonHistory']) ? $prevRow['seasonHistory'] : array());
         $form = array();
         if (!empty($seasonHistory)) {
             $last5 = array_slice($seasonHistory, -5);
@@ -212,7 +215,7 @@ function ejlFetchStandingsFromApi($competitionId, $season, $existingRows = array
             'position'       => $rank,
             'team'           => $teamName,
             'teamId'         => isset($teamObj['id']) ? (int)$teamObj['id'] : null,
-            'logo'           => $teamObj['logo'] ?? ($prevRow['logo'] ?? ''),
+            'logo'           => ejlVal($teamObj, 'logo', ejlVal($prevRow, 'logo', '')),
             'localLogo'      => $localLogo,
             'played'         => $played,
             'won'            => $won,
@@ -248,22 +251,22 @@ function ejlFetchTeamMatchesFromApi($teamId, $season, $isWomen = false) {
 
     $upcomingList = array();
     foreach ($rawUpcoming as $g) {
-        $dtParsed = ejlParseDateTime($g['dateTime'] ?? '');
-        $compObj = $g['competition'] ?? array();
-        $compShort = trim((string)($compObj['name'] ?? $defaultCode));
+        $dtParsed = ejlParseDateTime(ejlVal($g, 'dateTime', ''));
+        $compObj = (isset($g['competition']) && is_array($g['competition'])) ? $g['competition'] : array();
+        $compShort = trim((string)ejlVal($compObj, 'name', $defaultCode));
         if ($compShort === 'ML') {
             $compShort = 'PL';
         }
-        $compLong = trim((string)($compObj['longName'] ?? $defaultTournament));
-        $tour = trim((string)($g['tour'] ?? ''));
+        $compLong = trim((string)ejlVal($compObj, 'longName', $defaultTournament));
+        $tour = trim((string)ejlVal($g, 'tour', ''));
         $roundDisplay = $compLong . ($tour !== '' ? " • {$tour}. Voor" : '');
 
-        $homeTeam = ejlCleanTeamName($g['teams']['home']['name'] ?? '');
-        $awayTeam = ejlCleanTeamName($g['teams']['away']['name'] ?? '');
-        $venue = trim((string)($g['field']['name'] ?? ''));
-        $broadcaster = trim((string)($g['coverage']['broadcaster']['name'] ?? ''));
+        $homeTeam = ejlCleanTeamName(isset($g['teams']['home']['name']) ? $g['teams']['home']['name'] : '');
+        $awayTeam = ejlCleanTeamName(isset($g['teams']['away']['name']) ? $g['teams']['away']['name'] : '');
+        $venue = trim((string)(isset($g['field']['name']) ? $g['field']['name'] : ''));
+        $broadcaster = trim((string)(isset($g['coverage']['broadcaster']['name']) ? $g['coverage']['broadcaster']['name'] : ''));
         $broadcastStr = $broadcaster !== '' ? 'OTSE: ' . mb_strtoupper($broadcaster, 'UTF-8') : 'OTSE: SOCCERNET TV / JALGPALL.EE';
-        $ticketUrl = $g['links']['tickets'] ?? null;
+        $ticketUrl = isset($g['links']['tickets']) ? $g['links']['tickets'] : null;
         $gid = isset($g['id']) ? (int)$g['id'] : 0;
 
         $upcomingList[] = array(
@@ -286,7 +289,10 @@ function ejlFetchTeamMatchesFromApi($teamId, $season, $isWomen = false) {
 
     // Sort upcoming chronologically ascending (earliest next match first!)
     usort($upcomingList, function ($a, $b) {
-        return $a['_ts'] <=> $b['_ts'];
+        if ($a['_ts'] == $b['_ts']) {
+            return 0;
+        }
+        return ($a['_ts'] < $b['_ts']) ? -1 : 1;
     });
     foreach ($upcomingList as &$uItem) {
         unset($uItem['_ts']);
@@ -305,27 +311,27 @@ function ejlFetchTeamMatchesFromApi($teamId, $season, $isWomen = false) {
 
     $recentList = array();
     foreach ($rawPast as $idx => $g) {
-        $scores = $g['scores']['fullTime'] ?? null;
+        $scores = isset($g['scores']['fullTime']) ? $g['scores']['fullTime'] : null;
         if (!is_array($scores) || !isset($scores['home']) || !isset($scores['away']) || $scores['home'] === null || $scores['away'] === null) {
             continue;
         }
         $gid = isset($g['id']) ? (int)$g['id'] : 0;
-        $dtParsed = ejlParseDateTime($g['dateTime'] ?? '');
-        $compObj = $g['competition'] ?? array();
-        $compShort = trim((string)($compObj['name'] ?? $defaultCode));
+        $dtParsed = ejlParseDateTime(ejlVal($g, 'dateTime', ''));
+        $compObj = (isset($g['competition']) && is_array($g['competition'])) ? $g['competition'] : array();
+        $compShort = trim((string)ejlVal($compObj, 'name', $defaultCode));
         if ($compShort === 'ML') {
             $compShort = 'PL';
         }
-        $compLong = trim((string)($compObj['longName'] ?? $defaultTournament));
-        $tour = trim((string)($g['tour'] ?? ''));
+        $compLong = trim((string)ejlVal($compObj, 'longName', $defaultTournament));
+        $tour = trim((string)ejlVal($g, 'tour', ''));
         $roundStr = $tour !== '' ? "{$tour}. voor" : $compLong;
 
-        $homeTeam = ejlCleanTeamName($g['teams']['home']['name'] ?? '');
-        $awayTeam = ejlCleanTeamName($g['teams']['away']['name'] ?? '');
+        $homeTeam = ejlCleanTeamName(isset($g['teams']['home']['name']) ? $g['teams']['home']['name'] : '');
+        $awayTeam = ejlCleanTeamName(isset($g['teams']['away']['name']) ? $g['teams']['away']['name'] : '');
         $homeScore = (int)$scores['home'];
         $awayScore = (int)$scores['away'];
-        $venue = trim((string)($g['field']['name'] ?? ''));
-        $attendance = isset($g['attendance']) && $g['attendance'] !== null ? (int)$g['attendance'] : null;
+        $venue = trim((string)(isset($g['field']['name']) ? $g['field']['name'] : ''));
+        $attendance = (isset($g['attendance']) && $g['attendance'] !== null) ? (int)$g['attendance'] : null;
 
         // Fetch full game protocol details (goal scorers) for the 5 most recent games
         $scorers = array();
@@ -359,7 +365,10 @@ function ejlFetchTeamMatchesFromApi($teamId, $season, $isWomen = false) {
 
     // Sort recent matches descending (newest played match first!)
     usort($recentList, function ($a, $b) {
-        return $b['_ts'] <=> $a['_ts'];
+        if ($a['_ts'] == $b['_ts']) {
+            return 0;
+        }
+        return ($b['_ts'] < $a['_ts']) ? -1 : 1;
     });
     foreach ($recentList as &$rItem) {
         unset($rItem['_ts']);
@@ -404,7 +413,7 @@ function ejlFetchTeamStatsAndTopScorers($teamId, $season, $isWomen = false, $exi
         foreach ($statsResp['topPlayersByAssists'] as $aItem) {
             $pid = isset($aItem['player']['id']) ? (int)$aItem['player']['id'] : 0;
             if ($pid > 0) {
-                $assistsMap[$pid] = (int)($aItem['value'] ?? 0);
+                $assistsMap[$pid] = (int)ejlVal($aItem, 'value', 0);
             }
         }
     }
@@ -413,14 +422,14 @@ function ejlFetchTeamStatsAndTopScorers($teamId, $season, $isWomen = false, $exi
     $cupCode = $isWomen ? 'NKV' : 'KV';
     $topScorers = array();
 
-    $rawGoalsList = isset($statsResp['topPlayersByGoals']) && is_array($statsResp['topPlayersByGoals'])
+    $rawGoalsList = (isset($statsResp['topPlayersByGoals']) && is_array($statsResp['topPlayersByGoals']))
         ? array_slice($statsResp['topPlayersByGoals'], 0, 10)
         : array();
 
     foreach ($rawGoalsList as $idx => $gItem) {
-        $pObj = $gItem['player'] ?? array();
+        $pObj = (isset($gItem['player']) && is_array($gItem['player'])) ? $gItem['player'] : array();
         $pid = isset($pObj['id']) ? (int)$pObj['id'] : 0;
-        $fullName = trim(($pObj['forename'] ?? '') . ' ' . ($pObj['surname'] ?? ''));
+        $fullName = trim(ejlVal($pObj, 'forename', '') . ' ' . ejlVal($pObj, 'surname', ''));
         if ($fullName === '') {
             continue;
         }
@@ -428,7 +437,7 @@ function ejlFetchTeamStatsAndTopScorers($teamId, $season, $isWomen = false, $exi
         $teamGoalsVal = isset($gItem['value']) ? (int)$gItem['value'] : 0;
         $leagueGoals = $teamGoalsVal;
         $cupGoals = 0;
-        $apiAssists = $assistsMap[$pid] ?? 0;
+        $apiAssists = isset($assistsMap[$pid]) ? $assistsMap[$pid] : 0;
         $gamesPlayed = 0;
         $minutesPlayed = 0;
 
@@ -439,17 +448,17 @@ function ejlFetchTeamStatsAndTopScorers($teamId, $season, $isWomen = false, $exi
                 $cpGoals = 0;
                 $totAssists = 0;
                 foreach ($pStat['leagues'] as $lg) {
-                    $lName = strtoupper(trim((string)($lg['leagueName'] ?? '')));
+                    $lName = strtoupper(trim((string)ejlVal($lg, 'leagueName', '')));
                     if ($lName === $leagueCode) {
-                        $lgGoals += (int)($lg['goals'] ?? 0);
-                        $totAssists += (int)($lg['assists'] ?? 0);
-                        $gamesPlayed += (int)($lg['gamesPlayed'] ?? 0);
-                        $minutesPlayed += (int)($lg['minutesPlayed'] ?? 0);
+                        $lgGoals += (int)ejlVal($lg, 'goals', 0);
+                        $totAssists += (int)ejlVal($lg, 'assists', 0);
+                        $gamesPlayed += (int)ejlVal($lg, 'gamesPlayed', 0);
+                        $minutesPlayed += (int)ejlVal($lg, 'minutesPlayed', 0);
                     } elseif ($lName === $cupCode) {
-                        $cpGoals += (int)($lg['goals'] ?? 0);
-                        $totAssists += (int)($lg['assists'] ?? 0);
-                        $gamesPlayed += (int)($lg['gamesPlayed'] ?? 0);
-                        $minutesPlayed += (int)($lg['minutesPlayed'] ?? 0);
+                        $cpGoals += (int)ejlVal($lg, 'goals', 0);
+                        $totAssists += (int)ejlVal($lg, 'assists', 0);
+                        $gamesPlayed += (int)ejlVal($lg, 'gamesPlayed', 0);
+                        $minutesPlayed += (int)ejlVal($lg, 'minutesPlayed', 0);
                     }
                 }
                 if (($lgGoals + $cpGoals) > 0) {
@@ -463,7 +472,8 @@ function ejlFetchTeamStatsAndTopScorers($teamId, $season, $isWomen = false, $exi
             }
         }
 
-        $prevScorer = $existingByName[mb_strtolower($fullName, 'UTF-8')] ?? array();
+        $nameKey = mb_strtolower($fullName, 'UTF-8');
+        $prevScorer = isset($existingByName[$nameKey]) ? $existingByName[$nameKey] : array();
         $finalAssists = $apiAssists;
         if ($finalAssists === 0 && !empty($prevScorer['assists'])) {
             $finalAssists = (int)$prevScorer['assists'];
@@ -486,23 +496,23 @@ function ejlFetchTeamStatsAndTopScorers($teamId, $season, $isWomen = false, $exi
     $topAssistsList = array();
     if (!empty($statsResp['topPlayersByAssists']) && is_array($statsResp['topPlayersByAssists'])) {
         foreach (array_slice($statsResp['topPlayersByAssists'], 0, 10) as $idx => $aItem) {
-            $pObj = $aItem['player'] ?? array();
+            $pObj = (isset($aItem['player']) && is_array($aItem['player'])) ? $aItem['player'] : array();
             $topAssistsList[] = array(
-                'rank'    => (int)($aItem['rank'] ?? ($idx + 1)),
+                'rank'    => (int)ejlVal($aItem, 'rank', $idx + 1),
                 'id'      => isset($pObj['id']) ? (int)$pObj['id'] : 0,
-                'name'    => trim(($pObj['forename'] ?? '') . ' ' . ($pObj['surname'] ?? '')),
-                'assists' => (int)($aItem['value'] ?? 0),
+                'name'    => trim(ejlVal($pObj, 'forename', '') . ' ' . ejlVal($pObj, 'surname', '')),
+                'assists' => (int)ejlVal($aItem, 'value', 0),
             );
         }
     }
 
     $teamStatsSummary = array(
-        'gamesPlayed' => $statsResp['gamesPlayed']['total'] ?? 0,
-        'goals'       => $statsResp['goals']['total'] ?? 0,
-        'assists'     => $statsResp['assists']['total'] ?? 0,
-        'yellowCards' => $statsResp['yellowCards']['total'] ?? 0,
-        'redCards'    => $statsResp['redCards']['total'] ?? 0,
-        'viewers'     => $statsResp['viewers']['total'] ?? 0,
+        'gamesPlayed' => isset($statsResp['gamesPlayed']['total']) ? (int)$statsResp['gamesPlayed']['total'] : 0,
+        'goals'       => isset($statsResp['goals']['total']) ? (int)$statsResp['goals']['total'] : 0,
+        'assists'     => isset($statsResp['assists']['total']) ? (int)$statsResp['assists']['total'] : 0,
+        'yellowCards' => isset($statsResp['yellowCards']['total']) ? (int)$statsResp['yellowCards']['total'] : 0,
+        'redCards'    => isset($statsResp['redCards']['total']) ? (int)$statsResp['redCards']['total'] : 0,
+        'viewers'     => isset($statsResp['viewers']['total']) ? (int)$statsResp['viewers']['total'] : 0,
         'topAssists'  => $topAssistsList,
     );
 
@@ -544,7 +554,7 @@ $season = 2026;
 $updatedAny = false;
 
 // 1. Men's Premium Liiga Standings (Competition 52)
-$existingMenStandings = $data['standings']['premiumLiiga'] ?? array();
+$existingMenStandings = isset($data['standings']['premiumLiiga']) ? $data['standings']['premiumLiiga'] : array();
 $menStandings = ejlFetchStandingsFromApi(52, $season, $existingMenStandings);
 if (count($menStandings) >= 8) {
     $data['standings']['premiumLiiga'] = $menStandings;
@@ -552,7 +562,7 @@ if (count($menStandings) >= 8) {
 }
 
 // 2. Women's Naiste Meistriliiga Standings (Competition 63)
-$existingWomenStandings = $data['standings']['naisteMeistriliiga'] ?? array();
+$existingWomenStandings = isset($data['standings']['naisteMeistriliiga']) ? $data['standings']['naisteMeistriliiga'] : array();
 $womenStandings = ejlFetchStandingsFromApi(63, $season, $existingWomenStandings);
 if (count($womenStandings) >= 4) {
     $data['standings']['naisteMeistriliiga'] = $womenStandings;
@@ -574,7 +584,7 @@ if (!empty($womenMatches['upcoming']) || !empty($womenMatches['recent'])) {
 }
 
 // 5. Men's Top Scorers & Team Statistics (Team 5)
-$menStats = ejlFetchTeamStatsAndTopScorers(5, $season, false, $data['topScorers'] ?? array());
+$menStats = ejlFetchTeamStatsAndTopScorers(5, $season, false, isset($data['topScorers']) ? $data['topScorers'] : array());
 if (!empty($menStats['topScorers'])) {
     $data['topScorers'] = $menStats['topScorers'];
     $updatedAny = true;
@@ -584,7 +594,7 @@ if (!empty($menStats['teamStats'])) {
 }
 
 // 6. Women's Top Scorers & Team Statistics (Team 3521)
-$womenStats = ejlFetchTeamStatsAndTopScorers(3521, $season, true, $data['womenTopScorers'] ?? array());
+$womenStats = ejlFetchTeamStatsAndTopScorers(3521, $season, true, isset($data['womenTopScorers']) ? $data['womenTopScorers'] : array());
 if (!empty($womenStats['topScorers'])) {
     $data['womenTopScorers'] = $womenStats['topScorers'];
     $updatedAny = true;

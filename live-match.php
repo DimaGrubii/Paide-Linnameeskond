@@ -1,13 +1,11 @@
 <?php
 /**
- * Paide Linnameeskond — Official EJL OpenData API Live Match Endpoint
+ * Paide Linnameeskond — Official EJL OpenData API Live Match Endpoint (PHP 5.6+ Compatible)
  *
- * Replaces legacy HTML protocol scraping with official EJL OpenData REST API calls:
+ * Uses official EJL OpenData REST API calls:
  *   - GET /api/v1/teams/5/games (Paide Linnameeskond)
  *   - GET /api/v1/teams/3521/games (Paide Linnanaiskond)
  *   - GET /api/v1/games/{calendarId} (Full live match protocol, scores, events, lineups)
- *
- * Security: Uses `api/ejl-client.php` so the EJL Bearer token remains strictly confidential on the server.
  */
 
 header('Content-Type: application/json; charset=utf-8');
@@ -33,10 +31,13 @@ function ejlBuildLiveMatchPayload($gameDetail) {
     }
 
     $gameId = (int)$gameDetail['id'];
-    $homeObj = $gameDetail['teams']['home'] ?? array();
-    $awayObj = $gameDetail['teams']['away'] ?? array();
-    $homeTeam = ejlCleanTeamName($homeObj['name'] ?? '');
-    $awayTeam = ejlCleanTeamName($awayObj['name'] ?? '');
+    $teamsRoot = (isset($gameDetail['teams']) && is_array($gameDetail['teams'])) ? $gameDetail['teams'] : array();
+    $homeObj = (isset($teamsRoot['home']) && is_array($teamsRoot['home'])) ? $teamsRoot['home'] : array();
+    $awayObj = (isset($teamsRoot['away']) && is_array($teamsRoot['away'])) ? $teamsRoot['away'] : array();
+    $homeRawName = (string)ejlVal($homeObj, 'name', '');
+    $awayRawName = (string)ejlVal($awayObj, 'name', '');
+    $homeTeam = ejlCleanTeamName($homeRawName);
+    $awayTeam = ejlCleanTeamName($awayRawName);
 
     if ($homeTeam === '' || $awayTeam === '') {
         return null;
@@ -49,29 +50,31 @@ function ejlBuildLiveMatchPayload($gameDetail) {
         return null;
     }
 
-    $compObj = $gameDetail['competition'] ?? array();
-    $compName = trim((string)($compObj['longName'] ?? $compObj['name'] ?? ''));
-    $compSex = strtoupper((string)($compObj['sex'] ?? ''));
+    $compObj = (isset($gameDetail['competition']) && is_array($gameDetail['competition'])) ? $gameDetail['competition'] : array();
+    $compLong = ejlVal($compObj, 'longName', '');
+    $compShort = ejlVal($compObj, 'name', '');
+    $compName = trim((string)($compLong !== '' ? $compLong : $compShort));
+    $compSex = strtoupper((string)ejlVal($compObj, 'sex', ''));
     $isWomen = ($compSex === 'N') ||
                (mb_stripos($compName, 'naiste', 0, 'UTF-8') !== false) ||
-               (mb_stripos($homeObj['name'] ?? '', 'naiskond', 0, 'UTF-8') !== false) ||
-               (mb_stripos($awayObj['name'] ?? '', 'naiskond', 0, 'UTF-8') !== false);
+               (mb_stripos($homeRawName, 'naiskond', 0, 'UTF-8') !== false) ||
+               (mb_stripos($awayRawName, 'naiskond', 0, 'UTF-8') !== false);
 
-    $dtParsed = ejlParseDateTime($gameDetail['dateTime'] ?? '');
+    $dtParsed = ejlParseDateTime(ejlVal($gameDetail, 'dateTime', ''));
     $kickoffTs = (int)$dtParsed['timestamp'];
     $now = time();
 
-    $statuses = $gameDetail['statuses'] ?? array();
-    $gameStatusObj = $statuses['gameStatus'] ?? array();
-    $gameStatusCode = strtoupper((string)($gameStatusObj['code'] ?? ''));
-    $gameStatusName = (string)($gameStatusObj['name'] ?? '');
-    $liveStatus = $statuses['liveStatus'] ?? null;
-    $liveMinute = isset($statuses['liveMinute']) && $statuses['liveMinute'] !== null ? (int)$statuses['liveMinute'] : null;
-    $liveExtraMinute = isset($statuses['liveExtraMinute']) && $statuses['liveExtraMinute'] !== null ? (int)$statuses['liveExtraMinute'] : null;
+    $statuses = (isset($gameDetail['statuses']) && is_array($gameDetail['statuses'])) ? $gameDetail['statuses'] : array();
+    $gameStatusObj = (isset($statuses['gameStatus']) && is_array($statuses['gameStatus'])) ? $statuses['gameStatus'] : array();
+    $gameStatusCode = strtoupper((string)ejlVal($gameStatusObj, 'code', ''));
+    $gameStatusName = (string)ejlVal($gameStatusObj, 'name', '');
+    $liveStatus = ejlVal($statuses, 'liveStatus', null);
+    $liveMinute = (isset($statuses['liveMinute']) && $statuses['liveMinute'] !== null) ? (int)$statuses['liveMinute'] : null;
+    $liveExtraMinute = (isset($statuses['liveExtraMinute']) && $statuses['liveExtraMinute'] !== null) ? (int)$statuses['liveExtraMinute'] : null;
 
-    $scores = $gameDetail['scores'] ?? array();
-    $ft = $scores['fullTime'] ?? null;
-    $ht = $scores['halftime'] ?? null;
+    $scores = (isset($gameDetail['scores']) && is_array($gameDetail['scores'])) ? $gameDetail['scores'] : array();
+    $ft = isset($scores['fullTime']) ? $scores['fullTime'] : null;
+    $ht = isset($scores['halftime']) ? $scores['halftime'] : null;
 
     $homeScore = (is_array($ft) && isset($ft['home']) && $ft['home'] !== null) ? (int)$ft['home'] : null;
     $awayScore = (is_array($ft) && isset($ft['away']) && $ft['away'] !== null) ? (int)$ft['away'] : null;
@@ -92,7 +95,7 @@ function ejlBuildLiveMatchPayload($gameDetail) {
     }
 
     $isPlayed = ($gameStatusCode === 'PLAYED' || mb_stripos($gameStatusName, 'mängitud', 0, 'UTF-8') !== false);
-    $isExplicitLive = ($liveStatus !== null || $liveMinute !== null || in_array($gameStatusCode, array('LIVE', 'IN_PROGRESS', 'PLAYING', 'FIRST_HALF', 'SECOND_HALF', 'HALFTIME'), true));
+    $isExplicitLive = ($liveStatus !== null || $liveMinute !== null || in_array($gameStatusCode, array('RUNNING', 'LIVE', 'IN_PROGRESS', 'PLAYING', 'FIRST_HALF', 'SECOND_HALF', 'HALFTIME'), true));
 
     $matchState = 'upcoming';
     $statusLabel = 'Kalendris';
@@ -120,15 +123,23 @@ function ejlBuildLiveMatchPayload($gameDetail) {
         }
     }
 
-    $tour = trim((string)($gameDetail['tour'] ?? ''));
+    $tour = trim((string)ejlVal($gameDetail, 'tour', ''));
     $roundStr = $tour !== '' ? (preg_match('/voor/iu', $tour) ? $tour : "{$tour}. voor") : '';
-    $venueName = trim((string)($gameDetail['field']['name'] ?? ''));
-    $attendance = isset($gameDetail['attendance']) && $gameDetail['attendance'] !== null ? (int)$gameDetail['attendance'] : null;
+    $fieldObj = (isset($gameDetail['field']) && is_array($gameDetail['field'])) ? $gameDetail['field'] : array();
+    $venueName = trim((string)ejlVal($fieldObj, 'name', ''));
+    $attendance = (isset($gameDetail['attendance']) && $gameDetail['attendance'] !== null) ? (int)$gameDetail['attendance'] : null;
 
-    $broadcasterName = trim((string)($gameDetail['coverage']['broadcaster']['name'] ?? ''));
-    $broadcastUrl = trim((string)($gameDetail['coverage']['links']['broadcastPage'] ?? $gameDetail['coverage']['links']['stream'] ?? ''));
-    $ticketUrl = trim((string)($gameDetail['links']['tickets'] ?? ''));
-    $weatherComment = trim((string)($gameDetail['comment'] ?? ''));
+    $covObj = (isset($gameDetail['coverage']) && is_array($gameDetail['coverage'])) ? $gameDetail['coverage'] : array();
+    $bcObj = (isset($covObj['broadcaster']) && is_array($covObj['broadcaster'])) ? $covObj['broadcaster'] : array();
+    $bcLinks = (isset($covObj['links']) && is_array($covObj['links'])) ? $covObj['links'] : array();
+    $broadcasterName = trim((string)ejlVal($bcObj, 'name', ''));
+    $bcPage = ejlVal($bcLinks, 'broadcastPage', '');
+    $bcStream = ejlVal($bcLinks, 'stream', '');
+    $broadcastUrl = trim((string)($bcPage !== '' ? $bcPage : $bcStream));
+
+    $gameLinks = (isset($gameDetail['links']) && is_array($gameDetail['links'])) ? $gameDetail['links'] : array();
+    $ticketUrl = trim((string)ejlVal($gameLinks, 'tickets', ''));
+    $weatherComment = trim((string)ejlVal($gameDetail, 'comment', ''));
 
     return array(
         'gameId'            => (string)$gameId,
@@ -163,7 +174,7 @@ function ejlBuildLiveMatchPayload($gameDetail) {
         'liveStatus'        => $liveStatus,
         'liveMinute'        => $liveMinute,
         'liveExtraMinute'   => $liveExtraMinute,
-        'lineupConfirmed'   => (bool)(($homeObj['lineupConfirmed'] ?? false) || ($awayObj['lineupConfirmed'] ?? false)),
+        'lineupConfirmed'   => (bool)(!empty($homeObj['lineupConfirmed']) || !empty($awayObj['lineupConfirmed'])),
         'goals'             => $goals,
         'timeline'          => $fullDetails['timeline'],
         'stats'             => $fullDetails['stats'],
@@ -211,7 +222,8 @@ if ($requestedId !== '') {
 } else {
     // Check both Men's (5) and Women's (3521) teams for live, pre-match, or just-finished games
     $teamIds = array(5, 3521);
-    $candidateGameIds = array();
+    $priorityGameIds = array();
+    $fallbackGameIds = array();
     $now = time();
 
     foreach ($teamIds as $tid) {
@@ -227,17 +239,21 @@ if ($requestedId !== '') {
                 if ($gid <= 0) {
                     continue;
                 }
-                $dt = ejlParseDateTime($g['dateTime'] ?? '');
+                $dt = ejlParseDateTime(ejlVal($g, 'dateTime', ''));
                 $ko = (int)$dt['timestamp'];
-                $stCode = strtoupper((string)($g['statuses']['gameStatus']['code'] ?? ''));
-                // Fetch full detail for the latest played game OR any game within 12 hours of now or not marked PLAYED
-                if ($idx === 0 || $stCode !== 'PLAYED' || ($ko > 0 && abs($now - $ko) <= 43200)) {
-                    $candidateGameIds[$gid] = $gid;
+                $stObj = (isset($g['statuses']['gameStatus']) && is_array($g['statuses']['gameStatus'])) ? $g['statuses']['gameStatus'] : array();
+                $stCode = strtoupper((string)ejlVal($stObj, 'code', ''));
+                $liveSt = isset($g['statuses']['liveStatus']) ? $g['statuses']['liveStatus'] : null;
+
+                if ($liveSt !== null || $stCode === 'RUNNING' || $stCode !== 'PLAYED' || ($ko > 0 && abs($now - $ko) <= 43200)) {
+                    $priorityGameIds[$gid] = $gid;
+                } elseif ($idx === 0) {
+                    $fallbackGameIds[$gid] = $gid;
                 }
             }
         }
 
-        // 2. Games whose kickoff is still ahead (upcoming=1) — check if kickoff is today / within 2 hours
+        // 2. Games whose kickoff is still ahead (upcoming=1) — check if kickoff is within 2 hours
         $upResp = ejlApiGet("/api/v1/teams/{$tid}/games", array(
             'season'   => $season,
             'upcoming' => 1,
@@ -249,16 +265,17 @@ if ($requestedId !== '') {
                 if ($gid <= 0) {
                     continue;
                 }
-                $dt = ejlParseDateTime($g['dateTime'] ?? '');
+                $dt = ejlParseDateTime(ejlVal($g, 'dateTime', ''));
                 $ko = (int)$dt['timestamp'];
                 if ($ko > 0 && ($ko - $now) <= 7200) {
-                    $candidateGameIds[$gid] = $gid;
+                    $priorityGameIds[$gid] = $gid;
                 }
             }
         }
     }
 
-    foreach ($candidateGameIds as $gid) {
+    $targetIds = !empty($priorityGameIds) ? $priorityGameIds : $fallbackGameIds;
+    foreach ($targetIds as $gid) {
         $detail = ejlApiGet("/api/v1/games/{$gid}");
         $parsed = ejlBuildLiveMatchPayload($detail);
         if ($parsed !== null) {

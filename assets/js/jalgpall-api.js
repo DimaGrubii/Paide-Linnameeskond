@@ -1705,6 +1705,15 @@ const JalgpallSync = (function () {
       return;
     }
 
+    if ((liveMatchState.liveStatus || '').toUpperCase() === 'HT') {
+      statusLabelEl.textContent = 'VAHEAEG';
+      timerEl.textContent = 'POOLAEG';
+      if (pingEl) pingEl.className = 'animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75';
+      if (dotEl) dotEl.className = 'relative inline-flex rounded-full h-2 w-2 bg-amber-500';
+      if (badgeEl) badgeEl.className = 'inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 font-mono text-[10px] font-bold uppercase tracking-widest shadow-sm';
+      return;
+    }
+
     if (!koMs) {
       statusLabelEl.textContent = 'OTSE';
       timerEl.textContent = liveMatchState.kickoffTimeStr || 'LIVE';
@@ -1819,7 +1828,7 @@ const JalgpallSync = (function () {
 
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 5000);
+      const timeoutId = setTimeout(() => controller.abort(), 12000);
       const phpRes = await fetch(`live-match.php?_t=${Date.now()}`, { cache: 'no-store', signal: controller.signal });
       clearTimeout(timeoutId);
 
@@ -1877,6 +1886,7 @@ const JalgpallSync = (function () {
               awayScore: m.awayScore ?? m.scoreAway ?? 0,
               halftimeScore: m.halftimeScore ?? m.htScore ?? null,
               statusLabel: m.statusLabel || 'Hetkeseis',
+              liveStatus: m.liveStatus ?? null,
               liveMinute: m.liveMinute ?? null,
               liveExtraMinute: m.liveExtraMinute ?? null,
               goals: normalizedGoals,
