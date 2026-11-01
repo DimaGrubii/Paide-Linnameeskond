@@ -2,7 +2,7 @@
   "metadata": {
     "source": "Eesti Jalgpalli Liit (EJL OpenData API v1)",
     "sourceUrl": "https://opendata.jalgpall.ee/api/v1",
-    "lastUpdated": "2026-11-01T13:25:47.627228+02:00",
+    "lastUpdated": "2026-11-01T19:13:15.147369+02:00",
     "season": "2026",
     "status": "success"
   },
@@ -1820,22 +1820,16 @@
         "teamId": 4,
         "logo": "https://jalgpall.ee/images/teams/9FA11522AB09B90003E8875D5B25116A",
         "localLogo": "assets/img/jalgpall_logos/flora.png",
-        "played": 34,
-        "won": 19,
+        "played": 35,
+        "won": 20,
         "drawn": 1,
         "lost": 14,
-        "goalsFor": 64,
+        "goalsFor": 66,
         "goalsAgainst": 49,
-        "goalDifference": "+15",
-        "points": 58,
+        "goalDifference": "+17",
+        "points": 61,
         "isPaide": false,
         "form": [
-          {
-            "result": "K",
-            "type": "loss",
-            "score": "2:0 vs FC Kuressaare",
-            "opponent": "FC Kuressaare"
-          },
           {
             "result": "K",
             "type": "loss",
@@ -1859,6 +1853,12 @@
             "type": "loss",
             "score": "2:1 vs Nõmme Kalju FC",
             "opponent": "Nõmme Kalju FC"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "2:0 vs JK Narva Trans",
+            "opponent": "JK Narva Trans"
           }
         ],
         "seasonHistory": [
@@ -2269,6 +2269,18 @@
             "date": "25.10.2026 14:30",
             "isHome": false,
             "round": 34
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "2:0 vs JK Narva Trans",
+            "matchScore": "2:0",
+            "homeTeam": "Tallinna FC Flora",
+            "awayTeam": "JK Narva Trans",
+            "opponent": "JK Narva Trans",
+            "date": "01.11.2026 14:30",
+            "isHome": true,
+            "round": 35
           }
         ]
       },
@@ -2279,13 +2291,13 @@
         "logo": "https://jalgpall.ee/images/logos/C287B9A18B8C02FDA9A7E921E6D3E645",
         "localLogo": "assets/img/jalgpall_logos/kalju.png",
         "played": 35,
-        "won": 17,
-        "drawn": 7,
+        "won": 18,
+        "drawn": 6,
         "lost": 11,
-        "goalsFor": 58,
+        "goalsFor": 59,
         "goalsAgainst": 34,
-        "goalDifference": "+24",
-        "points": 58,
+        "goalDifference": "+25",
+        "points": 60,
         "isPaide": false,
         "form": [
           {
@@ -2313,9 +2325,9 @@
             "opponent": "Paide Linnameeskond"
           },
           {
-            "result": "X",
-            "type": "draw",
-            "score": "0:0 vs FC Kuressaare",
+            "result": "V",
+            "type": "win",
+            "score": "1:0 vs FC Kuressaare",
             "opponent": "FC Kuressaare"
           }
         ],
@@ -2729,10 +2741,10 @@
             "round": 34
           },
           {
-            "type": "draw",
-            "result": "X",
-            "score": "0:0 vs FC Kuressaare",
-            "matchScore": "0:0",
+            "type": "win",
+            "result": "V",
+            "score": "1:0 vs FC Kuressaare",
+            "matchScore": "1:0",
             "homeTeam": "Nõmme Kalju FC",
             "awayTeam": "FC Kuressaare",
             "opponent": "FC Kuressaare",
@@ -4630,12 +4642,12 @@
         "localLogo": "assets/img/jalgpall_logos/kuressaare.png",
         "played": 35,
         "won": 10,
-        "drawn": 7,
-        "lost": 18,
+        "drawn": 6,
+        "lost": 19,
         "goalsFor": 35,
-        "goalsAgainst": 53,
-        "goalDifference": "-18",
-        "points": 37,
+        "goalsAgainst": 54,
+        "goalDifference": "-19",
+        "points": 36,
         "isPaide": false,
         "form": [
           {
@@ -4663,9 +4675,9 @@
             "opponent": "Pärnu JK Vaprus"
           },
           {
-            "result": "X",
-            "type": "draw",
-            "score": "0:0 vs Nõmme Kalju FC",
+            "result": "K",
+            "type": "loss",
+            "score": "1:0 vs Nõmme Kalju FC",
             "opponent": "Nõmme Kalju FC"
           }
         ],
@@ -5079,10 +5091,10 @@
             "round": 34
           },
           {
-            "type": "draw",
-            "result": "X",
-            "score": "0:0 vs Nõmme Kalju FC",
-            "matchScore": "0:0",
+            "type": "loss",
+            "result": "K",
+            "score": "1:0 vs Nõmme Kalju FC",
+            "matchScore": "1:0",
             "homeTeam": "Nõmme Kalju FC",
             "awayTeam": "FC Kuressaare",
             "opponent": "Nõmme Kalju FC",
@@ -5098,22 +5110,16 @@
         "teamId": 14,
         "logo": "https://jalgpall.ee/images/clubs/4A3FF0803D0C049C81C5924B98567A9E",
         "localLogo": "assets/img/jalgpall_logos/trans.png",
-        "played": 34,
+        "played": 35,
         "won": 5,
         "drawn": 5,
-        "lost": 24,
+        "lost": 25,
         "goalsFor": 26,
-        "goalsAgainst": 76,
-        "goalDifference": "-50",
+        "goalsAgainst": 78,
+        "goalDifference": "-52",
         "points": 20,
         "isPaide": false,
         "form": [
-          {
-            "result": "X",
-            "type": "draw",
-            "score": "2:2 vs Pärnu JK Vaprus",
-            "opponent": "Pärnu JK Vaprus"
-          },
           {
             "result": "K",
             "type": "loss",
@@ -5137,6 +5143,12 @@
             "type": "loss",
             "score": "0:1 vs FC Nõmme United",
             "opponent": "FC Nõmme United"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "2:0 vs Tallinna FC Flora",
+            "opponent": "Tallinna FC Flora"
           }
         ],
         "seasonHistory": [
@@ -5547,6 +5559,18 @@
             "date": "27.10.2026 18:00",
             "isHome": true,
             "round": 34
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "2:0 vs Tallinna FC Flora",
+            "matchScore": "2:0",
+            "homeTeam": "Tallinna FC Flora",
+            "awayTeam": "JK Narva Trans",
+            "opponent": "Tallinna FC Flora",
+            "date": "01.11.2026 14:30",
+            "isHome": false,
+            "round": 35
           }
         ]
       }
