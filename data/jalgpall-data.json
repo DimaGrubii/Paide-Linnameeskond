@@ -2,7 +2,7 @@
   "metadata": {
     "source": "Eesti Jalgpalli Liit (EJL OpenData API v1)",
     "sourceUrl": "https://opendata.jalgpall.ee/api/v1",
-    "lastUpdated": "2026-11-01T06:09:22.033046+02:00",
+    "lastUpdated": "2026-11-01T13:25:47.627228+02:00",
     "season": "2026",
     "status": "success"
   },
@@ -2278,22 +2278,16 @@
         "teamId": 3136,
         "logo": "https://jalgpall.ee/images/logos/C287B9A18B8C02FDA9A7E921E6D3E645",
         "localLogo": "assets/img/jalgpall_logos/kalju.png",
-        "played": 34,
+        "played": 35,
         "won": 17,
-        "drawn": 6,
+        "drawn": 7,
         "lost": 11,
         "goalsFor": 58,
         "goalsAgainst": 34,
         "goalDifference": "+24",
-        "points": 57,
+        "points": 58,
         "isPaide": false,
         "form": [
-          {
-            "result": "K",
-            "type": "loss",
-            "score": "0:1 vs Harju JK Laagri",
-            "opponent": "Harju JK Laagri"
-          },
           {
             "result": "X",
             "type": "draw",
@@ -2317,6 +2311,12 @@
             "type": "win",
             "score": "0:2 vs Paide Linnameeskond",
             "opponent": "Paide Linnameeskond"
+          },
+          {
+            "result": "X",
+            "type": "draw",
+            "score": "0:0 vs FC Kuressaare",
+            "opponent": "FC Kuressaare"
           }
         ],
         "seasonHistory": [
@@ -2727,6 +2727,18 @@
             "date": "28.10.2026 19:00",
             "isHome": false,
             "round": 34
+          },
+          {
+            "type": "draw",
+            "result": "X",
+            "score": "0:0 vs FC Kuressaare",
+            "matchScore": "0:0",
+            "homeTeam": "Nõmme Kalju FC",
+            "awayTeam": "FC Kuressaare",
+            "opponent": "FC Kuressaare",
+            "date": "01.11.2026 12:30",
+            "isHome": true,
+            "round": 35
           }
         ]
       },
@@ -4616,22 +4628,16 @@
         "teamId": 76,
         "logo": "https://jalgpall.ee/images/logos/82513CF228618115FBB68121D90A730F",
         "localLogo": "assets/img/jalgpall_logos/kuressaare.png",
-        "played": 34,
+        "played": 35,
         "won": 10,
-        "drawn": 6,
+        "drawn": 7,
         "lost": 18,
         "goalsFor": 35,
         "goalsAgainst": 53,
         "goalDifference": "-18",
-        "points": 36,
+        "points": 37,
         "isPaide": false,
         "form": [
-          {
-            "result": "V",
-            "type": "win",
-            "score": "2:0 vs Tallinna FC Flora",
-            "opponent": "Tallinna FC Flora"
-          },
           {
             "result": "V",
             "type": "win",
@@ -4655,6 +4661,12 @@
             "type": "draw",
             "score": "1:1 vs Pärnu JK Vaprus",
             "opponent": "Pärnu JK Vaprus"
+          },
+          {
+            "result": "X",
+            "type": "draw",
+            "score": "0:0 vs Nõmme Kalju FC",
+            "opponent": "Nõmme Kalju FC"
           }
         ],
         "seasonHistory": [
@@ -5065,6 +5077,18 @@
             "date": "28.10.2026 18:00",
             "isHome": false,
             "round": 34
+          },
+          {
+            "type": "draw",
+            "result": "X",
+            "score": "0:0 vs Nõmme Kalju FC",
+            "matchScore": "0:0",
+            "homeTeam": "Nõmme Kalju FC",
+            "awayTeam": "FC Kuressaare",
+            "opponent": "Nõmme Kalju FC",
+            "date": "01.11.2026 12:30",
+            "isHome": false,
+            "round": 35
           }
         ]
       },
