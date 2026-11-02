@@ -82,15 +82,13 @@ function loadPollData($jsonFile) {
 $method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
 
 // ============================================================================
-// GET: Return public poll summary (without exposing voter emails)
+// GET: Return public poll status (standings & vote counts are internal only)
 // ============================================================================
 if ($method === 'GET') {
     $pollData = loadPollData($jsonFile);
     echo json_encode(array(
-        'ok'          => true,
-        'updated_at'  => isset($pollData['updated_at']) ? $pollData['updated_at'] : date('c'),
-        'total_votes' => $pollData['total_votes'],
-        'standings'   => $pollData['standings']
+        'ok'         => true,
+        'updated_at' => isset($pollData['updated_at']) ? $pollData['updated_at'] : date('c')
     ));
     exit;
 }
@@ -322,7 +320,5 @@ echo json_encode(array(
     'squad'                 => $squad,
     'other_squad'           => $otherSquad,
     'has_voted_other_squad' => $hasVotedOtherSquad,
-    'player_name'           => $playerName,
-    'total_votes'           => $pollData['total_votes'],
-    'standings'             => $pollData['standings']
+    'player_name'           => $playerName
 ));

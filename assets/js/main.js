@@ -2155,61 +2155,12 @@ function initSeasonPlayerPoll() {
     showStep(3);
   }
 
-  function renderLeaderboardOnSuccess(squadKey, apiResult) {
-    const lbContainer = document.getElementById('poll-live-leaderboard');
-    const totalEl = document.getElementById('poll-live-total-votes');
-    if (!lbContainer) return;
-
-    let topList = [];
-    let totalVotes = 1;
-
-    if (
-      apiResult &&
-      apiResult.standings &&
-      apiResult.standings[squadKey] &&
-      typeof apiResult.standings[squadKey] === 'object'
-    ) {
-      const entries = Object.entries(apiResult.standings[squadKey]).map(([name, votes]) => ({
-        name,
-        votes: Number(votes) || 0
-      }));
-      entries.sort((a, b) => b.votes - a.votes);
-      topList = entries.slice(0, 3);
-      totalVotes =
-        (apiResult.total_votes && Number(apiResult.total_votes[squadKey])) ||
-        entries.reduce((acc, r) => acc + r.votes, 0) ||
-        1;
-    } else if (apiResult && Array.isArray(apiResult.leaderboard) && apiResult.leaderboard.length > 0) {
-      topList = apiResult.leaderboard.slice(0, 3);
-      totalVotes = apiResult.totalSquadVotes || topList.reduce((acc, r) => acc + (r.votes || 0), 0);
-    } else {
-      const localStore = getLocalVotes();
-      const countsObj = (localStore[squadKey] && localStore[squadKey].counts) || {};
-      const arr = Object.values(countsObj).sort((a, b) => (b.votes || 0) - (a.votes || 0));
-      topList = arr.slice(0, 3);
-      totalVotes = arr.reduce((acc, r) => acc + (r.votes || 0), 0) || 1;
+  function renderLeaderboardOnSuccess() {
+    const lbWrap = document.getElementById('poll-live-leaderboard-wrap');
+    if (lbWrap) {
+      lbWrap.classList.add('hidden');
+      lbWrap.style.display = 'none';
     }
-
-    if (totalEl) {
-      totalEl.textContent = `Kokku hääli: ${totalVotes}`;
-    }
-
-    lbContainer.innerHTML = topList
-      .map((item, idx) => {
-        const pct = totalVotes > 0 ? Math.round(((item.votes || 1) / totalVotes) * 100) : 100;
-        return `
-          <div class="space-y-1">
-            <div class="flex items-center justify-between text-xs font-sans">
-              <span class="font-bold text-navy truncate">${idx + 1}. ${item.name}</span>
-              <span class="font-mono font-bold text-crimson">${item.votes || 1} (${pct}%)</span>
-            </div>
-            <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
-              <div class="h-full ${idx === 0 ? 'bg-crimson' : 'bg-navy'} rounded-full" style="width: ${pct}%"></div>
-            </div>
-          </div>
-        `;
-      })
-      .join('');
   }
 
   function openPollModal(preselectedPlayer = null) {
