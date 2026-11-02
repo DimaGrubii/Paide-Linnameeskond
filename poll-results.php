@@ -74,6 +74,27 @@ foreach ($backupCandidates as $bFile) {
                     ? json_encode($pollData, JSON_PRETTY_PRINT | (defined('JSON_UNESCAPED_UNICODE') ? JSON_UNESCAPED_UNICODE : 0))
                     : json_encode($pollData);
                 @file_put_contents($jsonFile, $jsonEncoded, LOCK_EX);
+
+                // Also sync CSV file with merged votes
+                $fp = @fopen($csvFile, 'w');
+                if ($fp) {
+                    if (@flock($fp, LOCK_EX)) {
+                        @fwrite($fp, "\xEF\xBB\xBF");
+                        @fputcsv($fp, array('Aeg', 'Kategooria', 'Mängija', 'Särginumber', 'Positsioon', 'E-post'));
+                        foreach ($mergedVotes as $mv) {
+                            @fputcsv($fp, array(
+                                isset($mv['date_readable']) ? $mv['date_readable'] : '',
+                                isset($mv['squad_label']) ? $mv['squad_label'] : 'Esindusmeeskond',
+                                isset($mv['player_name']) ? $mv['player_name'] : '',
+                                isset($mv['player_number']) ? $mv['player_number'] : '',
+                                isset($mv['player_role']) ? $mv['player_role'] : '',
+                                isset($mv['email']) ? $mv['email'] : ''
+                            ));
+                        }
+                        @flock($fp, LOCK_UN);
+                    }
+                    @fclose($fp);
+                }
             }
         }
     }
