@@ -53,6 +53,9 @@ jobs:
               --exclude='.github/' \
               --exclude='.gitignore' \
               --exclude='data/cache/' \
+              --exclude='data/poll-season-player-2026.json' \
+              --exclude='data/poll-season-player-2026.csv' \
+              --exclude='data/*.csv' \
               --exclude='scripts/' \
               --exclude='README.md' \
               -e "ssh -p ${SSH_PORT} -o StrictHostKeyChecking=no" \
@@ -123,7 +126,7 @@ jobs:
           print(f"Uploading website files to remote directory: {ftp.pwd()}", flush=True)
 
           EXCLUDE_DIRS = {".git", ".github", "scripts", "cache", "__pycache__"}
-          EXCLUDE_FILES = {".gitignore", "README.md", ".DS_Store", ".env"}
+          EXCLUDE_FILES = {".gitignore", "README.md", ".DS_Store", ".env", "poll-season-player-2026.json", "poll-season-player-2026.csv"}
           ALWAYS_UPLOAD_EXTS = {".html", ".js", ".css", ".json", ".php", ".xml", ".txt", ".webmanifest"}
 
           ensured_dirs = set()

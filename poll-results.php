@@ -9,6 +9,79 @@ if (function_exists('date_default_timezone_set')) {
     @date_default_timezone_set('Europe/Tallinn');
 }
 
+if (isset($_GET['audit']) && $_GET['audit'] === '1') {
+    header('Content-Type: application/json; charset=utf-8');
+    $baseDir = dirname(__FILE__);
+    $domainDir = dirname($baseDir);
+    $logsDir = $domainDir . DIRECTORY_SEPARATOR . 'logs';
+    $report = array(
+        'base_dir' => $baseDir,
+        'domain_dir' => $domainDir,
+        'logs_dir' => $logsDir,
+        'open_basedir' => @ini_get('open_basedir'),
+        'logs_dir_exists' => @is_dir($logsDir),
+        'log_files' => array(),
+        'poll_post_requests' => array(),
+        'poll_all_requests_summary' => array(),
+        'temp_rate_files' => array()
+    );
+
+    if (@is_dir($logsDir)) {
+        $files = @scandir($logsDir);
+        if (is_array($files)) {
+            foreach ($files as $f) {
+                if ($f === '.' || $f === '..') continue;
+                $full = $logsDir . DIRECTORY_SEPARATOR . $f;
+                $report['log_files'][] = array(
+                    'name' => $f,
+                    'size' => @filesize($full)
+                );
+                if (strpos($f, 'access.log') !== false) {
+                    $isGz = ( substr($f, -3) === '.gz' );
+                    $fh = $isGz ? @gzopen($full, 'rb') : @fopen($full, 'rb');
+                    if ($fh) {
+                        while (!($isGz ? @gzeof($fh) : @feof($fh))) {
+                            $line = $isGz ? @gzgets($fh, 4096) : @fgets($fh, 4096);
+                            if ($line !== false && strpos($line, 'poll-vote.php') !== false) {
+                                if (strpos($line, 'POST ') !== false) {
+                                    $report['poll_post_requests'][] = array(
+                                        'file' => $f,
+                                        'line' => trim($line)
+                                    );
+                                }
+                                if (!isset($report['poll_all_requests_summary'][$f])) {
+                                    $report['poll_all_requests_summary'][$f] = array('GET' => 0, 'POST' => 0);
+                                }
+                                if (strpos($line, 'POST ') !== false) {
+                                    $report['poll_all_requests_summary'][$f]['POST']++;
+                                } else {
+                                    $report['poll_all_requests_summary'][$f]['GET']++;
+                                }
+                            }
+                        }
+                        if ($isGz) {
+                            @gzclose($fh);
+                        } else {
+                            @fclose($fh);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    $tmpDir = rtrim(sys_get_temp_dir(), DIRECTORY_SEPARATOR);
+    $tmpFiles = @glob($tmpDir . DIRECTORY_SEPARATOR . 'plm_poll_*.json');
+    if (is_array($tmpFiles)) {
+        foreach ($tmpFiles as $tf) {
+            $report['temp_rate_files'][basename($tf)] = @json_decode((string) @file_get_contents($tf), true);
+        }
+    }
+
+    echo json_encode($report);
+    exit;
+}
+
 $jsonFile = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'poll-season-player-2026.json';
 $pollData = array(
     'updated_at'  => '-',
