@@ -1535,7 +1535,7 @@ function initNewsletterForms() {
 /* -------------------------------------------------------------------------- */
 function initSeasonPlayerPoll() {
   const section = document.getElementById('player-of-season-poll');
-  if (!section) return;
+  if (!section || section.classList.contains('hidden') || section.style.display === 'none') return;
 
   const row1El = document.getElementById('poll-showcase-row-1');
   const row2El = document.getElementById('poll-showcase-row-2');

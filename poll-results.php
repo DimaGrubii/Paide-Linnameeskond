@@ -178,9 +178,9 @@ function h($str) {
         <div>
           <div class="flex flex-wrap items-center gap-2">
             <span class="text-xs font-bold uppercase tracking-widest text-crimson">Backend Raport • Hooaeg 2026</span>
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold uppercase tracking-wider">
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Hääletus on avatud
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-700 text-[11px] font-bold uppercase tracking-wider">
+              <span class="w-2 h-2 rounded-full bg-slate-500"></span>
+              Hääletus on lõppenud
             </span>
           </div>
           <h1 class="font-display font-black text-2xl sm:text-3xl text-navy uppercase mt-0.5">Hooaja Mängija Hääletuse Tulemused</h1>
@@ -196,8 +196,8 @@ function h($str) {
         <a href="data/poll-season-player-2026.json" target="_blank" class="px-4 py-2 rounded-xl bg-white border border-slate-200 text-navy text-xs font-bold uppercase tracking-wider hover:border-navy transition-colors">
           Ava JSON fail
         </a>
-        <a href="index.html#player-of-season-poll" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider hover:bg-slate-200 transition-colors">
-          ← Avalehele hääletama
+        <a href="index.html" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider hover:bg-slate-200 transition-colors">
+          ← Avalehele
         </a>
       </div>
     </div>

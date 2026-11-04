@@ -88,6 +88,7 @@ if ($method === 'GET') {
     $pollData = loadPollData($jsonFile);
     echo json_encode(array(
         'ok'         => true,
+        'closed'     => true,
         'updated_at' => isset($pollData['updated_at']) ? $pollData['updated_at'] : date('c')
     ));
     exit;
@@ -101,6 +102,17 @@ if ($method !== 'POST') {
     ));
     exit;
 }
+
+// ============================================================================
+// POLL CLOSED: Reject new votes
+// ============================================================================
+setStatus(403);
+echo json_encode(array(
+    'ok'     => false,
+    'closed' => true,
+    'error'  => 'Hooaja parima mängija hääletamine on lõppenud!'
+));
+exit;
 
 // ============================================================================
 // POST: Parse & Validate Vote
