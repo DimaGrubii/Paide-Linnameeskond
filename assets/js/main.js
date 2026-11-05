@@ -584,13 +584,13 @@ function initMatchdayToggle() {
 /* 6. HERO EDITORIAL STORIES SWITCHER                                         */
 /* -------------------------------------------------------------------------- */
 const defaultHeroStory = {
-  tag: 'A. LE COQ PREMIUM LIIGA • PAIDE 0:2 NÕMME KALJU',
-  title: 'PAIDE LINNAMEESKOND JÄI KODUVÄLJAKUL NÕMME KALJULE ALLA',
-  date: '30. OKTOOBER 2026',
+  tag: 'NAISTE MEISTRILIIGA • TIITLIMÄNG 8.11 KELL 17.00',
+  title: 'TIITLIMÄNGU JUHATAB SISSE TRAFFIC!',
+  date: '5. NOVEMBER 2026',
   readTime: '2 MIN LUGEMIST',
-  desc: 'Paide Linnameeskond pidi kolmapäeval, 28. oktoobril A. Le Coq Premium liiga 34. voorus tunnistama koduväljakul Nõmme Kalju FC 2:0 paremust. Medalikohtade nimel heitlevate meeskondade vastasseisus lõid külalised värava kummalgi poolajal.',
-  image: 'assets/img/news/PLM-Kalju_loss.JPEG',
-  link: 'artikkel-nomme-kalju-kaotus.html',
+  desc: 'Pühapäeval, 8. novembril ootab Paide kunstmurustaadionil ees ajaloolise kaaluga jalgpallipidu! Paide Linnanaiskond asub jahtima klubi ajaloo esimest Eesti meistritiitlit ning suurele vutipäevale annab hoo sisse armastatud Eesti pop-rock-bänd Traffic!',
+  image: 'assets/img/news/traffic.png',
+  link: 'artikkel-tiitlimang-traffic.html',
   btnText: 'Loe täispikka uudist'
 };
 
@@ -1107,6 +1107,16 @@ function initNewsFilters() {
       },
       secondary: [
         {
+          href: 'artikkel-tiitlimang-traffic.html',
+          img: 'assets/img/news/traffic.png',
+          alt: 'Tiitlimängu juhatab sisse Traffic!',
+          badge: 'LINNANAISKOND',
+          badgeClass: 'bg-crimson',
+          date: '5. NOVEMBER 2026 • 2 MIN',
+          title: 'Tiitlimängu juhatab sisse Traffic!',
+          excerpt: 'Pühapäeval, 8. novembril ootab Paide kunstmurustaadionil ees ajaloolise kaaluga jalgpallipidu! Paide Linnanaiskond asub jahtima klubi ajaloo esimest Eesti meistritiitlit ning suurele vutipäevale annab hoo sisse Traffic!'
+        },
+        {
           href: 'artikkel-nomme-kalju-kaotus.html',
           img: 'assets/img/news/PLM-Kalju_loss.JPEG',
           alt: 'Paide Linnameeskond jäi koduväljakul Nõmme Kaljule alla',
@@ -1125,16 +1135,6 @@ function initNewsFilters() {
           date: '27. OKTOOBER 2026 • 3 MIN',
           title: 'Paide Linnameeskond ja Connecto alustasid koostööd!',
           excerpt: 'Paide Linnameeskond ja AS Connecto Infra alustasid koostööd, mille tulemusena liitub Connecto klubi toetajate ringiga ning Connecto logo jõuab esindusmeeskonna võistlusvormi esiküljele!'
-        },
-        {
-          href: 'artikkel-kuressaare-voit-teiseks.html',
-          img: 'assets/img/news/kuressaare_PLM_Victory.JPEG',
-          alt: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
-          badge: 'ESINDUSMEESKOND',
-          badgeClass: 'bg-navy',
-          date: '27. OKTOOBER 2026 • 2 MIN',
-          title: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
-          excerpt: 'Paide Linnameeskond naasis Saaremaalt kolme väärtusliku punktiga, alistades võõrsil FC Kuressaare 1:0 Juan Sebastian Palaciose tabamusest!'
         }
       ]
     },
@@ -1189,21 +1189,31 @@ function initNewsFilters() {
     },
     naiskond: {
       lead: {
-        img: 'assets/img/news/PLN_Elva_Victory.JPEG',
-        alt: 'Paide Linnanaiskonna 4:0 võit FC Elva üle',
+        img: 'assets/img/news/traffic.png',
+        alt: 'Tiitlimängu juhatab sisse Traffic!',
         badge1: 'NAISTE MEISTRILIIGA',
-        badge2: 'PAIDE 4:0 ELVA',
-        metaLeft: 'Paide Linnanaiskond 4 : 0 FC Elva',
-        metaRight: '26. OKTOOBER 2026',
-        kicker: 'PAIDE LINNANAISKOND • MÄNGUÜLEVAADE',
-        title: 'Linnanaiskond alistas Elva ja jätkab meistritiitli jahti!',
-        href: 'artikkel-linnanaiskond-elva-voit.html',
-        excerpt: 'Paide Linnanaiskond jätkas naiste Meistriliiga hooaja lõpusirgel võidulainel, kui laupäeval, 24. oktoobril alistati kodusel kunstmuruväljakul FC Elva naiskond kindlalt 4:0. Kaks väravat said kirja nii Lisandra Rannasto kui ka Katriin Rodi!',
+        badge2: 'TIITLIMÄNG 8.11',
+        metaLeft: 'Paide Linnanaiskond vs Harju JK Laagri',
+        metaRight: '5. NOVEMBER 2026',
+        kicker: 'PAIDE LINNANAISKOND • TIITLIMÄNG',
+        title: 'Tiitlimängu juhatab sisse Traffic!',
+        href: 'artikkel-tiitlimang-traffic.html',
+        excerpt: 'Pühapäeval, 8. novembril ootab Paide kunstmurustaadionil ees ajaloolise kaaluga jalgpallipidu! Paide Linnanaiskond asub jahtima klubi ajaloo esimest Eesti meistritiitlit ning suurele vutipäevale annab hoo sisse armastatud Eesti pop-rock-bänd Traffic!',
         author: 'Paide Linnanaiskond',
         avatar: 'assets/img/photos/female_team_article.jpg',
         ctaText: 'Loe täispikka uudist'
       },
       secondary: [
+        {
+          href: 'artikkel-linnanaiskond-elva-voit.html',
+          img: 'assets/img/news/PLN_Elva_Victory.JPEG',
+          alt: 'Linnanaiskond alistas Elva ja jätkab meistritiitli jahti!',
+          badge: 'LINNANAISKOND',
+          badgeClass: 'bg-crimson',
+          date: '26. OKTOOBER 2026 • 2 MIN',
+          title: 'Linnanaiskond alistas Elva ja jätkab meistritiitli jahti!',
+          excerpt: 'Paide Linnanaiskond jätkas naiste Meistriliiga hooaja lõpusirgel võidulainel, kui laupäeval, 24. oktoobril alistati kodusel kunstmuruväljakul FC Elva naiskond kindlalt 4:0!'
+        },
         {
           href: 'artikkel-linnanaiskond-flora-voit.html',
           img: 'assets/img/news/PLN_FCF_Victory.JPEG',
@@ -1223,16 +1233,6 @@ function initNewsFilters() {
           date: '18. SEPTEMBER 2026 • 2 MIN',
           title: 'Linnanaiskond sai esimese välismängija',
           excerpt: 'Paide Linnanaiskonnaga liitus 23-aastane ameeriklannast ründaja Kennedy Avery Mayo (#21), kellest saab ühtlasi meie naiskonna ajaloo esimene välismängija.'
-        },
-        {
-          href: 'artikkel-naiskond-nora-mai-kool.html',
-          img: 'assets/img/news/naiskond-taiendas-ridu-aarekaitsjaga.jpg',
-          alt: 'Naiskond täiendas ridu äärekaitsjaga',
-          badge: 'NAISMEESKOND',
-          badgeClass: 'bg-crimson',
-          date: '06. AUGUST 2026 • 2 MIN',
-          title: 'Naiskond täiendas ridu äärekaitsjaga',
-          excerpt: 'Paide Linnanaiskonnaga liitus Eesti noortekoondise äärekaitsja Nora-Mai Kool, tuues naiskonna kaitseliini lisajõudu ja kiirust.'
         }
       ]
     },
