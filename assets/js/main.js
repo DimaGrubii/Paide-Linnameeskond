@@ -584,13 +584,13 @@ function initMatchdayToggle() {
 /* 6. HERO EDITORIAL STORIES SWITCHER                                         */
 /* -------------------------------------------------------------------------- */
 const defaultHeroStory = {
-  tag: 'ESINDUSMEESKOND • HENRIK OJAMAA',
-  title: 'HENRIK OJAMAA LÕPETAB PIKA JA EDUKA PROFIKARJÄÄRI',
-  date: '5. NOVEMBER 2026',
-  readTime: '3 MIN LUGEMIST',
-  desc: 'Paide Linnameeskonna ääreründaja, 63 korda Eesti rahvuskoondist esindanud ning pika ja värvika väliskarjääri jooksul kümne riigi klubides mänginud Henrik Ojamaa (35) on otsustanud lõppeva hooaja järel oma ligi 20 aastat kestnud profijalgpallurikarjäärile joone alla tõmmata.',
-  image: 'assets/img/news/Henrik_Ojamaa_last_match.jpeg',
-  link: 'artikkel-henrik-ojamaa-lopetab-karjaari.html',
+  tag: 'ESINDUSMEESKOND • PEATREENER',
+  title: 'PAIDE LINNAMEESKONNA PEATREENERINA JÄTKAB TARMO KINK!',
+  date: '6. NOVEMBER 2026',
+  readTime: '2 MIN LUGEMIST',
+  desc: '2026. aasta aprillis Paide Linnameeskonna peatreeneri kohusetäitjana ametisse asunud Tarmo Kink sõlmis klubiga uue lepingu ja jätkab klubi peatreenerina. Lepingu kestvuseks on kolm aastat.',
+  image: 'assets/img/news/Taki_contract.jpeg',
+  link: 'artikkel-tarmo-kink-jatkab-peatreenerina.html',
   btnText: 'Loe täispikka uudist'
 };
 
@@ -1107,6 +1107,16 @@ function initNewsFilters() {
       },
       secondary: [
         {
+          href: 'artikkel-tarmo-kink-jatkab-peatreenerina.html',
+          img: 'assets/img/news/Taki_contract.jpeg',
+          alt: 'Paide Linnameeskonna peatreenerina jätkab Tarmo Kink!',
+          badge: 'ESINDUSMEESKOND',
+          badgeClass: 'bg-navy',
+          date: '6. NOVEMBER 2026 • 2 MIN',
+          title: 'Paide Linnameeskonna peatreenerina jätkab Tarmo Kink!',
+          excerpt: '2026. aasta aprillis Paide Linnameeskonna peatreeneri kohusetäitjana ametisse asunud Tarmo Kink sõlmis klubiga uue lepingu ja jätkab klubi peatreenerina. Lepingu kestvuseks on kolm aastat.'
+        },
+        {
           href: 'artikkel-henrik-ojamaa-lopetab-karjaari.html',
           img: 'assets/img/news/Henrik_Ojamaa_last_match.jpeg',
           alt: 'Henrik Ojamaa lõpetab pika ja eduka profikarjääri',
@@ -1125,36 +1135,36 @@ function initNewsFilters() {
           date: '5. NOVEMBER 2026 • 2 MIN',
           title: 'Tiitlimängu juhatab sisse Traffic!',
           excerpt: 'Pühapäeval, 8. novembril ootab Paide kunstmurustaadionil ees ajaloolise kaaluga jalgpallipidu! Paide Linnanaiskond asub jahtima klubi ajaloo esimest Eesti meistritiitlit ning suurele vutipäevale annab hoo sisse Traffic!'
-        },
-        {
-          href: 'artikkel-nomme-kalju-kaotus.html',
-          img: 'assets/img/news/PLM-Kalju_loss.JPEG',
-          alt: 'Paide Linnameeskond jäi koduväljakul Nõmme Kaljule alla',
-          badge: 'ESINDUSMEESKOND',
-          badgeClass: 'bg-navy',
-          date: '30. OKTOOBER 2026 • 2 MIN',
-          title: 'Paide Linnameeskond jäi koduväljakul Nõmme Kaljule alla',
-          excerpt: 'Paide Linnameeskond pidi kolmapäeval, 28. oktoobril A. Le Coq Premium liiga 34. voorus tunnistama koduväljakul Nõmme Kalju FC 2:0 paremust.'
         }
       ]
     },
     esindus: {
       lead: {
-        img: 'assets/img/news/Henrik_Ojamaa_last_match.jpeg',
-        alt: 'Henrik Ojamaa lõpetab pika ja eduka profikarjääri',
+        img: 'assets/img/news/Taki_contract.jpeg',
+        alt: 'Paide Linnameeskonna peatreenerina jätkab Tarmo Kink!',
         badge1: 'ESINDUSMEESKOND',
-        badge2: 'HENRIK OJAMAA',
-        metaLeft: '95 mängu • 10 väravat • 18 väravasöötu Paides',
-        metaRight: '5. NOVEMBER 2026',
-        kicker: 'ESINDUSMEESKOND • PROFIKARJÄÄRI LÕPP',
-        title: 'Henrik Ojamaa lõpetab pika ja eduka profikarjääri',
-        href: 'artikkel-henrik-ojamaa-lopetab-karjaari.html',
-        excerpt: 'Paide Linnameeskonna ääreründaja, 63 korda Eesti rahvuskoondist esindanud ning pika ja värvika väliskarjääri jooksul kümne riigi klubides mänginud Henrik Ojamaa (35) on otsustanud lõppeva hooaja järel oma ligi 20 aastat kestnud profijalgpallurikarjäärile joone alla tõmmata.',
+        badge2: 'PEATREENER',
+        metaLeft: 'Tarmo Kink • 3-aastane leping',
+        metaRight: '6. NOVEMBER 2026',
+        kicker: 'ESINDUSMEESKOND • PEATREENER',
+        title: 'Paide Linnameeskonna peatreenerina jätkab Tarmo Kink!',
+        href: 'artikkel-tarmo-kink-jatkab-peatreenerina.html',
+        excerpt: '2026. aasta aprillis Paide Linnameeskonna peatreeneri kohusetäitjana ametisse asunud Tarmo Kink sõlmis klubiga uue lepingu ja jätkab klubi peatreenerina. Lepingu kestvuseks on kolm aastat.',
         author: 'Paide Linnameeskond',
         avatar: 'assets/img/photos/main_team_article.jpeg',
         ctaText: 'Loe täispikka uudist'
       },
       secondary: [
+        {
+          href: 'artikkel-henrik-ojamaa-lopetab-karjaari.html',
+          img: 'assets/img/news/Henrik_Ojamaa_last_match.jpeg',
+          alt: 'Henrik Ojamaa lõpetab pika ja eduka profikarjääri',
+          badge: 'ESINDUSMEESKOND',
+          badgeClass: 'bg-navy',
+          date: '5. NOVEMBER 2026 • 3 MIN',
+          title: 'Henrik Ojamaa lõpetab pika ja eduka profikarjääri',
+          excerpt: 'Paide Linnameeskonna ääreründaja, 63 korda Eesti rahvuskoondist esindanud Henrik Ojamaa (35) on otsustanud lõppeva hooaja järel oma ligi 20 aastat kestnud profijalgpallurikarjäärile joone alla tõmmata.'
+        },
         {
           href: 'artikkel-nomme-kalju-kaotus.html',
           img: 'assets/img/news/PLM-Kalju_loss.JPEG',
@@ -1174,16 +1184,6 @@ function initNewsFilters() {
           date: '27. OKTOOBER 2026 • 3 MIN',
           title: 'Paide Linnameeskond ja Connecto alustasid koostööd!',
           excerpt: 'Paide Linnameeskond ja AS Connecto Infra alustasid koostööd, mille tulemusena liitub Connecto klubi toetajate ringiga ning Connecto logo jõuab esindusmeeskonna võistlusvormi esiküljele!'
-        },
-        {
-          href: 'artikkel-kuressaare-voit-teiseks.html',
-          img: 'assets/img/news/kuressaare_PLM_Victory.JPEG',
-          alt: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
-          badge: 'ESINDUSMEESKOND',
-          badgeClass: 'bg-navy',
-          date: '27. OKTOOBER 2026 • 2 MIN',
-          title: 'Paide Linnameeskond tõusis Kuressaares teenitud võiduga liigatabelis teiseks!',
-          excerpt: 'Paide Linnameeskond naasis Saaremaalt kolme väärtusliku punktiga, alistades võõrsil FC Kuressaare 1:0 Juan Sebastian Palaciose tabamusest!'
         }
       ]
     },
