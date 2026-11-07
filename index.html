@@ -172,13 +172,13 @@
     class="bg-navy-950 text-white text-xs border-b border-navy-800/80 py-2 px-4 relative z-40 hidden sm:block max-w-full overflow-hidden">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <span
+        <span id="top-ticker-badge"
           class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-crimson text-white tracking-wider animate-pulse">
-          JÄRGMINE MÄNG
+          36. VOOR • LÕPPSEIS
         </span>
         <span id="top-ticker-match" class="text-slate-300 font-medium">
-          Premium Liiga: <strong class="text-white">Pärnu JK Vaprus vs Paide Linnameeskond</strong> • Laupäev, 31.
-          okt kell 14:30 • Pärnu Rannastaadion
+          Premium Liiga 36. voor: <strong class="text-white">Paide Linnameeskond 2 : 2 Tallinna FC Flora</strong> • Laupäev, 7.
+          november • Paide kunstmuruväljak
         </span>
       </div>
       <div class="flex items-center space-x-5 text-slate-300">
@@ -512,14 +512,14 @@
           class="relative z-10 bg-white rounded-2xl hairline-border shadow-[0_-6px_20px_-4px_rgba(11,32,62,0.07),0_4px_20px_-2px_rgba(11,32,62,0.07)] overflow-hidden w-full transition-all duration-300">
 
           <!-- Strip Header with Dynamic Mode Indicator & Team Switcher -->
-          <div id="match-hub-header" class="px-5 py-3.5 bg-slate-50/80 hairline-b flex flex-wrap items-center justify-between gap-3 transition-colors duration-300">
+          <div id="match-hub-header" class="px-5 py-3.5 bg-emerald-50/60 hairline-b flex flex-wrap items-center justify-between gap-3 transition-colors duration-300">
             <div class="flex items-center gap-2.5 flex-wrap">
               <span id="match-hub-dot-wrap" class="relative flex h-2.5 w-2.5">
-                <span id="match-hub-dot-ping" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-crimson opacity-75"></span>
-                <span id="match-hub-dot" class="relative inline-flex rounded-full h-2.5 w-2.5 bg-crimson"></span>
+                <span id="match-hub-dot-ping" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span id="match-hub-dot" class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
               </span>
               <span id="match-hub-title" class="font-display font-black text-sm tracking-wider uppercase text-navy">
-                JÄRGMINE MÄNG / NEXT MATCH
+                MÄNGUKESKUS / MATCH CENTER
               </span>
             </div>
 
@@ -528,7 +528,7 @@
               <button id="match-toggle-men" type="button"
                 class="px-3.5 py-1.5 rounded-lg bg-white text-navy shadow-sm font-bold transition-all cursor-pointer inline-flex items-center gap-1.5"
                 role="tab" aria-selected="true">
-                <span id="match-tab-live-dot-men" class="hidden w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span id="match-tab-live-dot-men" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                 <span>Esindusmeeskond</span>
               </button>
               <button id="match-toggle-women" type="button"
@@ -542,9 +542,9 @@
 
           <!-- ================================================================= -->
           <!-- LIVE MATCH COMPACT VIEW + EXPANDABLE STATS DRAWER                 -->
-          <!-- Shown automatically when the active team has a match in progress  -->
+          <!-- Displays the 2-2 Flora season finale & all stats for Men's Team   -->
           <!-- ================================================================= -->
-          <div id="match-card-live" class="hidden">
+          <div id="match-card-live">
             <!-- Top Compact Live Scoreboard -->
             <div class="p-6 sm:p-8">
               <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
@@ -554,17 +554,17 @@
                   <div id="latest-match-round"
                     class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-emerald-50 border border-emerald-200/80 text-emerald-800 font-sans text-xs font-bold uppercase tracking-wide whitespace-nowrap mb-2">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping flex-shrink-0"></span>
-                    <span>Premium Liiga • 35. Voor</span>
+                    <span>Premium liiga • 36. voor</span>
                   </div>
 
-                  <div id="latest-match-date" class="font-display font-extrabold text-xl text-navy">Laupäev, 31. oktoober</div>
+                  <div id="latest-match-date" class="font-display font-extrabold text-xl text-navy">Laupäev, 7. november</div>
                   <div id="latest-match-time"
                     class="text-sm font-semibold text-crimson flex items-center justify-center lg:justify-start gap-1 mt-0.5">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span>Avavile: 14:30</span>
+                    <span>Avavile: 12:30</span>
                   </div>
 
                   <div class="text-xs text-slate-500 mt-2 flex items-center justify-center lg:justify-start gap-1">
@@ -574,7 +574,7 @@
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <span id="latest-match-venue" class="truncate">Pärnu Rannastaadion</span>
+                    <span id="latest-match-venue" class="truncate">Paide kunstmuruväljak</span>
                   </div>
                 </div>
 
@@ -585,42 +585,42 @@
                     <!-- Home Team -->
                     <div class="flex flex-col items-center text-center justify-self-center w-full min-w-0 px-1">
                       <div class="w-16 h-16 sm:w-20 sm:h-20 p-1.5 flex items-center justify-center relative">
-                        <img id="latest-match-homelogo" src="assets/img/jalgpall_logos/vaprus.png"
-                          alt="Kodumeeskond" class="w-full h-full object-contain filter drop-shadow">
+                        <img id="latest-match-homelogo" src="assets/img/jalgpall_logos/paide.png"
+                          alt="Paide Linnameeskond" class="w-full h-full object-contain filter drop-shadow">
                       </div>
                       <span id="latest-match-hometeam"
-                        class="font-display font-bold text-base sm:text-xl text-slate-700 mt-1.5 tracking-wide uppercase whitespace-nowrap">
-                        <span class="sm:hidden">VAP</span><span class="hidden sm:inline">PÄRNU JK VAPRUS</span>
+                        class="font-display font-black text-base sm:text-xl text-navy mt-1.5 tracking-wide uppercase whitespace-nowrap">
+                        <span class="sm:hidden">PLM</span><span class="hidden sm:inline">PAIDE LM</span>
                       </span>
                     </div>
 
-                    <!-- Center Score + Ticking Match Clock -->
+                    <!-- Center Score + Match Status -->
                     <div class="flex flex-col items-center justify-center px-2 sm:px-4 pb-6 sm:pb-7 flex-shrink-0">
                       <div class="flex items-center justify-center gap-3 sm:gap-6">
                         <span id="latest-match-score-home"
                           style="-webkit-text-stroke: 1.25px currentColor;"
-                          class="font-grotesk font-black text-[4.25rem] sm:text-[5.75rem] text-slate-500 leading-[0.82] tracking-tighter select-none">
-                          1
+                          class="font-grotesk font-black text-[4.25rem] sm:text-[5.75rem] text-navy leading-[0.82] tracking-tighter select-none">
+                          2
                         </span>
 
                         <div class="flex flex-col items-center justify-center min-w-[82px] sm:min-w-[92px]">
                           <div id="live-match-badge"
-                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-700 font-mono text-[10px] font-bold uppercase tracking-widest shadow-sm">
+                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-slate-600 font-mono text-[10px] font-bold uppercase tracking-widest shadow-sm">
                             <span id="live-match-dot-wrap" class="relative flex h-2 w-2">
-                              <span id="live-match-ping" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                              <span id="live-match-dot" class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                              <span id="live-match-ping" class="hidden"></span>
+                              <span id="live-match-dot" class="relative inline-flex rounded-full h-2 w-2 bg-slate-400"></span>
                             </span>
-                            <span id="live-match-status-label">OTSE</span>
+                            <span id="live-match-status-label">LÕPPSEIS</span>
                           </div>
                           <div id="live-match-timer"
                             class="font-mono font-black text-sm sm:text-base text-navy mt-1.5 tracking-wider leading-none select-none">
-                            67:42
+                            90' LÕPP
                           </div>
                         </div>
 
                         <span id="latest-match-score-away"
                           style="-webkit-text-stroke: 1.25px currentColor;"
-                          class="font-grotesk font-black text-[4.25rem] sm:text-[5.75rem] text-navy leading-[0.82] tracking-tighter select-none">
+                          class="font-grotesk font-black text-[4.25rem] sm:text-[5.75rem] text-slate-500 leading-[0.82] tracking-tighter select-none">
                           2
                         </span>
                       </div>
@@ -629,29 +629,20 @@
                     <!-- Away Team -->
                     <div class="flex flex-col items-center text-center justify-self-center w-full min-w-0 px-2">
                       <div class="w-16 h-16 sm:w-20 sm:h-20 p-1.5 flex items-center justify-center relative">
-                        <img id="latest-match-awaylogo" src="assets/img/jalgpall_logos/paide.png"
-                          alt="Külalismeeskond" class="w-full h-full object-contain filter drop-shadow">
+                        <img id="latest-match-awaylogo" src="assets/img/jalgpall_logos/flora.png"
+                          alt="Tallinna FC Flora" class="w-full h-full object-contain filter drop-shadow">
                       </div>
                       <span id="latest-match-awayteam"
-                        class="font-display font-black text-base sm:text-xl text-navy mt-1.5 tracking-wide uppercase whitespace-nowrap">
-                        <span class="sm:hidden">PLM</span><span class="hidden sm:inline">PAIDE LM</span>
+                        class="font-display font-bold text-base sm:text-xl text-slate-600 mt-1.5 tracking-wide uppercase whitespace-nowrap">
+                        <span class="sm:hidden">FCF</span><span class="hidden sm:inline">FC FLORA</span>
                       </span>
                     </div>
 
                   </div>
                 </div>
 
-                <!-- Right Column: Live Broadcast CTA & Protocol/Standings Links -->
+                <!-- Right Column: Standings & Protocol Links -->
                 <div class="lg:col-span-3 min-w-0 flex flex-col sm:flex-row lg:flex-col gap-2.5 justify-center">
-                  <a id="live-hub-stream-btn" href="https://jalgpall.ee" target="_blank" rel="noopener noreferrer"
-                    class="w-full py-3 px-4 rounded-xl text-xs sm:text-sm font-bold tracking-wider uppercase bg-crimson hover:bg-crimson-700 text-white shadow-md hover:shadow-glow-red transition-all flex items-center justify-center gap-2 cursor-pointer">
-                    <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
-                    <span id="live-hub-stream-label">Vaata otseülekannet</span>
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-
                   <a href="#standings" id="live-hub-table-btn"
                     class="w-full py-2.5 px-4 rounded-xl text-xs font-bold tracking-wider uppercase hairline-border text-navy bg-white hover:bg-slate-50 transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer">
                     <span>Vaata liigatabelit</span>
@@ -660,7 +651,7 @@
                     </svg>
                   </a>
 
-                  <a id="live-hub-protocol-link" href="https://jalgpall.ee" target="_blank" rel="noopener noreferrer"
+                  <a id="live-hub-protocol-link" href="https://jalgpall.ee/voistlused/protocol/186282" target="_blank" rel="noopener noreferrer"
                     class="text-[11px] font-mono font-bold text-slate-400 hover:text-navy text-center transition-colors inline-flex items-center justify-center gap-1">
                     <span>Ametlik EJL mänguprotokoll</span>
                     <span>↗</span>
@@ -724,8 +715,8 @@
                       <span>Koosseisud</span>
                     </h4>
                     <div class="inline-flex rounded-lg bg-slate-100 p-0.5 text-[10px] font-bold">
-                      <button type="button" id="live-lineup-tab-home" class="px-2.5 py-1 rounded-md bg-white text-navy shadow-2xs cursor-pointer transition-all">Kodu</button>
-                      <button type="button" id="live-lineup-tab-away" class="px-2.5 py-1 rounded-md text-slate-500 hover:text-navy cursor-pointer transition-all">Võõrsil</button>
+                      <button type="button" id="live-lineup-tab-home" class="px-2.5 py-1 rounded-md bg-white text-navy shadow-2xs cursor-pointer transition-all">PLM</button>
+                      <button type="button" id="live-lineup-tab-away" class="px-2.5 py-1 rounded-md text-slate-500 hover:text-navy cursor-pointer transition-all">FCF</button>
                     </div>
                   </div>
                   <div id="live-drawer-lineups" class="max-h-[340px] overflow-y-auto pr-1">
@@ -736,8 +727,8 @@
             </div>
           </div>
 
-          <!-- Fixture Content Area: MEN'S NEXT MATCH -->
-          <div id="match-card-men" class="p-6 sm:p-8">
+          <!-- Fixture Content Area: MEN'S NEXT MATCH (Hidden — 2026 Season Completed) -->
+          <div id="match-card-men" class="p-6 sm:p-8 hidden">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
 
               <!-- Competition Info & Venue -->
@@ -746,16 +737,16 @@
                 <span id="match-next-round"
                   class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-100 text-navy font-sans text-xs font-bold uppercase tracking-wide whitespace-nowrap mb-2">
                   <span class="w-1.5 h-1.5 rounded-full bg-crimson animate-ping flex-shrink-0"></span>
-                  <span>Premium Liiga • 35. Voor</span>
+                  <span>Premium Liiga • 36. Voor</span>
                 </span>
-                <div id="match-next-date" class="font-display font-extrabold text-xl text-navy">Laupäev, 31. oktoober</div>
+                <div id="match-next-date" class="font-display font-extrabold text-xl text-navy">Laupäev, 7. november</div>
                 <div id="match-next-time"
                   class="text-sm font-semibold text-crimson flex items-center justify-center lg:justify-start gap-1 mt-0.5">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>Avavile: 14:30</span>
+                  <span>Avavile: 12:30</span>
                 </div>
                 <div class="text-xs text-slate-500 mt-2 flex items-center justify-center lg:justify-start gap-1">
                   <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -764,24 +755,24 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <span id="match-next-venue">Pärnu Rannastaadion</span>
+                  <span id="match-next-venue">Paide kunstmuruväljak</span>
                 </div>
               </div>
 
-              <!-- Teams Face-Off Visual: Strict 3-Column Subgrid locking VS to dead center and crests to identical positions -->
+              <!-- Teams Face-Off Visual -->
               <div class="lg:col-span-6 min-w-0 w-full flex items-center justify-center">
                 <div class="grid grid-cols-[1fr_auto_1fr] items-center w-full max-w-lg mx-auto">
-                  <!-- Home: Pärnu JK Vaprus -->
+                  <!-- Home: Paide Linnameeskond -->
                   <div
                     class="flex flex-col items-center text-center justify-self-center w-full min-w-0 px-2 group cursor-pointer">
                     <div
                       class="w-16 h-16 sm:w-20 sm:h-20 p-1.5 transition-transform duration-300 group-hover:scale-110 flex items-center justify-center relative">
-                      <img id="match-next-homelogo" src="assets/img/jalgpall_logos/vaprus.png" alt="Pärnu JK Vaprus Ametlik Logo"
+                      <img id="match-next-homelogo" src="assets/img/jalgpall_logos/paide.png" alt="Paide Linnameeskond Ametlik Logo"
                         class="w-full h-full object-contain filter drop-shadow">
                     </div>
                     <span id="match-next-hometeam"
                       class="font-display font-black text-lg sm:text-xl text-navy mt-2 tracking-wide uppercase whitespace-nowrap">
-                      <span class="sm:hidden">VAP</span><span class="hidden sm:inline">PÄRNU JK VAPRUS</span>
+                      <span class="sm:hidden">PLM</span><span class="hidden sm:inline">PAIDE LM</span>
                     </span>
                   </div>
 
@@ -790,21 +781,21 @@
                     <span class="font-display font-black text-2xl sm:text-3xl text-slate-300 tracking-wider">VS</span>
                     <div
                       class="mt-1 px-3 py-1 rounded-full bg-slate-100 hairline-border text-[11px] font-mono font-bold text-navy whitespace-nowrap min-w-[130px] text-center">
-                      OTSE: SOCCERNET TV
+                      OTSE: ETV2
                     </div>
                   </div>
 
-                  <!-- Away: Paide Linnameeskond -->
+                  <!-- Away: Tallinna FC Flora -->
                   <div
                     class="flex flex-col items-center text-center justify-self-center w-full min-w-0 px-2 group cursor-pointer">
                     <div
                       class="w-16 h-16 sm:w-20 sm:h-20 p-1.5 transition-transform duration-300 group-hover:scale-110 flex items-center justify-center relative">
-                      <img id="match-next-awaylogo" src="assets/img/jalgpall_logos/paide.png"
-                        alt="Paide Linnameeskond Ametlik Logo" class="w-full h-full object-contain filter drop-shadow">
+                      <img id="match-next-awaylogo" src="assets/img/jalgpall_logos/flora.png"
+                        alt="Tallinna FC Flora Ametlik Logo" class="w-full h-full object-contain filter drop-shadow">
                     </div>
                     <span id="match-next-awayteam"
                       class="font-display font-black text-lg sm:text-xl text-navy mt-2 tracking-wide uppercase whitespace-nowrap">
-                      <span class="sm:hidden">PLM</span><span class="hidden sm:inline">PAIDE LM</span>
+                      <span class="sm:hidden">FCF</span><span class="hidden sm:inline">FC FLORA</span>
                     </span>
                   </div>
                 </div>
@@ -851,9 +842,9 @@
                 <span id="match-women-round"
                   class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-100 text-navy font-sans text-xs font-bold uppercase tracking-wide whitespace-nowrap mb-2">
                   <span class="w-1.5 h-1.5 rounded-full bg-crimson animate-ping flex-shrink-0"></span>
-                  <span>Naiste Meistriliiga • 24. Voor</span>
+                  <span>Naiste Meistriliiga • 25. Voor</span>
                 </span>
-                <div id="match-women-date" class="font-display font-extrabold text-xl text-navy">Laupäev, 31. oktoober
+                <div id="match-women-date" class="font-display font-extrabold text-xl text-navy">Pühapäev, 8. november
                 </div>
                 <div id="match-women-time"
                   class="text-sm font-semibold text-crimson flex items-center justify-center lg:justify-start gap-1 mt-0.5">
@@ -870,24 +861,24 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <span id="match-women-venue">Viimsi staadion</span>
+                  <span id="match-women-venue">Laagri kunstmurustaadion</span>
                 </div>
               </div>
 
               <!-- Teams Face-Off Visual: Strict 3-Column Subgrid locking VS to dead center and crests to identical positions -->
               <div class="lg:col-span-6 min-w-0 w-full flex items-center justify-center">
                 <div class="grid grid-cols-[1fr_auto_1fr] items-center w-full max-w-lg mx-auto">
-                  <!-- Home: Viimsi JK -->
+                  <!-- Home: Harju JK Laagri -->
                   <div
                     class="flex flex-col items-center text-center justify-self-center w-full min-w-0 px-2 group cursor-pointer">
                     <div
                       class="w-16 h-16 sm:w-20 sm:h-20 p-1.5 transition-transform duration-300 group-hover:scale-110 flex items-center justify-center relative">
-                      <img id="match-women-homelogo" src="assets/img/jalgpall_logos/viimsi.png" alt="Viimsi JK"
+                      <img id="match-women-homelogo" src="assets/img/jalgpall_logos/harju.png" alt="Harju JK Laagri"
                         class="w-full h-full object-contain filter drop-shadow">
                     </div>
                     <span id="match-women-hometeam"
                       class="font-display font-black text-lg sm:text-xl text-navy mt-2 tracking-wide uppercase whitespace-nowrap">
-                      <span class="sm:hidden">VII</span><span class="hidden sm:inline">VIIMSI JK</span>
+                      <span class="sm:hidden">HJKL</span><span class="hidden sm:inline">HARJU JK LAAGRI</span>
                     </span>
                   </div>
 
@@ -967,14 +958,14 @@
                     <div class="text-xs truncate">
                       <span id="recent-men-hometeam" class="font-bold text-crimson"><span class="sm:hidden">PLM</span><span
                           class="hidden sm:inline">Paide LM</span></span>
-                      <span id="recent-men-score" class="font-extrabold text-navy font-mono px-1.5">0 : 2</span>
+                      <span id="recent-men-score" class="font-extrabold text-navy font-mono px-1.5">2 : 2</span>
                       <span id="recent-men-awayteam" class="text-slate-600"><span
-                          class="sm:hidden">NKFC</span><span class="hidden sm:inline">Nõmme Kalju FC</span></span>
+                          class="sm:hidden">FCF</span><span class="hidden sm:inline">Tallinna FC Flora</span></span>
                     </div>
                   </div>
                   <div class="flex items-center gap-2 shrink-0">
                     <span id="recent-men-badge"
-                      class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-800 uppercase">Kaotus</span>
+                      class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 uppercase">Viik</span>
                     <button data-video-trigger
                       data-video-title="Täispikk kokkuvõte: FC Kuressaare 0 - 1 Paide Linnameeskond"
                       data-video-duration="08:15"
@@ -6182,22 +6173,22 @@
               </div>
 
               <h3 id="standings-tracker-title" class="font-display font-black text-2xl uppercase tracking-tight mb-2">
-                EUROSARJA PÄÄSE
+                HÕBEMEDAL &amp; EUROSARJA PÄÄSE
               </h3>
               <p id="standings-tracker-desc" class="text-slate-300 text-xs leading-relaxed mb-5">
-                Paide Linnameeskond hoiab Premium Liigas 63 punktiga 2. positsiooni, edestades 3. koha Tallinna FC Florat 5 punktiga ja püsides kindlal kursil UEFA Konverentsiliigasse!
+                Paide Linnameeskond lõpetas 2026. aasta Premium Liiga hooaja 64 punktiga 2. kohal, edestades 3. koha Tallinna FC Florat 2 punktiga ja kindlustades hõbemedalid ning pääsme UEFA Konverentsiliigasse!
               </p>
 
               <div class="space-y-2.5">
                 <div class="flex justify-between text-xs font-semibold">
                   <span id="standings-tracker-gap-label" class="text-slate-300">Edu 4. koha ees (Kalju):</span>
-                  <span id="standings-tracker-gap-val" class="text-emerald-400 font-bold">+6 punkti</span>
+                  <span id="standings-tracker-gap-val" class="text-emerald-400 font-bold">+3 punkti</span>
                 </div>
                 <div class="w-full bg-navy-800 rounded-full h-2.5 overflow-hidden">
                   <div id="standings-tracker-progress" class="bg-crimson h-2.5 rounded-full transition-all duration-500"
-                    style="width: 97.2%"></div>
+                    style="width: 100.0%"></div>
                 </div>
-                <div id="standings-tracker-played" class="text-[11px] text-slate-400 text-right">Mängitud 35/36 vooru
+                <div id="standings-tracker-played" class="text-[11px] text-slate-400 text-right">Mängitud 36/36 vooru
                 </div>
               </div>
             </div>
@@ -10169,9 +10160,9 @@
 
   <!-- Vanilla JavaScript Interactions -->
   <!-- Real-Time Estonian FA (jalgpall.ee) Sync Module -->
-  <script src="assets/js/jalgpall-api.js?v=20261031-live-hub-v3"></script>
+  <script src="assets/js/jalgpall-api.js?v=20261107-season-finale-v2"></script>
   <script src="assets/js/cookie-consent.js"></script>
-  <script src="assets/js/main.js?v=20261031-live-hub-v3"></script>
+  <script src="assets/js/main.js?v=20261107-season-finale-v2"></script>
   <script>
     (function() {
       const forms = document.querySelectorAll('.newsletter-signup-form');

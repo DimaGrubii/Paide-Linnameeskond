@@ -287,20 +287,20 @@ function updateTrackerCard(gender) {
       const paideRow = mTable.find(r => r.isPaide || (r.team || '').toLowerCase().includes('paide')) || null;
       const fourthRow = mTable.find(r => Number(r.position) === 4) || mTable[3] || null;
       const thirdRow = mTable.find(r => Number(r.position) === 3) || mTable[2] || null;
-      const playedGames = paideRow ? Number(paideRow.played || 35) : 35;
+      const playedGames = paideRow ? Number(paideRow.played || 36) : 36;
       const totalRounds = 36;
-      const paidePts = paideRow ? Number(paideRow.points || 63) : 63;
+      const paidePts = paideRow ? Number(paideRow.points || 64) : 64;
       const paideRank = paideRow ? Number(paideRow.position || 2) : 2;
-      const fourthPts = fourthRow ? Number(fourthRow.points || 57) : 57;
-      const thirdPts = thirdRow ? Number(thirdRow.points || 58) : 58;
+      const fourthPts = fourthRow ? Number(fourthRow.points || 61) : 61;
+      const thirdPts = thirdRow ? Number(thirdRow.points || 62) : 62;
       const diffFourth = paidePts - fourthPts;
       const diffThird = paidePts - thirdPts;
       const pct = Math.min(100, Math.max(0, (playedGames / totalRounds) * 100)).toFixed(1);
 
       if (badge) badge.textContent = 'UEFA CONFERENCE LEAGUE';
       if (season) season.textContent = 'HOOAEG 2026';
-      if (title) title.textContent = 'EUROSARJA PÄÄSE';
-      if (desc) desc.textContent = `Paide Linnameeskond hoiab Premium Liigas ${paidePts} punktiga ${paideRank}. positsiooni, edestades 3. koha Tallinna FC Florat ${diffThird} punktiga ja püsides kindlal kursil UEFA Konverentsiliigasse!`;
+      if (title) title.textContent = 'HÕBEMEDAL & EUROSARJA PÄÄSE';
+      if (desc) desc.textContent = `Paide Linnameeskond lõpetas 2026. aasta Premium Liiga hooaja ${paidePts} punktiga ${paideRank}. kohal, edestades 3. koha Tallinna FC Florat ${diffThird} punktiga ja kindlustades hõbemedalid ning pääsme UEFA Konverentsiliigasse!`;
       if (gapLabel) gapLabel.textContent = 'Edu 4. koha ees (Kalju):';
       if (gapVal) gapVal.textContent = `${diffFourth >= 0 ? '+' : ''}${diffFourth} punkti`;
       if (progress) progress.style.width = `${pct}%`;
@@ -529,6 +529,7 @@ function initMatchdayToggle() {
   const btnWomen = document.getElementById('match-toggle-women') || document.getElementById('match-toggle-prev');
   const cardMen = document.getElementById('match-card-men') || document.getElementById('match-card-next');
   const cardWomen = document.getElementById('match-card-women');
+  const cardLive = document.getElementById('match-card-live');
 
   if (!btnMen || !btnWomen || !cardMen || !cardWomen) return;
 
@@ -544,8 +545,9 @@ function initMatchdayToggle() {
       btnWomen.classList.remove('bg-white', 'text-navy', 'shadow-sm', 'font-bold');
       btnWomen.classList.add('text-slate-600', 'hover:text-navy');
 
-      cardMen.classList.remove('hidden');
+      cardMen.classList.add('hidden');
       cardWomen.classList.add('hidden');
+      if (cardLive) cardLive.classList.remove('hidden');
     } else {
       btnWomen.classList.add('bg-white', 'text-navy', 'shadow-sm', 'font-bold');
       btnWomen.classList.remove('text-slate-600', 'hover:text-navy');
@@ -554,6 +556,7 @@ function initMatchdayToggle() {
 
       cardWomen.classList.remove('hidden');
       cardMen.classList.add('hidden');
+      if (cardLive) cardLive.classList.add('hidden');
     }
   };
 

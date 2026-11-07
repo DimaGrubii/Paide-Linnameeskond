@@ -245,7 +245,7 @@ if ($requestedId !== '') {
                 $stCode = strtoupper((string)ejlVal($stObj, 'code', ''));
                 $liveSt = isset($g['statuses']['liveStatus']) ? $g['statuses']['liveStatus'] : null;
 
-                if ($liveSt !== null || $stCode === 'RUNNING' || $stCode !== 'PLAYED' || ($ko > 0 && abs($now - $ko) <= 43200)) {
+                if ($liveSt !== null || $stCode === 'RUNNING' || $stCode !== 'PLAYED' || ($ko > 0 && abs($now - $ko) <= 43200) || ($tid === 5 && $idx === 0)) {
                     $priorityGameIds[$gid] = $gid;
                 } elseif ($idx === 0) {
                     $fallbackGameIds[$gid] = $gid;
@@ -284,7 +284,14 @@ if ($requestedId !== '') {
     }
 }
 
+$menMatch = null;
 foreach ($candidates as $m) {
+    if ($m['teamCategory'] === 'men') {
+        if ($menMatch === null || $m['kickoffTimestamp'] > $menMatch['kickoffTimestamp']) {
+            $menMatch = $m;
+        }
+    }
+
     if ($m['matchState'] === 'live' || $m['matchState'] === 'pre_match') {
         if ($activeMatch === null || ($m['matchState'] === 'live' && $activeMatch['matchState'] !== 'live')) {
             $activeMatch = $m;
@@ -304,13 +311,19 @@ if ($recentMatch === null && !empty($candidates)) {
     $recentMatch = $candidates[0];
 }
 
+// Keep the men's season finale (186282: Paide Linnameeskond 2 - 2 Tallinna FC Flora) active in the Match Center
+if ($activeMatch === null && $menMatch !== null) {
+    $activeMatch = $menMatch;
+}
+
 $output = array(
     'status'      => 'success',
     'source'      => 'EJL OpenData API v1',
     'timestamp'   => date('c'),
     'nowUnix'     => time(),
-    'isLive'      => ($activeMatch !== null && ($activeMatch['matchState'] === 'live' || $activeMatch['matchState'] === 'pre_match')),
+    'isLive'      => ($activeMatch !== null),
     'activeMatch' => $activeMatch,
+    'menMatch'    => $menMatch,
     'match'       => $activeMatch !== null ? $activeMatch : $recentMatch,
 );
 
