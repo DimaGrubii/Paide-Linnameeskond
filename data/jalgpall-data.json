@@ -2,7 +2,7 @@
   "metadata": {
     "source": "Eesti Jalgpalli Liit (EJL OpenData API v1)",
     "sourceUrl": "https://opendata.jalgpall.ee/api/v1",
-    "lastUpdated": "2026-11-07T06:29:07.865724+02:00",
+    "lastUpdated": "2026-11-07T13:16:56.973355+02:00",
     "season": "2026",
     "status": "success"
   },
@@ -373,8 +373,8 @@
       "totalGoals": "6",
       "assists": "2",
       "apiAssists": "2",
-      "gamesPlayed": 31,
-      "minutesPlayed": 2332
+      "gamesPlayed": 32,
+      "minutesPlayed": 2422
     },
     {
       "rank": "4",
@@ -385,8 +385,8 @@
       "totalGoals": "6",
       "assists": "1",
       "apiAssists": "1",
-      "gamesPlayed": 12,
-      "minutesPlayed": 840
+      "gamesPlayed": 13,
+      "minutesPlayed": 930
     },
     {
       "rank": "5",
@@ -409,8 +409,8 @@
       "totalGoals": "5",
       "assists": "2",
       "apiAssists": "2",
-      "gamesPlayed": 31,
-      "minutesPlayed": 1966
+      "gamesPlayed": 32,
+      "minutesPlayed": 2056
     },
     {
       "rank": "7",
@@ -462,39 +462,48 @@
     }
   ],
   "matches": {
-    "next": {
-      "id": 186282,
-      "type": "upcoming",
-      "homeTeam": "Paide Linnameeskond",
-      "awayTeam": "Tallinna FC Flora",
-      "date": "PL 07.11.2026 12:30",
-      "dateStr": "07.11.2026",
-      "timeStr": "12:30",
-      "dateDisplay": "Laupäev, 7. november",
-      "venue": "Paide kunstmuruväljak",
-      "round": "A. Le Coq Premium liiga • 36. Voor",
-      "broadcast": "OTSE: ETV2",
-      "ticketUrl": null,
-      "matchInfoUrl": "https://jalgpall.ee/voistlused/protocol/186282"
-    },
-    "upcoming": [
+    "next": null,
+    "upcoming": [],
+    "recent": [
       {
         "id": 186282,
-        "type": "upcoming",
-        "homeTeam": "Paide Linnameeskond",
-        "awayTeam": "Tallinna FC Flora",
-        "date": "PL 07.11.2026 12:30",
-        "dateStr": "07.11.2026",
-        "timeStr": "12:30",
+        "type": "finished",
+        "meta": "PL 07.11.2026 Kell 12:30",
+        "tournament": "A. Le Coq Premium liiga",
+        "round": "36. voor",
         "dateDisplay": "Laupäev, 7. november",
+        "timeDisplay": "12:30",
+        "homeTeam": "Paide Linnameeskond",
+        "score": "0 - 2",
+        "homeScore": 0,
+        "awayScore": 2,
+        "awayTeam": "Tallinna FC Flora",
         "venue": "Paide kunstmuruväljak",
-        "round": "A. Le Coq Premium liiga • 36. Voor",
-        "broadcast": "OTSE: ETV2",
-        "ticketUrl": null,
-        "matchInfoUrl": "https://jalgpall.ee/voistlused/protocol/186282"
-      }
-    ],
-    "recent": [
+        "attendance": 847,
+        "protocolUrl": "https://jalgpall.ee/voistlused/protocol/186282",
+        "scorers": [
+          {
+            "side": "away",
+            "minute": "9'",
+            "player": "Danil Kuraksin",
+            "shortPlayer": "D. Kuraksin",
+            "team": "Tallinna FC Flora",
+            "runningScore": "0 : 1",
+            "goalType": "",
+            "isPaide": false
+          },
+          {
+            "side": "away",
+            "minute": "24'",
+            "player": "Sergei Zenjov",
+            "shortPlayer": "S. Zenjov",
+            "team": "Tallinna FC Flora",
+            "runningScore": "0 : 2",
+            "goalType": "",
+            "isPaide": false
+          }
+        ]
+      },
       {
         "id": 186277,
         "type": "finished",
@@ -657,38 +666,7 @@
         "venue": "Paide kunstmuruväljak",
         "attendance": 444,
         "protocolUrl": "https://jalgpall.ee/voistlused/protocol/186258",
-        "scorers": [
-          {
-            "side": "home",
-            "minute": "41'",
-            "player": "Dawda Darboe",
-            "shortPlayer": "D. Darboe",
-            "team": "Paide Linnameeskond",
-            "runningScore": "1 : 0",
-            "goalType": "",
-            "isPaide": true
-          },
-          {
-            "side": "away",
-            "minute": "44'",
-            "player": "Moussa Felix Sambe",
-            "shortPlayer": "M.F. Sambe",
-            "team": "Tartu JK Tammeka",
-            "runningScore": "1 : 1",
-            "goalType": "",
-            "isPaide": false
-          },
-          {
-            "side": "home",
-            "minute": "90+4'",
-            "player": "Michael Lilander",
-            "shortPlayer": "M. Lilander",
-            "team": "Paide Linnameeskond",
-            "runningScore": "2 : 1",
-            "goalType": "",
-            "isPaide": true
-          }
-        ]
+        "scorers": []
       },
       {
         "id": 186254,
@@ -851,24 +829,6 @@
         "attendance": 254,
         "protocolUrl": "https://jalgpall.ee/voistlused/protocol/186218",
         "scorers": []
-      },
-      {
-        "id": 195465,
-        "type": "finished",
-        "meta": "UEFA KL 12.08.2026 Kell 19:00",
-        "tournament": "UEFA Konverentsiliiga",
-        "round": "2. voor",
-        "dateDisplay": "Kolmapäev, 12. august",
-        "timeDisplay": "19:00",
-        "homeTeam": "SK Rapid Wien",
-        "score": "2 - 0",
-        "homeScore": 2,
-        "awayScore": 0,
-        "awayTeam": "Paide Linnameeskond",
-        "venue": "Weststadion",
-        "attendance": 0,
-        "protocolUrl": "https://jalgpall.ee/voistlused/protocol/195465",
-        "scorers": []
       }
     ]
   },
@@ -880,22 +840,16 @@
         "teamId": 11,
         "logo": "https://jalgpall.ee/images/logos/057147CE8C38CC81522C3741AADA2D4B",
         "localLogo": "assets/img/jalgpall_logos/levadia.png",
-        "played": 35,
+        "played": 36,
         "won": 28,
         "drawn": 6,
-        "lost": 1,
-        "goalsFor": 95,
-        "goalsAgainst": 27,
-        "goalDifference": "+68",
+        "lost": 2,
+        "goalsFor": 96,
+        "goalsAgainst": 29,
+        "goalDifference": "+67",
         "points": 90,
         "isPaide": false,
         "form": [
-          {
-            "result": "V",
-            "type": "win",
-            "score": "1:3 vs Tallinna FC Flora",
-            "opponent": "Tallinna FC Flora"
-          },
           {
             "result": "V",
             "type": "win",
@@ -919,6 +873,12 @@
             "type": "win",
             "score": "3:4 vs FC Nõmme United",
             "opponent": "FC Nõmme United"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "1:2 vs Nõmme Kalju FC",
+            "opponent": "Nõmme Kalju FC"
           }
         ],
         "seasonHistory": [
@@ -1341,501 +1301,37 @@
             "date": "31.10.2026 15:00",
             "isHome": false,
             "round": 35
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "1:2 vs Nõmme Kalju FC",
+            "matchScore": "1:2",
+            "homeTeam": "Tallinna FCI Levadia",
+            "awayTeam": "Nõmme Kalju FC",
+            "opponent": "Nõmme Kalju FC",
+            "date": "07.11.2026 12:30",
+            "isHome": true,
+            "round": 36
           }
         ]
       },
       {
         "position": 2,
-        "team": "Paide Linnameeskond",
-        "teamId": 5,
-        "logo": "https://jalgpall.ee/images/clubs/04DA1E5682F6B6CACC9A577CED953711",
-        "localLogo": "assets/img/jalgpall_logos/paide.png",
-        "played": 35,
-        "won": 19,
-        "drawn": 6,
-        "lost": 10,
-        "goalsFor": 54,
-        "goalsAgainst": 41,
-        "goalDifference": "+13",
-        "points": 63,
-        "isPaide": true,
-        "form": [
-          {
-            "result": "V",
-            "type": "win",
-            "score": "2:1 vs Tartu JK Tammeka",
-            "opponent": "Tartu JK Tammeka"
-          },
-          {
-            "result": "V",
-            "type": "win",
-            "score": "2:1 vs JK Narva Trans",
-            "opponent": "JK Narva Trans"
-          },
-          {
-            "result": "V",
-            "type": "win",
-            "score": "0:1 vs FC Kuressaare",
-            "opponent": "FC Kuressaare"
-          },
-          {
-            "result": "K",
-            "type": "loss",
-            "score": "0:2 vs Nõmme Kalju FC",
-            "opponent": "Nõmme Kalju FC"
-          },
-          {
-            "result": "V",
-            "type": "win",
-            "score": "0:1 vs Pärnu JK Vaprus",
-            "opponent": "Pärnu JK Vaprus"
-          }
-        ],
-        "seasonHistory": [
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "3:2 vs Pärnu JK Vaprus",
-            "matchScore": "3:2",
-            "homeTeam": "Pärnu JK Vaprus",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "Pärnu JK Vaprus",
-            "date": "07.03.2026 14:30",
-            "isHome": false,
-            "round": 1
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "1:0 vs JK Narva Trans",
-            "matchScore": "1:0",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "JK Narva Trans",
-            "opponent": "JK Narva Trans",
-            "date": "15.03.2026 12:30",
-            "isHome": true,
-            "round": 2
-          },
-          {
-            "type": "draw",
-            "result": "X",
-            "score": "2:2 vs Tallinna FCI Levadia",
-            "matchScore": "2:2",
-            "homeTeam": "Tallinna FCI Levadia",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "Tallinna FCI Levadia",
-            "date": "22.03.2026 15:00",
-            "isHome": false,
-            "round": 3
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "0:1 vs FC Kuressaare",
-            "matchScore": "0:1",
-            "homeTeam": "FC Kuressaare",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "FC Kuressaare",
-            "date": "03.04.2026 14:30",
-            "isHome": false,
-            "round": 4
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "3:1 vs FC Nõmme United",
-            "matchScore": "3:1",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "FC Nõmme United",
-            "date": "08.04.2026 19:00",
-            "isHome": true,
-            "round": 5
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "1:4 vs Tartu JK Tammeka",
-            "matchScore": "1:4",
-            "homeTeam": "Tartu JK Tammeka",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "Tartu JK Tammeka",
-            "date": "12.04.2026 14:30",
-            "isHome": false,
-            "round": 6
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "1:0 vs Nõmme Kalju FC",
-            "matchScore": "1:0",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "Nõmme Kalju FC",
-            "opponent": "Nõmme Kalju FC",
-            "date": "19.04.2026 17:00",
-            "isHome": true,
-            "round": 7
-          },
-          {
-            "type": "draw",
-            "result": "X",
-            "score": "2:2 vs Harju JK Laagri",
-            "matchScore": "2:2",
-            "homeTeam": "Harju JK Laagri",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "Harju JK Laagri",
-            "date": "22.04.2026 19:00",
-            "isHome": false,
-            "round": 8
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "1:2 vs Tallinna FC Flora",
-            "matchScore": "1:2",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "Tallinna FC Flora",
-            "opponent": "Tallinna FC Flora",
-            "date": "26.04.2026 14:30",
-            "isHome": true,
-            "round": 9
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "0:1 vs Tartu JK Tammeka",
-            "matchScore": "0:1",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "Tartu JK Tammeka",
-            "opponent": "Tartu JK Tammeka",
-            "date": "01.05.2026 17:00",
-            "isHome": true,
-            "round": 10
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "2:3 vs FC Nõmme United",
-            "matchScore": "2:3",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "FC Nõmme United",
-            "date": "10.05.2026 17:00",
-            "isHome": false,
-            "round": 11
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "1:3 vs Tallinna FCI Levadia",
-            "matchScore": "1:3",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "Tallinna FCI Levadia",
-            "opponent": "Tallinna FCI Levadia",
-            "date": "17.05.2026 14:30",
-            "isHome": true,
-            "round": 12
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "1:0 vs JK Narva Trans",
-            "matchScore": "1:0",
-            "homeTeam": "JK Narva Trans",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "JK Narva Trans",
-            "date": "20.05.2026 19:00",
-            "isHome": false,
-            "round": 13
-          },
-          {
-            "type": "draw",
-            "result": "X",
-            "score": "1:1 vs FC Kuressaare",
-            "matchScore": "1:1",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "FC Kuressaare",
-            "opponent": "FC Kuressaare",
-            "date": "31.05.2026 17:00",
-            "isHome": true,
-            "round": 14
-          },
-          {
-            "type": "draw",
-            "result": "X",
-            "score": "1:1 vs Nõmme Kalju FC",
-            "matchScore": "1:1",
-            "homeTeam": "Nõmme Kalju FC",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "Nõmme Kalju FC",
-            "date": "14.06.2026 14:30",
-            "isHome": false,
-            "round": 15
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "1:0 vs Harju JK Laagri",
-            "matchScore": "1:0",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "Harju JK Laagri",
-            "opponent": "Harju JK Laagri",
-            "date": "17.06.2026 19:00",
-            "isHome": true,
-            "round": 16
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "1:2 vs Tallinna FC Flora",
-            "matchScore": "1:2",
-            "homeTeam": "Tallinna FC Flora",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "Tallinna FC Flora",
-            "date": "21.06.2026 17:00",
-            "isHome": false,
-            "round": 17
-          },
-          {
-            "type": "draw",
-            "result": "X",
-            "score": "1:1 vs Nõmme Kalju FC",
-            "matchScore": "1:1",
-            "homeTeam": "Nõmme Kalju FC",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "Nõmme Kalju FC",
-            "date": "28.06.2026 17:00",
-            "isHome": false,
-            "round": 18
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "3:1 vs Pärnu JK Vaprus",
-            "matchScore": "3:1",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "Pärnu JK Vaprus",
-            "opponent": "Pärnu JK Vaprus",
-            "date": "04.07.2026 19:00",
-            "isHome": true,
-            "round": 19
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "5:2 vs Harju JK Laagri",
-            "matchScore": "5:2",
-            "homeTeam": "Harju JK Laagri",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "Harju JK Laagri",
-            "date": "19.07.2026 19:00",
-            "isHome": false,
-            "round": 20
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "1:0 vs FC Kuressaare",
-            "matchScore": "1:0",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "FC Kuressaare",
-            "opponent": "FC Kuressaare",
-            "date": "02.08.2026 17:00",
-            "isHome": true,
-            "round": 21
-          },
-          {
-            "type": "draw",
-            "result": "X",
-            "score": "1:1 vs JK Narva Trans",
-            "matchScore": "1:1",
-            "homeTeam": "JK Narva Trans",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "JK Narva Trans",
-            "date": "16.08.2026 17:00",
-            "isHome": false,
-            "round": 22
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "4:1 vs FC Nõmme United",
-            "matchScore": "4:1",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "FC Nõmme United",
-            "date": "23.08.2026 17:00",
-            "isHome": true,
-            "round": 23
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "1:2 vs Tallinna FC Flora",
-            "matchScore": "1:2",
-            "homeTeam": "Tallinna FC Flora",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "Tallinna FC Flora",
-            "date": "30.08.2026 17:00",
-            "isHome": false,
-            "round": 24
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "0:2 vs Tallinna FCI Levadia",
-            "matchScore": "0:2",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "Tallinna FCI Levadia",
-            "opponent": "Tallinna FCI Levadia",
-            "date": "06.09.2026 14:30",
-            "isHome": true,
-            "round": 25
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "0:2 vs Tartu JK Tammeka",
-            "matchScore": "0:2",
-            "homeTeam": "Tartu JK Tammeka",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "Tartu JK Tammeka",
-            "date": "09.09.2026 19:00",
-            "isHome": false,
-            "round": 26
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "1:2 vs Harju JK Laagri",
-            "matchScore": "1:2",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "Harju JK Laagri",
-            "opponent": "Harju JK Laagri",
-            "date": "13.09.2026 14:30",
-            "isHome": true,
-            "round": 27
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "2:0 vs Pärnu JK Vaprus",
-            "matchScore": "2:0",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "Pärnu JK Vaprus",
-            "opponent": "Pärnu JK Vaprus",
-            "date": "16.09.2026 19:00",
-            "isHome": true,
-            "round": 28
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "1:3 vs FC Nõmme United",
-            "matchScore": "1:3",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "FC Nõmme United",
-            "date": "19.09.2026 17:00",
-            "isHome": false,
-            "round": 29
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "1:0 vs Tallinna FCI Levadia",
-            "matchScore": "1:0",
-            "homeTeam": "Tallinna FCI Levadia",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "Tallinna FCI Levadia",
-            "date": "11.10.2026 14:30",
-            "isHome": false,
-            "round": 30
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "2:1 vs Tartu JK Tammeka",
-            "matchScore": "2:1",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "Tartu JK Tammeka",
-            "opponent": "Tartu JK Tammeka",
-            "date": "14.10.2026 19:00",
-            "isHome": true,
-            "round": 31
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "2:1 vs JK Narva Trans",
-            "matchScore": "2:1",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "JK Narva Trans",
-            "opponent": "JK Narva Trans",
-            "date": "18.10.2026 17:00",
-            "isHome": true,
-            "round": 32
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "0:1 vs FC Kuressaare",
-            "matchScore": "0:1",
-            "homeTeam": "FC Kuressaare",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "FC Kuressaare",
-            "date": "24.10.2026 14:30",
-            "isHome": false,
-            "round": 33
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "0:2 vs Nõmme Kalju FC",
-            "matchScore": "0:2",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "Nõmme Kalju FC",
-            "opponent": "Nõmme Kalju FC",
-            "date": "28.10.2026 19:00",
-            "isHome": true,
-            "round": 34
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "0:1 vs Pärnu JK Vaprus",
-            "matchScore": "0:1",
-            "homeTeam": "Pärnu JK Vaprus",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "Pärnu JK Vaprus",
-            "date": "31.10.2026 14:30",
-            "isHome": false,
-            "round": 35
-          }
-        ]
-      },
-      {
-        "position": 3,
         "team": "Tallinna FC Flora",
         "teamId": 4,
         "logo": "https://jalgpall.ee/images/teams/9FA11522AB09B90003E8875D5B25116A",
         "localLogo": "assets/img/jalgpall_logos/flora.png",
-        "played": 35,
-        "won": 20,
+        "played": 36,
+        "won": 21,
         "drawn": 1,
         "lost": 14,
-        "goalsFor": 66,
+        "goalsFor": 68,
         "goalsAgainst": 49,
-        "goalDifference": "+17",
-        "points": 61,
+        "goalDifference": "+19",
+        "points": 64,
         "isPaide": false,
         "form": [
-          {
-            "result": "K",
-            "type": "loss",
-            "score": "1:3 vs Tallinna FCI Levadia",
-            "opponent": "Tallinna FCI Levadia"
-          },
           {
             "result": "V",
             "type": "win",
@@ -1859,6 +1355,12 @@
             "type": "win",
             "score": "2:0 vs JK Narva Trans",
             "opponent": "JK Narva Trans"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "0:2 vs Paide Linnameeskond",
+            "opponent": "Paide Linnameeskond"
           }
         ],
         "seasonHistory": [
@@ -2281,31 +1783,37 @@
             "date": "01.11.2026 14:30",
             "isHome": true,
             "round": 35
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "0:2 vs Paide Linnameeskond",
+            "matchScore": "0:2",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "Tallinna FC Flora",
+            "opponent": "Paide Linnameeskond",
+            "date": "07.11.2026 12:30",
+            "isHome": false,
+            "round": 36
           }
         ]
       },
       {
-        "position": 4,
+        "position": 3,
         "team": "Nõmme Kalju FC",
         "teamId": 3136,
         "logo": "https://jalgpall.ee/images/logos/C287B9A18B8C02FDA9A7E921E6D3E645",
         "localLogo": "assets/img/jalgpall_logos/kalju.png",
-        "played": 35,
-        "won": 18,
+        "played": 36,
+        "won": 19,
         "drawn": 6,
         "lost": 11,
-        "goalsFor": 59,
-        "goalsAgainst": 34,
-        "goalDifference": "+25",
-        "points": 60,
+        "goalsFor": 61,
+        "goalsAgainst": 35,
+        "goalDifference": "+26",
+        "points": 63,
         "isPaide": false,
         "form": [
-          {
-            "result": "X",
-            "type": "draw",
-            "score": "2:2 vs Pärnu JK Vaprus",
-            "opponent": "Pärnu JK Vaprus"
-          },
           {
             "result": "K",
             "type": "loss",
@@ -2329,6 +1837,12 @@
             "type": "win",
             "score": "1:0 vs FC Kuressaare",
             "opponent": "FC Kuressaare"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "1:2 vs Tallinna FCI Levadia",
+            "opponent": "Tallinna FCI Levadia"
           }
         ],
         "seasonHistory": [
@@ -2751,6 +2265,500 @@
             "date": "01.11.2026 12:30",
             "isHome": true,
             "round": 35
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:2 vs Tallinna FCI Levadia",
+            "matchScore": "1:2",
+            "homeTeam": "Tallinna FCI Levadia",
+            "awayTeam": "Nõmme Kalju FC",
+            "opponent": "Tallinna FCI Levadia",
+            "date": "07.11.2026 12:30",
+            "isHome": false,
+            "round": 36
+          }
+        ]
+      },
+      {
+        "position": 4,
+        "team": "Paide Linnameeskond",
+        "teamId": 5,
+        "logo": "https://jalgpall.ee/images/clubs/04DA1E5682F6B6CACC9A577CED953711",
+        "localLogo": "assets/img/jalgpall_logos/paide.png",
+        "played": 36,
+        "won": 19,
+        "drawn": 6,
+        "lost": 11,
+        "goalsFor": 54,
+        "goalsAgainst": 43,
+        "goalDifference": "+11",
+        "points": 63,
+        "isPaide": true,
+        "form": [
+          {
+            "result": "V",
+            "type": "win",
+            "score": "2:1 vs JK Narva Trans",
+            "opponent": "JK Narva Trans"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "0:1 vs FC Kuressaare",
+            "opponent": "FC Kuressaare"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "0:2 vs Nõmme Kalju FC",
+            "opponent": "Nõmme Kalju FC"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "0:1 vs Pärnu JK Vaprus",
+            "opponent": "Pärnu JK Vaprus"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "0:2 vs Tallinna FC Flora",
+            "opponent": "Tallinna FC Flora"
+          }
+        ],
+        "seasonHistory": [
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "3:2 vs Pärnu JK Vaprus",
+            "matchScore": "3:2",
+            "homeTeam": "Pärnu JK Vaprus",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "Pärnu JK Vaprus",
+            "date": "07.03.2026 14:30",
+            "isHome": false,
+            "round": 1
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:0 vs JK Narva Trans",
+            "matchScore": "1:0",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "JK Narva Trans",
+            "opponent": "JK Narva Trans",
+            "date": "15.03.2026 12:30",
+            "isHome": true,
+            "round": 2
+          },
+          {
+            "type": "draw",
+            "result": "X",
+            "score": "2:2 vs Tallinna FCI Levadia",
+            "matchScore": "2:2",
+            "homeTeam": "Tallinna FCI Levadia",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "Tallinna FCI Levadia",
+            "date": "22.03.2026 15:00",
+            "isHome": false,
+            "round": 3
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "0:1 vs FC Kuressaare",
+            "matchScore": "0:1",
+            "homeTeam": "FC Kuressaare",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "FC Kuressaare",
+            "date": "03.04.2026 14:30",
+            "isHome": false,
+            "round": 4
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "3:1 vs FC Nõmme United",
+            "matchScore": "3:1",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "FC Nõmme United",
+            "date": "08.04.2026 19:00",
+            "isHome": true,
+            "round": 5
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:4 vs Tartu JK Tammeka",
+            "matchScore": "1:4",
+            "homeTeam": "Tartu JK Tammeka",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "Tartu JK Tammeka",
+            "date": "12.04.2026 14:30",
+            "isHome": false,
+            "round": 6
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:0 vs Nõmme Kalju FC",
+            "matchScore": "1:0",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "Nõmme Kalju FC",
+            "opponent": "Nõmme Kalju FC",
+            "date": "19.04.2026 17:00",
+            "isHome": true,
+            "round": 7
+          },
+          {
+            "type": "draw",
+            "result": "X",
+            "score": "2:2 vs Harju JK Laagri",
+            "matchScore": "2:2",
+            "homeTeam": "Harju JK Laagri",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "Harju JK Laagri",
+            "date": "22.04.2026 19:00",
+            "isHome": false,
+            "round": 8
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "1:2 vs Tallinna FC Flora",
+            "matchScore": "1:2",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "Tallinna FC Flora",
+            "opponent": "Tallinna FC Flora",
+            "date": "26.04.2026 14:30",
+            "isHome": true,
+            "round": 9
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "0:1 vs Tartu JK Tammeka",
+            "matchScore": "0:1",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "Tartu JK Tammeka",
+            "opponent": "Tartu JK Tammeka",
+            "date": "01.05.2026 17:00",
+            "isHome": true,
+            "round": 10
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "2:3 vs FC Nõmme United",
+            "matchScore": "2:3",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "FC Nõmme United",
+            "date": "10.05.2026 17:00",
+            "isHome": false,
+            "round": 11
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "1:3 vs Tallinna FCI Levadia",
+            "matchScore": "1:3",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "Tallinna FCI Levadia",
+            "opponent": "Tallinna FCI Levadia",
+            "date": "17.05.2026 14:30",
+            "isHome": true,
+            "round": 12
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "1:0 vs JK Narva Trans",
+            "matchScore": "1:0",
+            "homeTeam": "JK Narva Trans",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "JK Narva Trans",
+            "date": "20.05.2026 19:00",
+            "isHome": false,
+            "round": 13
+          },
+          {
+            "type": "draw",
+            "result": "X",
+            "score": "1:1 vs FC Kuressaare",
+            "matchScore": "1:1",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "FC Kuressaare",
+            "opponent": "FC Kuressaare",
+            "date": "31.05.2026 17:00",
+            "isHome": true,
+            "round": 14
+          },
+          {
+            "type": "draw",
+            "result": "X",
+            "score": "1:1 vs Nõmme Kalju FC",
+            "matchScore": "1:1",
+            "homeTeam": "Nõmme Kalju FC",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "Nõmme Kalju FC",
+            "date": "14.06.2026 14:30",
+            "isHome": false,
+            "round": 15
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:0 vs Harju JK Laagri",
+            "matchScore": "1:0",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "Harju JK Laagri",
+            "opponent": "Harju JK Laagri",
+            "date": "17.06.2026 19:00",
+            "isHome": true,
+            "round": 16
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:2 vs Tallinna FC Flora",
+            "matchScore": "1:2",
+            "homeTeam": "Tallinna FC Flora",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "Tallinna FC Flora",
+            "date": "21.06.2026 17:00",
+            "isHome": false,
+            "round": 17
+          },
+          {
+            "type": "draw",
+            "result": "X",
+            "score": "1:1 vs Nõmme Kalju FC",
+            "matchScore": "1:1",
+            "homeTeam": "Nõmme Kalju FC",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "Nõmme Kalju FC",
+            "date": "28.06.2026 17:00",
+            "isHome": false,
+            "round": 18
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "3:1 vs Pärnu JK Vaprus",
+            "matchScore": "3:1",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "Pärnu JK Vaprus",
+            "opponent": "Pärnu JK Vaprus",
+            "date": "04.07.2026 19:00",
+            "isHome": true,
+            "round": 19
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "5:2 vs Harju JK Laagri",
+            "matchScore": "5:2",
+            "homeTeam": "Harju JK Laagri",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "Harju JK Laagri",
+            "date": "19.07.2026 19:00",
+            "isHome": false,
+            "round": 20
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:0 vs FC Kuressaare",
+            "matchScore": "1:0",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "FC Kuressaare",
+            "opponent": "FC Kuressaare",
+            "date": "02.08.2026 17:00",
+            "isHome": true,
+            "round": 21
+          },
+          {
+            "type": "draw",
+            "result": "X",
+            "score": "1:1 vs JK Narva Trans",
+            "matchScore": "1:1",
+            "homeTeam": "JK Narva Trans",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "JK Narva Trans",
+            "date": "16.08.2026 17:00",
+            "isHome": false,
+            "round": 22
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "4:1 vs FC Nõmme United",
+            "matchScore": "4:1",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "FC Nõmme United",
+            "date": "23.08.2026 17:00",
+            "isHome": true,
+            "round": 23
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:2 vs Tallinna FC Flora",
+            "matchScore": "1:2",
+            "homeTeam": "Tallinna FC Flora",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "Tallinna FC Flora",
+            "date": "30.08.2026 17:00",
+            "isHome": false,
+            "round": 24
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "0:2 vs Tallinna FCI Levadia",
+            "matchScore": "0:2",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "Tallinna FCI Levadia",
+            "opponent": "Tallinna FCI Levadia",
+            "date": "06.09.2026 14:30",
+            "isHome": true,
+            "round": 25
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "0:2 vs Tartu JK Tammeka",
+            "matchScore": "0:2",
+            "homeTeam": "Tartu JK Tammeka",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "Tartu JK Tammeka",
+            "date": "09.09.2026 19:00",
+            "isHome": false,
+            "round": 26
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "1:2 vs Harju JK Laagri",
+            "matchScore": "1:2",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "Harju JK Laagri",
+            "opponent": "Harju JK Laagri",
+            "date": "13.09.2026 14:30",
+            "isHome": true,
+            "round": 27
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "2:0 vs Pärnu JK Vaprus",
+            "matchScore": "2:0",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "Pärnu JK Vaprus",
+            "opponent": "Pärnu JK Vaprus",
+            "date": "16.09.2026 19:00",
+            "isHome": true,
+            "round": 28
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:3 vs FC Nõmme United",
+            "matchScore": "1:3",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "FC Nõmme United",
+            "date": "19.09.2026 17:00",
+            "isHome": false,
+            "round": 29
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "1:0 vs Tallinna FCI Levadia",
+            "matchScore": "1:0",
+            "homeTeam": "Tallinna FCI Levadia",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "Tallinna FCI Levadia",
+            "date": "11.10.2026 14:30",
+            "isHome": false,
+            "round": 30
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "2:1 vs Tartu JK Tammeka",
+            "matchScore": "2:1",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "Tartu JK Tammeka",
+            "opponent": "Tartu JK Tammeka",
+            "date": "14.10.2026 19:00",
+            "isHome": true,
+            "round": 31
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "2:1 vs JK Narva Trans",
+            "matchScore": "2:1",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "JK Narva Trans",
+            "opponent": "JK Narva Trans",
+            "date": "18.10.2026 17:00",
+            "isHome": true,
+            "round": 32
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "0:1 vs FC Kuressaare",
+            "matchScore": "0:1",
+            "homeTeam": "FC Kuressaare",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "FC Kuressaare",
+            "date": "24.10.2026 14:30",
+            "isHome": false,
+            "round": 33
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "0:2 vs Nõmme Kalju FC",
+            "matchScore": "0:2",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "Nõmme Kalju FC",
+            "opponent": "Nõmme Kalju FC",
+            "date": "28.10.2026 19:00",
+            "isHome": true,
+            "round": 34
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "0:1 vs Pärnu JK Vaprus",
+            "matchScore": "0:1",
+            "homeTeam": "Pärnu JK Vaprus",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "Pärnu JK Vaprus",
+            "date": "31.10.2026 14:30",
+            "isHome": false,
+            "round": 35
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "0:2 vs Tallinna FC Flora",
+            "matchScore": "0:2",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "Tallinna FC Flora",
+            "opponent": "Tallinna FC Flora",
+            "date": "07.11.2026 12:30",
+            "isHome": true,
+            "round": 36
           }
         ]
       },
@@ -2760,22 +2768,16 @@
         "teamId": 1382,
         "logo": "https://jalgpall.ee/images/clubs/81AD4B4CED48E03076052BE2AD56B0B6",
         "localLogo": "assets/img/jalgpall_logos/tammeka.png",
-        "played": 35,
+        "played": 36,
         "won": 17,
         "drawn": 2,
-        "lost": 16,
+        "lost": 17,
         "goalsFor": 50,
-        "goalsAgainst": 55,
-        "goalDifference": "-5",
+        "goalsAgainst": 58,
+        "goalDifference": "-8",
         "points": 53,
         "isPaide": false,
         "form": [
-          {
-            "result": "K",
-            "type": "loss",
-            "score": "2:1 vs Paide Linnameeskond",
-            "opponent": "Paide Linnameeskond"
-          },
           {
             "result": "K",
             "type": "loss",
@@ -2799,6 +2801,12 @@
             "type": "win",
             "score": "2:1 vs Harju JK Laagri",
             "opponent": "Harju JK Laagri"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "0:3 vs Pärnu JK Vaprus",
+            "opponent": "Pärnu JK Vaprus"
           }
         ],
         "seasonHistory": [
@@ -3221,6 +3229,18 @@
             "date": "31.10.2026 14:30",
             "isHome": true,
             "round": 35
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "0:3 vs Pärnu JK Vaprus",
+            "matchScore": "0:3",
+            "homeTeam": "Tartu JK Tammeka",
+            "awayTeam": "Pärnu JK Vaprus",
+            "opponent": "Pärnu JK Vaprus",
+            "date": "07.11.2026 12:30",
+            "isHome": true,
+            "round": 36
           }
         ]
       },
@@ -3230,22 +3250,16 @@
         "teamId": 3573,
         "logo": "https://jalgpall.ee/images/clubs/B35E6F475CFD782B9499B3FAF26C3A55",
         "localLogo": "assets/img/jalgpall_logos/harju.png",
-        "played": 35,
+        "played": 36,
         "won": 15,
         "drawn": 2,
-        "lost": 18,
+        "lost": 19,
         "goalsFor": 50,
-        "goalsAgainst": 52,
-        "goalDifference": "-2",
+        "goalsAgainst": 53,
+        "goalDifference": "-3",
         "points": 47,
         "isPaide": false,
         "form": [
-          {
-            "result": "V",
-            "type": "win",
-            "score": "2:0 vs FC Nõmme United",
-            "opponent": "FC Nõmme United"
-          },
           {
             "result": "V",
             "type": "win",
@@ -3269,6 +3283,12 @@
             "type": "loss",
             "score": "2:1 vs Tartu JK Tammeka",
             "opponent": "Tartu JK Tammeka"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "1:0 vs JK Narva Trans",
+            "opponent": "JK Narva Trans"
           }
         ],
         "seasonHistory": [
@@ -3691,501 +3711,37 @@
             "date": "31.10.2026 14:30",
             "isHome": false,
             "round": 35
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "1:0 vs JK Narva Trans",
+            "matchScore": "1:0",
+            "homeTeam": "JK Narva Trans",
+            "awayTeam": "Harju JK Laagri",
+            "opponent": "JK Narva Trans",
+            "date": "07.11.2026 12:30",
+            "isHome": false,
+            "round": 36
           }
         ]
       },
       {
         "position": 7,
-        "team": "FC Nõmme United",
-        "teamId": 6314,
-        "logo": "https://jalgpall.ee/images/logos/5C7E20E45CE3FC3318DB9A2BF36EACA6",
-        "localLogo": "assets/img/jalgpall_logos/united.png",
-        "played": 35,
-        "won": 12,
-        "drawn": 1,
-        "lost": 22,
-        "goalsFor": 58,
-        "goalsAgainst": 80,
-        "goalDifference": "-22",
-        "points": 37,
-        "isPaide": false,
-        "form": [
-          {
-            "result": "K",
-            "type": "loss",
-            "score": "2:0 vs Harju JK Laagri",
-            "opponent": "Harju JK Laagri"
-          },
-          {
-            "result": "V",
-            "type": "win",
-            "score": "3:0 vs Nõmme Kalju FC",
-            "opponent": "Nõmme Kalju FC"
-          },
-          {
-            "result": "V",
-            "type": "win",
-            "score": "4:2 vs Pärnu JK Vaprus",
-            "opponent": "Pärnu JK Vaprus"
-          },
-          {
-            "result": "V",
-            "type": "win",
-            "score": "0:1 vs JK Narva Trans",
-            "opponent": "JK Narva Trans"
-          },
-          {
-            "result": "K",
-            "type": "loss",
-            "score": "3:4 vs Tallinna FCI Levadia",
-            "opponent": "Tallinna FCI Levadia"
-          }
-        ],
-        "seasonHistory": [
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "3:0 vs Tallinna FC Flora",
-            "matchScore": "3:0",
-            "homeTeam": "Tallinna FC Flora",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "Tallinna FC Flora",
-            "date": "07.03.2026 12:30",
-            "isHome": false,
-            "round": 1
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "7:1 vs Pärnu JK Vaprus",
-            "matchScore": "7:1",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "Pärnu JK Vaprus",
-            "opponent": "Pärnu JK Vaprus",
-            "date": "14.03.2026 12:30",
-            "isHome": true,
-            "round": 2
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "2:3 vs Tartu JK Tammeka",
-            "matchScore": "2:3",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "Tartu JK Tammeka",
-            "opponent": "Tartu JK Tammeka",
-            "date": "21.03.2026 12:30",
-            "isHome": true,
-            "round": 3
-          },
-          {
-            "type": "draw",
-            "result": "X",
-            "score": "1:1 vs Tallinna FCI Levadia",
-            "matchScore": "1:1",
-            "homeTeam": "Tallinna FCI Levadia",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "Tallinna FCI Levadia",
-            "date": "04.04.2026 14:30",
-            "isHome": false,
-            "round": 4
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "3:1 vs Paide Linnameeskond",
-            "matchScore": "3:1",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "Paide Linnameeskond",
-            "date": "08.04.2026 19:00",
-            "isHome": false,
-            "round": 5
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "5:1 vs JK Narva Trans",
-            "matchScore": "5:1",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "JK Narva Trans",
-            "opponent": "JK Narva Trans",
-            "date": "11.04.2026 17:00",
-            "isHome": true,
-            "round": 6
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "1:2 vs Harju JK Laagri",
-            "matchScore": "1:2",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "Harju JK Laagri",
-            "opponent": "Harju JK Laagri",
-            "date": "18.04.2026 20:30",
-            "isHome": true,
-            "round": 7
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "7:1 vs Nõmme Kalju FC",
-            "matchScore": "7:1",
-            "homeTeam": "Nõmme Kalju FC",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "Nõmme Kalju FC",
-            "date": "22.04.2026 18:45",
-            "isHome": false,
-            "round": 8
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "2:1 vs FC Kuressaare",
-            "matchScore": "2:1",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "FC Kuressaare",
-            "opponent": "FC Kuressaare",
-            "date": "25.04.2026 17:00",
-            "isHome": true,
-            "round": 9
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "2:3 vs Pärnu JK Vaprus",
-            "matchScore": "2:3",
-            "homeTeam": "Pärnu JK Vaprus",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "Pärnu JK Vaprus",
-            "date": "02.05.2026 17:00",
-            "isHome": false,
-            "round": 10
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "2:3 vs Paide Linnameeskond",
-            "matchScore": "2:3",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "Paide Linnameeskond",
-            "date": "10.05.2026 17:00",
-            "isHome": true,
-            "round": 11
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "3:1 vs Tartu JK Tammeka",
-            "matchScore": "3:1",
-            "homeTeam": "Tartu JK Tammeka",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "Tartu JK Tammeka",
-            "date": "15.05.2026 19:00",
-            "isHome": false,
-            "round": 12
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "2:1 vs FC Kuressaare",
-            "matchScore": "2:1",
-            "homeTeam": "FC Kuressaare",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "FC Kuressaare",
-            "date": "20.05.2026 19:00",
-            "isHome": false,
-            "round": 13
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "0:4 vs Tallinna FC Flora",
-            "matchScore": "0:4",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "Tallinna FC Flora",
-            "opponent": "Tallinna FC Flora",
-            "date": "29.05.2026 19:00",
-            "isHome": true,
-            "round": 14
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "1:2 vs JK Narva Trans",
-            "matchScore": "1:2",
-            "homeTeam": "JK Narva Trans",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "JK Narva Trans",
-            "date": "13.06.2026 14:30",
-            "isHome": false,
-            "round": 15
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "1:2 vs Tallinna FCI Levadia",
-            "matchScore": "1:2",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "Tallinna FCI Levadia",
-            "opponent": "Tallinna FCI Levadia",
-            "date": "17.06.2026 19:00",
-            "isHome": true,
-            "round": 16
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "1:3 vs Harju JK Laagri",
-            "matchScore": "1:3",
-            "homeTeam": "Harju JK Laagri",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "Harju JK Laagri",
-            "date": "20.06.2026 14:30",
-            "isHome": false,
-            "round": 17
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "1:3 vs Nõmme Kalju FC",
-            "matchScore": "1:3",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "Nõmme Kalju FC",
-            "opponent": "Nõmme Kalju FC",
-            "date": "03.07.2026 19:00",
-            "isHome": true,
-            "round": 18
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "3:2 vs FC Kuressaare",
-            "matchScore": "3:2",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "FC Kuressaare",
-            "opponent": "FC Kuressaare",
-            "date": "11.07.2026 17:00",
-            "isHome": true,
-            "round": 19
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "1:2 vs Tallinna FC Flora",
-            "matchScore": "1:2",
-            "homeTeam": "Tallinna FC Flora",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "Tallinna FC Flora",
-            "date": "17.07.2026 19:00",
-            "isHome": false,
-            "round": 20
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "1:2 vs JK Narva Trans",
-            "matchScore": "1:2",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "JK Narva Trans",
-            "opponent": "JK Narva Trans",
-            "date": "31.07.2026 19:00",
-            "isHome": true,
-            "round": 21
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "5:0 vs Tallinna FCI Levadia",
-            "matchScore": "5:0",
-            "homeTeam": "Tallinna FCI Levadia",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "Tallinna FCI Levadia",
-            "date": "09.08.2026 19:00",
-            "isHome": false,
-            "round": 22
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "0:1 vs Tartu JK Tammeka",
-            "matchScore": "0:1",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "Tartu JK Tammeka",
-            "opponent": "Tartu JK Tammeka",
-            "date": "14.08.2026 19:00",
-            "isHome": true,
-            "round": 23
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "4:1 vs Paide Linnameeskond",
-            "matchScore": "4:1",
-            "homeTeam": "Paide Linnameeskond",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "Paide Linnameeskond",
-            "date": "23.08.2026 17:00",
-            "isHome": false,
-            "round": 24
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "1:2 vs Harju JK Laagri",
-            "matchScore": "1:2",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "Harju JK Laagri",
-            "opponent": "Harju JK Laagri",
-            "date": "29.08.2026 14:30",
-            "isHome": true,
-            "round": 25
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "1:0 vs Pärnu JK Vaprus",
-            "matchScore": "1:0",
-            "homeTeam": "Pärnu JK Vaprus",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "Pärnu JK Vaprus",
-            "date": "05.09.2026 17:00",
-            "isHome": false,
-            "round": 26
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "1:2 vs Nõmme Kalju FC",
-            "matchScore": "1:2",
-            "homeTeam": "Nõmme Kalju FC",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "Nõmme Kalju FC",
-            "date": "08.09.2026 18:00",
-            "isHome": false,
-            "round": 27
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "2:3 vs Tallinna FC Flora",
-            "matchScore": "2:3",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "Tallinna FC Flora",
-            "opponent": "Tallinna FC Flora",
-            "date": "12.09.2026 17:00",
-            "isHome": true,
-            "round": 28
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "1:3 vs Paide Linnameeskond",
-            "matchScore": "1:3",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "Paide Linnameeskond",
-            "opponent": "Paide Linnameeskond",
-            "date": "19.09.2026 17:00",
-            "isHome": true,
-            "round": 29
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "4:0 vs Tartu JK Tammeka",
-            "matchScore": "4:0",
-            "homeTeam": "Tartu JK Tammeka",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "Tartu JK Tammeka",
-            "date": "10.10.2026 17:00",
-            "isHome": false,
-            "round": 30
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "2:0 vs Harju JK Laagri",
-            "matchScore": "2:0",
-            "homeTeam": "Harju JK Laagri",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "Harju JK Laagri",
-            "date": "13.10.2026 18:00",
-            "isHome": false,
-            "round": 31
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "3:0 vs Nõmme Kalju FC",
-            "matchScore": "3:0",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "Nõmme Kalju FC",
-            "opponent": "Nõmme Kalju FC",
-            "date": "17.10.2026 12:30",
-            "isHome": true,
-            "round": 32
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "4:2 vs Pärnu JK Vaprus",
-            "matchScore": "4:2",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "Pärnu JK Vaprus",
-            "opponent": "Pärnu JK Vaprus",
-            "date": "23.10.2026 19:00",
-            "isHome": true,
-            "round": 33
-          },
-          {
-            "type": "win",
-            "result": "V",
-            "score": "0:1 vs JK Narva Trans",
-            "matchScore": "0:1",
-            "homeTeam": "JK Narva Trans",
-            "awayTeam": "FC Nõmme United",
-            "opponent": "JK Narva Trans",
-            "date": "27.10.2026 18:00",
-            "isHome": false,
-            "round": 34
-          },
-          {
-            "type": "loss",
-            "result": "K",
-            "score": "3:4 vs Tallinna FCI Levadia",
-            "matchScore": "3:4",
-            "homeTeam": "FC Nõmme United",
-            "awayTeam": "Tallinna FCI Levadia",
-            "opponent": "Tallinna FCI Levadia",
-            "date": "31.10.2026 15:00",
-            "isHome": true,
-            "round": 35
-          }
-        ]
-      },
-      {
-        "position": 8,
         "team": "Pärnu JK Vaprus",
         "teamId": 5387,
         "logo": "https://jalgpall.ee/images/clubs/D8034B13F45C52A82CC8EAFFB756EABF",
         "localLogo": "assets/img/jalgpall_logos/vaprus.png",
-        "played": 35,
-        "won": 10,
+        "played": 36,
+        "won": 11,
         "drawn": 7,
         "lost": 18,
-        "goalsFor": 46,
+        "goalsFor": 49,
         "goalsAgainst": 69,
-        "goalDifference": "-23",
-        "points": 37,
+        "goalDifference": "-20",
+        "points": 40,
         "isPaide": false,
         "form": [
-          {
-            "result": "X",
-            "type": "draw",
-            "score": "2:2 vs Nõmme Kalju FC",
-            "opponent": "Nõmme Kalju FC"
-          },
           {
             "result": "K",
             "type": "loss",
@@ -4209,6 +3765,12 @@
             "type": "loss",
             "score": "0:1 vs Paide Linnameeskond",
             "opponent": "Paide Linnameeskond"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "0:3 vs Tartu JK Tammeka",
+            "opponent": "Tartu JK Tammeka"
           }
         ],
         "seasonHistory": [
@@ -4631,6 +4193,500 @@
             "date": "31.10.2026 14:30",
             "isHome": true,
             "round": 35
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "0:3 vs Tartu JK Tammeka",
+            "matchScore": "0:3",
+            "homeTeam": "Tartu JK Tammeka",
+            "awayTeam": "Pärnu JK Vaprus",
+            "opponent": "Tartu JK Tammeka",
+            "date": "07.11.2026 12:30",
+            "isHome": false,
+            "round": 36
+          }
+        ]
+      },
+      {
+        "position": 8,
+        "team": "FC Nõmme United",
+        "teamId": 6314,
+        "logo": "https://jalgpall.ee/images/logos/5C7E20E45CE3FC3318DB9A2BF36EACA6",
+        "localLogo": "assets/img/jalgpall_logos/united.png",
+        "played": 36,
+        "won": 12,
+        "drawn": 2,
+        "lost": 22,
+        "goalsFor": 59,
+        "goalsAgainst": 81,
+        "goalDifference": "-22",
+        "points": 38,
+        "isPaide": false,
+        "form": [
+          {
+            "result": "V",
+            "type": "win",
+            "score": "3:0 vs Nõmme Kalju FC",
+            "opponent": "Nõmme Kalju FC"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "4:2 vs Pärnu JK Vaprus",
+            "opponent": "Pärnu JK Vaprus"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "0:1 vs JK Narva Trans",
+            "opponent": "JK Narva Trans"
+          },
+          {
+            "result": "K",
+            "type": "loss",
+            "score": "3:4 vs Tallinna FCI Levadia",
+            "opponent": "Tallinna FCI Levadia"
+          },
+          {
+            "result": "X",
+            "type": "draw",
+            "score": "1:1 vs FC Kuressaare",
+            "opponent": "FC Kuressaare"
+          }
+        ],
+        "seasonHistory": [
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "3:0 vs Tallinna FC Flora",
+            "matchScore": "3:0",
+            "homeTeam": "Tallinna FC Flora",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "Tallinna FC Flora",
+            "date": "07.03.2026 12:30",
+            "isHome": false,
+            "round": 1
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "7:1 vs Pärnu JK Vaprus",
+            "matchScore": "7:1",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Pärnu JK Vaprus",
+            "opponent": "Pärnu JK Vaprus",
+            "date": "14.03.2026 12:30",
+            "isHome": true,
+            "round": 2
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "2:3 vs Tartu JK Tammeka",
+            "matchScore": "2:3",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Tartu JK Tammeka",
+            "opponent": "Tartu JK Tammeka",
+            "date": "21.03.2026 12:30",
+            "isHome": true,
+            "round": 3
+          },
+          {
+            "type": "draw",
+            "result": "X",
+            "score": "1:1 vs Tallinna FCI Levadia",
+            "matchScore": "1:1",
+            "homeTeam": "Tallinna FCI Levadia",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "Tallinna FCI Levadia",
+            "date": "04.04.2026 14:30",
+            "isHome": false,
+            "round": 4
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "3:1 vs Paide Linnameeskond",
+            "matchScore": "3:1",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "Paide Linnameeskond",
+            "date": "08.04.2026 19:00",
+            "isHome": false,
+            "round": 5
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "5:1 vs JK Narva Trans",
+            "matchScore": "5:1",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "JK Narva Trans",
+            "opponent": "JK Narva Trans",
+            "date": "11.04.2026 17:00",
+            "isHome": true,
+            "round": 6
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "1:2 vs Harju JK Laagri",
+            "matchScore": "1:2",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Harju JK Laagri",
+            "opponent": "Harju JK Laagri",
+            "date": "18.04.2026 20:30",
+            "isHome": true,
+            "round": 7
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "7:1 vs Nõmme Kalju FC",
+            "matchScore": "7:1",
+            "homeTeam": "Nõmme Kalju FC",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "Nõmme Kalju FC",
+            "date": "22.04.2026 18:45",
+            "isHome": false,
+            "round": 8
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "2:1 vs FC Kuressaare",
+            "matchScore": "2:1",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "FC Kuressaare",
+            "opponent": "FC Kuressaare",
+            "date": "25.04.2026 17:00",
+            "isHome": true,
+            "round": 9
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "2:3 vs Pärnu JK Vaprus",
+            "matchScore": "2:3",
+            "homeTeam": "Pärnu JK Vaprus",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "Pärnu JK Vaprus",
+            "date": "02.05.2026 17:00",
+            "isHome": false,
+            "round": 10
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "2:3 vs Paide Linnameeskond",
+            "matchScore": "2:3",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "Paide Linnameeskond",
+            "date": "10.05.2026 17:00",
+            "isHome": true,
+            "round": 11
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "3:1 vs Tartu JK Tammeka",
+            "matchScore": "3:1",
+            "homeTeam": "Tartu JK Tammeka",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "Tartu JK Tammeka",
+            "date": "15.05.2026 19:00",
+            "isHome": false,
+            "round": 12
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "2:1 vs FC Kuressaare",
+            "matchScore": "2:1",
+            "homeTeam": "FC Kuressaare",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "FC Kuressaare",
+            "date": "20.05.2026 19:00",
+            "isHome": false,
+            "round": 13
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "0:4 vs Tallinna FC Flora",
+            "matchScore": "0:4",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Tallinna FC Flora",
+            "opponent": "Tallinna FC Flora",
+            "date": "29.05.2026 19:00",
+            "isHome": true,
+            "round": 14
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:2 vs JK Narva Trans",
+            "matchScore": "1:2",
+            "homeTeam": "JK Narva Trans",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "JK Narva Trans",
+            "date": "13.06.2026 14:30",
+            "isHome": false,
+            "round": 15
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "1:2 vs Tallinna FCI Levadia",
+            "matchScore": "1:2",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Tallinna FCI Levadia",
+            "opponent": "Tallinna FCI Levadia",
+            "date": "17.06.2026 19:00",
+            "isHome": true,
+            "round": 16
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:3 vs Harju JK Laagri",
+            "matchScore": "1:3",
+            "homeTeam": "Harju JK Laagri",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "Harju JK Laagri",
+            "date": "20.06.2026 14:30",
+            "isHome": false,
+            "round": 17
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "1:3 vs Nõmme Kalju FC",
+            "matchScore": "1:3",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Nõmme Kalju FC",
+            "opponent": "Nõmme Kalju FC",
+            "date": "03.07.2026 19:00",
+            "isHome": true,
+            "round": 18
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "3:2 vs FC Kuressaare",
+            "matchScore": "3:2",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "FC Kuressaare",
+            "opponent": "FC Kuressaare",
+            "date": "11.07.2026 17:00",
+            "isHome": true,
+            "round": 19
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:2 vs Tallinna FC Flora",
+            "matchScore": "1:2",
+            "homeTeam": "Tallinna FC Flora",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "Tallinna FC Flora",
+            "date": "17.07.2026 19:00",
+            "isHome": false,
+            "round": 20
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "1:2 vs JK Narva Trans",
+            "matchScore": "1:2",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "JK Narva Trans",
+            "opponent": "JK Narva Trans",
+            "date": "31.07.2026 19:00",
+            "isHome": true,
+            "round": 21
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "5:0 vs Tallinna FCI Levadia",
+            "matchScore": "5:0",
+            "homeTeam": "Tallinna FCI Levadia",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "Tallinna FCI Levadia",
+            "date": "09.08.2026 19:00",
+            "isHome": false,
+            "round": 22
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "0:1 vs Tartu JK Tammeka",
+            "matchScore": "0:1",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Tartu JK Tammeka",
+            "opponent": "Tartu JK Tammeka",
+            "date": "14.08.2026 19:00",
+            "isHome": true,
+            "round": 23
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "4:1 vs Paide Linnameeskond",
+            "matchScore": "4:1",
+            "homeTeam": "Paide Linnameeskond",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "Paide Linnameeskond",
+            "date": "23.08.2026 17:00",
+            "isHome": false,
+            "round": 24
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "1:2 vs Harju JK Laagri",
+            "matchScore": "1:2",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Harju JK Laagri",
+            "opponent": "Harju JK Laagri",
+            "date": "29.08.2026 14:30",
+            "isHome": true,
+            "round": 25
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "1:0 vs Pärnu JK Vaprus",
+            "matchScore": "1:0",
+            "homeTeam": "Pärnu JK Vaprus",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "Pärnu JK Vaprus",
+            "date": "05.09.2026 17:00",
+            "isHome": false,
+            "round": 26
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:2 vs Nõmme Kalju FC",
+            "matchScore": "1:2",
+            "homeTeam": "Nõmme Kalju FC",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "Nõmme Kalju FC",
+            "date": "08.09.2026 18:00",
+            "isHome": false,
+            "round": 27
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "2:3 vs Tallinna FC Flora",
+            "matchScore": "2:3",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Tallinna FC Flora",
+            "opponent": "Tallinna FC Flora",
+            "date": "12.09.2026 17:00",
+            "isHome": true,
+            "round": 28
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "1:3 vs Paide Linnameeskond",
+            "matchScore": "1:3",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Paide Linnameeskond",
+            "opponent": "Paide Linnameeskond",
+            "date": "19.09.2026 17:00",
+            "isHome": true,
+            "round": 29
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "4:0 vs Tartu JK Tammeka",
+            "matchScore": "4:0",
+            "homeTeam": "Tartu JK Tammeka",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "Tartu JK Tammeka",
+            "date": "10.10.2026 17:00",
+            "isHome": false,
+            "round": 30
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "2:0 vs Harju JK Laagri",
+            "matchScore": "2:0",
+            "homeTeam": "Harju JK Laagri",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "Harju JK Laagri",
+            "date": "13.10.2026 18:00",
+            "isHome": false,
+            "round": 31
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "3:0 vs Nõmme Kalju FC",
+            "matchScore": "3:0",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Nõmme Kalju FC",
+            "opponent": "Nõmme Kalju FC",
+            "date": "17.10.2026 12:30",
+            "isHome": true,
+            "round": 32
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "4:2 vs Pärnu JK Vaprus",
+            "matchScore": "4:2",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Pärnu JK Vaprus",
+            "opponent": "Pärnu JK Vaprus",
+            "date": "23.10.2026 19:00",
+            "isHome": true,
+            "round": 33
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "0:1 vs JK Narva Trans",
+            "matchScore": "0:1",
+            "homeTeam": "JK Narva Trans",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "JK Narva Trans",
+            "date": "27.10.2026 18:00",
+            "isHome": false,
+            "round": 34
+          },
+          {
+            "type": "loss",
+            "result": "K",
+            "score": "3:4 vs Tallinna FCI Levadia",
+            "matchScore": "3:4",
+            "homeTeam": "FC Nõmme United",
+            "awayTeam": "Tallinna FCI Levadia",
+            "opponent": "Tallinna FCI Levadia",
+            "date": "31.10.2026 15:00",
+            "isHome": true,
+            "round": 35
+          },
+          {
+            "type": "draw",
+            "result": "X",
+            "score": "1:1 vs FC Kuressaare",
+            "matchScore": "1:1",
+            "homeTeam": "FC Kuressaare",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "FC Kuressaare",
+            "date": "07.11.2026 12:30",
+            "isHome": false,
+            "round": 36
           }
         ]
       },
@@ -4640,22 +4696,16 @@
         "teamId": 76,
         "logo": "https://jalgpall.ee/images/logos/82513CF228618115FBB68121D90A730F",
         "localLogo": "assets/img/jalgpall_logos/kuressaare.png",
-        "played": 35,
+        "played": 36,
         "won": 10,
-        "drawn": 6,
+        "drawn": 7,
         "lost": 19,
-        "goalsFor": 35,
-        "goalsAgainst": 54,
+        "goalsFor": 36,
+        "goalsAgainst": 55,
         "goalDifference": "-19",
-        "points": 36,
+        "points": 37,
         "isPaide": false,
         "form": [
-          {
-            "result": "V",
-            "type": "win",
-            "score": "0:1 vs JK Narva Trans",
-            "opponent": "JK Narva Trans"
-          },
           {
             "result": "K",
             "type": "loss",
@@ -4679,6 +4729,12 @@
             "type": "loss",
             "score": "1:0 vs Nõmme Kalju FC",
             "opponent": "Nõmme Kalju FC"
+          },
+          {
+            "result": "X",
+            "type": "draw",
+            "score": "1:1 vs FC Nõmme United",
+            "opponent": "FC Nõmme United"
           }
         ],
         "seasonHistory": [
@@ -5101,6 +5157,18 @@
             "date": "01.11.2026 12:30",
             "isHome": false,
             "round": 35
+          },
+          {
+            "type": "draw",
+            "result": "X",
+            "score": "1:1 vs FC Nõmme United",
+            "matchScore": "1:1",
+            "homeTeam": "FC Kuressaare",
+            "awayTeam": "FC Nõmme United",
+            "opponent": "FC Nõmme United",
+            "date": "07.11.2026 12:30",
+            "isHome": true,
+            "round": 36
           }
         ]
       },
@@ -5110,22 +5178,16 @@
         "teamId": 14,
         "logo": "https://jalgpall.ee/images/clubs/4A3FF0803D0C049C81C5924B98567A9E",
         "localLogo": "assets/img/jalgpall_logos/trans.png",
-        "played": 35,
-        "won": 5,
+        "played": 36,
+        "won": 6,
         "drawn": 5,
         "lost": 25,
-        "goalsFor": 26,
+        "goalsFor": 27,
         "goalsAgainst": 78,
-        "goalDifference": "-52",
-        "points": 20,
+        "goalDifference": "-51",
+        "points": 23,
         "isPaide": false,
         "form": [
-          {
-            "result": "K",
-            "type": "loss",
-            "score": "0:1 vs FC Kuressaare",
-            "opponent": "FC Kuressaare"
-          },
           {
             "result": "K",
             "type": "loss",
@@ -5149,6 +5211,12 @@
             "type": "loss",
             "score": "2:0 vs Tallinna FC Flora",
             "opponent": "Tallinna FC Flora"
+          },
+          {
+            "result": "V",
+            "type": "win",
+            "score": "1:0 vs Harju JK Laagri",
+            "opponent": "Harju JK Laagri"
           }
         ],
         "seasonHistory": [
@@ -5571,6 +5639,18 @@
             "date": "01.11.2026 14:30",
             "isHome": false,
             "round": 35
+          },
+          {
+            "type": "win",
+            "result": "V",
+            "score": "1:0 vs Harju JK Laagri",
+            "matchScore": "1:0",
+            "homeTeam": "JK Narva Trans",
+            "awayTeam": "Harju JK Laagri",
+            "opponent": "Harju JK Laagri",
+            "date": "07.11.2026 12:30",
+            "isHome": true,
+            "round": 36
           }
         ]
       }
@@ -8559,7 +8639,7 @@
     "assists": 34,
     "yellowCards": 84,
     "redCards": 8,
-    "viewers": 22169,
+    "viewers": 23016,
     "topAssists": [
       {
         "rank": 1,
