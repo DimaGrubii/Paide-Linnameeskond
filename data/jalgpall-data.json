@@ -2,7 +2,7 @@
   "metadata": {
     "source": "Eesti Jalgpalli Liit (EJL OpenData API v1)",
     "sourceUrl": "https://opendata.jalgpall.ee/api/v1",
-    "lastUpdated": "2026-11-07T22:42:10.211312+02:00",
+    "lastUpdated": "2026-11-08T02:10:27.758942+02:00",
     "season": "2026",
     "status": "success"
   },
@@ -8656,7 +8656,7 @@
   "teamStats": {
     "gamesPlayed": 55,
     "goals": 69,
-    "assists": 34,
+    "assists": 36,
     "yellowCards": 89,
     "redCards": 8,
     "viewers": 23031,
@@ -8681,44 +8681,44 @@
       },
       {
         "rank": 2,
+        "id": 29849,
+        "name": "Aleksandr Šurõgin",
+        "assists": 3
+      },
+      {
+        "rank": 2,
         "id": 50291,
         "name": "Daniel Luts",
         "assists": 3
       },
       {
-        "rank": 5,
+        "rank": 2,
+        "id": 106054,
+        "name": "Victor Hugo Dos Santos De Sa",
+        "assists": 3
+      },
+      {
+        "rank": 7,
         "id": 7746,
         "name": "Siim Luts",
         "assists": 2
       },
       {
-        "rank": 5,
+        "rank": 7,
         "id": 16530,
         "name": "Edgar Tur",
         "assists": 2
       },
       {
-        "rank": 5,
+        "rank": 7,
         "id": 20292,
         "name": "Martin Miller",
         "assists": 2
       },
       {
-        "rank": 5,
-        "id": 29849,
-        "name": "Aleksandr Šurõgin",
-        "assists": 2
-      },
-      {
-        "rank": 5,
+        "rank": 7,
         "id": 31471,
         "name": "Oskar Hõim",
-        "assists": 2
-      },
-      {
-        "rank": 5,
-        "id": 106054,
-        "name": "Victor Hugo Dos Santos De Sa",
         "assists": 2
       }
     ]
