@@ -320,6 +320,7 @@ function initStandingsTabs() {
   const expandBtn = document.getElementById('standings-expand-btn');
 
   if (!menTab || !womenTab || !menTable || !womenTable) return;
+  if (menTab.closest('.hidden')) return;
 
   const setActiveTab = (selected) => {
     if (selected === 'men') {
@@ -374,43 +375,49 @@ function initStandingsTabs() {
 function initStandingsExpand() {
   initSeasonHistoryGraph();
 
-  const expandBtn = document.getElementById('standings-expand-btn');
-  if (!expandBtn) return;
+  const bindExpandButton = (btnId, fallbackTableSelector) => {
+    const expandBtn = document.getElementById(btnId);
+    if (!expandBtn) return;
 
-  expandBtn.addEventListener('click', () => {
-    const isExpanded = expandBtn.getAttribute('data-expanded') === 'true';
-    const activeTable = document.querySelector('#table-standings-men:not(.hidden), #table-standings-women:not(.hidden)');
-    if (!activeTable) return;
+    expandBtn.addEventListener('click', () => {
+      const isExpanded = expandBtn.getAttribute('data-expanded') === 'true';
+      const targetId = expandBtn.getAttribute('data-target-table');
+      const activeTable = (targetId && document.getElementById(targetId)) || document.querySelector(fallbackTableSelector);
+      if (!activeTable) return;
 
-    const extraRows = activeTable.querySelectorAll('.standings-extra-row');
-    const btnText = expandBtn.querySelector('.btn-text');
-    const btnIcon = expandBtn.querySelector('.btn-icon');
+      const extraRows = activeTable.querySelectorAll('.standings-extra-row');
+      const btnText = expandBtn.querySelector('.btn-text');
+      const btnIcon = expandBtn.querySelector('.btn-icon');
 
-    if (isExpanded) {
-      extraRows.forEach(row => {
-        row.classList.add('hidden');
-        const toggleBtn = row.querySelector('[data-season-toggle]');
-        if (toggleBtn) {
-          const key = toggleBtn.getAttribute('data-season-toggle');
-          const historyRow = activeTable.querySelector(`[data-season-row="${key}"]`);
-          if (historyRow) historyRow.classList.add('hidden');
-          toggleBtn.setAttribute('aria-expanded', 'false');
-          toggleBtn.classList.remove('bg-navy', 'text-white', 'border-navy');
-          toggleBtn.classList.add('border-slate-300', 'text-slate-500');
-          const icon = toggleBtn.querySelector('.season-toggle-icon');
-          if (icon) icon.classList.remove('rotate-180');
-        }
-      });
-      expandBtn.setAttribute('data-expanded', 'false');
-      if (btnText) btnText.textContent = 'Vaata täispikka tabelit';
-      if (btnIcon) btnIcon.classList.remove('rotate-180');
-    } else {
-      extraRows.forEach(row => row.classList.remove('hidden'));
-      expandBtn.setAttribute('data-expanded', 'true');
-      if (btnText) btnText.textContent = 'Ahenda tabelit';
-      if (btnIcon) btnIcon.classList.add('rotate-180');
-    }
-  });
+      if (isExpanded) {
+        extraRows.forEach(row => {
+          row.classList.add('hidden');
+          const toggleBtn = row.querySelector('[data-season-toggle]');
+          if (toggleBtn) {
+            const key = toggleBtn.getAttribute('data-season-toggle');
+            const historyRow = activeTable.querySelector(`[data-season-row="${key}"]`);
+            if (historyRow) historyRow.classList.add('hidden');
+            toggleBtn.setAttribute('aria-expanded', 'false');
+            toggleBtn.classList.remove('bg-navy', 'text-white', 'border-navy');
+            toggleBtn.classList.add('border-slate-300', 'text-slate-500');
+            const icon = toggleBtn.querySelector('.season-toggle-icon');
+            if (icon) icon.classList.remove('rotate-180');
+          }
+        });
+        expandBtn.setAttribute('data-expanded', 'false');
+        if (btnText) btnText.textContent = 'Vaata täispikka tabelit';
+        if (btnIcon) btnIcon.classList.remove('rotate-180');
+      } else {
+        extraRows.forEach(row => row.classList.remove('hidden'));
+        expandBtn.setAttribute('data-expanded', 'true');
+        if (btnText) btnText.textContent = 'Ahenda tabelit';
+        if (btnIcon) btnIcon.classList.add('rotate-180');
+      }
+    });
+  };
+
+  bindExpandButton('standings-expand-btn', '#table-standings-men');
+  bindExpandButton('standings-expand-btn-women', '#table-standings-women');
 }
 
 function resetTableRows(table) {
