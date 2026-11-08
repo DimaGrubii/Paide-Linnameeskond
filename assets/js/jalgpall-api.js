@@ -523,7 +523,7 @@ const JalgpallSync = (function () {
 
     let html = '';
     teams.forEach((t, index) => {
-      const isExtra = index >= 6;
+      const isExtra = index >= 5;
       const isPaide = t.isPaide || (t.team && t.team.includes('Paide Linnameeskond'));
       const trClass = isPaide 
         ? 'standings-paide-row transition-colors' 
