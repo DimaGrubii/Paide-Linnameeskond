@@ -594,13 +594,13 @@ function initMatchdayToggle() {
 /* 6. HERO EDITORIAL STORIES SWITCHER                                         */
 /* -------------------------------------------------------------------------- */
 const defaultHeroStory = {
-  tag: 'ESINDUSMEESKOND • PEATREENER',
-  title: 'PAIDE LINNAMEESKONNA PEATREENERINA JÄTKAB TARMO KINK!',
-  date: '6. NOVEMBER 2026',
+  tag: 'ESINDUSMEESKOND • HÕBEMEDALID 2026',
+  title: 'PAIDE LINNAMEESKOND LÕPETAS HOOAJA HÕBEMEDALITEGA!',
+  date: '9. NOVEMBER 2026',
   readTime: '2 MIN LUGEMIST',
-  desc: '2026. aasta aprillis Paide Linnameeskonna peatreeneri kohusetäitjana ametisse asunud Tarmo Kink sõlmis klubiga uue lepingu ja jätkab klubi peatreenerina. Lepingu kestvuseks on kolm aastat.',
-  image: 'assets/img/news/Taki_contract.jpeg',
-  link: 'artikkel-tarmo-kink-jatkab-peatreenerina.html',
+  desc: 'Paide Linnameeskond lõpetas 2026. aasta A. Le Coq Premium liiga hooaja hõbemedalitega, korrates sellega klubi ajaloo parimat liigatulemust 2020. aastast. Hooaja viimases kohtumises võõrustati Paide kunstmuruväljakul Tallinna FC Florat, kellega mängiti välja 2:2 viik.',
+  image: 'assets/img/news/last_match.JPEG',
+  link: 'artikkel-hooaeg-loppes-hobemedalitega.html',
   btnText: 'Loe täispikka uudist'
 };
 
@@ -1117,6 +1117,55 @@ function initNewsFilters() {
       },
       secondary: [
         {
+          href: 'artikkel-hooaeg-loppes-hobemedalitega.html',
+          img: 'assets/img/news/last_match.JPEG',
+          alt: 'Paide Linnameeskond lõpetas hooaja hõbemedalitega!',
+          badge: 'ESINDUSMEESKOND',
+          badgeClass: 'bg-navy',
+          date: '9. NOVEMBER 2026 • 2 MIN',
+          title: 'Paide Linnameeskond lõpetas hooaja hõbemedalitega!',
+          excerpt: 'Paide Linnameeskond lõpetas 2026. aasta A. Le Coq Premium liiga hooaja hõbemedalitega, korrates sellega klubi ajaloo parimat liigatulemust 2020. aastast. Hooaja viimases kohtumises võõrustati Paide kunstmuruväljakul Tallinna FC Florat, kellega mängiti välja 2:2 viik.'
+        },
+        {
+          href: 'artikkel-tarmo-kink-jatkab-peatreenerina.html',
+          img: 'assets/img/news/Taki_contract.jpeg',
+          alt: 'Paide Linnameeskonna peatreenerina jätkab Tarmo Kink!',
+          badge: 'ESINDUSMEESKOND',
+          badgeClass: 'bg-navy',
+          date: '6. NOVEMBER 2026 • 2 MIN',
+          title: 'Paide Linnameeskonna peatreenerina jätkab Tarmo Kink!',
+          excerpt: '2026. aasta aprillis Paide Linnameeskonna peatreeneri kohusetäitjana ametisse asunud Tarmo Kink sõlmis klubiga uue lepingu ja jätkab klubi peatreenerina. Lepingu kestvuseks on kolm aastat.'
+        },
+        {
+          href: 'artikkel-henrik-ojamaa-lopetab-karjaari.html',
+          img: 'assets/img/news/Henrik_Ojamaa_last_match.jpeg',
+          alt: 'Henrik Ojamaa lõpetab pika ja eduka profikarjääri',
+          badge: 'ESINDUSMEESKOND',
+          badgeClass: 'bg-navy',
+          date: '5. NOVEMBER 2026 • 3 MIN',
+          title: 'Henrik Ojamaa lõpetab pika ja eduka profikarjääri',
+          excerpt: 'Paide Linnameeskonna ääreründaja, 63 korda Eesti rahvuskoondist esindanud Henrik Ojamaa (35) on otsustanud lõppeva hooaja järel oma ligi 20 aastat kestnud profijalgpallurikarjäärile joone alla tõmmata.'
+        }
+      ]
+    },
+    esindus: {
+      lead: {
+        img: 'assets/img/news/last_match.JPEG',
+        alt: 'Paide Linnameeskond lõpetas hooaja hõbemedalitega!',
+        badge1: 'ESINDUSMEESKOND',
+        badge2: 'HÕBEMEDALID 2026',
+        metaLeft: 'Paide Linnameeskond 2:2 Tallinna FC Flora • 862 pealtvaatajat',
+        metaRight: '9. NOVEMBER 2026',
+        kicker: 'ESINDUSMEESKOND • A. LE COQ PREMIUM LIIGA',
+        title: 'Paide Linnameeskond lõpetas hooaja hõbemedalitega!',
+        href: 'artikkel-hooaeg-loppes-hobemedalitega.html',
+        excerpt: 'Paide Linnameeskond lõpetas 2026. aasta A. Le Coq Premium liiga hooaja hõbemedalitega, korrates sellega klubi ajaloo parimat liigatulemust 2020. aastast. Hooaja viimases kohtumises võõrustati Paide kunstmuruväljakul Tallinna FC Florat, kellega mängiti välja 2:2 viik.',
+        author: 'Paide Linnameeskond',
+        avatar: 'assets/img/photos/main_team_article.jpeg',
+        ctaText: 'Loe täispikka uudist'
+      },
+      secondary: [
+        {
           href: 'artikkel-tarmo-kink-jatkab-peatreenerina.html',
           img: 'assets/img/news/Taki_contract.jpeg',
           alt: 'Paide Linnameeskonna peatreenerina jätkab Tarmo Kink!',
@@ -1137,45 +1186,6 @@ function initNewsFilters() {
           excerpt: 'Paide Linnameeskonna ääreründaja, 63 korda Eesti rahvuskoondist esindanud Henrik Ojamaa (35) on otsustanud lõppeva hooaja järel oma ligi 20 aastat kestnud profijalgpallurikarjäärile joone alla tõmmata.'
         },
         {
-          href: 'artikkel-tiitlimang-traffic.html',
-          img: 'assets/img/news/traffic.png',
-          alt: 'Tiitlimängu juhatab sisse Traffic!',
-          badge: 'LINNANAISKOND',
-          badgeClass: 'bg-crimson',
-          date: '5. NOVEMBER 2026 • 2 MIN',
-          title: 'Tiitlimängu juhatab sisse Traffic!',
-          excerpt: 'Pühapäeval, 8. novembril ootab Paide kunstmurustaadionil ees ajaloolise kaaluga jalgpallipidu! Paide Linnanaiskond asub jahtima klubi ajaloo esimest Eesti meistritiitlit ning suurele vutipäevale annab hoo sisse Traffic!'
-        }
-      ]
-    },
-    esindus: {
-      lead: {
-        img: 'assets/img/news/Taki_contract.jpeg',
-        alt: 'Paide Linnameeskonna peatreenerina jätkab Tarmo Kink!',
-        badge1: 'ESINDUSMEESKOND',
-        badge2: 'PEATREENER',
-        metaLeft: 'Tarmo Kink • 3-aastane leping',
-        metaRight: '6. NOVEMBER 2026',
-        kicker: 'ESINDUSMEESKOND • PEATREENER',
-        title: 'Paide Linnameeskonna peatreenerina jätkab Tarmo Kink!',
-        href: 'artikkel-tarmo-kink-jatkab-peatreenerina.html',
-        excerpt: '2026. aasta aprillis Paide Linnameeskonna peatreeneri kohusetäitjana ametisse asunud Tarmo Kink sõlmis klubiga uue lepingu ja jätkab klubi peatreenerina. Lepingu kestvuseks on kolm aastat.',
-        author: 'Paide Linnameeskond',
-        avatar: 'assets/img/photos/main_team_article.jpeg',
-        ctaText: 'Loe täispikka uudist'
-      },
-      secondary: [
-        {
-          href: 'artikkel-henrik-ojamaa-lopetab-karjaari.html',
-          img: 'assets/img/news/Henrik_Ojamaa_last_match.jpeg',
-          alt: 'Henrik Ojamaa lõpetab pika ja eduka profikarjääri',
-          badge: 'ESINDUSMEESKOND',
-          badgeClass: 'bg-navy',
-          date: '5. NOVEMBER 2026 • 3 MIN',
-          title: 'Henrik Ojamaa lõpetab pika ja eduka profikarjääri',
-          excerpt: 'Paide Linnameeskonna ääreründaja, 63 korda Eesti rahvuskoondist esindanud Henrik Ojamaa (35) on otsustanud lõppeva hooaja järel oma ligi 20 aastat kestnud profijalgpallurikarjäärile joone alla tõmmata.'
-        },
-        {
           href: 'artikkel-nomme-kalju-kaotus.html',
           img: 'assets/img/news/PLM-Kalju_loss.JPEG',
           alt: 'Paide Linnameeskond jäi koduväljakul Nõmme Kaljule alla',
@@ -1184,16 +1194,6 @@ function initNewsFilters() {
           date: '30. OKTOOBER 2026 • 2 MIN',
           title: 'Paide Linnameeskond jäi koduväljakul Nõmme Kaljule alla',
           excerpt: 'Paide Linnameeskond pidi kolmapäeval, 28. oktoobril A. Le Coq Premium liiga 34. voorus tunnistama koduväljakul Nõmme Kalju FC 2:0 paremust.'
-        },
-        {
-          href: 'artikkel-connecto-koostoo.html',
-          img: 'assets/img/news/connecto_sponsor.jpeg',
-          alt: 'Paide Linnameeskond ja Connecto alustasid koostööd!',
-          badge: 'KLUBI & PARTNERLUS',
-          badgeClass: 'bg-crimson',
-          date: '27. OKTOOBER 2026 • 3 MIN',
-          title: 'Paide Linnameeskond ja Connecto alustasid koostööd!',
-          excerpt: 'Paide Linnameeskond ja AS Connecto Infra alustasid koostööd, mille tulemusena liitub Connecto klubi toetajate ringiga ning Connecto logo jõuab esindusmeeskonna võistlusvormi esiküljele!'
         }
       ]
     },
