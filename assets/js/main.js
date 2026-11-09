@@ -594,13 +594,13 @@ function initMatchdayToggle() {
 /* 6. HERO EDITORIAL STORIES SWITCHER                                         */
 /* -------------------------------------------------------------------------- */
 const defaultHeroStory = {
-  tag: 'ESINDUSMEESKOND • HÕBEMEDALID 2026',
-  title: 'PAIDE LINNAMEESKOND LÕPETAS HOOAJA HÕBEMEDALITEGA!',
+  tag: 'PAIDE LINNANAISKOND • EESTI MEISTER 2026',
+  title: 'PAIDE LINNANAISKOND KROONITI DEBÜÜTHOOAJAL EESTI MEISTRIKS!',
   date: '9. NOVEMBER 2026',
-  readTime: '2 MIN LUGEMIST',
-  desc: 'Paide Linnameeskond lõpetas 2026. aasta A. Le Coq Premium liiga hooaja hõbemedalitega, korrates sellega klubi ajaloo parimat liigatulemust 2020. aastast. Hooaja viimases kohtumises võõrustati Paide kunstmuruväljakul Tallinna FC Florat, kellega mängiti välja 2:2 viik.',
-  image: 'assets/img/news/last_match.JPEG',
-  link: 'artikkel-hooaeg-loppes-hobemedalitega.html',
+  readTime: '4 MIN LUGEMIST',
+  desc: 'Paide Linnanaiskond kirjutas pühapäeval, 8. novembril klubi ajalukku uue ja erakordse peatüki, kui krooniti oma esimesel naiste Meistriliiga hooajal Eesti meistriks! Paide kunstmuruväljakul peetud hooaja viimases kohtumises alistati Harju JK Laagri naiskond 3:1 ning kindlustati klubi ajaloo esimene Eesti meistritiitel.',
+  image: 'assets/img/news/champions.JPEG',
+  link: 'artikkel-linnanaiskond-eesti-meister.html',
   btnText: 'Loe täispikka uudist'
 };
 
@@ -1117,6 +1117,16 @@ function initNewsFilters() {
       },
       secondary: [
         {
+          href: 'artikkel-linnanaiskond-eesti-meister.html',
+          img: 'assets/img/news/champions.JPEG',
+          alt: 'Paide Linnanaiskond krooniti debüüthooajal Eesti meistriks!',
+          badge: 'LINNANAISKOND',
+          badgeClass: 'bg-crimson',
+          date: '9. NOVEMBER 2026 • 4 MIN',
+          title: 'Paide Linnanaiskond krooniti debüüthooajal Eesti meistriks!',
+          excerpt: 'Paide Linnanaiskond kirjutas pühapäeval, 8. novembril klubi ajalukku uue ja erakordse peatüki, kui krooniti oma esimesel naiste Meistriliiga hooajal Eesti meistriks! Paide kunstmuruväljakul alistati Harju JK Laagri 3:1.'
+        },
+        {
           href: 'artikkel-hooaeg-loppes-hobemedalitega.html',
           img: 'assets/img/news/last_match.JPEG',
           alt: 'Paide Linnameeskond lõpetas hooaja hõbemedalitega!',
@@ -1135,16 +1145,6 @@ function initNewsFilters() {
           date: '6. NOVEMBER 2026 • 2 MIN',
           title: 'Paide Linnameeskonna peatreenerina jätkab Tarmo Kink!',
           excerpt: '2026. aasta aprillis Paide Linnameeskonna peatreeneri kohusetäitjana ametisse asunud Tarmo Kink sõlmis klubiga uue lepingu ja jätkab klubi peatreenerina. Lepingu kestvuseks on kolm aastat.'
-        },
-        {
-          href: 'artikkel-henrik-ojamaa-lopetab-karjaari.html',
-          img: 'assets/img/news/Henrik_Ojamaa_last_match.jpeg',
-          alt: 'Henrik Ojamaa lõpetab pika ja eduka profikarjääri',
-          badge: 'ESINDUSMEESKOND',
-          badgeClass: 'bg-navy',
-          date: '5. NOVEMBER 2026 • 3 MIN',
-          title: 'Henrik Ojamaa lõpetab pika ja eduka profikarjääri',
-          excerpt: 'Paide Linnameeskonna ääreründaja, 63 korda Eesti rahvuskoondist esindanud Henrik Ojamaa (35) on otsustanud lõppeva hooaja järel oma ligi 20 aastat kestnud profijalgpallurikarjäärile joone alla tõmmata.'
         }
       ]
     },
@@ -1199,21 +1199,31 @@ function initNewsFilters() {
     },
     naiskond: {
       lead: {
-        img: 'assets/img/news/traffic.png',
-        alt: 'Tiitlimängu juhatab sisse Traffic!',
-        badge1: 'NAISTE MEISTRILIIGA',
-        badge2: 'TIITLIMÄNG 8.11',
-        metaLeft: 'Paide Linnanaiskond vs Harju JK Laagri',
-        metaRight: '5. NOVEMBER 2026',
-        kicker: 'PAIDE LINNANAISKOND • TIITLIMÄNG',
-        title: 'Tiitlimängu juhatab sisse Traffic!',
-        href: 'artikkel-tiitlimang-traffic.html',
-        excerpt: 'Pühapäeval, 8. novembril ootab Paide kunstmurustaadionil ees ajaloolise kaaluga jalgpallipidu! Paide Linnanaiskond asub jahtima klubi ajaloo esimest Eesti meistritiitlit ning suurele vutipäevale annab hoo sisse armastatud Eesti pop-rock-bänd Traffic!',
+        img: 'assets/img/news/champions.JPEG',
+        alt: 'Paide Linnanaiskond krooniti debüüthooajal Eesti meistriks!',
+        badge1: 'PAIDE LINNANAISKOND',
+        badge2: 'EESTI MEISTER 2026',
+        metaLeft: 'Paide Linnanaiskond 3:1 Harju JK Laagri • 654 pealtvaatajat',
+        metaRight: '9. NOVEMBER 2026',
+        kicker: 'PAIDE LINNANAISKOND • NAISTE MEISTRILIIGA',
+        title: 'Paide Linnanaiskond krooniti debüüthooajal Eesti meistriks!',
+        href: 'artikkel-linnanaiskond-eesti-meister.html',
+        excerpt: 'Paide Linnanaiskond kirjutas pühapäeval, 8. novembril klubi ajalukku uue ja erakordse peatüki, kui krooniti oma esimesel naiste Meistriliiga hooajal Eesti meistriks! Paide kunstmuruväljakul alistati Harju JK Laagri 3:1.',
         author: 'Paide Linnanaiskond',
         avatar: 'assets/img/photos/female_team_article.jpg',
         ctaText: 'Loe täispikka uudist'
       },
       secondary: [
+        {
+          href: 'artikkel-tiitlimang-traffic.html',
+          img: 'assets/img/news/traffic.png',
+          alt: 'Tiitlimängu juhatab sisse Traffic!',
+          badge: 'LINNANAISKOND',
+          badgeClass: 'bg-crimson',
+          date: '5. NOVEMBER 2026 • 2 MIN',
+          title: 'Tiitlimängu juhatab sisse Traffic!',
+          excerpt: 'Pühapäeval, 8. novembril ootab Paide kunstmurustaadionil ees ajaloolise kaaluga jalgpallipidu! Paide Linnanaiskond asub jahtima klubi ajaloo esimest Eesti meistritiitlit ning suurele vutipäevale annab hoo sisse Traffic!'
+        },
         {
           href: 'artikkel-linnanaiskond-elva-voit.html',
           img: 'assets/img/news/PLN_Elva_Victory.JPEG',
@@ -1233,16 +1243,6 @@ function initNewsFilters() {
           date: '17. OKTOOBER 2026 • 2 MIN',
           title: 'Linnanaiskond alistas Flora ja tõusis tiitliheitluses ühele pulgale!',
           excerpt: 'Paide Linnanaiskond alistas reedel, 16. oktoobril naiste Meistriliiga senise tabeliliidri FC Flora 2:0 ning tõusis pealinna rohelistega võrdsele punktisummale!'
-        },
-        {
-          href: 'artikkel-linnanaiskond-mayo.html',
-          img: 'assets/img/photos/Mayo_presentation_1_web.jpg',
-          alt: 'Kennedy Avery Mayo esitleb Paide särki',
-          badge: 'NAISMEESKOND',
-          badgeClass: 'bg-crimson',
-          date: '18. SEPTEMBER 2026 • 2 MIN',
-          title: 'Linnanaiskond sai esimese välismängija',
-          excerpt: 'Paide Linnanaiskonnaga liitus 23-aastane ameeriklannast ründaja Kennedy Avery Mayo (#21), kellest saab ühtlasi meie naiskonna ajaloo esimene välismängija.'
         }
       ]
     },
