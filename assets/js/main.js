@@ -594,13 +594,13 @@ function initMatchdayToggle() {
 /* 6. HERO EDITORIAL STORIES SWITCHER                                         */
 /* -------------------------------------------------------------------------- */
 const defaultHeroStory = {
-  tag: 'PAIDE LINNANAISKOND • EESTI MEISTER 2026',
-  title: 'PAIDE LINNANAISKOND KROONITI DEBÜÜTHOOAJAL EESTI MEISTRIKS!',
-  date: '9. NOVEMBER 2026',
+  tag: 'ESINDUSMEESKOND • AITÄH, EBRIMA!',
+  title: 'AITÄH NENDE IMELISTE AASTATE EEST, EBRIMA!',
+  date: '10. NOVEMBER 2026',
   readTime: '4 MIN LUGEMIST',
-  desc: 'Paide Linnanaiskond kirjutas pühapäeval, 8. novembril klubi ajalukku uue ja erakordse peatüki, kui krooniti oma esimesel naiste Meistriliiga hooajal Eesti meistriks! Paide kunstmuruväljakul peetud hooaja viimases kohtumises alistati Harju JK Laagri naiskond 3:1 ning kindlustati klubi ajaloo esimene Eesti meistritiitel.',
-  image: 'assets/img/news/champions.JPEG',
-  link: 'artikkel-linnanaiskond-eesti-meister.html',
+  desc: 'Paide Linnameeskonna väravavaht, kümnel korral Gambia rahvuskoondist esindanud ning Järvamaa esindusklubi ridades nii Evald Tipneri karika kui ka Eesti superkarika võitnud Ebrima Jarju (28) lahkub viie ühise hooaja järel Paide Linnameeskonnast.',
+  image: 'assets/img/news/goodbye_Ebrima.jpeg',
+  link: 'artikkel-aitah-ebrima-jarju.html',
   btnText: 'Loe täispikka uudist'
 };
 
@@ -1117,6 +1117,16 @@ function initNewsFilters() {
       },
       secondary: [
         {
+          href: 'artikkel-aitah-ebrima-jarju.html',
+          img: 'assets/img/news/goodbye_Ebrima.jpeg',
+          alt: 'Aitäh nende imeliste aastate eest, Ebrima!',
+          badge: 'ESINDUSMEESKOND',
+          badgeClass: 'bg-navy',
+          date: '10. NOVEMBER 2026 • 4 MIN',
+          title: 'Aitäh nende imeliste aastate eest, Ebrima!',
+          excerpt: 'Paide Linnameeskonna väravavaht, kümnel korral Gambia rahvuskoondist esindanud ning Järvamaa esindusklubi ridades nii Evald Tipneri karika kui ka Eesti superkarika võitnud Ebrima Jarju (28) lahkub viie ühise hooaja järel Paide Linnameeskonnast.'
+        },
+        {
           href: 'artikkel-linnanaiskond-eesti-meister.html',
           img: 'assets/img/news/champions.JPEG',
           alt: 'Paide Linnanaiskond krooniti debüüthooajal Eesti meistriks!',
@@ -1126,6 +1136,35 @@ function initNewsFilters() {
           title: 'Paide Linnanaiskond krooniti debüüthooajal Eesti meistriks!',
           excerpt: 'Paide Linnanaiskond kirjutas pühapäeval, 8. novembril klubi ajalukku uue ja erakordse peatüki, kui krooniti oma esimesel naiste Meistriliiga hooajal Eesti meistriks! Paide kunstmuruväljakul alistati Harju JK Laagri 3:1.'
         },
+        {
+          href: 'artikkel-hooaeg-loppes-hobemedalitega.html',
+          img: 'assets/img/news/last_match.JPEG',
+          alt: 'Paide Linnameeskond lõpetas hooaja hõbemedalitega!',
+          badge: 'ESINDUSMEESKOND',
+          badgeClass: 'bg-navy',
+          date: '9. NOVEMBER 2026 • 2 MIN',
+          title: 'Paide Linnameeskond lõpetas hooaja hõbemedalitega!',
+          excerpt: 'Paide Linnameeskond lõpetas 2026. aasta A. Le Coq Premium liiga hooaja hõbemedalitega, korrates sellega klubi ajaloo parimat liigatulemust 2020. aastast. Hooaja viimases kohtumises võõrustati Paide kunstmuruväljakul Tallinna FC Florat, kellega mängiti välja 2:2 viik.'
+        }
+      ]
+    },
+    esindus: {
+      lead: {
+        img: 'assets/img/news/goodbye_Ebrima.jpeg',
+        alt: 'Aitäh nende imeliste aastate eest, Ebrima!',
+        badge1: 'ESINDUSMEESKOND',
+        badge2: '162 MÄNGU • 2022–2026',
+        metaLeft: 'Ebrima Jarju • 5 hooaega Paide Linnameeskonnas',
+        metaRight: '10. NOVEMBER 2026',
+        kicker: 'ESINDUSMEESKOND • EBRIMA JARJU',
+        title: 'Aitäh nende imeliste aastate eest, Ebrima!',
+        href: 'artikkel-aitah-ebrima-jarju.html',
+        excerpt: 'Paide Linnameeskonna väravavaht, kümnel korral Gambia rahvuskoondist esindanud ning Järvamaa esindusklubi ridades nii Evald Tipneri karika kui ka Eesti superkarika võitnud Ebrima Jarju (28) lahkub viie ühise hooaja järel Paide Linnameeskonnast.',
+        author: 'Paide Linnameeskond',
+        avatar: 'assets/img/photos/main_team_article.jpeg',
+        ctaText: 'Loe täispikka uudist'
+      },
+      secondary: [
         {
           href: 'artikkel-hooaeg-loppes-hobemedalitega.html',
           img: 'assets/img/news/last_match.JPEG',
@@ -1145,35 +1184,6 @@ function initNewsFilters() {
           date: '6. NOVEMBER 2026 • 2 MIN',
           title: 'Paide Linnameeskonna peatreenerina jätkab Tarmo Kink!',
           excerpt: '2026. aasta aprillis Paide Linnameeskonna peatreeneri kohusetäitjana ametisse asunud Tarmo Kink sõlmis klubiga uue lepingu ja jätkab klubi peatreenerina. Lepingu kestvuseks on kolm aastat.'
-        }
-      ]
-    },
-    esindus: {
-      lead: {
-        img: 'assets/img/news/last_match.JPEG',
-        alt: 'Paide Linnameeskond lõpetas hooaja hõbemedalitega!',
-        badge1: 'ESINDUSMEESKOND',
-        badge2: 'HÕBEMEDALID 2026',
-        metaLeft: 'Paide Linnameeskond 2:2 Tallinna FC Flora • 862 pealtvaatajat',
-        metaRight: '9. NOVEMBER 2026',
-        kicker: 'ESINDUSMEESKOND • A. LE COQ PREMIUM LIIGA',
-        title: 'Paide Linnameeskond lõpetas hooaja hõbemedalitega!',
-        href: 'artikkel-hooaeg-loppes-hobemedalitega.html',
-        excerpt: 'Paide Linnameeskond lõpetas 2026. aasta A. Le Coq Premium liiga hooaja hõbemedalitega, korrates sellega klubi ajaloo parimat liigatulemust 2020. aastast. Hooaja viimases kohtumises võõrustati Paide kunstmuruväljakul Tallinna FC Florat, kellega mängiti välja 2:2 viik.',
-        author: 'Paide Linnameeskond',
-        avatar: 'assets/img/photos/main_team_article.jpeg',
-        ctaText: 'Loe täispikka uudist'
-      },
-      secondary: [
-        {
-          href: 'artikkel-tarmo-kink-jatkab-peatreenerina.html',
-          img: 'assets/img/news/Taki_contract.jpeg',
-          alt: 'Paide Linnameeskonna peatreenerina jätkab Tarmo Kink!',
-          badge: 'ESINDUSMEESKOND',
-          badgeClass: 'bg-navy',
-          date: '6. NOVEMBER 2026 • 2 MIN',
-          title: 'Paide Linnameeskonna peatreenerina jätkab Tarmo Kink!',
-          excerpt: '2026. aasta aprillis Paide Linnameeskonna peatreeneri kohusetäitjana ametisse asunud Tarmo Kink sõlmis klubiga uue lepingu ja jätkab klubi peatreenerina. Lepingu kestvuseks on kolm aastat.'
         },
         {
           href: 'artikkel-henrik-ojamaa-lopetab-karjaari.html',
@@ -1184,16 +1194,6 @@ function initNewsFilters() {
           date: '5. NOVEMBER 2026 • 3 MIN',
           title: 'Henrik Ojamaa lõpetab pika ja eduka profikarjääri',
           excerpt: 'Paide Linnameeskonna ääreründaja, 63 korda Eesti rahvuskoondist esindanud Henrik Ojamaa (35) on otsustanud lõppeva hooaja järel oma ligi 20 aastat kestnud profijalgpallurikarjäärile joone alla tõmmata.'
-        },
-        {
-          href: 'artikkel-nomme-kalju-kaotus.html',
-          img: 'assets/img/news/PLM-Kalju_loss.JPEG',
-          alt: 'Paide Linnameeskond jäi koduväljakul Nõmme Kaljule alla',
-          badge: 'ESINDUSMEESKOND',
-          badgeClass: 'bg-navy',
-          date: '30. OKTOOBER 2026 • 2 MIN',
-          title: 'Paide Linnameeskond jäi koduväljakul Nõmme Kaljule alla',
-          excerpt: 'Paide Linnameeskond pidi kolmapäeval, 28. oktoobril A. Le Coq Premium liiga 34. voorus tunnistama koduväljakul Nõmme Kalju FC 2:0 paremust.'
         }
       ]
     },
