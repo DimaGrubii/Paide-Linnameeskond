@@ -594,13 +594,13 @@ function initMatchdayToggle() {
 /* 6. HERO EDITORIAL STORIES SWITCHER                                         */
 /* -------------------------------------------------------------------------- */
 const defaultHeroStory = {
-  tag: 'ESINDUSMEESKOND • AITÄH, EBRIMA!',
-  title: 'AITÄH NENDE IMELISTE AASTATE EEST, EBRIMA!',
-  date: '10. NOVEMBER 2026',
-  readTime: '4 MIN LUGEMIST',
-  desc: 'Paide Linnameeskonna väravavaht, kümnel korral Gambia rahvuskoondist esindanud ning Järvamaa esindusklubi ridades nii Evald Tipneri karika kui ka Eesti superkarika võitnud Ebrima Jarju (28) lahkub viie ühise hooaja järel Paide Linnameeskonnast.',
-  image: 'assets/img/news/goodbye_Ebrima.jpeg',
-  link: 'artikkel-aitah-ebrima-jarju.html',
+  tag: 'ESINDUSMEESKOND • TREENINGMÄNG',
+  title: 'PAIDE KOSTITAS KALEVIT ÜHEKSA VÄRAVAGA!',
+  date: '13. NOVEMBER 2026',
+  readTime: '2 MIN LUGEMIST',
+  desc: 'Paide Linnameeskond tõmbas hõbedasele 2026. aastale joone alla koduses jalgpallihallis alistades treeningmängus Tallinna Kalevi 9:0. Darboe sai kirja kübaratriki, kaks väravat lisas Candidus Daberechi Osuji ning jala said valgeks ka Luts, Nigula, Jobarteh ja Vassilenko.',
+  image: 'assets/img/news/friendly_kalev.JPEG',
+  link: 'artikkel-paide-kostitas-kalevit-uheksa-varavaga.html',
   btnText: 'Loe täispikka uudist'
 };
 
@@ -1117,6 +1117,16 @@ function initNewsFilters() {
       },
       secondary: [
         {
+          href: 'artikkel-paide-kostitas-kalevit-uheksa-varavaga.html',
+          img: 'assets/img/news/friendly_kalev.JPEG',
+          alt: 'Paide kostitas Kalevit üheksa väravaga!',
+          badge: 'ESINDUSMEESKOND',
+          badgeClass: 'bg-navy',
+          date: '13. NOVEMBER 2026 • 2 MIN',
+          title: 'Paide kostitas Kalevit üheksa väravaga!',
+          excerpt: 'Paide Linnameeskond tõmbas hõbedasele 2026. aastale joone alla koduses jalgpallihallis alistades treeningmängus Tallinna Kalevi 9:0.'
+        },
+        {
           href: 'artikkel-aitah-ebrima-jarju.html',
           img: 'assets/img/news/goodbye_Ebrima.jpeg',
           alt: 'Aitäh nende imeliste aastate eest, Ebrima!',
@@ -1135,36 +1145,36 @@ function initNewsFilters() {
           date: '9. NOVEMBER 2026 • 4 MIN',
           title: 'Paide Linnanaiskond krooniti debüüthooajal Eesti meistriks!',
           excerpt: 'Paide Linnanaiskond kirjutas pühapäeval, 8. novembril klubi ajalukku uue ja erakordse peatüki, kui krooniti oma esimesel naiste Meistriliiga hooajal Eesti meistriks! Paide kunstmuruväljakul alistati Harju JK Laagri 3:1.'
-        },
-        {
-          href: 'artikkel-hooaeg-loppes-hobemedalitega.html',
-          img: 'assets/img/news/last_match.JPEG',
-          alt: 'Paide Linnameeskond lõpetas hooaja hõbemedalitega!',
-          badge: 'ESINDUSMEESKOND',
-          badgeClass: 'bg-navy',
-          date: '9. NOVEMBER 2026 • 2 MIN',
-          title: 'Paide Linnameeskond lõpetas hooaja hõbemedalitega!',
-          excerpt: 'Paide Linnameeskond lõpetas 2026. aasta A. Le Coq Premium liiga hooaja hõbemedalitega, korrates sellega klubi ajaloo parimat liigatulemust 2020. aastast. Hooaja viimases kohtumises võõrustati Paide kunstmuruväljakul Tallinna FC Florat, kellega mängiti välja 2:2 viik.'
         }
       ]
     },
     esindus: {
       lead: {
-        img: 'assets/img/news/goodbye_Ebrima.jpeg',
-        alt: 'Aitäh nende imeliste aastate eest, Ebrima!',
+        img: 'assets/img/news/friendly_kalev.JPEG',
+        alt: 'Paide kostitas Kalevit üheksa väravaga!',
         badge1: 'ESINDUSMEESKOND',
-        badge2: '162 MÄNGU • 2022–2026',
-        metaLeft: 'Ebrima Jarju • 5 hooaega Paide Linnameeskonnas',
-        metaRight: '10. NOVEMBER 2026',
-        kicker: 'ESINDUSMEESKOND • EBRIMA JARJU',
-        title: 'Aitäh nende imeliste aastate eest, Ebrima!',
-        href: 'artikkel-aitah-ebrima-jarju.html',
-        excerpt: 'Paide Linnameeskonna väravavaht, kümnel korral Gambia rahvuskoondist esindanud ning Järvamaa esindusklubi ridades nii Evald Tipneri karika kui ka Eesti superkarika võitnud Ebrima Jarju (28) lahkub viie ühise hooaja järel Paide Linnameeskonnast.',
+        badge2: 'TREENINGMÄNG • 9:0',
+        metaLeft: 'Paide Linnameeskond 9:0 Tallinna Kalev • Paide jalgpallihall',
+        metaRight: '13. NOVEMBER 2026',
+        kicker: 'ESINDUSMEESKOND • TREENINGMÄNG',
+        title: 'Paide kostitas Kalevit üheksa väravaga!',
+        href: 'artikkel-paide-kostitas-kalevit-uheksa-varavaga.html',
+        excerpt: 'Paide Linnameeskond tõmbas hõbedasele 2026. aastale joone alla koduses jalgpallihallis alistades treeningmängus Tallinna Kalevi 9:0.',
         author: 'Paide Linnameeskond',
         avatar: 'assets/img/photos/main_team_article.jpeg',
         ctaText: 'Loe täispikka uudist'
       },
       secondary: [
+        {
+          href: 'artikkel-aitah-ebrima-jarju.html',
+          img: 'assets/img/news/goodbye_Ebrima.jpeg',
+          alt: 'Aitäh nende imeliste aastate eest, Ebrima!',
+          badge: 'ESINDUSMEESKOND',
+          badgeClass: 'bg-navy',
+          date: '10. NOVEMBER 2026 • 4 MIN',
+          title: 'Aitäh nende imeliste aastate eest, Ebrima!',
+          excerpt: 'Paide Linnameeskonna väravavaht, kümnel korral Gambia rahvuskoondist esindanud ning Järvamaa esindusklubi ridades nii Evald Tipneri karika kui ka Eesti superkarika võitnud Ebrima Jarju (28) lahkub viie ühise hooaja järel Paide Linnameeskonnast.'
+        },
         {
           href: 'artikkel-hooaeg-loppes-hobemedalitega.html',
           img: 'assets/img/news/last_match.JPEG',
@@ -1184,16 +1194,6 @@ function initNewsFilters() {
           date: '6. NOVEMBER 2026 • 2 MIN',
           title: 'Paide Linnameeskonna peatreenerina jätkab Tarmo Kink!',
           excerpt: '2026. aasta aprillis Paide Linnameeskonna peatreeneri kohusetäitjana ametisse asunud Tarmo Kink sõlmis klubiga uue lepingu ja jätkab klubi peatreenerina. Lepingu kestvuseks on kolm aastat.'
-        },
-        {
-          href: 'artikkel-henrik-ojamaa-lopetab-karjaari.html',
-          img: 'assets/img/news/Henrik_Ojamaa_last_match.jpeg',
-          alt: 'Henrik Ojamaa lõpetab pika ja eduka profikarjääri',
-          badge: 'ESINDUSMEESKOND',
-          badgeClass: 'bg-navy',
-          date: '5. NOVEMBER 2026 • 3 MIN',
-          title: 'Henrik Ojamaa lõpetab pika ja eduka profikarjääri',
-          excerpt: 'Paide Linnameeskonna ääreründaja, 63 korda Eesti rahvuskoondist esindanud Henrik Ojamaa (35) on otsustanud lõppeva hooaja järel oma ligi 20 aastat kestnud profijalgpallurikarjäärile joone alla tõmmata.'
         }
       ]
     },
