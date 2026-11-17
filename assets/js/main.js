@@ -600,7 +600,7 @@ const defaultHeroStory = {
   readTime: '2 MIN LUGEMIST',
   desc: 'Paide Linnameeskond tõmbas hõbedasele 2026. aastale joone alla koduses jalgpallihallis alistades treeningmängus Tallinna Kalevi 9:0. Darboe sai kirja kübaratriki, kaks väravat lisas Candidus Daberechi Osuji ning jala said valgeks ka Luts, Nigula, Jobarteh ja Vassilenko.',
   image: 'assets/img/news/friendly_kalev.JPEG',
-  link: 'artikkel-paide-kostitas-kalevit-uheksa-varavaga.html',
+  link: 'uudised/2026/artikkel-paide-kostitas-kalevit-uheksa-varavaga.html',
   btnText: 'Loe täispikka uudist'
 };
 
@@ -612,7 +612,7 @@ const heroStories = [
     readTime: '2 MIN LUGEMIST',
     desc: 'Sõidame ühiselt suurele finaalturniirile! Paide Linnameeskonna fänniklubi korraldab fännibussi Tallinnasse A. Le Coq Arenale Väikeste karikavõistluste finaalile.',
     image: 'assets/img/photos/Fanbus_web.jpg',
-    link: 'artikkel-fannibuss.html',
+    link: 'uudised/2026/artikkel-fannibuss.html',
     btnText: 'Loe fännireisist'
   },
   {
@@ -622,7 +622,7 @@ const heroStories = [
     readTime: '3 MIN LUGEMIST',
     desc: 'Paide Linnameeskonna ründaja Abdourahman Badamosi karjäär jätkub Tšehhi kõrgliigaklubis FK Teplice. Paide teenis üleminekust märkimisväärse üleminekutasu.',
     image: 'assets/img/news/badamosi-tsehhi-korgliigasse.jpeg',
-    link: 'artikkel-badamosi-tsehhi-korgliigasse.html',
+    link: 'uudised/2026/artikkel-badamosi-tsehhi-korgliigasse.html',
     btnText: 'Loe üleminekust'
   },
   {
@@ -632,7 +632,7 @@ const heroStories = [
     readTime: '2 MIN LUGEMIST',
     desc: 'Paide Linnameeskond kutsub oma jalgpallikooli kõiki Järvamaa poisse ja tüdrukuid. Tule trenni ja saa osa meie jalgpalliperest – esimene proovikuu on kõigile tasuta!',
     image: 'assets/img/news/uute-laste-vastuvott-klubisse-on-alanud.jpg',
-    link: 'artikkel-uute-laste-vastuvott.html',
+    link: 'uudised/2026/artikkel-uute-laste-vastuvott.html',
     btnText: 'Loe liitumisinfot'
   },
   {
@@ -642,7 +642,7 @@ const heroStories = [
     readTime: '2 MIN LUGEMIST',
     desc: 'Paide Linnameeskonnaga sõlmis mitmeaastase lepingu 21-aastane Gambia noortekoondise ründaja Dawda Darboe, kes hakkab kandma särginumbrit 29.',
     image: 'assets/img/news/paidega-liitus-gambia-rundaja-dawda-darboe.jpg',
-    link: 'artikkel-dawda-darboe.html',
+    link: 'uudised/2026/artikkel-dawda-darboe.html',
     btnText: 'Loe liitujast'
   }
 ];
@@ -1117,7 +1117,7 @@ function initNewsFilters() {
       },
       secondary: [
         {
-          href: 'artikkel-paide-kostitas-kalevit-uheksa-varavaga.html',
+          href: 'uudised/2026/artikkel-paide-kostitas-kalevit-uheksa-varavaga.html',
           img: 'assets/img/news/friendly_kalev.JPEG',
           alt: 'Paide kostitas Kalevit üheksa väravaga!',
           badge: 'ESINDUSMEESKOND',
@@ -1127,7 +1127,7 @@ function initNewsFilters() {
           excerpt: 'Paide Linnameeskond tõmbas hõbedasele 2026. aastale joone alla koduses jalgpallihallis alistades treeningmängus Tallinna Kalevi 9:0.'
         },
         {
-          href: 'artikkel-aitah-ebrima-jarju.html',
+          href: 'uudised/2026/artikkel-aitah-ebrima-jarju.html',
           img: 'assets/img/news/goodbye_Ebrima.jpeg',
           alt: 'Aitäh nende imeliste aastate eest, Ebrima!',
           badge: 'ESINDUSMEESKOND',
@@ -1137,7 +1137,7 @@ function initNewsFilters() {
           excerpt: 'Paide Linnameeskonna väravavaht, kümnel korral Gambia rahvuskoondist esindanud ning Järvamaa esindusklubi ridades nii Evald Tipneri karika kui ka Eesti superkarika võitnud Ebrima Jarju (28) lahkub viie ühise hooaja järel Paide Linnameeskonnast.'
         },
         {
-          href: 'artikkel-linnanaiskond-eesti-meister.html',
+          href: 'uudised/2026/artikkel-linnanaiskond-eesti-meister.html',
           img: 'assets/img/news/champions.JPEG',
           alt: 'Paide Linnanaiskond krooniti debüüthooajal Eesti meistriks!',
           badge: 'LINNANAISKOND',
@@ -1158,7 +1158,7 @@ function initNewsFilters() {
         metaRight: '13. NOVEMBER 2026',
         kicker: 'ESINDUSMEESKOND • TREENINGMÄNG',
         title: 'Paide kostitas Kalevit üheksa väravaga!',
-        href: 'artikkel-paide-kostitas-kalevit-uheksa-varavaga.html',
+        href: 'uudised/2026/artikkel-paide-kostitas-kalevit-uheksa-varavaga.html',
         excerpt: 'Paide Linnameeskond tõmbas hõbedasele 2026. aastale joone alla koduses jalgpallihallis alistades treeningmängus Tallinna Kalevi 9:0.',
         author: 'Paide Linnameeskond',
         avatar: 'assets/img/photos/main_team_article.jpeg',
@@ -1166,7 +1166,7 @@ function initNewsFilters() {
       },
       secondary: [
         {
-          href: 'artikkel-aitah-ebrima-jarju.html',
+          href: 'uudised/2026/artikkel-aitah-ebrima-jarju.html',
           img: 'assets/img/news/goodbye_Ebrima.jpeg',
           alt: 'Aitäh nende imeliste aastate eest, Ebrima!',
           badge: 'ESINDUSMEESKOND',
@@ -1176,7 +1176,7 @@ function initNewsFilters() {
           excerpt: 'Paide Linnameeskonna väravavaht, kümnel korral Gambia rahvuskoondist esindanud ning Järvamaa esindusklubi ridades nii Evald Tipneri karika kui ka Eesti superkarika võitnud Ebrima Jarju (28) lahkub viie ühise hooaja järel Paide Linnameeskonnast.'
         },
         {
-          href: 'artikkel-hooaeg-loppes-hobemedalitega.html',
+          href: 'uudised/2026/artikkel-hooaeg-loppes-hobemedalitega.html',
           img: 'assets/img/news/last_match.JPEG',
           alt: 'Paide Linnameeskond lõpetas hooaja hõbemedalitega!',
           badge: 'ESINDUSMEESKOND',
@@ -1186,7 +1186,7 @@ function initNewsFilters() {
           excerpt: 'Paide Linnameeskond lõpetas 2026. aasta A. Le Coq Premium liiga hooaja hõbemedalitega, korrates sellega klubi ajaloo parimat liigatulemust 2020. aastast. Hooaja viimases kohtumises võõrustati Paide kunstmuruväljakul Tallinna FC Florat, kellega mängiti välja 2:2 viik.'
         },
         {
-          href: 'artikkel-tarmo-kink-jatkab-peatreenerina.html',
+          href: 'uudised/2026/artikkel-tarmo-kink-jatkab-peatreenerina.html',
           img: 'assets/img/news/Taki_contract.jpeg',
           alt: 'Paide Linnameeskonna peatreenerina jätkab Tarmo Kink!',
           badge: 'ESINDUSMEESKOND',
@@ -1207,7 +1207,7 @@ function initNewsFilters() {
         metaRight: '9. NOVEMBER 2026',
         kicker: 'PAIDE LINNANAISKOND • NAISTE MEISTRILIIGA',
         title: 'Paide Linnanaiskond krooniti debüüthooajal Eesti meistriks!',
-        href: 'artikkel-linnanaiskond-eesti-meister.html',
+        href: 'uudised/2026/artikkel-linnanaiskond-eesti-meister.html',
         excerpt: 'Paide Linnanaiskond kirjutas pühapäeval, 8. novembril klubi ajalukku uue ja erakordse peatüki, kui krooniti oma esimesel naiste Meistriliiga hooajal Eesti meistriks! Paide kunstmuruväljakul alistati Harju JK Laagri 3:1.',
         author: 'Paide Linnanaiskond',
         avatar: 'assets/img/photos/female_team_article.jpg',
@@ -1215,7 +1215,7 @@ function initNewsFilters() {
       },
       secondary: [
         {
-          href: 'artikkel-tiitlimang-traffic.html',
+          href: 'uudised/2026/artikkel-tiitlimang-traffic.html',
           img: 'assets/img/news/traffic.png',
           alt: 'Tiitlimängu juhatab sisse Traffic!',
           badge: 'LINNANAISKOND',
@@ -1225,7 +1225,7 @@ function initNewsFilters() {
           excerpt: 'Pühapäeval, 8. novembril ootab Paide kunstmurustaadionil ees ajaloolise kaaluga jalgpallipidu! Paide Linnanaiskond asub jahtima klubi ajaloo esimest Eesti meistritiitlit ning suurele vutipäevale annab hoo sisse Traffic!'
         },
         {
-          href: 'artikkel-linnanaiskond-elva-voit.html',
+          href: 'uudised/2026/artikkel-linnanaiskond-elva-voit.html',
           img: 'assets/img/news/PLN_Elva_Victory.JPEG',
           alt: 'Linnanaiskond alistas Elva ja jätkab meistritiitli jahti!',
           badge: 'LINNANAISKOND',
@@ -1235,7 +1235,7 @@ function initNewsFilters() {
           excerpt: 'Paide Linnanaiskond jätkas naiste Meistriliiga hooaja lõpusirgel võidulainel, kui laupäeval, 24. oktoobril alistati kodusel kunstmuruväljakul FC Elva naiskond kindlalt 4:0!'
         },
         {
-          href: 'artikkel-linnanaiskond-flora-voit.html',
+          href: 'uudised/2026/artikkel-linnanaiskond-flora-voit.html',
           img: 'assets/img/news/PLN_FCF_Victory.JPEG',
           alt: 'Linnanaiskond alistas Flora ja tõusis tiitliheitluses ühele pulgale!',
           badge: 'NAISMEESKOND',
@@ -1264,7 +1264,7 @@ function initNewsFilters() {
       },
       secondary: [
         {
-          href: 'artikkel-uute-laste-vastuvott.html',
+          href: 'uudised/2026/artikkel-uute-laste-vastuvott.html',
           img: 'assets/img/news/uute-laste-vastuvott-klubisse-on-alanud.jpg',
           alt: 'Uute laste vastuvõtt klubisse on alanud!',
           badge: 'NOORTETÖÖ',
@@ -1274,7 +1274,7 @@ function initNewsFilters() {
           excerpt: 'Paide Linnameeskond alustab uue hooaja eel laste vastuvõttu treeninggruppidesse Paides, Türil, Väätsal, Koerus ja Järva-Jaanis. Esimene treeningkuu on tasuta!'
         },
         {
-          href: 'artikkel-natural-suvelaager.html',
+          href: 'uudised/2026/artikkel-natural-suvelaager.html',
           img: 'assets/img/news/natural-suvelaagrit-nauditi-taiest-sudamest.jpg',
           alt: 'Natural Suvelaagrit nauditi täiest südamest',
           badge: 'AKADEEMIA',
@@ -1284,7 +1284,7 @@ function initNewsFilters() {
           excerpt: 'Järvamaa noorte jalgpallisuve suursündmus Natural Suvelaager tõi Paidesse ja Türile kokku rekordilised 101 last.'
         },
         {
-          href: 'artikkel-akadeemia-comfort.html',
+          href: 'uudised/2026/artikkel-akadeemia-comfort.html',
           img: 'assets/img/news/jalgpalliakadeemia-sai-suurtoetaja.jpg',
           alt: 'Jalgpalliakadeemia sai suurtoetaja',
           badge: 'AKADEEMIA',
@@ -1305,7 +1305,7 @@ function initNewsFilters() {
         metaRight: '25. SEPTEMBER 2026',
         kicker: 'FÄNNIREIS • VÄIKESTE KARIKAVÕISTLUSTE FINAAL',
         title: 'Fännibussiga finaali vaatama! 🏁',
-        href: 'artikkel-fannibuss.html',
+        href: 'uudised/2026/artikkel-fannibuss.html',
         excerpt: 'Sel laupäeval ootab Paide Linnameeskond III ees kuues Väikeste karikavõistluste finaal Harju JK Laagri U21 vastu. Tule fännibussiga A. Le Coq Arenale ja toome karika Paidesse!',
         author: 'Paide Kogukond',
         avatar: 'assets/img/photos/main_team_article.jpeg',
@@ -1313,7 +1313,7 @@ function initNewsFilters() {
       },
       secondary: [
         {
-          href: 'artikkel-spordiedendajad.html',
+          href: 'uudised/2026/artikkel-spordiedendajad.html',
           img: 'assets/img/news/linnameeskond-taienes-kahe-spordiedendajaga.jpg',
           alt: 'Linnameeskond täienes kahe spordiedendajaga',
           badge: 'KOGUKOND',
@@ -1323,7 +1323,7 @@ function initNewsFilters() {
           excerpt: 'Paide Linnameeskonna klubistruktuur ja sporditöö laienesid kahe kogenud spordiedendaja liitumisega, et tugevdada kohalikku kogukonnatööd.'
         },
         {
-          href: 'artikkel-horticom-vaetab.html',
+          href: 'uudised/2026/artikkel-horticom-vaetab.html',
           img: 'assets/img/news/horticom-vaetab-klubi-kasvab.jpg',
           alt: 'Horticom väetab, klubi kasvab!',
           badge: 'KOGUKOND & KLUBI',
@@ -1333,7 +1333,7 @@ function initNewsFilters() {
           excerpt: 'Paide Linnameeskonna treening- ja mängukeskkonna üheks oluliseks osaks on kvaliteetne muruväljak ning koostöö ettevõttega Horticom.'
         },
         {
-          href: 'artikkel-sinilillejooks-2026.html',
+          href: 'uudised/2026/artikkel-sinilillejooks-2026.html',
           img: 'assets/img/news/sinilillejooks-2026.png',
           alt: 'Sinilillejooks 2026',
           badge: 'HEATEGEVUS',
