@@ -5,6 +5,16 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      full_sync:
+        description: 'Force full sync of all website files'
+        required: false
+        type: boolean
+        default: false
+
+concurrency:
+  group: deploy-zone
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -13,6 +23,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Inject EJL API secret config for Zone.ee (if configured in GitHub Secrets)
         env:
@@ -38,6 +50,10 @@ jobs:
           ZONE_SSH_KEY: ${{ secrets.ZONE_SSH_KEY }}
           ZONE_PORT: ${{ secrets.ZONE_PORT }}
           ZONE_TARGET_DIR: ${{ secrets.ZONE_TARGET_DIR }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          GIT_BEFORE_SHA: ${{ github.event.before }}
+          GIT_AFTER_SHA: ${{ github.sha }}
+          FULL_SYNC: ${{ inputs.full_sync }}
         run: |
           if [ -n "$ZONE_SSH_KEY" ]; then
             HOST=$(echo "${ZONE_HOST:-paidelinnameeskond.ee}" | xargs)
@@ -65,6 +81,7 @@ jobs:
           import os
           import sys
           import ssl
+          import subprocess
           from ftplib import FTP_TLS, FTP
           from pathlib import Path
 
@@ -161,16 +178,56 @@ jobs:
               return sizes
 
           root = Path(".")
-          all_files = []
-          for path in sorted(root.rglob("*")):
-              rel_parts = path.relative_to(root).parts
-              if any(p in EXCLUDE_DIRS for p in rel_parts) or path.is_dir() or path.name in EXCLUDE_FILES:
-                  continue
-              all_files.append(path)
+          event_name = os.environ.get("GITHUB_EVENT_NAME", "")
+          before_sha = (os.environ.get("GIT_BEFORE_SHA") or "").strip()
+          after_sha = (os.environ.get("GIT_AFTER_SHA") or "HEAD").strip()
+          full_sync = (os.environ.get("FULL_SYNC") or "").lower() == "true"
 
-          # Upload PHP/HTML/JS/CSS/JSON first so live endpoints & code updates appear within 2 seconds
-          PRIORITY_EXTS = {".php": 0, ".js": 1, ".html": 2, ".css": 3, ".json": 4}
-          all_files.sort(key=lambda p: (PRIORITY_EXTS.get(p.suffix.lower(), 5 if p.suffix.lower() in ALWAYS_UPLOAD_EXTS else 9), p.as_posix()))
+          def is_excluded(path: Path) -> bool:
+              rel_parts = path.relative_to(root).parts
+              return any(p in EXCLUDE_DIRS for p in rel_parts) or path.is_dir() or path.name in EXCLUDE_FILES
+
+          changed_files = None
+          if not full_sync and event_name == "push" and before_sha and set(before_sha) != {"0"}:
+              try:
+                  res = subprocess.run(
+                      ["git", "diff", "--name-only", "--diff-filter=ACMRT", before_sha, after_sha],
+                      check=True,
+                      capture_output=True,
+                      text=True,
+                  )
+                  changed_files = []
+                  for line in res.stdout.splitlines():
+                      line = line.strip()
+                      if not line:
+                          continue
+                      p = root / line
+                      if p.exists() and not is_excluded(p):
+                          changed_files.append(p)
+                  # Always include generated EJL secret config if present
+                  ejl_cfg = root / "config/ejl-secret.php"
+                  if ejl_cfg.exists() and ejl_cfg not in changed_files:
+                      changed_files.append(ejl_cfg)
+                  print(f"Incremental deploy mode: {len(changed_files)} changed file(s) detected via git diff.", flush=True)
+              except Exception as e:
+                  print(f"Could not compute git diff ({e}); falling back to full sync.", flush=True)
+                  changed_files = None
+
+          if changed_files is not None:
+              all_files = changed_files
+              # Upload media/assets before HTML/JS so pages never briefly reference a missing image
+              INC_PRIORITY = {".php": 0, ".css": 1, ".json": 2, ".js": 4, ".html": 5}
+              all_files.sort(key=lambda p: (INC_PRIORITY.get(p.suffix.lower(), 3), p.as_posix()))
+          else:
+              print("Full sync mode: scanning repository files...", flush=True)
+              all_files = []
+              for path in sorted(root.rglob("*")):
+                  if is_excluded(path):
+                      continue
+                  all_files.append(path)
+              # Upload PHP/HTML/JS/CSS/JSON first so live endpoints & code updates appear quickly
+              PRIORITY_EXTS = {".php": 0, ".js": 1, ".html": 2, ".css": 3, ".json": 4}
+              all_files.sort(key=lambda p: (PRIORITY_EXTS.get(p.suffix.lower(), 5 if p.suffix.lower() in ALWAYS_UPLOAD_EXTS else 9), p.as_posix()))
 
           uploaded = 0
           skipped = 0
@@ -180,19 +237,21 @@ jobs:
               if parent_posix != ".":
                   ensure_remote_dir(parent_posix)
 
-              if path.suffix.lower() not in ALWAYS_UPLOAD_EXTS:
-                  existing_sizes = get_remote_sizes(parent_posix)
-                  if existing_sizes.get(path.name) == path.stat().st_size:
-                      skipped += 1
-                      continue
+              if changed_files is None:
+                  is_archive_html = rel_posix.startswith("uudised/") and path.suffix.lower() == ".html"
+                  if path.suffix.lower() not in ALWAYS_UPLOAD_EXTS or is_archive_html:
+                      existing_sizes = get_remote_sizes(parent_posix)
+                      if existing_sizes.get(path.name) == path.stat().st_size:
+                          skipped += 1
+                          continue
 
               with open(path, "rb") as f:
                   ftp.storbinary(f"STOR {rel_posix}", f)
               uploaded += 1
-              if path.suffix.lower() in ALWAYS_UPLOAD_EXTS or uploaded % 20 == 0:
+              if changed_files is not None or path.suffix.lower() in ALWAYS_UPLOAD_EXTS or uploaded % 20 == 0:
                   print(f"Uploaded ({uploaded}): {rel_posix}", flush=True)
 
           ftp.quit()
-          print(f"Done! Uploaded {uploaded} files, skipped {skipped} unchanged media files.", flush=True)
+          print(f"Done! Uploaded {uploaded} files, skipped {skipped} unchanged files.", flush=True)
           PYEOF
           fi
