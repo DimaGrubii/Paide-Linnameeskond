@@ -594,13 +594,13 @@ function initMatchdayToggle() {
 /* 6. HERO EDITORIAL STORIES SWITCHER                                         */
 /* -------------------------------------------------------------------------- */
 const defaultHeroStory = {
-  tag: 'ESINDUSMEESKOND • TREENINGMÄNG',
-  title: 'PAIDE KOSTITAS KALEVIT ÜHEKSA VÄRAVAGA!',
-  date: '13. NOVEMBER 2026',
+  tag: 'KOGUKOND • SPORDIMEDITSIIN',
+  title: 'JÄRVAMAAL AVATI SPORDIMEDITSIINITEENUS! 🩺⚽',
+  date: '20. NOVEMBER 2026',
   readTime: '2 MIN LUGEMIST',
-  desc: 'Paide Linnameeskond tõmbas hõbedasele 2026. aastale joone alla koduses jalgpallihallis alistades treeningmängus Tallinna Kalevi 9:0. Darboe sai kirja kübaratriki, kaks väravat lisas Candidus Daberechi Osuji ning jala said valgeks ka Luts, Nigula, Jobarteh ja Vassilenko.',
-  image: 'assets/img/news/friendly_kalev.JPEG',
-  link: 'uudised/2026/artikkel-paide-kostitas-kalevit-uheksa-varavaga.html',
+  desc: 'Järvamaa noorsportlased saavad nüüd läbida spordimeditsiinilisi tervisekontrolle ja koormusteste kodu lähedal, ilma et peaksid Tallinnasse või Tartusse sõitma. Teste teeb AS Järvamaa Haigla ning eesmärk on jälgida noorte terviseseisundit, ennetada vigastusi ja pakkuda neile terviklikku tuge.',
+  image: 'assets/img/news/PEEK_inauguration.jpg',
+  link: 'uudised/2026/artikkel-jarvamaal-avati-spordimeditsiiniteenus.html',
   btnText: 'Loe täispikka uudist'
 };
 
@@ -1117,6 +1117,16 @@ function initNewsFilters() {
       },
       secondary: [
         {
+          href: 'uudised/2026/artikkel-jarvamaal-avati-spordimeditsiiniteenus.html',
+          img: 'assets/img/news/PEEK_inauguration.jpg',
+          alt: 'Järvamaal avati spordimeditsiiniteenus!',
+          badge: 'KOGUKOND',
+          badgeClass: 'bg-navy-700',
+          date: '20. NOVEMBER 2026 • 2 MIN',
+          title: 'Järvamaal avati spordimeditsiiniteenus! 🩺⚽',
+          excerpt: 'Järvamaa noorsportlased saavad nüüd läbida spordimeditsiinilisi tervisekontrolle ja koormusteste kodu lähedal, ilma et peaksid Tallinnasse või Tartusse sõitma.'
+        },
+        {
           href: 'uudised/2026/artikkel-paide-kostitas-kalevit-uheksa-varavaga.html',
           img: 'assets/img/news/friendly_kalev.JPEG',
           alt: 'Paide kostitas Kalevit üheksa väravaga!',
@@ -1135,16 +1145,6 @@ function initNewsFilters() {
           date: '10. NOVEMBER 2026 • 4 MIN',
           title: 'Aitäh nende imeliste aastate eest, Ebrima!',
           excerpt: 'Paide Linnameeskonna väravavaht, kümnel korral Gambia rahvuskoondist esindanud ning Järvamaa esindusklubi ridades nii Evald Tipneri karika kui ka Eesti superkarika võitnud Ebrima Jarju (28) lahkub viie ühise hooaja järel Paide Linnameeskonnast.'
-        },
-        {
-          href: 'uudised/2026/artikkel-linnanaiskond-eesti-meister.html',
-          img: 'assets/img/news/champions.JPEG',
-          alt: 'Paide Linnanaiskond krooniti debüüthooajal Eesti meistriks!',
-          badge: 'LINNANAISKOND',
-          badgeClass: 'bg-crimson',
-          date: '9. NOVEMBER 2026 • 4 MIN',
-          title: 'Paide Linnanaiskond krooniti debüüthooajal Eesti meistriks!',
-          excerpt: 'Paide Linnanaiskond kirjutas pühapäeval, 8. novembril klubi ajalukku uue ja erakordse peatüki, kui krooniti oma esimesel naiste Meistriliiga hooajal Eesti meistriks! Paide kunstmuruväljakul alistati Harju JK Laagri 3:1.'
         }
       ]
     },
@@ -1297,21 +1297,31 @@ function initNewsFilters() {
     },
     kogukond: {
       lead: {
-        img: 'assets/img/photos/Fanbus_web.jpg',
-        alt: 'Paide Linnameeskonna fännibuss',
-        badge1: 'KOGUKOND & FÄNNID',
-        badge2: 'KARIKAFINAAL',
-        metaLeft: 'Paide → A. Le Coq Arena',
-        metaRight: '25. SEPTEMBER 2026',
-        kicker: 'FÄNNIREIS • VÄIKESTE KARIKAVÕISTLUSTE FINAAL',
-        title: 'Fännibussiga finaali vaatama! 🏁',
-        href: 'uudised/2026/artikkel-fannibuss.html',
-        excerpt: 'Sel laupäeval ootab Paide Linnameeskond III ees kuues Väikeste karikavõistluste finaal Harju JK Laagri U21 vastu. Tule fännibussiga A. Le Coq Arenale ja toome karika Paidesse!',
-        author: 'Paide Kogukond',
+        img: 'assets/img/news/PEEK_inauguration.jpg',
+        alt: 'Järvamaal avati spordimeditsiiniteenus!',
+        badge1: 'KOGUKOND & KLUBI',
+        badge2: 'SPORDIMEDITSIIN',
+        metaLeft: 'AS Järvamaa Haigla • PEEK kompetentsikeskus',
+        metaRight: '20. NOVEMBER 2026',
+        kicker: 'KOGUKOND • JÄRVAMAA LIIKUMISE JA SPORDI KOMPETENTSIKESKUS',
+        title: 'Järvamaal avati spordimeditsiiniteenus! 🩺⚽',
+        href: 'uudised/2026/artikkel-jarvamaal-avati-spordimeditsiiniteenus.html',
+        excerpt: 'Järvamaa noorsportlased saavad nüüd läbida spordimeditsiinilisi tervisekontrolle ja koormusteste kodu lähedal, ilma et peaksid Tallinnasse või Tartusse sõitma. Teste teeb AS Järvamaa Haigla ning eesmärk on jälgida noorte terviseseisundit, ennetada vigastusi ja pakkuda neile terviklikku tuge.',
+        author: 'Paide Linnameeskond',
         avatar: 'assets/img/photos/main_team_article.jpeg',
         ctaText: 'Loe täispikka uudist'
       },
       secondary: [
+        {
+          href: 'uudised/2026/artikkel-fannibuss.html',
+          img: 'assets/img/photos/Fanbus_web.jpg',
+          alt: 'Fännibussiga finaali vaatama!',
+          badge: 'KOGUKOND & FÄNNID',
+          badgeClass: 'bg-crimson',
+          date: '25. SEPTEMBER 2026 • 2 MIN',
+          title: 'Fännibussiga finaali vaatama! 🏁',
+          excerpt: 'Sel laupäeval ootab Paide Linnameeskond III ees kuues Väikeste karikavõistluste finaal Harju JK Laagri U21 vastu. Tule fännibussiga A. Le Coq Arenale ja toome karika Paidesse!'
+        },
         {
           href: 'uudised/2026/artikkel-spordiedendajad.html',
           img: 'assets/img/news/linnameeskond-taienes-kahe-spordiedendajaga.jpg',
@@ -1331,16 +1341,6 @@ function initNewsFilters() {
           date: '20. JUUNI 2026 • 3 MIN',
           title: 'Horticom väetab, klubi kasvab!',
           excerpt: 'Paide Linnameeskonna treening- ja mängukeskkonna üheks oluliseks osaks on kvaliteetne muruväljak ning koostöö ettevõttega Horticom.'
-        },
-        {
-          href: 'uudised/2026/artikkel-sinilillejooks-2026.html',
-          img: 'assets/img/news/sinilillejooks-2026.png',
-          alt: 'Sinilillejooks 2026',
-          badge: 'HEATEGEVUS',
-          badgeClass: 'bg-navy',
-          date: '29. MÄRTS 2026 • 4 MIN',
-          title: 'Sinilillejooks 2026',
-          excerpt: 'Paide Linnameeskond ja Naiskodukaitse kutsuvad Järvamaa koole osalema Sinilille teatejooksul veteranide toetuseks.'
         }
       ]
     }
