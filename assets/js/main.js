@@ -595,7 +595,7 @@ function initMatchdayToggle() {
 /* -------------------------------------------------------------------------- */
 const defaultHeroStory = {
   tag: 'KOGUKOND • SPORDIMEDITSIIN',
-  title: 'JÄRVAMAAL AVATI SPORDIMEDITSIINITEENUS! 🩺⚽',
+  title: 'JÄRVAMAAL AVATI SPORDIMEDITSIINITEENUS!',
   date: '20. NOVEMBER 2026',
   readTime: '2 MIN LUGEMIST',
   desc: 'Järvamaa noorsportlased saavad nüüd läbida spordimeditsiinilisi tervisekontrolle ja koormusteste kodu lähedal, ilma et peaksid Tallinnasse või Tartusse sõitma. Teste teeb AS Järvamaa Haigla ning eesmärk on jälgida noorte terviseseisundit, ennetada vigastusi ja pakkuda neile terviklikku tuge.',
@@ -1123,7 +1123,7 @@ function initNewsFilters() {
           badge: 'KOGUKOND',
           badgeClass: 'bg-navy-700',
           date: '20. NOVEMBER 2026 • 2 MIN',
-          title: 'Järvamaal avati spordimeditsiiniteenus! 🩺⚽',
+          title: 'Järvamaal avati spordimeditsiiniteenus!',
           excerpt: 'Järvamaa noorsportlased saavad nüüd läbida spordimeditsiinilisi tervisekontrolle ja koormusteste kodu lähedal, ilma et peaksid Tallinnasse või Tartusse sõitma.'
         },
         {
@@ -1304,7 +1304,7 @@ function initNewsFilters() {
         metaLeft: 'AS Järvamaa Haigla • PEEK kompetentsikeskus',
         metaRight: '20. NOVEMBER 2026',
         kicker: 'KOGUKOND • JÄRVAMAA LIIKUMISE JA SPORDI KOMPETENTSIKESKUS',
-        title: 'Järvamaal avati spordimeditsiiniteenus! 🩺⚽',
+        title: 'Järvamaal avati spordimeditsiiniteenus!',
         href: 'uudised/2026/artikkel-jarvamaal-avati-spordimeditsiiniteenus.html',
         excerpt: 'Järvamaa noorsportlased saavad nüüd läbida spordimeditsiinilisi tervisekontrolle ja koormusteste kodu lähedal, ilma et peaksid Tallinnasse või Tartusse sõitma. Teste teeb AS Järvamaa Haigla ning eesmärk on jälgida noorte terviseseisundit, ennetada vigastusi ja pakkuda neile terviklikku tuge.',
         author: 'Paide Linnameeskond',
