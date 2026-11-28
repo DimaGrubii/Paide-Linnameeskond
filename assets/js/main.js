@@ -791,23 +791,23 @@ function initVideoModal() {
   const playlistItems = document.querySelectorAll('#video-playlist-container .video-item');
 
   function extractInitialVideoId() {
-    if (!mainIframe) return '0ZzLeLraqmk';
+    if (!mainIframe) return 'MbepTfQ9AsQ';
     const dataId = mainIframe.getAttribute('data-video-id');
     if (dataId) return dataId;
     const src = mainIframe.getAttribute('src') || '';
     const match = src.match(/\/embed\/([^?&/]+)/);
-    return match ? match[1] : '0ZzLeLraqmk';
+    return match ? match[1] : 'MbepTfQ9AsQ';
   }
 
   const initialVideoId = extractInitialVideoId();
   const defaultVideoData = {
     videoId: initialVideoId,
-    title: featuredTitle ? featuredTitle.textContent.trim() : 'IIZI TALK EP3 | Tänaste Linnanaiskonna mängijate toonastest väliskarjääridest',
+    title: featuredTitle ? featuredTitle.textContent.trim() : 'IIZI TALK EP4 | Kuldse hooaja telgitagused',
     category: featuredCategory ? featuredCategory.textContent.trim() : 'IIZI TALK PODCAST',
-    duration: '1:19:19',
-    views: featuredViews ? featuredViews.textContent.trim() : '540+ vaatamist',
+    duration: '1:14:30',
+    views: featuredViews ? featuredViews.textContent.trim() : '730+ vaatamist',
     time: featuredTime ? featuredTime.textContent.trim() : 'Uus episood',
-    desc: featuredDesc ? featuredDesc.textContent.trim() : 'IIZI TALK on tagasi ja kolmandas episoodis võtame jutuks Paide Linnanaiskonna jalgpallurite varasemad väliskarjäärid!',
+    desc: featuredDesc ? featuredDesc.textContent.trim() : 'Esimene hooaeg naiste Meistriliigas ja kohe Eesti meistriks! Tänavuse hooaja viimases IIZI TALK-i episoodis vaatavad kuldsele debüüthooajale tagasi peatreener Sirje Kapper, abitreener Kaivo Sang ja saatejuht Renate-Ly Mehevets.',
     url: featuredExtLink ? featuredExtLink.getAttribute('href') : `https://www.youtube.com/watch?v=${initialVideoId}`
   };
 
@@ -815,6 +815,9 @@ function initVideoModal() {
 
   function getEmbedUrl(videoId, autoplay = false) {
     const autoParam = autoplay ? 'autoplay=1&' : '';
+    if (videoId === 'MbepTfQ9AsQ') {
+      return `https://www.youtube.com/embed/MbepTfQ9AsQ?si=LEWy3iWulYIef52l&${autoParam}enablejsapi=1`;
+    }
     if (videoId === '0ZzLeLraqmk') {
       return `https://www.youtube.com/embed/0ZzLeLraqmk?si=fobh9JI9F99d1DLC&${autoParam}enablejsapi=1`;
     }
